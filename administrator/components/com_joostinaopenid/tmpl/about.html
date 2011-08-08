@@ -1,0 +1,47 @@
+<mos:comment>
+@version 1.0
+@package JoostinaOpenID
+@copyright Copyright (C) 2010 Joostina Team
+@license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+</mos:comment>
+<h1>JoostinaOpenID</h1><img src="/administrator/components/com_joostinaopenid/tmpl/openid.png" alt="JoostinaOpenID" style="float:left;" />
+<h3>Создание аккаунта и авторизация черз OpenID</h3>
+<p>Расширение позволяет автоматически создавать пользователя при входе с их OpenID URL на сайт под управлением  <a href="http://www.joostina.ru/" title="Joostina! CMS" target="_blank">Joostina! CMS</a>. Пользователь создается с групповыми правами Registered.</p>
+<p>Расширение основано на актуальной версии библиотек &ndash; 2.1.3 php-OpenID libraries by JanRain, Inc. Данная библиотека уже установлена и зарегистрирована в скрипте  <a href="http://www.joostina.ru/" title="Joostina! CMS" target="_blank">Joostina! CMS</a> (папки <code>/Auth</code> и <code>/Services</code>) по пути <code>/inclodec/openid/</code>. Возможен ее вызов и из других дирректорий на сервере, для этого после перемещения необходимо исправить пути в файлах библиотеки php-OpenID libraries (используемая функция <code>require_once</code>).</p>
+<p>Пример использования:<br />
+<code>require_once ($mosConfig_absolute_path.'/includes/openid/Services/Yadis/PlainHTTPFetcher.php');</code><br />
+где<br />
+$mosConfig_absolute_path.' &ndash; путь от корня сайта<br />
+/includes/openid/Services/Yadis/PlainHTTPFetcher.php &ndash; путь до исполняемого файла php-OpenID libraries</p>
+<h3>Если вы не хотите использовать OpenID</h3>
+<p>Произведите следующие изменения<span class="small">*</span>:</p>
+<p>1. В файле <code>mod_ml_login.php</code></p>
+<p>1). в строках 57-67  закомментируйте/удалите вызов переменных <code>openid</code>:</p>
+<code>
+'submit_button_text'=> $params->get('submit_button_text', _BUTTON_LOGIN),<br />
+//openid<br />
+'openid_login_txt'=> $params->get('openid_login_txt'),<br />
+'openid_example_url'=> $params->get('openid_example_url'),<br />
+'openid_submit_txt'=> $params->get('openid_submit_txt'),<br />
+'openid_help_display'=> $params->get('openid_help_display'),<br />
+'openid_help_txt'=> $params->get('openid_help_txt'),<br />
+'openid_help_url'=> $params->get('openid_help_url'),<br />
+'openid_provider_display'=> $params->get('openid_provider_display'),<br />
+'openid_provider_txt'=> $params->get('openid_provider_txt'),<br />
+'openid_provider_url'=> $params->get('openid_provider_url')
+</code>
+<p>т.е. должно получиться/остаться:</p>
+<code>
+'submit_button_text'=> $params->get('submit_button_text', _BUTTON_LOGIN)
+</code>
+<p>2). закомментируйте/удалите строки 144-168.</p>
+<p>2. В файле <code>mod_ml_login.xml</code> закомментируйте/удалите строки (64-80).</p>
+<p>3. Сохраните измененные файлы.</p>
+<h3>Дополнительная информация</h3>
+<p>Подробнее о механизме OpenID смотрите на сайте <a href="http://openid.net/" title="openid.net" target="_blank">http://openid.net/</a>.</p>
+<p>Вы можете найти и скачать новые версии библиотеки php-OpenID libraries <a href="http://www.openidenabled.com/openid/libraries/php/download" title="php-OpenID libraries" target="_blank">здесь</a>.</p>
+<p>Идея/мечта, поиск реализации, доработка и рефракторинг кода расширения и php-OpenID libraries, внедрение вызовов OpenID в модуль mod_ml_login <a href="http://www.joostina.ru/" title="Joostina! CMS" target="_blank">Joostina! CMS</a>, руссификация &ndash; <a href="http://www.hospsurg.ru/" target="_blank" title="Кафедра хирургических болезней, реаниматологии и интенсивной терапии">doctorgrif</a> (Joostina Team).</p>
+<p>Примечание:</p>
+<p class="small">* &mdash; нумерация строк актуальна для конфигурации по умолчанию файлов скрипта ("из коробки"), в каждом конкретном случае данные этот показатель может быть иным, если данные файлы модифицировались владельцем/аминистратором сайта.</p>
+<input type="hidden" name="option" value="{OPTION}" />
+<input type="hidden" name="task" value="" />

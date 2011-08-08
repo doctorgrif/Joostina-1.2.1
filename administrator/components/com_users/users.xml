@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<mosinstall type="component" version="1.0.0">
+	<name>Users</name>
+	<author>Joostina! Project</author>
+	<creationDate>Февраль 2008</creationDate>
+	<creationDate>30/03/2011</creationDate>
+	<license>http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL</license>
+	<authorEmail>joostinacms@gmail.com</authorEmail>
+	<authorUrl>www.joostina.ru</authorUrl>
+	<version>1.0.1</version>
+	<description>Управление пользователями</description>
+	<params>
+		<param name="editor" type="editor_list" default="" label="Редактор пользователя" description="WYSYWYG-редактор пользователя" />
+		<param name="gender" type="list" default="0" label="Пол" description="Пол пользователя">
+			<option value="0">Не указан</option>
+			<option value="1">Мужской</option>
+			<option value="2">Женский</option>
+		</param>
+		<param name="user_info" type="textarea" rows="3" cols="30" default="" label="Информация" description="Общее поле информации о пользователе" />
+		<param name="user_ip" type="text" size="35" default="" label="IP пользователя" description="Разрешённый IP адрес для пользователя" />
+	</params>
+</mosinstall>

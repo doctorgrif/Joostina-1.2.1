@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<mosinstall type="template" version="1.0.0" client="administrator">
+	<name>joostfree</name>
+	<creationDate>22:05:2008</creationDate>
+	<author>boston</author>
+	<copyright>GNU/GPL</copyright>
+	<authorEmail>joostinacms@gmail.com</authorEmail>
+	<authorUrl>http://www.joostina.ru</authorUrl>
+	<version>2.0.1</version>
+	<description>boston (c) в рамках проекта Joostina CMS.</description>
+</mosinstall>

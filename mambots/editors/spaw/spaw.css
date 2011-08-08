@@ -1,0 +1,16 @@
+body {background-color:#fff;}
+body, tr, td, table {
+	color:#000;
+	font-family:verdana, arial, helvetica, sans-serif;
+	font-size:9pt;}
+.style1 {
+	color:green;
+	font-family:verdana, arial, helvetica, sans-serif;
+	font-weight:bolder;
+	font-size:10pt;}
+.style2 {
+	color:red;
+	background-color:#ddd;
+	font-family:verdana, arial, helvetica, sans-serif;
+	font-weight:bolder;
+	font-size:12pt;}

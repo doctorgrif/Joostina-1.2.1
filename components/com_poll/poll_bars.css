@@ -1,0 +1,9 @@
+/*Вынесено в базовый css*/
+/* polls Bar Colors/Formats - Follow the format to add your own. Then update the maxcolors setting for polls in components/com_poll/poll.php -> $polls_maxcolors*/
+.polls_color_1{background-color:#8d1b1b;border:2px ridge #b22222;}
+.polls_color_2{background-color:#6740e1;border:2px ridge #4169e1;}
+.polls_color_3{background-color:#8d8d8d;border:2px ridge #d2d2d2;}
+.polls_color_4{background-color:#cc8500;border:2px ridge #ffa500;}
+.polls_color_5{background-color:#5b781e;border:2px ridge #6b8e23;}
+/* polls Outside Table Border */
+.pollstableborder{border:1px solid;padding:2px;}

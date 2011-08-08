@@ -1,0 +1,104 @@
+table.adminform {}
+.dynamic-tab-pane-control .tab-pane {background-image:none;position:relative;}
+.dynamic-tab-pane-control .tab-page {
+	background:#fcfcfe;
+	float:left;
+	margin-left:1px;
+	padding:0px;
+	position:relative;
+	text-align:left;
+	top:-3px;
+	width:99%;
+	z-index:0;}
+.dynamic-tab-pane-control .tab-row {
+	background-image:none;
+	margin-left:8px !important;
+	margin-left:1em;
+	white-space:nowrap;
+	z-index:1;}
+.dynamic-tab-pane-control .tab-row .tab {
+	background-color:#e2e2e2;
+	background-image:none;
+	border:1px solid white;
+	cursor:pointer;
+	display:inline;
+	float:left;
+	font-family:tahoma, arial, verdana, sans-serif;
+	font-size:1em;
+	font-weight:normal;
+	height:16px;
+	margin:4px -1px 1px 2px;
+	overflow:hidden;
+	padding:2px 6px 0px 6px;
+	position:relative;
+	top:0;
+	white-space:nowrap;
+	width:auto;
+	z-index:1;}
+.dynamic-tab-pane-control .tab-row .tab .hover {
+	background-color:#cbcbcb;
+	background-image:none;
+	border:1px solid #cdcdcd;
+	font-family:tahoma, arial, verdana, sans-serif;
+	font-size:1em;
+	font-weight:normal;
+	height:16px;
+	text-decoration:none;
+	white-space:nowrap;
+	width:auto;}
+.dynamic-tab-pane-control .tab-row .tab .selected {
+	background:#575757;	background-image:none !important;
+	border:1px solid #575757;
+	font-family:tahoma, arial, verdana, sans-serif;
+	font-size:1em;
+	font-weight:normal;
+	height:16px !important;
+	top:0;
+	white-space:nowrap;
+	width:auto !important;
+	z-index:3;}
+.dynamic-tab-pane-control .tab-row .tab .selected .hover {
+	background:#575757;
+	background-color:#f5f5f5;
+	background-image:none !important;
+	border:1px solid #575757;
+	font-family:tahoma, arial, verdana, sans-serif;
+	font-size:1em;
+	font-weight:normal;
+	height:16px !important;
+	text-decoration:none;
+	top:0;
+	white-space:nowrap;
+	width:auto !important;
+	z-index:3;}
+.dynamic-tab-pane-control .tab-row .tab a {
+	background-image:none;
+	color:#000000;
+	font-family:tahoma, arial, verdana, sans-serif;
+	font-size:1em;
+	font-weight:normal;
+	white-space:nowrap;
+	width:auto;}
+.dynamic-tab-pane-control .tab-row .tab a:hover {
+	background-image:none;
+	font-family:tahoma, arial, verdana, sans-serif;
+	font-size:1em;
+	font-weight:normal;
+	text-decoration:none;
+	white-space:nowrap;}
+.dynamic-tab-pane-control .tab-row .tab .selected a {
+	background-image:none;
+	color:#d0e0ff;
+	font-family:tahoma, arial, verdana, sans-serif;
+	font-size:1em;
+	font-weight:normal;
+	height:16px;
+	text-decoration:none;
+	white-space:nowrap;}
+.dynamic-tab-pane-control .tab-row .tab .selected a:hover {
+	background-image:none;
+	font-family:tahoma, arial, verdana, sans-serif;
+	font-size:1em;
+	font-weight:normal;
+	text-decoration:none;
+	white-space:nowrap;}

@@ -1,0 +1,76 @@
+body {
+	height:100%;
+	height:auto !important;
+	min-height:100%;
+	margin:0 auto;
+	padding:1em auto;
+	font-family:arial, helvetica, serif;
+	font-size:12px;
+	color:#ccc;
+	background:#000;}
+body#joooffline {
+	height:100%;
+	height:auto !important;
+	min-height:100%;
+	margin:0 auto;
+	padding:1em auto;
+	text-align:center;
+	width:100%;}
+#joo {}
+#ctr1 {
+	height:100%;
+	margin:0 auto;
+	padding:1em auto;
+	text-align:center;
+	width:100%;}
+.outline {
+	margin:0 auto;
+	padding:1em auto;
+	text-align:center;
+	width:100%;}
+.image {
+	height:50px;
+	margin:0 auto;
+	padding:1em auto;
+	text-align:center;
+	width:50%;}
+.offlinemessage, .errormessage, .installwarning, .clear {
+	height:auto;
+	margin:0 auto;
+	padding:1em auto;
+	text-align:center;
+	width:39%;}
+.err {color:#bbb;}
+body#warning {
+	height:100%;
+	height:auto !important;
+	min-height:100%;
+	margin:0 auto;
+	text-align:center;
+	padding:1em auto;}
+.moswarning {
+	background:#c00;
+	border-bottom:2px solid #600;
+	color:#fff;
+	font-size:200%;
+	margin:0 auto;
+	padding:1em auto;
+	text-align:center;
+	width:100%;}
+.moswarning h2 {
+	font-family:arial, helvetica, sans-serif;
+	margin:0 auto;
+	padding:1em auto;
+	text-align:center;}
+#footeroff {
+	position:absolute;
+	text-align:center;
+	bottom:0;
+	padding-top:10px;
+	width:100%;
+	background:none;
+	background-color:#000;
+	margin-top:0px;
+	height:32px;
+	height:32px !important;
+	color:#ccc;}

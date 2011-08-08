@@ -1,0 +1,21 @@
+* html #wrapper, * html #footer {
+	width:expression(
+	(document.compatMode && document.compatMode == 'CSS1Compat') ?
+	(document.documentElement.clientWidth < 900 ? "900px" :
+	(document.documentElement.clientWidth > 1284 ? "1284px" : "auto")) :
+	(document.body.clientWidth > 900 ? "900px" :
+	(document.body.clientWidth < 1284 ? "1284px" : "auto")));}
+* html textarea, * html input {padding:0;}
+hr, p, ul, ol, dl, pre, address, table, form {margin-bottom:.6em;}
+ul {list-style:disc outside;margin-left:2em;}
+ul li {text-indent:0;margin-left:0;}
+sup, sub {font-size:90%;}
+legend+* {margin-top:0;}
+textarea, input, form {padding:.5em .4em .3em .4em}
+textarea, input, select {cursor:auto;}
+input[type='submit'], input[type='button'] {padding:.25em 0;}
+a abbr, a acronym {text-decoration:underline;}
+img {behavior:url('../js/iepngfix.htc');}
+.search {margin:0;padding:0;}
+.search-text {width:310px;}
+.search-button {width:70px;}

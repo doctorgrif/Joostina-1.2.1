@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<mosinstall type="module" version="1.0.0">
+<name>Ссылки в категории</name>
+<author>Joostina! Project</author>
+<creationDate>30/03/2011</creationDate>
+<copyright>(C) 2008 Joostina team.</copyright>
+<license>http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL</license>
+<authorEmail>joostinacms@gmail.com</authorEmail>
+<authorUrl>www.joostina.ru</authorUrl>
+<version>1.0.1</version>
+<description>Этот модуль показывает список опубликованных ссылок в категории.</description>
+<files>
+<filename module="mod_weblinkspercat">mod_weblinkspercat.php</filename>
+</files>
+<params>
+<param name="moduleclass_sfx" type="text" default="" label="CSS-суффикс класса модуля" description="Суффикс, который будет использован в описании класса (table.moduletable) таблицы стилей (CSS) модуля. Это позволяет использовать индивидуальный стиль модуля." />
+<param name="cache" type="radio" default="0" label="Разрешить кэширование" description="Выберите, кэшировать ли содержимое этого модуля">
+<option value="1">Да</option>
+<option value="0">Нет</option>
+</param>
+<param name="wlcategory" type="text" default="0" label="Выберите категорию Ссылок" description="Выберите категорию Ссылок (укажите catid категории ссылок). Если указан 0, то будут отображены ссылки из всех категорий." />
+<param name="@spacer" type="spacer" default="" label="" description="" />
+<param name="wlshownew" type="radio" default="0" label="Показать Новая" description="Показать если ссылка новая?">
+<option value="0">Нет</option>
+<option value="1">Да</option>
+</param>
+<param name="wldaysnew" type="text" default="3" label="Число дней для Новой" description="Укажите число дней для показа новой ссылки." />
+<param name="wlorderby" type="list" default="Date" label="Порядок сортировки" description="Select were to sort on">
+<option value="date DESC">По дате</option>
+<option value="hits DESC">По просмотрам</option>
+<option value="title">По заголовку</option>
+<option value="RAND()">Случайный выбор</option>
+</param>
+<param name="wlshowhits" type="radio" default="0" label="Просмотры" description="Показывать число просмотров?">
+<option value="0">Нет</option>
+<option value="1">Да</option>
+</param>
+<param name="wlnumberofrows" type="text" default="10" label="Number of rows to use" description="Enter the number of rows" />
+<param name="wlpopuplinks" type="radio" default="1" label="Открыть в новом окне" description="Открыть ссылку в новом окне?">
+<option value="0">Нет</option>
+<option value="1">Да</option>
+</param>
+<param name="@spacer" type="spacer" default="" label="" description="" />
+<param name="wllengthoftitle" type="text" default="23" label="Длина заголовка" description="Maximum number of characters before the linktitle is cut of." />
+<param name="wldotaddlenght" type="text" default="20" label="Length to cut off" description="Number of characters to use when title has to be shortened." />
+<param name="@spacer" type="spacer" default="" label="" description="" />
+<param name="wlreadmore" type="list" default="0" label="Показать Далее" description="If there are more rows then shown in column there will be a Read More Link. This link will open the Joomla! Weblinks component with the choosen category.">
+<option value="0">Нет</option>
+<option value="1">Да</option>
+</param>
+</params>
+</mosinstall>

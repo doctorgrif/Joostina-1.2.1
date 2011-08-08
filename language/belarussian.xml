@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<mosinstall version="1.0.0" type="language">
+	<name>Belarussian</name>
+	<version>1.0.12</version>
+	<creationDate>01/07/2007  16:04</creationDate>
+	<author>Andrei Miskevish</author>
+	<authorEmail>jan_dax@telegaf.by</authorEmail>
+	<files>
+		<filename>belarussian.php</filename>
+		<filename>belarussian.ignore.php</filename>
+		<filename>belarussian.xml</filename>
+	</files>
+</mosinstall>
+

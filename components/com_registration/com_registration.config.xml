@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<mosinstall type="component">
+<params>
+<param name="test_param" type="textarea" cols="20" rows="5" default="" label="Test Parametert" description=" some description " />
+</params>
+</mosinstall>

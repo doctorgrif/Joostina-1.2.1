@@ -1,0 +1,17 @@
+.xmap .contentpaneopen{padding:10px 0 10px 10px;}
+.xmap ul{
+	display:block;
+	list-style:none;
+	margin:0;
+	padding:0;}
+.xmap ul li{
+	margin:0;
+	padding:0;
+	white-space:nowrap;
+	background:transparent;}
+.xmap a img{border:none;padding-left:5px;}
+.xmap ul.level0 ,.xmap ul.level_0 li{list-style:none;padding:0;}
+.xmap ul.level0 li a{font-weight:bold;}
+.xmap ul.level0 li ul a{font-weight:normal;}
+.xmap ul.level1 li{padding:0 0 0 2em;white-space:nowrap;}
+.xmap .active{font-style:italic;}

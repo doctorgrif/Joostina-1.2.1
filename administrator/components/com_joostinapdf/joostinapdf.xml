@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<mosinstall type="component" version="1.0">
+<name>JoostinaPDF</name>
+<author>Joostina! Project</author>
+<creationDate>01/06/2011</creationDate>
+<copyright>Copyright (C) 2011 JoostinaTeam. All rights reserved.</copyright>
+<license>GNU/GPL</license>
+<authorEmail>joostinacms@gmail.com</authorEmail>
+<authorUrl>www.joostina.ru</authorUrl>
+<version>1.0.1</version>
+<description>JoostinaPDF - создание pdf файлов из содержимого Joostina. В основе идея и часть решений из jreprettypdf от www.joomlatwork.com с дополнениями, обновлениями и модификацией под требования Joostina API и кодировку cp-1251.</description>
+<installfile>install.joostinapdf.php</installfile>
+<uninstallfile>uninstall.joostinapdf.php</uninstallfile>
+<files>
+	<filename>index.html</filename>
+</files>
+<administration>
+	<menu img="components/com_joostinapdf/images/logo_16x16.png">JoostinaPDF</menu>
+	<files>
+		<filename>admin.joostinapdf.html.php</filename>
+		<filename>admin.joostinapdf.php</filename>
+		<filename>fpdf_joostinapdf.php</filename>
+		<filename>fpdf_tpl.php</filename>
+		<filename>fpdi.php</filename>
+		<filename>fpdi_pdf_parser.php</filename>
+		<filename>gif.php</filename>
+		<filename>index.html</filename>
+		<filename writeable="yes">joostinapdf_config.php</filename>
+		<filename>joostinapdf_cpanel.php</filename>
+		<filename>joostinapdf.php</filename>
+		<filename>joostinapdf.xml</filename>
+		<filename>pdf.php</filename>
+		<filename>pdf_context.php</filename>
+		<filename>pdf_parser.php</filename>
+		<filename>toolbar.joostinapdf.html.php</filename>
+		<filename>toolbar.joostinapdf.php</filename>
+		<filename>utils.php</filename>
+		<filename>wrapper_functions.php</filename>
+		<filename>presets/index.html</filename>
+		<filename>presets/promo.pdf</filename>
+		<filename>presets/template.pdf</filename>
+		<filename>backup/index.html</filename>
+		<filename>font.cp1251/arial.php</filename>
+		<filename>font.cp1251/arial.z</filename>
+		<filename>font.cp1251/courier.php</filename>
+		<filename>font.cp1251/courier.z</filename>
+		<filename>font.cp1251/courierB.php</filename>
+		<filename>font.cp1251/courierB.z</filename>
+		<filename>font.cp1251/courierBI.php</filename>
+		<filename>font.cp1251/courierBI.z</filename>
+		<filename>font.cp1251/courierI.php</filename>
+		<filename>font.cp1251/courierI.z</filename>
+		<filename>font.cp1251/helvetica.php</filename>
+		<filename>font.cp1251/helvetica.z</filename>
+		<filename>font.cp1251/helveticaB.php</filename>
+		<filename>font.cp1251/helveticaB.z</filename>
+		<filename>font.cp1251/helveticaBI.php</filename>
+		<filename>font.cp1251/helveticaBI.z</filename>
+		<filename>font.cp1251/helveticaI.php</filename>
+		<filename>font.cp1251/helveticaI.z</filename>
+		<filename>font.cp1251/index.html</filename>
+		<filename>font.cp1251/symbol.php</filename>
+		<filename>font.cp1251/symbol.z</filename>
+		<filename>font.cp1251/times.php</filename>
+		<filename>font.cp1251/times.z</filename>
+		<filename>font.cp1251/timesB.php</filename>
+		<filename>font.cp1251/timesB.z</filename>
+		<filename>font.cp1251/timesBI.php</filename>
+		<filename>font.cp1251/timesBI.z</filename>
+		<filename>font.cp1251/timesI.php</filename>
+		<filename>font.cp1251/timesI.z</filename>
+		<filename>font.cp1251/zapfdingbats.php</filename>
+		<filename>font.cp1251/zapfdingbats.z</filename>
+		<filename>font.std/courier.php</filename>
+		<filename>font.std/helvetica.php</filename>
+		<filename>font.std/helveticab.php</filename>
+		<filename>font.std/helveticabi.php</filename>
+		<filename>font.std/helveticai.php</filename>
+		<filename>font.std/index.html</filename>
+		<filename>font.std/symbol.php</filename>
+		<filename>font.std/times.php</filename>
+		<filename>font.std/timesb.php</filename>
+		<filename>font.std/timesbi.php</filename>
+		<filename>font.std/timesi.php</filename>
+		<filename>font.std/zapfdingbats.php</filename>
+		<filename>images/ark.png</filename>
+		<filename>images/index.html</filename>
+		<filename>images/config.png</filename>
+		<filename>images/replacement.png</filename>
+		<filename>images/install.png</filename>
+		<filename>images/restore.png</filename>
+		<filename>images/adw.png</filename>
+		<filename>images/database.png</filename>
+		<filename>images/support.png</filename>
+		<filename>images/refresh.png</filename>
+		<filename>images/logo.png</filename>
+		<filename>images/pdf_button.png</filename>
+		<filename>language/russian.php</filename>
+		<filename>language/index.html</filename>
+	</files>
+</administration>
+</mosinstall>

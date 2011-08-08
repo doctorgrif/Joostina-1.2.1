@@ -1,0 +1,24 @@
+Подключение плагина:
+mosCommonHTML::loadJqueryPlugins('mop-tip');
+Если уже имеется вызов плагинов jQuery, то можно его просто дополнить строкой вызова именно данного плагина.
+Добавить вызов стилевого файла подсказок в шаблон
+<link type="text/css" href="<?php echo $mosConfig_live_site;?>/includes/js/jquery/plugins/mop-tip/mop-tip.css"
+ rel="stylesheet" />
+либо добавить в основной стилевой файл шаблона стили для подсказок, изменив пути к изображениям
+В теле шаблона перед </body> добавить:
+<script type="text/javascript">
+jQuery(document).ready(function(){
+jQuery("#demo1Btn").mopTip({'w': 150,'style': 'overOut','get': '#demo1'
+});
+jQuery("#demo2Btn").mopTip({'w': 150,'style': 'overClick','get': '#demo1'});
+});
+</script>
+Использование:
+либо
+<a href="#" id="demo1Btn">наведи на меня курсор</a> /*добавить в ссыку id подсказки*/
+<div style="display:none;"><div id="demo1">А вот тут может быть любой текст</div></div>
+Подсказка появляется при наведении на объект, пропадает при убирании курсора.
+либо
+<a href="#" id="demo2Btn">наведи на меня курсор</a> /*добавить в ссыку id подсказки*/
+<div style="display:none;"><div id="demo1">А вот тут может быть любой текст</div></div>
+Подсказка появляется при наведении на объект, пропадает при клике на крестик.

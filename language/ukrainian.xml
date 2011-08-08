@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<mosinstall version="1.0.10" type="language">
+<name>Ukrainian</name>
+<version>1.0 Joostina 1.2.1</version>
+<creationDate>23.12.2010</creationDate>
+<author>Kovalchuk Vitaliy / www.joostina.ru</author>
+<authorEmail>joostinacms@gmail.com</authorEmail>
+<files>
+<filename>ukrainian.php</filename>
+<filename>ukrainian.ignore.php</filename>
+</files>
+</mosinstall>

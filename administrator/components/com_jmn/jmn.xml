@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<mosinstall type="component">
+<name>JMN</name>
+<creationDate>30/03/2011</creationDate>
+<author>Joostina! Project</author>
+<copyright>(C) 2009 Joostina team</copyright>
+<authorEmail>joostinacms@gmail.com</authorEmail>
+<authorUrl>www.joostina.ru</authorUrl>
+<version>1.0.5</version>
+<license>GNU/GPL</license>
+<description>Компонент Joostina Meta Name (JMN) позволяет автоматически генерировать ключевые слова и описания для объектов содержимого из вводного или основного текста. Удобное управление ключевыми словами и описаниями в рамках одной страницы.</description>
+<files>
+<filename>jmn.php</filename>
+<filename>words.txt</filename>
+</files>
+<installfile>install.jmn.php</installfile>
+<uninstallfile>uninstall.jmn.php</uninstallfile>
+<administration>
+<menu>Joostina Meta Name</menu>
+<submenu>
+<menu task="">Менеджер метатегов</menu>
+<menu task="config">Настройки</menu>
+<menu task="settings">Слова-исключения</menu>
+</submenu>
+<files>
+<filename>admin.jmn.php</filename>
+<filename>admin.jmn.html.php</filename>
+<filename>jmn_config.php</filename>
+<filename>functions_jmn.php</filename>
+<filename>toolbar.jmn.php</filename>
+<filename>toolbar.jmn.html.php</filename>
+<filename>language/russian.php</filename>
+<filename>language/english.php</filename>
+</files>
+</administration>
+</mosinstall>
