@@ -18,7 +18,7 @@ if ($mosConfig_sef) {
 	$url_array = explode('/', $url4parse);
 	/* Обработка GET-параметра - end */
 	if (in_array('content', $url_array)) {
-		/** Content http://www.domain.com/$option/$task/$sectionid/$id/$Itemid/$limit/$limitstart */
+		/* Content http://www.domain.com/$option/$task/$sectionid/$id/$Itemid/$limit/$limitstart */
 		$uri = explode('content/', $_SERVER['REQUEST_URI']);
 		$option = 'com_content';
 		$_GET['option'] = $option;
@@ -281,6 +281,8 @@ if ($mosConfig_sef) {
 				if ($temp[0] == 'option') {
 					if (!is_dir($mosConfig_absolute_path . '/components/' . $temp[1])) {
 						header('HTTP/1.0 404 Not Found');
+						header('HTTP/1.1 404 Not Found');
+						header('Status: 404 Not Found');
 						require_once ($mosConfig_absolute_path . '/templates/404.php');
 						exit(404);
 					}
@@ -311,18 +313,20 @@ if ($mosConfig_sef) {
 			}
 		}
 	} else {
-		/** Unknown content http://www.domain.com/unknown */
+		/* Unknown content http://www.domain.com/unknown */
 		$jdir = str_replace('index.php', '', $_SERVER['PHP_SELF']);
 		$juri = str_replace($jdir, '', $_SERVER['REQUEST_URI']);
 		if ($juri != '' && $juri != '/' && !eregi("index\.php", $_SERVER['REQUEST_URI']) && !eregi("index2\.php", $_SERVER['REQUEST_URI']) && !eregi("/\?", $_SERVER['REQUEST_URI']) && $_SERVER['QUERY_STRING'] == '') {
-			header('HTTP/1.0 404 Not Found');
+				header('HTTP/1.0 404 Not Found');
+				header('HTTP/1.1 404 Not Found');
+				header('Status: 404 Not Found');
 			require_once ($mosConfig_absolute_path . '/templates/404.php');
 			exit(404);
 		}
 	}
 }
 
-/**
+/*
  * Converts an absolute URL to SEF format
  * @param string The URL
  * @return string
@@ -361,11 +365,11 @@ function sefRelToAbs($string) {
 		if (isset($url['query'])) {
 // special handling for javascript
 			$url['query'] = stripslashes(str_replace('+', '%2b', $url['query']));
-// clean possible xss attacks
+// clean possible xss attacks */
 			$url['query'] = preg_replace("'%3Cscript[^%3E]*%3E.*?%3C/script%3E'si", '', $url['query']);
-// break url into component parts
+// break url into component parts */
 			parse_str($url['query'], $parts);
-// special handling for javascript
+// special handling for javascript */
 			foreach ($parts as $key => $value) {
 				if (strpos($value, '+') !== false) {
 					$parts[$key] = stripslashes(str_replace('%2b', '+', $value));
@@ -373,102 +377,101 @@ function sefRelToAbs($string) {
 			}
 //var_dump($parts);
 			$sefstring = '';
-// Component com_content urls
+/* Component com_content urls */
 			if (((isset($parts['option']) && ($parts['option'] == 'com_content' || $parts['option'] == 'content'))) && ($parts['task'] != 'new') && ($parts['task'] != 'edit') && ($parts['task'] != 'mycontent')) {
-// index.php?option=com_content [&task=$task] [&sectionid=$sectionid] [&id=$id] [&Itemid=$Itemid] [&limit=$limit] [&limitstart=$limitstart] [&year=$year] [&month=$month] [&module=$module]
+/* index.php?option=com_content [&task=$task] [&sectionid=$sectionid] [&id=$id] [&Itemid=$Itemid] [&limit=$limit] [&limitstart=$limitstart] [&year=$year] [&month=$month] [&module=$module] */
 				$sefstring .= 'content/';
-// task
+/* task */
 				if (isset($parts['task'])) {
 					$sefstring .= $parts['task'] . '/';
 				}
-// sectionid
+/* sectionid */
 				if (isset($parts['sectionid'])) {
 					$sefstring .= $parts['sectionid'] . '/';
 				}
-// id
+/* id */
 				if (isset($parts['id'])) {
 					$sefstring .= $parts['id'] . '/';
 				}
-// Itemid
+/* Itemid */
 				if (isset($parts['Itemid'])) {
-//only add Itemid value if it does not correspond with the 'unassigned' Itemid value
+/* only add Itemid value if it does not correspond with the 'unassigned' Itemid value */
 					if ($parts['Itemid'] != 99999999 && $parts['Itemid'] != 0) {
 						$sefstring .= $parts['Itemid'] . '/';
 					}
 				}
-// order
+/* order */
 				if (isset($parts['order'])) {
 					$sefstring .= 'order,' . $parts['order'] . '/';
 				}
-// filter
+/* filter */
 				if (isset($parts['filter'])) {
 					$sefstring .= 'filter,' . $parts['filter'] . '/';
 				}
-// limit
+/* limit */
 				if (isset($parts['limit'])) {
 					$sefstring .= $parts['limit'] . '/';
 				}
-// limitstart
+/* limitstart */
 				if (isset($parts['limitstart'])) {
 					$sefstring .= $parts['limitstart'] . '/';
 				}
-// year
+/* year */
 				if (isset($parts['year'])) {
 					$sefstring .= $parts['year'] . '/';
 				}
-// month
+/* month */
 				if (isset($parts['month'])) {
 					$sefstring .= $parts['month'] . '/';
 				}
-// module
+/* module */
 				if (isset($parts['module'])) {
 					$sefstring .= $parts['module'] . '/';
 				}
-// lang
+/* lang */
 				if (isset($parts['lang'])) {
 					$sefstring .= 'lang,' . $parts['lang'] . '/';
 				}
 				$string = $sefstring;
-// all other components index.php?option=com_xxxx &...
+/* all other components index.php?option=com_xxxx &... */
 			} else
 			if (isset($parts['option']) && (strpos($parts['option'], 'com_') !== false)) {
-// do not SEF where com_content - `edit` or `new` task link
+/* do not SEF where com_content - 'edit' or 'new' task link */
 				if (!(($parts['option'] == 'com_content') && ((isset($parts['task']) == 'new') ||
 						(isset($parts['task']) == 'edit')))) {
 					$sefstring = 'component/';
 					foreach ($parts as $key => $value) {
-// remove slashes automatically added by parse_str
+/* remove slashes automatically added by parse_str */
 						$value = stripslashes($value);
 						$sefstring .= $key . ',' . $value . '/';
 					}
 					$string = str_replace('=', ',', $sefstring);
 				}
 			}
-// no query given. Empty $string to get only the fragment index.php#anchor or index.php?#anchor
+/* no query given. Empty $string to get only the fragment index.php#anchor or index.php?#anchor */
 		} else {
 			$string = '';
 		}
-// allows SEF without mod_rewrite comment line below if you dont have mod_rewrite
+/* allows SEF without mod_rewrite comment line below if you dont have mod_rewrite */
 		return $mosConfig_live_site . '/' . $string . $fragment;
-// allows SEF without mod_rewrite
-// uncomment Line 453 and comment out Line 455
-// uncomment line below if you dont have mod_rewrite
-// return $mosConfig_live_site .'/index.php/'. $string . $fragment;
-// If the above doesnt work - try uncommenting this line instead
-// return $mosConfig_live_site .'/index.php?/'. $string . $fragment;
+/* allows SEF without mod_rewrite - comment Line 456 and uncomment out Line 460 */
+/* uncomment line below if you dont have mod_rewrite */
+// return $mosConfig_live_site .'/index.php/'. $string . $fragment; */
+/* If the above doesnt work - try uncommenting this line instead */
+// return $mosConfig_live_site .'/index.php?/'. $string . $fragment; */
 	} else {
-// Handling for when SEF is not activated
-// Relative link handling
+/* Handling for when SEF is not activated */
+/* Relative link handling */
 		if ((strpos($string, $mosConfig_live_site) !== 0)) {
-// if URI starts with a "/", means URL is at the root of the host...
+/* if URI starts with a "/", means URL is at the root of the host... */
 			if (strncmp($string, '/', 1) == 0) {
-// splits http(s)://xx.xx/yy/zz..." into [1]="http(s)://xx.xx" and [2]="/yy/zz...":
+/* splits http(s)://xx.xx/yy/zz..." into [1]="http(s)://xx.xx" and [2]="/yy/zz...": */
 				$live_site_parts = array();
 				eregi("^(https?:[\/]+[^\/]+)(.*$)", $mosConfig_live_site, $live_site_parts);
 				$string = $live_site_parts[1] . $string;
 			} else {
 				$check = 1;
-// array list of non http/httpsURL schemes
+/* array list of non http/httpsURL schemes */
 				$url_schemes = explode(', ', _URL_SCHEMES);
 				$url_schemes[] = 'http:';
 				$url_schemes[] = 'https:';

@@ -14,7 +14,7 @@ defined('_VALID_MOS') or die();
 define('CACHE_LITE_ERROR_RETURN',1);
 define('CACHE_LITE_ERROR_DIE',8);
 class Cache_Lite {
-	var $_cacheDir = '/tmp/';
+	var $_cacheDir = '/cache/';
 	var $_caching = true;
 	var $_lifeTime = 3600;
 	var $_fileLocking = true;

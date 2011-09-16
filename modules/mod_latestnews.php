@@ -159,12 +159,10 @@ if (!$def_itemid > 0) {
 		}
 		$link = sefRelToAbs('index.php?option=com_content&amp;task=view&amp;id=' . $row->id . $Itemid);
 		?>
-	<li class="latestnews<?php echo $moduleclass_sfx; ?>">
-		<span class="latestnews">
-			<a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>" class="latestnews">
-				<?php echo $row->title; ?>
-			</a>
-		</span>
+	<li>
+		<a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>" class="latestnews">
+			<?php echo $row->title; ?>
+		</a>
 	</li>
 	<?php } ?>
 </ul>

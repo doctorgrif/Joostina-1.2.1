@@ -119,16 +119,16 @@ class mosPageNav {
 				$mainframe->addCustomHeadTag('<link rel="prev" href="' . sefRelToAbs($link) . '" />');
 				$this->prev_exist = 1;
 			}
-			$txt .= '<a href="' . sefRelToAbs($link) . '&amp;limitstart=0" class="pageLLast" title="' . _PN_LLAST . '">' . $pnSpace . '</a> ';
-			$txt .= '<a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page_p10) . '" class="pageLPrev10" title="' . _PN_PREV10 . ' ' . $displayed_pages . '">' . $pnSpace . $pnSpace . '</a> ';
-			$txt .= '<a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" class="pageLPrev1" title="' . _PN_PREV1 . '">' . $pnSpace . '</a> ';
+			$txt .= '<li class="pagenav_prev"><a href="' . sefRelToAbs($link) . '&amp;limitstart=0" title="' . _PN_L_LLAST . '">' . _PN_LLAST . '</a></li>';
+			$txt .= '<li class="pagenav_prev">&larr; <a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page_p10) . '" title="' . _PN_L_PREV10 . '">' . _PN_PREV10 . '</a></li>';
+			$txt .= '<li class="pagenav_prev">&larr; <a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" title="' . _PN_L_PREV1 . '">' . _PN_PREV1 . '</a></li>';
 		}
 		for ($i = $start_loop; $i <= $stop_loop; ++$i) {
 			$page = ($i - 1) * $this->limit;
 			if ($i == $this_page) {
-				$txt .= '<span class="pageS">' . $i . '</span> ';
+				$txt .= '<li class="pagenav_current">' . $i . '</li>';
 			} else {
-				$txt .= '<a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" class="pageA">' . $i . '</a> ';
+				$txt .= '<li class="pagenav_no_current"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" title="' . _PN_PAGE_NUMBER . ' ' . $i . '">' . $i . '</a></li>';
 			}
 		}
 		if ($this_page < $total_pages) {
@@ -139,14 +139,13 @@ class mosPageNav {
 				$mainframe->addCustomHeadTag('<link rel="next" href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" />');
 				$this->next_exist = 1;
 			}
-			$txt .= '<a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" class="pageRNext1" title="' . _PN_NEXT1 . '">' . $pnSpace . '</a> ';
-			$txt .= '<a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page_p10) . '" class="pageRNext10" title="' . _PN_NEXT10 . ' ' . $displayed_pages . '">' . $pnSpace . '</a> ';
-			$txt .= '<a href="' . sefRelToAbs($link . '&amp;limitstart=' . $end_page) . '" class="pageRLast" title="' . _PN_RLAST . ' (' . $total_pages . ')">' . $pnSpace . '</a>';
+			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" title="' . _PN_L_NEXT1 . '">' . _PN_NEXT1 . '</a> &rarr;</li>';
+			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page_p10) . '" title="' . _PN_L_NEXT10 . '">' . _PN_NEXT10 . '</a> &rarr;</li>';
+			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $end_page) . '" title="' . _PN_L_RLAST . '">' . _PN_RLAST . '</a></li>';
 		}
-		$txt = '<p class="flashpage"><span id="flashpageL"><span id="flashpageR"><span class="strong">' . _MODULE_PAGES . '</span> ' . $txt . '</span></span></p>';
+		$txt = '<div class="pagenav_line"><ul>' . $txt . '</ul></div>';
 		return $txt;
 	}
-
 	/**
 	* Sets the vars {PAGE_LINKS}, {PAGE_LIST_OPTIONS} and {PAGE_COUNTER} for the page navigation template
 	* @param object The patTemplate object

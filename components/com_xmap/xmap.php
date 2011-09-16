@@ -166,7 +166,7 @@ class Xmap {
 		$menus = $this->sitemap->getMenus();
 		$plugins = XmapPlugins::loadAvailablePlugins();
 		$root = array();
-		$this->startOutput($menus,$config);
+		$this->startOutput($menus, $config);
 		foreach ( $menus as $menutype => $menu ) {
 			if ( ($type == 'html' && !$menu->show) || ($type == 'xml' && !$menu->showXML ) ) {
 				continue;

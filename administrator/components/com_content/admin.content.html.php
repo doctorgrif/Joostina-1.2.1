@@ -81,42 +81,48 @@ class HTML_content {
 		<tr>
 			<th class="edit" colspan="3" class="jtd_nowrap">
 <?php if($all) { ?>
-				<?php echo _ALL_CONTENT?>
+				<?php echo _ALL_CONTENT;?>
 <?php } else { ?>
-				<?php echo _SITE_CONTENT?>, <?php echo $section->params['name'];?>: <a href="<?php echo $section->params['link'];?>" title="<?php echo _GOTO_EDIT?>"><?php echo $section->title; ?></a>
+				<?php echo _SITE_CONTENT;?>, <?php echo $section->params['name'];?>: <a href="<?php echo $section->params['link'];?>" title="<?php echo _GOTO_EDIT;?>"><?php echo $section->title; ?></a>
 <?php } ?>
 			</th>
 		</tr>
 		<tr>
 			<td>
-				<?php echo _FILTER?>:<br /><input type="text" style="width: 99%;" name="search" value="<?php echo htmlspecialchars($search); ?>" class="inputbox" onChange="document.adminForm.submit();" />
+				<?php echo _FILTER;?>:<br /><input type="text" style="width: 99%;" name="search" value="<?php echo htmlspecialchars($search); ?>" class="inputbox" onChange="document.adminForm.submit();" />
 			</td>
-			<td><?php echo _SORT_BY?>:<br /><?php echo $lists['order']; ?></td>
-			<td><?php echo _ORDER_DROPDOWN?>:<br /><?php echo $lists['order_sort']; ?></td>
+			<td><?php echo _SORT_BY;?>:<br /><?php echo $lists['order']; ?></td>
+			<td><?php echo _ORDER_DROPDOWN;?>:<br /><?php echo $lists['order_sort']; ?></td>
 		</tr>
 	</table>
 
 <table class="adminlisttop adminlist">
 	<tr class="row0">
-	<td valign="top" align="left" id="ntdree"><img src="images/con_pix.gif"><?php echo $lists['sectree'];?></td>
-	<td onclick="ntreetoggle();" width="1" id="tdtoogle" <?php echo $lists['sectreetoggle'];?>><img alt="<?php echo _HIDE_NAV_TREE?>" src="images/tgl.gif" /></td>
+	<td valign="top" align="left"id="ntdree"><img src="images/con_pix.gif"><?php echo $lists['sectree'];?></td>
+	<td onclick="ntreetoggle();" width="1" id="tdtoogle" <?php echo $lists['sectreetoggle'];?>><img alt="<?php echo _HIDE_NAV_TREE;?>" src="images/tgl.gif" /></td>
 	<td valign="top" width="100%">
 	<table class="adminlist" width="100%">
 		<thead>
 		<tr>
-			<th width="5">
+			<th width="5%">
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($rows); ?>);" />
 			</th>
-			<th class="title"><?php echo _HEADER_TITLE?></th>
-			<th><?php echo _CMN_PUBLISHED?></th>
-			<th class="jtd_nowrap"><?php echo _ON_FRONTPAGE?></th>
-			<th width="2%"><?php echo _ORDER_DROPDOWN?></th>
-			<th width="1%">
-				<a href="javascript: saveorder( <?php echo count($rows) - 1; ?> )"><img src="images/filesave.png" width="16" height="16" alt="<?php echo _SAVE_ORDER?>" /></a>
+			<th class="title" width="45%"><?php echo _HEADER_TITLE;?></th>
+			<th width="5%"><?php echo _CMN_PUBLISHED;?></th>
+			<th width="5%" class="jtd_nowrap"><?php echo _ON_FRONTPAGE;?></th>
+			<th width="5%"><?php echo _ORDER_DROPDOWN;?></th>
+			<th width="5%">
+				<a href="javascript: saveorder( <?php echo count($rows) - 1; ?> )"><img src="images/filesave.png" width="16" height="16" alt="<?php echo _SAVE_ORDER;?>" /></a>
 			</th>
-			<th width="10%"><?php echo _ACCESS_RIGHTS?></th>
-			<th align="center"><?php echo _TO_TRASH?></th>
-			<th width="5">ID</th>
+			<th width="5%"><?php echo _ACCESS_RIGHTS;?></th>
+			<th width="5%"><?php echo _TO_TRASH;?></th>
+			<th width="5%">ID</th>
+			<?php if ( $all ) { ?>
+			<th width="5%"><?php echo _SECTION;?></th>
+			<?php } ?>
+			<th width="5%"><?php echo _E_CATEGORY;?></th>
+			<th width="5%"><?php echo _AUTHOR_BY;?></th>
+			<!--<th><?php echo _CREATED;?></th>-->
 		</tr>
 		</thead>
 		<tbody>
@@ -185,42 +191,54 @@ class HTML_content {
 			$front_img = $row->frontpage ? 'tick.png' : 'publish_x.png';
 ?>
 			<tr class="row<?php echo $k; ?>" id="tr-el-<?php echo $row->id;?>">
-				<td align="center"><?php echo $checked; ?></td>
-				<td align="left">
+				<td width="5%" align="center"><?php echo $checked; ?></td>
+				<td width="45%"align="left">
 <?php
 				if($row->checked_out && ($row->checked_out != $my->id)) {
 					echo $row->title;
 				} else {
 ?>
-				<a class="abig" href="<?php echo $link; ?>" title="<?php echo _CHANGE_CONTENT?>"><?php echo $row->title; ?></a>
+				<a class="abig" href="<?php echo $link; ?>" title="<?php echo _CHANGE_CONTENT;?>"><?php echo $row->title; ?></a>
 <?php
 				}
 ?>
 				<br />
-				<?php echo $row->created;?>,  <?php echo $row->hits;?> <?php echo _HEADER_HITS?> : <?php echo $author; ?>
+				<?php echo _CREATED;?> <?php echo $row->created;?>,<br />
+				<?php echo _HEADER_HITS;?> <?php echo $row->hits;?>
+				<!--,<br /> <?php echo _AUTHOR_BY;?> <?php echo $author; ?>-->
 				</td>
 <?php
 			if($times) {
 ?>
-				<td align="center" <?php echo ($row->checked_out && ($row->checked_out != $my->id)) ? null : 'onclick="ch_publ('.$row->id.',\'com_content\');" class="td-state"';?>>
-					<img class="img-mini-state" src="images/<?php echo $img;?>" id="img-pub-<?php echo $row->id;?>" alt="<?php echo _E_PUBLISHING?>" />
+				<td width="5%" align="center" <?php echo ($row->checked_out && ($row->checked_out != $my->id)) ? null : 'onclick="ch_publ('.$row->id.',\'com_content\');" class="td-state"';?>>
+					<img class="img-mini-state" src="images/<?php echo $img;?>" id="img-pub-<?php echo $row->id;?>" alt="<?php echo _E_PUBLISHING;?>" />
 				</td>
 <?php
 			}
 ?>
-				<td align="center" <?php echo ($row->checked_out && ($row->checked_out != $my->id)) ? null : 'onclick="ch_fpage('.$row->id.');" class="td-state"';?>>
-					<img class="img-mini-state" src="images/<?php echo $front_img;?>" id="img-fpage-<?php echo $row->id;?>" alt="<?php echo _ON_FRONTPAGE?>" />
+				<td width="5%" align="center" <?php echo ($row->checked_out && ($row->checked_out != $my->id)) ? null : 'onclick="ch_fpage('.$row->id.');" class="td-state"';?>>
+					<img class="img-mini-state" src="images/<?php echo $front_img;?>" id="img-fpage-<?php echo $row->id;?>" alt="<?php echo _ON_FRONTPAGE;?>" />
 				</td>
-				<td align="center" colspan="2">
+				<td width="5%" align="center" colspan="2">
 					<?php echo $pageNav->orderUpIcon($i,($row->catid == @$rows[$i - 1]->catid)); ?>
-					<input type="text" name="order[]" size="3" value="<?php echo $row->ordering; ?>" class="textarea" style="text-align: center;" />
+					<input type="text" name="order[]" size="3" value="<?php echo $row->ordering; ?>" class="textarea" style="text-align:center;" />
 					<?php echo $pageNav->orderDownIcon($i,$n,($row->catid == @$rows[$i + 1]->catid)); ?>
 				</td>
-				<td align="center" id="acc-id-<?php echo $row->id;?>"><?php echo $access; ?></td>
-				<td align="center" <?php echo $row->checked_out ? null : 'onclick="ch_trash('.$row->id.');" class="td-state"';?>>
+				<td width="5%" align="center" id="acc-id-<?php echo $row->id;?>"><?php echo $access; ?></td>
+				<td width="5%" align="center" <?php echo $row->checked_out ? null : 'onclick="ch_trash('.$row->id.');" class="td-state"';?>>
 					<img class="img-mini-state" src="images/trash_mini.png" id="img-trash-<?php echo $row->id;?>"/>
 				</td>
-				<td align="center"><?php echo $row->id; ?></td>
+				<td width="5%" align="center"><?php echo $row->id; ?></td>
+				<?php if ( $all ) { ?>
+				<td width="5%" align="center">
+					<a href="<?php echo $row->sect_link; ?>" title="<?php echo _CHANGE_SECTION; ?>"><?php echo $row->section_name; ?></a>
+				</td>
+				<?php } ?>
+				<td width="5%" align="center">
+					<a href="<?php echo $row->cat_link; ?>" title="<?php echo _CHANGE_CATEGORY; ?>"><?php echo $row->name; ?></a>
+				</td>
+				<td width="5%" align="center"><?php echo $author; ?></td>
+				<!--<td align="center"><?php echo $date; ?></td>-->
 			</tr>
 <?php
 			$k = 1 - $k;
@@ -683,6 +701,12 @@ class HTML_content {
 							<input type="reset" class="button" value="..." onclick="return showCalendar('publish_down', 'y-mm-dd');" />
 						</td>
 					</tr>
+					<!--<tr>
+						<td valign="top" align="right">—сылка на источник:</td>
+						<td>
+							<input class="textarea" type="text" name="urls" id="urls" size="25" maxlength="500" value="<?php echo $row->urls; ?>" />
+						</td>
+					</tr>-->
 				</table>
 				<br />
 				<table class="adminform">

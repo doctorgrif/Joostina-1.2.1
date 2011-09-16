@@ -1,23 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
 defined('_VALID_MOS') or die();
 global $task, $my, $mainframe, $mosConfig_live_site, $mosConfig_mailfrom, $mosConfig_sitename, $option;
 $iso = explode('=', _ISO);
-echo '<?xml version="1.0" encoding="' . $iso[1] . '"?' . '>';
+if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE')) {
+echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?xml version="1.0" encoding="'.$iso[1].'"?' . '>';
+} else {
+echo '<!DOCTYPE html>
+<?xml version="1.0" encoding="'.$iso[1].'"?' . '>';
+}
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head profile="http://gmpg.org/xfn/11">
 <link rel="stylesheet" href="<?php echo $mosConfig_live_site; ?>/templates/<?php echo $mainframe->getTemplate(); ?>/css/style.css" type="text/css" media="screen, projection" />
-<!--[if lte IE 6]>
-<link rel="stylesheet" href="<?php echo $mosConfig_live_site; ?>/templates/<?php echo $mainframe->getTemplate(); ?>/css/style_ie.css" type="text/css" media="screen, projection" />
-<![endif]-->
-<script type="text/javascript" src="<?php echo $mosConfig_live_site; ?>/templates/<?php echo $mainframe->getTemplate(); ?>/js/html5.js"></script>
 <?php
+if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE')) {
+echo "\n";
+echo '<link rel="stylesheet" href="'.$mosConfig_live_site.'/templates/'.$mainframe->getTemplate().'/css/style_ie.css" type="text/css" media="screen, projection" />';
+echo "\n";}
 mosShowHead();
 mosCommonHTML::loadJquery();
-mosCommonHTML::loadJqueryPlugins('simplegallery');
-mosCommonHTML::loadJqueryPlugins('preloader');
 ?>
 <?php
 if ($my->id) {initEditor();}
@@ -25,11 +28,6 @@ $block1_count = (mosCountModules('user1') > 0) + (mosCountModules('user2') > 0) 
 $block2_count = (mosCountModules('user4') > 0) + (mosCountModules('user5') > 0) + (mosCountModules('user6') > 0);
 $block3_count = (mosCountModules('user7') > 0) + (mosCountModules('user8') > 0) + (mosCountModules('user9') > 0);
 ?>
-<?php 
-if (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE'))
-echo '<script type="text/javascript" src="' . $mosConfig_live_site . '/includes/js/jquery/plugins/corner.js"></script>';
-?>
-
 </head>
 <body class="joo_flex">
 <div class="main_wrap">
@@ -48,7 +46,7 @@ echo '<script type="text/javascript" src="' . $mosConfig_live_site . '/includes/
 				<a title="<?php echo _MAIN_PAGE; ?>" href="<?php echo $mosConfig_live_site; ?>" id="home" class="navbar"></a>
 				<a title="<?php echo _CMN_EMAIL; ?>" href="mailto:<?php echo $mosConfig_mailfrom; ?>" id="mail" class="navbar"></a>
 				<a title="<?php echo _CMN_SITEMAP; ?>" href="<?php echo sefRelToAbs('index.php?option=com_xmap&amp;Itemid=27'); ?>" id="map" class="navbar"></a>
-				<?php mosLoadModules('toolbar', -2); ?>
+				<?php mosLoadModules('toolbar',-2); ?>
 			</div>
 		</div>
 		<div class="block1">
@@ -82,8 +80,8 @@ echo '<script type="text/javascript" src="' . $mosConfig_live_site . '/includes/
 			<?php } ?>
 		</div>
 		<div class="col">
-			<?php mosLoadModules('left', -2); ?>
-			<?php mosLoadModules('banner', -2); ?>
+			<?php mosLoadModules('left',-2); ?>
+			<?php mosLoadModules('banner',-2); ?>
 		</div>
 		<?php if ($block3_count) { $block3_width = 'w' . $block3_count; ?>
 		<div class="block3">
@@ -112,28 +110,47 @@ echo '<script type="text/javascript" src="' . $mosConfig_live_site . '/includes/
 		</div>
 	</div>
 </div>
+<?php
+mosCommonHTML::loadJqueryPlugins('preloader');
+mosCommonHTML::loadJqueryPlugins('avatar');
+if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE'))
+echo '<script type="text/javascript" src="'.$mosConfig_live_site.'/includes/js/jquery/plugins/corner.js"></script>';
+?>
 <script type="text/javascript">
 	jQuery(function(){
 	jQuery('.mosimage').preloader();
 	});
 </script>
 <?php 
-if (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE'))
+if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE'))
 echo '<script type="text/javascript">
 	jQuery(document).ready(function(){
 	jQuery(\'div.moduletable-round\').corner();
 	jQuery(\'div.block2 h3\').corner();});
 </script>';
 ?>
-<!--UA-XXXXX-XX ID сайта-->
-<!--<script type="text/javascript">
-	var _gaq = [['_setAccount', 'UA-XXXXX-XX'], ['_trackPageview']];
+<?php
+$ga_script = '<script type="text/javascript">
+	var _gaq = [[\'_setAccount\', \''.$mosConfig_ga_id.'\'], [\'_trackPageview\']];
 	(function(d, t) {
 	var g = d.createElement(t),s = d.getElementsByTagName(t)[0];
 	g.async = true;
-	g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	g.src = (\'https:\' == location.protocol ? \'https://ssl\' : \'http://www\') + \'.google-analytics.com/ga.js\';
 	s.parentNode.insertBefore(g, s);})
-	(document, 'script');
-</script>-->
+	(document, \'script\');
+</script>';
+if ($mosConfig_ga == 1) {
+echo $ga_script;
+}
+?>
+<?php
+$ym_script = '<script type="text/javascript" src="//mc.yandex.ru/metrika/watch.js"></script>
+<div style="display:none;"><script type="text/javascript">try{var yaCounter' . $mosConfig_ym_id . '=new Ya.Metrika('.$mosConfig_ym_id.');}catch(e){}</script></div>
+<noscript><div style="position:absolute;"><img src="//mc.yandex.ru/watch/' . $mosConfig_ym_id . '" alt="Яндекс Метрика для '.$mosConfig_sitename.'" /></div></noscript>';
+if ($mosConfig_ym == 1) {
+echo $ym_script;
+}
+?>
+
 </body>
 </html>

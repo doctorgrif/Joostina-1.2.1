@@ -10,17 +10,19 @@
 # @upd doctorgrif (artem.grafov@gmail.com)
 ##
 # -== ВНИМАНИЕ! Обязательно установите chmod 644 на этот файл ==-
-
 ## [core]
-## Установка кодировки сайта по умолчанию. При необходимости, закомментируйте.
+## Установка кодировки сайта по умолчанию.
 AddDefaultCharset WINDOWS-1251
-## Устанавливает кодировку utf-8 для следующих форматов файлов. При необходимости, закомментируйте.
+## Устанавливает кодировку utf-8 для следующих форматов файлов.
 AddCharset UTF-8 .css .js
-## Следующие строки - попытка исправить настройки PHP для полного соответствия системным требованиям Joostina. Раскомментируйте (символ комментария - #) нужные строки, если настройки вашего хоста не соответствуют рекомендациям системных требований Joostina. При возникновении 500 ошибки сервера, закомментируйте строку, вызывающую ошибку, или все строки с php_value.
+## Следующие строки - попытка исправить настройки PHP для полного соответствия системным требованиям Joostina.
+## Раскомментируйте нужные строки, если настройки вашего хоста не соответствуют рекомендациям системных
+## требований Joostina.
+## При возникновении 500 ошибки сервера, закомментируйте строку, вызывающую ошибку, или все строки с php_value.
 # php_value register_globals 0
-# php_value display_errors 0
 # php_value display_errors 1
-# php_value error_reporting 7
+# php_value error_reporting 2047
+# php_value memory_limit 64M
 # php_value file_uploads 1
 php_value magic_quotes_gpc 1
 # php_value magic_quotes_runtime 0
@@ -31,219 +33,163 @@ php_value magic_quotes_gpc 1
 # log to file
 # php_flag log_errors on
 # php_value error_log /administrator/php_error.log
-## Пример явного указания каталога для записи сессий:
-## Для Windows - c:/temp
-## для UNIX - /tmp
-## Указанные каталоги должны физически существовать и быть доступны для записи. При необходимости, раскомментируйте строку ниже этой
+## Пример явного указания каталога для записи сессий: Для Windows - c:/temp; для UNIX - /tmp
+## Указанные каталоги должны физически существовать и быть доступны для записи.
+## При необходимости, раскомментируйте строку ниже этой
 # php_value session.save_path c:/temp
-## Прочтите полностью, если будете использовать этот файл
-## Строка ниже этого раздела: 'Options +FollowSymLinks +Indexes +MultiViews' может вызвать проблему при некоторых конфигурациях сервера. Она необходима для использования модуля Apache mod_rewrite, но может быть уже настроена администратором вашего сервера и изменение этого параметра в .htaccess может быть запрещено. Если эта директива вызывает ошибку сервера, то закомментируйте строку (добавьте символ # в начало строки), перезагрузите в браузере сайт и протестируйте работу SEF-ссылок. Если они работают, то вам не надо ничего менять здесь, т.к. всё уже настроено администратором сервера. Используйте только один из двух разделов SEF, которые находятся ниже. Строки, которые можно раскомментировать (и использовать) имеют только один #. Строки с двумя символами # раскомментировать не надо. В разделах, которые вы не используете, все строки должны начинаться с символа #. Для стандартного SEF, используйте раздел стандартного SEF. Вы можете закомментировать все строки с RewriteCond и уменьшить загрузку  сервера, если у вас в корне нет каталогов с названиями 'component' или 'content'. Если вы используете сторонние компоненты SEF или Core SEF, то раскомментируйте все строки в разделе "SEF сторонних разработчиков или Core SEF".
-## Решение проблемы с неработающими url компонентов (специальное примечание для пользователей SMF, использующих мост интеграции или для тех случаев, когда не работают url компонентов). В обоих разделах 'Стандартного SEF', и 'SEF сторонних разработчиков или Core SEF' строка RewriteCond %{REQUEST_URI} ^(/component/option,com) [NC,OR] может быть раскомментирована. Если ваша Joostina работает в подкаталоге, то в эту строку можно вставить название подкаталога. Например, если ваша Joostina находится в подкаталоге '/test/', то измените RewriteCond %{REQUEST_URI} ^(/component/option,com) [NC,OR] на RewriteCond %{REQUEST_URI} ^(/test/component/option,com) [NC,OR]
-## Запрет по маске доступа к htaccess и htpasswd
-<Files ~ "^\.(htaccess|htpasswd)$">
-deny from all
-</Files>
-## Запрет по маске доступа к просмотру позиций шаблона
-<Files ~ "\.tpl$">
-Order allow,deny
-Deny from all
-</Files>
-## Без -MultiViews, Apache отдаст 404 если папка с данным именем не существует. Может быть закомментировано, если вызывает ошибку сервера 
-Options -MultiViews 
-## -Indexes для Apache блокирует пользователей, запрашивающих папку без документа по умолчанию
-Options -Indexes
+## Может быть закомментировано, если вызывает ошибку сервера.
 Options +FollowSymLinks
+## Может быть закомментировано, если вызывает ошибку сервера.
+Options -MultiViews 
+## Может быть закомментировано, если вызывает ошибку сервера.
+Options -Indexes
 ## Включение mod_rewrite
 RewriteEngine On
-## Раскомментируйте следующую строку, если URL вашего web-сервера не связаны напрямую с физическими путями файлов. Обновите Ваш каталог Joostina (используйте "/" для обозначения корня сервера)
+## Запрет по маске доступа к htaccess и htpasswd
+# <Files ~ "^\.(htaccess|htpasswd)$">
+# deny from all
+# </Files>
+## Запрет по маске доступа к просмотру позиций шаблона
+# <Files ~ "\.tpl$">
+# Order allow,deny
+# Deny from all
+# </Files>
+## Код запрета доступа к xml-файлам расширений
+#<Files ~ "\.xml$">
+#Order allow,deny
+#Deny from all
+#Satisfy all
+#</Files>
+## Эти строки указывают серверу, что необходимо запретить выполнение скриптов в корне, кроме файла index.php.
+## Если хакеру удастся загрузить в корень сайта бэкдор, он не сможет его выполнить на сервере.
+# <Filesmatch ".(php)$">
+# order deny,allow
+# deny from all
+# </Filesmatch>
+# <Filesmatch "^index.php">
+# order allow,deny
+# allow from all
+# </Filesmatch>
+# <Filesmatch "^index2.php">
+# order deny,allow
+# allow from all
+# </Filesmatch>
+## Однако, хакер может загрузить бэкдор с именем index.php в подкаталог в корне сервера, где он будет выполняться. 
+## Поэтому во все подкаталоги первого уровня от корня необходимо поместить файл .htaccess нижеследующего содержания.
+## Необходимо предварительно протестировать данное решение для каждой папкив отдельности чтобы не заблокировать
+## необходимый функционал
+# <Files ~ ".(php)$">
+# Deny from all
+# </Files>
+## запрещаем /proc/self/environ в запросе
+RewriteCond %{QUERY_STRING} proc\/self\/environ [OR]
+## Отключаем возможность просмотра позиций модулей
+# RewriteCond %{QUERY_STRING} tp(=1) [OR]
+## Защита от загрузки файла. Может вызвать проблемы!
+# RewriteCond %{REQUEST_METHOD} GET
+# RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]\=http:\/\/(.*)
+# RewriteRule ^(.*)$ index.php [F,L]
+## Запрещаем доступ к файлам php и xml в каталогах с расширениями
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} \.php|\.xml [NC]
+## следующая строка закомментирована ибо с ней не работает чат
+# RewriteCond %{REQUEST_URI} \/components\/ [OR]
+RewriteCond %{REQUEST_URI} ^\/includes\/|^\/administrator\/includes\/ [OR]
+RewriteCond %{REQUEST_URI} \/language\/ [OR]
+# следующая строка может вызывать проблемы на разных серверах, поэтому по умолчанию она закомментирована,
+## однако стоит попробовать их включить.
+# RewriteCond %{REQUEST_URI} \/modules\/ [OR]
+## следующие строки могут вызывать проблемы на разных серверах, поэтому по умолчанию они взакомментированы,
+## однако стоит попробовать их включить.
+# RewriteCond %{REQUEST_URI} \/mambots\/ [OR]
+# RewriteCond %{REQUEST_URI} \/templates\/ [OR]
+# RewriteRule ^(.*)$ index.php [R=404,L]
+## Блокируем наиболее распространенные SQL-инъекции
+RewriteCond %{query_string} concat.*\( [NC,OR]
+RewriteCond %{query_string} union.*select.*\( [NC,OR]
+RewriteCond %{query_string} union.*all.*select [NC]
+## следующая строка может вызывать проблемы на разных серверах, поэтому по умолчанию она закомментирована,
+## однако стоит попробовать ее включить.
+# RewriteRule ^(.*)$ index.php [F,L]
+## Блокируем наиболее распространенные средства взлома
+RewriteRule ^([A-z0-9/_-]*)$ index.php [L,QSA]
+SetEnvIf user-agent "Indy Library" stayout=1
+SetEnvIf user-agent "libwww-perl" stayout=1
+SetEnvIf user-agent "Wget" stayout=1
+## следующая строка может вызывать проблемы на разных серверах, поэтому по умолчанию она закомментирована,
+## однако стоит попробовать ее включить.
+# deny from env=stayout
+## [bots block]
+# Блокировать любой запрос, пытающийся установить значение mosConfig через URL
+RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|\%3D) [OR]
+# Блокировать любой запрос, пытающийся испортить base64_encode через URL
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [OR]
+# Блокировать любой запрос, содержащий тег <script> в URL
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+# Блокировать любой запрос, пытающийся установить значение глобальных переменных PHP через URL
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+# Блокировать любой запрос, пытающийся изменить _REQUEST переменную через URL
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+# Перенаправлять заблокированные запросы на страницу 403 с запрещенными ошибками!
+RewriteRule ^(.*)$ index.php [F,L]
+## Custom redirects
+# If you need to redirect some pages, or set a canonical non-www to www redirect (or vice versa),
+# place that code here. Ensure those redirects use the correct RewriteRule syntax and the [R=301,L] flags.
+#Склеивание доменов с www и без www (а также "зеркал")
+#Редирект с адреса yoursitename.ru на www.yoursitename.ru
+# Для включения удалите раскомментируйте следующие 2 строки и подставьте свой адрес сайта.
+# RewriteCond %{HTTP_HOST} !^www.yoursitename.ru$ [NC] 
+# RewriteRule ^(.*)$ http://www.yoursitename.ru/$1 [L,R=301] 
+## End Custom redirects
+## Раскомментируйте следующую строку, если URL вашего web-сервера не связаны напрямую с физическими путями файлов.
+## Обновите Ваш каталог Joostina (используйте "/" для обозначения корня сервера)
 # RewriteBase /
-
 ## [sef]
-## Стандартный SEF. Используйте эту секцию ТОЛЬКО для работы встроенного SEF Joostina. ВСЕ (RewriteCond) строки в этой секции необходимы только если на вашем сервере имеются каталоги с названиями 'content/' или 'component/'. Если каталоги с такими названиями отсутствуют, то закомментируйте эти строки.
+## Решение проблемы с неработающими url компонентов (специальное примечание для пользователей SMF,
+## использующих мост интеграции или для тех случаев, когда не работают url компонентов).
+## В обоих разделах Стандартного SEF, и SEF сторонних разработчиков или Core SEF
+## строка RewriteCond %{REQUEST_URI} ^(/component/option,com) [NC,OR] может быть раскомментирована.
+## Если ваша Joostina работает в подкаталоге, то в эту строку можно вставить название подкаталога.
+## Например, если ваша Joostina находится в подкаталоге '/test/',
+## то измените RewriteCond %{REQUEST_URI} ^(/component/option,com) [NC,OR]
+## на RewriteCond %{REQUEST_URI} ^(/test/component/option,com) [NC,OR]
+## Стандартный SEF.
+## Используйте эту секцию ТОЛЬКО для работы встроенного SEF Joostina. ВСЕ (RewriteCond) строки в этой секции
+## необходимы только если на вашем сервере имеются каталоги с названиями content/ или component/.
+## Если каталоги с такими названиями отсутствуют, то закомментируйте эти строки.
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d#
-# RewriteCond %{REQUEST_URI} ^(/component/option,com) [NC,OR] #опционально - см. примечания#
+RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_URI} ^(/component/option,com) [NC,OR] ## опционально - см. примечания ##
 RewriteCond %{REQUEST_URI} (/|\.htm|\.php|\.html|/[^.]*)$ [NC]
 RewriteRule ^(view/|content/|component/) index.php
-## SEF сторонних разработчиков или Core SEF. Используйте этот раздел, если вы используете SEF-расширения типа sh404SEF, JPromoter, Atrio JoomSEF и т.д.
-# RewriteCond %{REQUEST_URI} ^(/component/option,com) [NC,OR] #опционально - см. примечания#
+## SEF сторонних разработчиков или Core SEF.
+## Используйте этот раздел, если вы используете SEF-расширения типа sh404SEF, JPromoter, Atrio JoomSEF и т.д.
+# RewriteCond %{REQUEST_URI} ^(/component/option,com) [NC,OR] ## опционально - см. примечания ##
 # RewriteCond %{REQUEST_URI} (/|\.htm|\.php|\.html|/[^.]*)$ [NC]
 # RewriteCond %{REQUEST_FILENAME} !-f
 # RewriteCond %{REQUEST_FILENAME} !-d
 # RewriteRule (.*) index.php
-
-## [bots block]
-## Правила обработки запросов для блокировки распространенных эксплоитов.
-# If the request query string contains /proc/self/environ (by SigSiu.net)
-RewriteCond %{QUERY_STRING} proc/self/environ [OR]
-## Block out any script trying to set a mosConfig value through the URL
-RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|\%3D) [OR]
-## Block out any script trying to base64_encode crap to send via URL
-RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [OR]
-## Block out any script that includes a <script> tag in URL
-RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
-## Block out any script trying to set a PHP GLOBALS variable via URL
-RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
-RewriteCond %{QUERY_STRING} tp(=1) [OR]
-## Block out any script trying to modify a _REQUEST variable via URL
-RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
-# Prevent use of specified methods in HTTP Request
-RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK) [NC,OR]
-# Block out use of illegal or unsafe characters in the HTTP Request
-RewriteCond %{THE_REQUEST} ^.*(\\r|\\n|%0A|%0D).* [NC,OR]
-# Block out use of illegal or unsafe characters in the Referer Variable of the HTTP Request
-RewriteCond %{HTTP_REFERER} ^(.*)(<|>|'|%0A|%0D|%27|%3C|%3E|%00).* [NC,OR]
-# Block out use of illegal or unsafe characters in any cookie associated with the HTTP Request
-RewriteCond %{HTTP_COOKIE} ^.*(<|>|'|%0A|%0D|%27|%3C|%3E|%00).* [NC,OR]
-# Block out use of illegal characters in URI or use of malformed URI
-RewriteCond %{REQUEST_URI} ^/(,|;|:|<|>|">|"<|/|\\\.\.\\).{0,9999}.* [NC,OR]
-# NOTE - disable this rule if your site is integrated with Payment Gateways such as PayPal
-# Block out  use of empty User Agent Strings
-RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
-# Block out  use of User Agent Strings beginning with java, curl or wget
-RewriteCond %{HTTP_USER_AGENT} ^(java|curl|wget).* [NC,OR]
-# Block out  use of User Agent Strings containing specific robot (crawler) identifiers
-RewriteCond %{HTTP_USER_AGENT} ^.*(winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner).* [NC,OR]
-# Block out  use of User Agent Strings containing references to specific crawler libraries
-RewriteCond %{HTTP_USER_AGENT} ^.*(libwww-perl|curl|wget|python|nikto|scan).* [NC,OR]
-# Block out  use of illegal or unsafe characters in the User Agent variable
-RewriteCond %{HTTP_USER_AGENT} ^.*(<|>|'|%0A|%0D|%27|%3C|%3E|%00).* [NC,OR]
-# Measures to block out SQL injection attacks
-RewriteCond %{QUERY_STRING} ^.*(;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|cast|set|declare|drop|update|md5|benchmark).* [NC,OR]
-# Block out  reference to localhost/loopback/127.0.0.1 in the Query String
-RewriteCond %{QUERY_STRING} ^.*(localhost|loopback|127\.0\.0\.1).* [NC,OR]
-# Block out  use of illegal or unsafe characters in the Query String variable
-RewriteCond %{QUERY_STRING} ^.*(<|>|'|%0A|%0D|%27|%3C|%3E|%00).* [NC]
-## Перенаправляем все блокированные запросы на главную страницу с ошибкой 403 Forbidden!
-RewriteRule ^(.*)$ index.php [F,L]
-
-## Блокировка плохих ботов по user-Agent 
-SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]
-SetEnvIfNoCase user-Agent ^Java.* [NC,OR]
-SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]
-SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]
-SetEnvIfNoCase user-Agent ^Offline.Explorer [NC,OR]
-SetEnvIfNoCase user-Agent ^[Ww]eb[Bb]andit [NC,OR]
-SetEnvIfNoCase user-Agent ^Zeus [NC]
-<Limit GET POST HEAD>
-Order Allow,Deny
-Allow from all
-Deny from env=bad_bot
-</Limit>
-## Блокировка сетевых вирусов и сканеров и редирект на microsoft.com при "странных" запросах каталогов и приложений
-redirect /_vti_bin http://www.microsoft.com
-redirect /scripts http://www.microsoft.com
-redirect /MSADC http://www.microsoft.com
-redirect /c http://www.microsoft.com
-redirect /d http://www.microsoft.com
-redirect /_mem_bin http://www.microsoft.com
-redirect /msadc http://www.microsoft.com
-RedirectMatch (.*)\cmd.exe$ http://www.microsoft.com$1
-
 ## [cache and optimize]
-## Обработка "кривых" браузеров
-## Вводим фильтр
-# SetOutputFilter DEFLATE
-## Netscape 4.x
-# BrowserMatch ^Mozilla/4 gzip-only-text/html
-## Netscape 4.06-4.08
-# BrowserMatch ^Mozilla/4\.0[678] no-gzip
-## MSIE маскируем как Netscape
-# BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-## Не сжимаем изображения
-# SetEnvIfNoCase Request_URI \
-# \.(?:gif|jpe?g|png)$ no-gzip dont-vary
-## Удостоверяемся, что прокси не отдают ошибочное содержимое
-#Header append Vary User-Agent env=!dont-vary
-## Правила для Apache 2.*
-# Header append Vary User-Agent
-## Force the latest IE version, in various cases when it may fall back to IE7 mode
-## Use ChromeFrame if it's installed for a better experience for the poor IE folk
-<IfModule mod_setenvif.c>
-<IfModule mod_headers.c>
-BrowserMatch MSIE ie
-Header set X-UA-Compatible "IE=Edge,chrome=1" env=ie
-</IfModule>
-</IfModule>
-# <IfModule mod_headers.c>
-## Because X-UA-Compatible isn't sent to non-IE (to save header bytes),
-## We need to inform proxies that content changes based on UA
-# Header append Vary User-Agent
-## Cache control is set only if mod_headers is enabled, so that's unncessary to declare
-# </IfModule>
-## Disabled. Uncomment to serve cross-domain ajax requests
-# <IfModule mod_headers.c>
-# Header set Access-Control-Allow-Origin "*"
-# </IfModule>
-## сжатие gzip
-# <IfModule mod_deflate.c>
-## добавление сжатия файлов html, txt, css, js, xml, htc:
-# AddOutputFilterByType DEFLATE image/x-icon
-# AddOutputFilterByType DEFLATE application/x-javascript
-# AddOutputFilterByType DEFLATE text/html text/plain text/css
-# AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript 
-# AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
-# </IfModule>
-<IfModule mod_expires.c>
-Header set Cache-Control "public"
-Header append Cache-Control private
-ExpiresActive on
-## Perhaps better to whitelist expires rules? Perhaps.
-ExpiresDefault "access plus 1 month"
-## cache.manifest needs re-requests in FF 3.6 (thx Remy ~Introducing HTML5)
-# ExpiresByType text/cache-manifest "access plus 0 seconds"
-## документ html 
-ExpiresByType text/html "access plus 0 seconds"
-## data
-ExpiresByType text/xml "access plus 0 seconds"
-ExpiresByType application/xml "access plus 0 seconds"
-## rss
-ExpiresByType application/rss+xml "access plus 1 hour"
-## favicon (не менять)
-ExpiresByType image/vnd.microsoft.icon  "access plus 1 week" 
-## медиа: images, video, audio
-ExpiresByType image/gif "access plus 1 month"
-ExpiresByType image/bmp "access plus 1 month"
-ExpiresByType image/png "access plus 1 month"
-ExpiresByType image/jpg "access plus 1 month"
-ExpiresByType image/jpeg "access plus 1 month"
-ExpiresByType video/ogg "access plus 1 month"
-ExpiresByType audio/ogg "access plus 1 month"
-ExpiresByType video/mp4 "access plus 1 month"
-ExpiresByType video/webm "access plus 1 month"
-## css и javascript
-ExpiresByType text/css "access plus 1 month"
-ExpiresByType application/javascript "access plus 1 month"
-ExpiresByType text/javascript "access plus 1 month"
-</IfModule>
-## Выше отдали заголовки Express, поэтому не нужно отдавать ETags для статического содержимого.
-FileETag None
-# Allow cookies to be set from iframes (for IE only)
-# If needed, uncomment and specify a path or regex in the Location directive
-# <IfModule mod_headers.c>
-# <Location />
-# Header set P3P "policyref=\"/w3c/p3p.xml\", CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\""
-# </Location>
-# </IfModule>
-## Правила для Apache 1.* - если у вас эта версия - расскомментируйте, закомментировав правила для Apache 2.
-# SetOutputFilter DEFLATE
-# Header set Expires "max-age=29030400, public"
+<FilesMatch "\.(js|css)$">
+SetOutputFilter DEFLATE
+</FilesMatch>
+# 480 недель
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+Header set Cache-Control "max-age=290304000, public"
+Header set Expires "Thu, 15 Apr 2017 20:00:00 GMT"
+</FilesMatch>
+# 2 дня
+<FilesMatch "\.(xml|txt)$">
+Header set Cache-Control "max-age=172800, public, must-revalidate"
+</FilesMatch>
+# 2 часа
+<FilesMatch "\.(html|htm)$">
+Header set Cache-Control "max-age=7200, must-revalidate"
+</FilesMatch>
 # Header unset ETag
 # FileETag None
-# ExpiresActive On
-# ExpiresDefault A600
-# ExpiresByType image/x-icon A2592000
-# ExpiresByType application/x-javascript A604800
-# ExpiresByType text/css A604800
-# ExpiresByType image/gif A2592000
-# ExpiresByType image/png A2592000
-# ExpiresByType image/jpeg A2592000
-# ExpiresByType text/plain A1200
-# ExpiresByType application/x-shockwave-flash A2592000
-# ExpiresByType video/x-flv A2592000
-# ExpiresByType application/pdf A2592000
-# ExpiresByType text/html A600
-
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif)$">
+Header unset Last-Modified
+</FilesMatch>
 ## [apache secure]
-## Сигнатура Apache
 # ServerSignature Off

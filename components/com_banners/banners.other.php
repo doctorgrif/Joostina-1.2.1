@@ -70,7 +70,7 @@ ORDER BY b.last_show ASC , b.msec ASC";
 	if (!$numrows) {
 		return '&nbsp;';
 	}
-$result = '<table cellpadding="0" cellspacing="0" class="banners' . $moduleclass_sfx . '">';
+$result = '<div class="banners' . $moduleclass_sfx . '">';
 	if ($random && $count == 1) {
 		$bannum = 0;
 		if ($numrows > 1) {
@@ -79,7 +79,7 @@ $result = '<table cellpadding="0" cellspacing="0" class="banners' . $moduleclass
 			$bannum = mt_rand(0, $numrows);
 		}
 		if ($numrows) {
-	$result .= '<tr><td>' . showSingleBanner($rows[$bannum]) . '</td></tr></table>';
+	$result .= '<div>' . showSingleBanner($rows[$bannum]) . '</div></div>';
 			return $result;
 		}
 	}
@@ -89,13 +89,13 @@ $result = '<table cellpadding="0" cellspacing="0" class="banners' . $moduleclass
 // '0' -> Vertical
 // '1' -> Horizontal
 		if ($orientation == '0') {
-	$result .= '<tr><td>' . showSingleBanner($row) . '</td></tr>';
+	$result .= '<div>' . showSingleBanner($row) . '</div>';
 		} else {
 			if ($first == false) {
-	$result .= '<tr>';
+	$result .= '<div>';
 				$first = true;
 			}
-		$result .= '<td>' . showSingleBanner($row) . '</td>';
+		$result .= '<div>' . showSingleBanner($row) . '</div>';
 		}
 		$showed++;
 		if ($showed == $count) {
@@ -103,9 +103,9 @@ $result = '<table cellpadding="0" cellspacing="0" class="banners' . $moduleclass
 		}
 	}
 	if ($orientation == '1') {
-	$result .= '</tr>';
+	$result .= '</div>';
 	}
-$result .= '</table>';
+$result .= '</div>';
 	return $result;
 }
 
@@ -136,12 +136,22 @@ function showSingleBanner(&$banner) {
 			$alt = $banner->alt;
 		$title = $banner->title;
 
-$result = '<a href="index.php?option=com_banners&amp;task=clk&amp;id=' . $banner->id . '" target="_' . $target . '"  title="' . $title . '"><img src="' . $image_url . '" style="border:"' . $border_value . $border_style . $border_color . '" vspace="0" alt=' . $alt . '" width="' . $imginfo[0] . '" height="' . $imginfo[1] . '" /></a>';
+$result = '<a href="index.php?option=com_banners&amp;task=clk&amp;id=' . $banner->id . '" target="_' . $target . '"  title="' . $title . '"><img src="' . $image_url . '" style="border:"' . $border_value . $border_style . $border_color . '" vspace="0" class="banner" alt=' . $alt . '" width="' . $imginfo[0] . '" height="' . $imginfo[1] . '" /></a>';
 	} else
 	if (eregi('.swf', $banner->image_url)) {
 		$image_url = $mosConfig_live_site . '/images/banners/' . $banner->image_url;
 		$swfinfo = @getimagesize($mosConfig_absolute_path . '/images/banners/' . $banner->image_url);
-$result = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=4,0,2,0" border="0" width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '" vspace="0"><param name="SRC" value="' . $image_url . '"><embed src="' . $image_url . '" loop="false" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '"></object>';
+		$result = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '" align="middle" class="header2">
+		<param name="allowScriptAccess" value="sameDomain" />
+		<param name="allowFullScreen" value="false" />
+		<param name="movie" value="' . $image_url . '" />
+		<param name="quality" value="high" />
+		<param name="bgcolor" value="#fff" />
+		<param name="SCALE" value="noborder" />
+		<param name="wmode" value="transparent" />
+		<embed src="' . $image_url . '"  width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '" align="middle" quality="high" bgcolor="#fff" wmode="transparent" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" scale="noborder" /> 
+		</object>';
+		//$result = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=4,0,2,0" border="0" width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '" vspace="0"><param name="SRC" value="' . $image_url . '"><embed src="' . $image_url . '" loop="false" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '"></object>';
 	}
 	return $result;
 }

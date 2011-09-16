@@ -9,7 +9,6 @@
 
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-
 class jdebug {
 	/* стек сообщений лога*/
 	var $_log = array();
@@ -25,33 +24,30 @@ class jdebug {
 		if($db){
 			$this->_db();
 		}else{
-			$this->add(_SQL_QUERIES_COUNT.': '.count($database->_log));
+			$this->add(_SQL_QUERIES_COUNT . ': ' . count($database->_log));
 		}
 		foreach($this->_log as $key => $value) {
-			$this->text .= $value.'<br />';
+			$this->text .= '<p>' . $value . '</p>';
 		}
-		echo '<noindex><div id="jdebug">'.$this->text.'</div></noindex>';
+		echo '<div id="jdebug">' . $this->text . '</div>';
 	}
-
 	/* отладка sql запросов базы данных*/
 	function _db() {
 		global $database;
-		 count($database->_log);
-		$this->add('<strong>SQL запросов:</strong> '.count($database->_log).'<pre>');
+		count($database->_log);
+		$this->add('<pre>');
+		$this->add('SQL запросов: ' . count($database->_log));
 		foreach($database->_log as $k => $sql) {
-			$this->add($k + 1 . ': '.$sql.'<hr />');
+			$this->add($k + 1 . ': ' . $sql . '<hr />');
 		}
 		$this->add('</pre>');
 		return;
 	}
-
 }
-;
 /* упрощенная процедура добавления сообщения в лог*/
 function jlog($text) {
 	global $debug;
 	if(!isset($debug)) $debug = new jdebug();
 	$debug->add($text);
 }
-
 ?>

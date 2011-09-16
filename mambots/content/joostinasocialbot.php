@@ -10,7 +10,7 @@
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onAfterDisplayContent', 'joostinasocialbot');
 
-function joostinasocialbot(&$row, &$params, $page = 0) {
+function joostinasocialbot(&$row, &$params) {
 	global $database, $mainframe, $task, $option, $mosConfig_live_site, $mainframe, $_MAMBOTS;
 
 	if ($option == 'com_content' AND $task == 'view') {

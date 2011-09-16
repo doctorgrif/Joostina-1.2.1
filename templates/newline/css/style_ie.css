@@ -5,6 +5,8 @@
 	(document.documentElement.clientWidth > 1284 ? "1284px" : "auto")) :
 	(document.body.clientWidth > 900 ? "900px" :
 	(document.body.clientWidth < 1284 ? "1284px" : "auto")));}
+* {behavior:url('../js/iepngfix.htc');}
+* {zoom:1;}
 * html textarea, * html input {padding:0;}
 hr, p, ul, ol, dl, pre, address, table, form {margin-bottom:.6em;}
 ul {list-style:disc outside;margin-left:2em;}
@@ -15,7 +17,10 @@ textarea, input, form {padding:.5em .4em .3em .4em}
 textarea, input, select {cursor:auto;}
 input[type='submit'], input[type='button'] {padding:.25em 0;}
 a abbr, a acronym {text-decoration:underline;}
-img {behavior:url('../js/iepngfix.htc');}
+#logo, a#logo {_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/logo.png',sizingMethod='crop');}
+#log_in {_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/log_in.png',sizingMethod='crop');}
+.closewin {_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/cross.png',sizingMethod='crop');}
+.syndicate a.RSS20, .syndicate a.Yandex, .syndicate a.RSS091, .syndicate a.RSS10, .syndicate a.ATOM03, .syndicate a.OPML {_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/rss_small.png',sizingMethod='crop');}
 .search {margin:0;padding:0;}
 .search-text {width:310px;}
 .search-button {width:70px;}

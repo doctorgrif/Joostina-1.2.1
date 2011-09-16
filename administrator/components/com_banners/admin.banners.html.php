@@ -61,14 +61,14 @@ class HTML_banners {
 			}
 
 			// se una image visualizzo l'anteprima
-			$info = '<br>' . _ABP_COSTS . '<br>';
+			$info = '<br />' . _ABP_COSTS . '<br />';
 			$info .= _ABP_TOTAL_PRICE . ': ' . _ABP_CURRENCY . ' ' . $row->click_value . ' / ' . _ABP_CURRENCY . ' ' . $total_clickvalue;
-			$info .= '<br>' . _ABP_PRICE_IMPRESSION . ': ' . _ABP_CURRENCY . ' ' . $row->imp_value . ' / ' . _ABP_CURRENCY . ' ' . $pay_imp;
+			$info .= '<br />' . _ABP_PRICE_IMPRESSION . ': ' . _ABP_CURRENCY . ' ' . $row->imp_value . ' / ' . _ABP_CURRENCY . ' ' . $pay_imp;
 
-			if(eregi("(\.bmp|\.gif|\.jpg|\.jpeg|\.png)$", $row->image_url)) {
-				$over = 'onmouseover="return overlib(\'<img border=0 src=../images/banners/' . str_replace(' ', '%20', $row->image_url) . '\><br>' . $info . '\',CAPTION,\'' . _ABP_PREVIEW . '\',WIDTH,468);" onmouseout="return nd();"';
+			if(eregi('(\.bmp|\.gif|\.jpg|\.jpeg|\.png)$', $row->image_url)) {
+				$over = 'onmouseover="return overlib(\'<img border=0 style=float:left;padding-right:10px; src=../images/banners/' . str_replace(' ', '%20', $row->image_url) . '\>' . $info . '\',CAPTION,\'' . _ABP_PREVIEW . '\',WIDTH,500);" onmouseout="return nd();"';
 			} else {
-				$over = 'onmouseover="return overlib(\'' . _ABP_PREVIEW_NOT_DISP . '<br>' . $info . '\',CAPTION,\'' . _ABP_PREVIEW . '\',WIDTH,468);" onmouseout="return nd();"';
+				$over = 'onmouseover="return overlib(\'' . _ABP_PREVIEW_NOT_DISP . '' . $info . '\',CAPTION,\'' . _ABP_PREVIEW . '\',WIDTH,500);" onmouseout="return nd();"';
 			}
 
 ?>
@@ -77,20 +77,20 @@ class HTML_banners {
 		<td width="20">
 <?php
 			if($row->checked_out && $row->checked_out != $myid) {
-				echo '<img src="images/checked_out.png" alt="', _ABP_BANNER_IN_USE, '">';
+				echo '<img src="images/checked_out.png" alt="' . _ABP_BANNER_IN_USE . '">';
 			} else {
-				echo '<input type="checkbox" id="cb', $i, '" name="cid[]" value="', $row->id, '" onClick="isChecked(this.checked);" />';
+				echo '<input type="checkbox" id="cb' . $i . '" name="cid[]" value="' . $row->id . '" onClick="isChecked(this.checked);" />';
 			}
 ?>
 		</td>
-		<td width="18" align="center"><b><?php echo $row->id; ?></b></td>
-		<td width="188" align="left"><a href="#editbanner" <?php echo $over; ?> onclick="return listItemTask('cb<?php echo $i; ?>','editbanner')"><?php echo $row->name; ?></a></td>
+		<td width="18" align="center"><strong><?php echo $row->id; ?></strong></td>
+		<td width="188" align="center"><a href="#editbanner" <?php echo $over; ?> onclick="return listItemTask('cb<?php echo $i; ?>','editbanner')"><?php echo $row->name; ?></a></td>
 		<td width="149" align="center"><?php echo $row->category; ?>&nbsp;</td>
-		<td width="188" align="left"><?php echo $row->cl_name; ?>&nbsp;</td>
+		<td width="188" align="center"><?php echo $row->cl_name; ?>&nbsp;</td>
 		<td width="108" align="center"><?php echo $row->imp_made; ?></td>
 		<td width="92" align="center"><?php echo $imp_left; ?></td>
-		<td width="90" align="center"> <?php echo $row->complete_clicks; ?> / <?php echo $row->clicks; ?> </td>
-		<td width="90" align="center"><?php echo $percentClicksTot; ?> / <?php echo $percentClicks; ?></td>
+		<td width="90" align="center"> <?php echo $row->complete_clicks; ?>/<?php echo $row->clicks; ?></td>
+		<td width="90" align="center"><?php echo $percentClicksTot; ?>/<?php echo $percentClicks; ?></td>
 		<td width="90" align="center">
 <?php
 			if($row->reccurtype == 1) {
@@ -108,8 +108,8 @@ class HTML_banners {
 ?>
 		</td>
 <?php
-			$times = "<tr><td>" . _ABP_FROM . " : " . $row->publish_up_date . "</td></tr>";
-			$times .= "<tr><td>" . _ABP_TO . " : ";
+			$times = '<tr><td>' . _ABP_FROM . ' : ' . $row->publish_up_date . '</td></tr>';
+			$times .= '<tr><td>' . _ABP_TO . ' : ';
 
 			if(isset($row->publish_down_date)) {
 				if($row->publish_down_date == '0000-00-00') {
@@ -118,13 +118,13 @@ class HTML_banners {
 					$times .= $row->publish_down_date;
 				}
 			}
-			$times .= "</td></tr>";
+			$times .= '</td></tr>';
 
-			$times .= "<tr><td>" . _ABP_EVENT_STARTHOURS . " : " . $row->publish_up_time . "</td></tr>";
+			$times .= '<tr><td>' . _ABP_EVENT_STARTHOURS . ' : ' . $row->publish_up_time . '</td></tr>';
 			if($row->publish_down_time != '00:00:00')
-				$times .= "<tr><td>" . _ABP_EVENT_ENDHOURS . " : " . $row->publish_down_time . "</td></tr>";
+				$times .= '<tr><td>' . _ABP_EVENT_ENDHOURS . ' : ' . $row->publish_down_time . '</td></tr>';
 
-			$times .= "<tr><td>";
+			$times .= '<tr><td>';
 
 			switch(getStato($row)) {
 				case BANNER_IN_ATTIVAZIONE:
@@ -156,19 +156,19 @@ class HTML_banners {
 				$task = 'unpublishbanner';
 			} else {
 				$task = ($row->state == 1) ? 'unpublishbanner' : 'publishbanner';
-				$times .= "<tr><td>" . addslashes(_ABP_COITTS) . "</td></tr>";
+				$times .= '<tr><td>' . addslashes(_ABP_COITTS) . '</td></tr>';
 			}
 
 			if($row->cat_pub == 0) {
-				$times .= "<tr><td align=center><img src=images/checked_out.png width=12 height=12 border=0>" . _ABP_CATEGORY_UNPUBLISH . "</td></tr>";
+				$times .= '<tr><td align="center"><img src="images/checked_out.png" width="12" height="12" border="0">' . _ABP_CATEGORY_UNPUBLISH . '</td></tr>';
 			}
 
 			if($row->cl_pub == 0) {
-				$times .= "<tr><td align=center><img src=images/checked_out.png width=12 height=12 border=0>" . _ABP_CLIENT_UNPUBLISH . "</td></tr>";
+				$times .= '<tr><td align="center"><img src="images/checked_out.png" width="12" height="12" border="0">' . _ABP_CLIENT_UNPUBLISH . '</td></tr>';
 			}
 
-			$now = mosCurrentDate("%Y-%m-%d");
-			$time = mosCurrentDate("%H:%M:%S");
+			$now = mosCurrentDate('%Y-%m-%d');
+			$time = mosCurrentDate('%H:%M:%S');
 
 			$onclick = '';
 
@@ -185,7 +185,7 @@ class HTML_banners {
 ?>
 		<td align="center">
 		<a href="javascript: void(0);" onMouseOver="return overlib('<table border=0 width=100% height=100%><?php echo $times; ?></table>', CAPTION, '<?php echo _ABP_PUBLISH_INFORMATION; ?>', BELOW, RIGHT);" onMouseOut="return nd();" <?php echo
-$onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
+$onclick; ?>><img src="images/<?php echo $img; ?>" border="0" alt="" /></a>
 		</td>
 	</tr>
 <?php
@@ -235,7 +235,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 <?php
 		$keys = array_keys($dimension);
 		foreach($keys as $key) {
-			echo "if (image_url == '", $key, "') return ", $dimension[$key]['w'], ";\n";
+			echo "if (image_url == '" . $key . "') return " . $dimension[$key]['w'] . ";\n";
 		}
 ?>
 	}
@@ -245,7 +245,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 	<?php
 		$keys = array_keys($dimension);
 		foreach($keys as $key) {
-			echo "if (image_url == '", $key, "') return ", $dimension[$key]['h'], ";\n";
+			echo "if (image_url == '" . $key . "') return " . $dimension[$key]['h'] . ";\n";
 		}
 ?>
 	}
@@ -260,7 +260,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 
 		 if (document.adminForm.image_url.value.indexOf('.swf') != -1) {
 			toggleBox('flashDiv', 1);
-			document.getElementById("flashDiv").innerHTML='<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=4,0,2,0" border="0" vspace="0" width="'+w+'" height="'+h+'"><param name="SRC" value="../images/banners/' + document.adminForm.image_url.value+'"><embed src="../images/banners/' + document.adminForm.image_url.value+'" loop="false" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="'+w+'" height="'+h+'"></object>';
+			document.getElementById("flashDiv").innerHTML='<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+w+'" height="'+h+'" align="middle" class="header2"><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="false" /><param name="movie" value="../images/banners/' + document.adminForm.image_url.value+'" /><param name="quality" value="high" /><param name="bgcolor" value="#fff" /><param name="SCALE" value="noborder" /><param name="wmode" value="transparent" /><embed src="../images/banners/' + document.adminForm.image_url.value+'" width="'+w+'" height="'+h+'" align="middle" quality="high" bgcolor="#fff" wmode="transparent" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" scale="noborder" /></object>';
 			document.adminForm.imagelib.src='images/blank.png';
 
 			toggleBox('flashDivText', 1);
@@ -541,7 +541,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 				//-->
 				</script>';
 			} else
-				if(eregi("(\.bmp|\.gif|\.jpg|\.jpeg|\.png)$", $row->image_url)) {
+				if(eregi('(\.bmp|\.gif|\.jpg|\.jpeg|\.png)$', $row->image_url)) {
 ?>
 			<img src="../images/banners/<?php echo $row->image_url; ?>" name="imagelib" alt="" />
 <?php
@@ -589,8 +589,8 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 	<td width="30%" valign="top">
 <?php
 	$tabs = new mosTabs(0);
-	$tabs->startPane("content-pane");
-	$tabs->startTab(_ABP_OPZ, "opzioni-page");
+	$tabs->startPane('content-pane');
+	$tabs->startTab(_ABP_OPZ, 'opzioni-page');
 ?>
 		<table width="100%" class="adminlist">
 		<tr>
@@ -630,7 +630,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 		</table>
 <?php
 	$tabs->endTab();
-	$tabs->startTab(_ABP_DATE, "date-page");
+	$tabs->startTab(_ABP_DATE, 'date-page');
 ?>
 	<table width="100%" class="adminlist">
 	<tr>
@@ -693,7 +693,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 	<tr>
 		<td align="left" colspan="3">
 <?php
-	echo _ABP_EVENT_CHOOSE_WEEKDAYS, '<br>';
+	echo _ABP_EVENT_CHOOSE_WEEKDAYS, '<br />';
 	buildWeekDaysCheck($row->reccurweekdays, 'disabled=true');
 ?>
 		</td>
@@ -701,7 +701,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 	</table>
 <?php
 	$tabs->endTab();
-	$tabs->startTab(_ABP_COSTS, "costi-page");
+	$tabs->startTab(_ABP_COSTS, 'costi-page');
 ?>
 		<table width="100%" class="adminlist">
 		<tr>
@@ -734,7 +734,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 
 		<table width="100%" class="adminlist">
 		<tr>
-			<th colspan="3"><?php echo _ABP_STATE; ?> / <?php echo _ABP_EVENT_ACCESSLEVEL; ?></th>
+			<th colspan="3"><?php echo _ABP_STATE; ?>/<?php echo _ABP_EVENT_ACCESSLEVEL; ?></th>
 		</tr>
 		<tr>
 			<td valign="top" width='100' align="left"><?php echo _ABP_EVENT_STATE; ?></td>
@@ -757,7 +757,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 					break;
 
 				default: //case BANNER_NON_PUBBLICATO:
-					$img = "publish_x.png"; // non pubblicato
+					$img = 'publish_x.png'; // non pubblicato
 					$times = _ABP_OUB_NOT;
 					break;
 			}
@@ -887,7 +887,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border=0 alt="" /></a>
 		<span>
 			<a href="<?php echo $link; ?>" title="<?php echo $text; ?>">
 	<?php
-				echo mosAdminMenus::imageCheckAdmin($image,'/'.ADMINISTRATOR_DIRECTORY.'/images/',null,null,$text);
+				echo mosAdminMenus::imageCheckAdmin($image . '/' . ADMINISTRATOR_DIRECTORY . '/images/',null,null,$text);
 				echo $text;
 	?>
 			</a>
@@ -936,9 +936,9 @@ class HTML_bannerClient {
 		<td width="20">
 <?php
 			if($row->checked_out && $row->checked_out != $myid) {
-				echo '<img src="images/checked_out.png" width="12" height="12" border="0" alt="', _ABP_CICBEBAA, '">';
+				echo '<img src="images/checked_out.png" width="12" height="12" border="0" alt="' . _ABP_CICBEBAA . '">';
 			} else {
-				echo '<input type="checkbox" id="cb', $i, '" name="cid[]" value="', $row->cid, '" onClick="isChecked(this.checked);" />';
+				echo '<input type="checkbox" id="cb', $i, '" name="cid[]" value="' . $row->cid . '" onClick="isChecked(this.checked);" />';
 			}
 ?>
 		</td>
@@ -1014,7 +1014,7 @@ class HTML_bannerClient {
 	</tr>
 	<tr class="row1">
 		<td valign="top"><?php echo _ABP_E_EXTRA_INFO; ?></td>
-		<td><textarea class="inputbox" name="extrainfo" cols="60" rows="10"><?php echo str_replace('&', '&amp;', $row->extrainfo); ?></textarea>	 </td>
+		<td><textarea class="inputbox" name="extrainfo" cols="60" rows="10"><?php echo str_replace('&', '&amp;', $row->extrainfo); ?></textarea></td>
 	</tr>
 	<tr>
 		<td colspan="2">&nbsp;</td>
@@ -1065,9 +1065,9 @@ class HTML_bannerCategory {
 			<td width="20">
 <?php
 				if($row->checked_out && $row->checked_out != $myid) {
-					echo '<img src="images/checked_out.png" border="0" alt="', _ABP_TCICBEBAA, '">';
+					echo '<img src="images/checked_out.png" border="0" alt="' . _ABP_TCICBEBAA . '">';
 				} else {
-					echo '<input type="checkbox" id="cb', $i, '" name="cid[]" value="', $row->id, '" onClick="isChecked(this.checked);" />';
+					echo '<input type="checkbox" id="cb' . $i . '" name="cid[]" value="' . $row->id . '" onClick="isChecked(this.checked);" />';
 				}
 ?>
 			</td>
@@ -1076,7 +1076,7 @@ class HTML_bannerCategory {
 				<a href="#edit" onClick="return listItemTask('cb<?php echo $i; ?>','editcategory')"><?php echo $row->name; ?></a>
 			</td>
 			<td width="15%" align="center"><?php echo $row->banners; ?></td>
-			<td align="center" <?php echo ($row->checked_out && ($row->checked_out != $my->id)) ? null : 'onclick="ch_publ('.$row->id.',\'com_banners\',\'&act=cat_publish\');" class="td-state"';?>>
+			<td align="center" <?php echo ($row->checked_out && ($row->checked_out != $my->id)) ? null : 'onclick="ch_publ(' . $row->id . ',\'com_banners\',\'&act=cat_publish\');" class="td-state"';?>>
 				<img class="img-mini-state" src="images/<?php echo $img;?>" id="img-pub-<?php echo $row->id;?>" alt="<?php echo _E_PUBLISHING?>" />
 			</td>
 		</tr>
@@ -1150,7 +1150,7 @@ class HTML_bannersOther {
 	<table class="adminform">
 	<tr>
 		<th class="title">
-			<?php echo _ABP_LOAD_FILE; ?> :
+			<?php echo _ABP_LOAD_FILE; ?>:
 		</th>
 	</tr>
 	<tr>
@@ -1166,7 +1166,4 @@ class HTML_bannersOther {
 <?php
 	}
 }
-
-
-
 ?>

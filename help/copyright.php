@@ -11,43 +11,43 @@ defined('_VALID_MOS') or die();
 ?>
 <style type="text/css">.copyright{font-family:sans-serif;margin:0;padding:0;height:100%;width:100%;white-space:pre-wrap;}img{float:right;}h3{font-size:1.5em;line-height:1.5;margin:0;}ol,ul{margin-top:5px;}ul{list-style:none;}li{margin:0;padding:0;}.sic{color:red;}</style>
 <div class="copyright">
-<img src="<?php echo $mosConfig_live_site; ?>/help/images/joostina.png" alt="Joostina" />
+<img src="<?php echo $mosConfig_live_site; ?>/help/joostina.png" alt="Joostina License" />
 <h3>Joostina! распространяется по лицензии <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></h3>
 <p>Joostina! включает в себя следующие программные продукты:</p>
 <ol>
 <li><strong>Joomla!</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/joomla.png" alt="Joomla!" />
+<ul>
 <li>Авторские права: &copy; 2005-2007, Open Source Matters.</li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 <li>Система основана на разработке Joomla, производимой Open Source Matters с 2005 по 2007 год, а так же на разработках, производимых с 2000 по 2005 год: Nick Anies, Brad Baker, Ron Bakker, Shayne Bartlett, Tim Broeker, Levis Bisson, Michelle Bisson, Robert Castley, Andrew Eddie, Rey Gigataras, Johan Janssens, Alex Kempkens, Peter Koch, James Logan, Andy Miller, Mitch Pirtle, Steen Rabol, Peter Russel, Phil Taylor, Brian Teeman, Emir Sakic, Jean-Marie Simonet, Andy Stewart, Trijnie Wanders, Arno Zijlstra, Miro International Pty Ltd.</li>
 </ul>
 </li>
 <li><strong>Joomla RE</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/joomla_re.png" alt="Joomla RE" />
+<ul>
 <li>Авторские права: &copy; 2005&mdash;2007, Joom.Ru - Русский дом Joomla</li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
 </li>
 <li><strong>Joomla LE</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/joomla_le.png" alt="Joomla LE" />
+<ul>
 <li>Авторские права &copy; <a href="http://www.andyr.mrezha.ru">AndyR</a></li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
 </li>
 <li><strong>Mambo</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/mambo.png" alt="Mambo" />
+<ul>
 <li>Авторские права: &copy; 2000&mdash;2004, Miro International Pty Ltd</li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
 </li>
 <li><strong>Joomla! Украинская локализация</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/ua.png" alt="Joomla! Украинская локализация" />
+<ul>
 <li>Авторские права: &copy; 2006&mdash;2008, Denys Nosov <a href="http://www.joomla-ua.org">Joomla! Ukraine</a></li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
 </li>
 <li><strong>Joomla! Белорусская локализация</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/by.png" alt="Joomla! Белорусская локализация" />
+<ul>
 <li>Авторские права: &copy; 2006&mdash;2007, Miskevish Andrei (jan_dax@telegaf.by)</li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
@@ -65,7 +65,7 @@ defined('_VALID_MOS') or die();
 </ul>
 </li>
 <li><strong>jQuery</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/jquery.png" alt="jQuery" />
+<ul>
 <li>Авторские права: &copy; 2008, <a href="http://www.jquery.com">John Resig</a></li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
@@ -83,7 +83,7 @@ defined('_VALID_MOS') or die();
 </ul>
 </li>
 <li><strong>MooTools</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/mootools.png" alt="MooTools" />
+<ul>
 <li>Авторские права: &copy; 2006&mdash;2010, <a href="http://www.mad4milk.net">Valerio Proietti</a>; <a href="http://mootools.net/developers/">The MooTools production team</a></li>
 <li>Лицензия: <a href="http://mootools.net/license.txt" title="MIT Style License">MIT Style License</a>.</li>
 </ul>
@@ -103,11 +103,6 @@ defined('_VALID_MOS') or die();
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
 </li>
-<!--<li><strong>JCE</strong>
-<ul><li>Авторские права: &copy; <a href="http://www.cellardoor.za.net">Ryan Demmer</a></li>
-<li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
-</ul>
-</li>-->
 <li><strong>Spaw</strong>
 <ul><li>Авторские права: &copy; Solmetra. Портирование для Joostina и общая оптимизация редактора: rav, boston, Hammer, TK, joomlaforum.ru, Components Lab.</li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
@@ -124,7 +119,7 @@ defined('_VALID_MOS') or die();
 </ul>
 </li>
 <li><strong>joomlaXplorer</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/joomlaxplorer.png" alt="joomlaXplorer" />
+<ul>
 <li>Авторские права: &copy; <a href="http://www.virtuemart.net">Soeren, QuiX Project</a></li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
@@ -145,7 +140,7 @@ defined('_VALID_MOS') or die();
 </ul>
 </li>
 <li><strong>My Content</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/mycontent.png" alt="My Content" />
+<ul>
 <li>Авторские права: &copy; 2006, <a href="http://www.owlwatch.com">Owl Watch Consulting Services</a></li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
@@ -161,7 +156,7 @@ defined('_VALID_MOS') or die();
 </ul>
 </li>
 <li><strong>Xmap</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/xmap.png" alt="Xmap" />
+<ul>
 <li>Авторские права: &copy; <a href="http://www.joomla.vargas.co.cr">Guillermo Vargas</a></li>
 <li>Лицензия: <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></li>
 </ul>
@@ -347,7 +342,7 @@ defined('_VALID_MOS') or die();
 </ul>
 </li>
 <li><strong>phpOpenID</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/openid.png" alt="phpOpenID" />
+<ul>
 <li>Авторские права: &copy; 2005&mdash;2008, Janrain, Inc. (penid@janrain.com)</li>
 <li>Лицензия: <a href="http://www.apache.org/licenses/">Apache 2.0</a></li>
 </ul>
@@ -357,7 +352,7 @@ defined('_VALID_MOS') or die();
 <li>Лицензия: PHP License</li>
 </ul>
 <li><strong>FPDF</strong>
-<ul><img src="<?php echo $mosConfig_live_site; ?>/help/images/fpdf.png" alt="FPDF" />
+<ul>
 <li>Авторские права: &copy; 2008, Olivier PLATHEY, <a href="http://www.fpdf.org/">http://www.fpdf.org/</a></li>
 <li>Лицензия: PHP License</li>
 </ul>

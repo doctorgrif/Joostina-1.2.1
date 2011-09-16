@@ -12,21 +12,6 @@
 <link id="luna-tab-style-sheet" type="text/css" rel="stylesheet" href="../includes/js/tabs/tabpane.css" />]]></description>
 <files>
 <filename module="mod_ml_login">mod_ml_login.php</filename>
-        <filename>mod_ml_login/index.html</filename>
-        <filename>mod_ml_login/icons.png</filename>
-        <filename>mod_ml_login/button.gif</filename>
-        <filename>mod_ml_login/facebook.png</filename>
-        <filename>mod_ml_login/flickr.png</filename>
-        <filename>mod_ml_login/google.png</filename>
-        <filename>mod_ml_login/loginza.png</filename>
-        <filename>mod_ml_login/mailru.png</filename>
-        <filename>mod_ml_login/myopenid.png</filename>
-        <filename>mod_ml_login/openid.png</filename>
-        <filename>mod_ml_login/rambler.png</filename>
-        <filename>mod_ml_login/twitter.png</filename>
-        <filename>mod_ml_login/vkontakte.png</filename>
-        <filename>mod_ml_login/webmoney.png</filename>
-        <filename>mod_ml_login/yandex.png</filename>
 </files>
 <params>
 <param name="@spacer" type="spacer" default="&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; &lt;div class=&quot;tab-page&quot; id=&quot;moduledgm&quot;&gt;&lt;script type=&quot;text/javascript&quot;&gt;var tabPane1 = new WebFXTabPane( document.getElementById( &quot;moduledgm&quot; ), 1 )&lt;/script&gt; &lt;div class=&quot;tab-page&quot;id=&quot;module32&quot;&gt;&lt;h2 class=&quot;tab&quot;&gt;Основные настройки&lt;/h2&gt;&lt;script type=&quot;text/javascript&quot;&gt;tabPane1.addTabPage(document.getElementById(&quot;module32&quot;));&lt;/script&gt;&lt;table width=&quot;100%&quot; class=&quot;paramlist-m&quot;&gt;&lt;tr&gt;&lt;td&gt;" label="" description="" />
@@ -67,27 +52,6 @@
 <option value="2">Не выводить</option>
 </param>
 <param name="profile_link_text" type="text" default="Личный кабинет" label="Текст ссылки на профиль" description="" />
-<param name="@spacer" type="spacer" default="&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt; &lt;div class=&quot;tab-page&quot; id=&quot;module19&quot;&gt;&lt;h2 class=&quot;tab&quot;&gt;OpenID&lt;/h2&gt;&lt;script type=&quot;text/javascript&quot;&gt;tabPane1.addTabPage(document.getElementById( &quot;module20&quot; ) );&lt;/script&gt;&lt;table width=&quot;100%&quot; class=&quot;paramlist-m&quot;&gt;&lt;tr&gt;&lt;td&gt;" label="" description="" />
-<param name="@spacer" type="spacer" default="" label="" description="" />
-<param name="openid_login_txt" type="text" default="Ваш OpenID URL:" label="Текст над полем OpenID" description="Надпись над формой авторизации OpenID" />
-<param name="openid_example_url" type="text" default="http://www.getmyopenid.com/example" label="OpenID для примера" description="The label of an example of openid url" />
-<param name="openid_submit_txt" type="text" default="Войти" label="Текст кнопки OpenID" description="Надпись на кнопке авторизации OpenID" />
-<param name="openid_help_display" type="radio" default="1" label="Показать помощь" description="Отображать в форме авторизации ссылку на помощь по OpenID">
-<option value="0">Нет</option>
-<option value="1">Да</option>
-</param>
-<param name="openid_help_txt" type="text" default="Что это - OpenID?" label="Заголовой ссылки помощи" description="Заголовой ссылки помощи по работе с OpenID" />
-<param name="openid_help_url" type="text" default="http://openid.net/" label="URL ссылки помощи" description="URL ссылки помощи по работе с OpenID" />
-<param name="openid_provider_display" type="radio" default="0" label="Показать провайдеров OpenID" description="Отображать в форме авторизации ссылку на Провайдеры OpenID">
-<option value="0">Нет</option>
-<option value="1">Да</option>
-</param>
-<param name="openid_provider_other" type="radio" default="1" label="Показать других провайдеров OpenID" description="Отображать в форме авторизации изображения-ссылки на других провайдеров OpenID">
-<option value="0">Нет</option>
-<option value="1">Да</option>
-</param>
-<param name="openid_provider_txt" type="text" default="I want my openid url" label="Provider link name" description="" />
-<param name="openid_provider_url" type="text" default="http://www.getmyopenid.com/registration/register.html" label="Provider link url" description="" />
 <param name="@spacer" type="spacer" default="&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt; &lt;div class=&quot;tab-page&quot; id=&quot;module19&quot;&gt;&lt;h2 class=&quot;tab&quot;&gt;Выход&lt;/h2&gt;&lt;script type=&quot;text/javascript&quot;&gt;tabPane1.addTabPage(document.getElementById( &quot;module20&quot; ) );&lt;/script&gt;&lt;table width=&quot;100%&quot; class=&quot;paramlist-m&quot;&gt;&lt;tr&gt;&lt;td&gt;" label="" description="" />
 <param name="logout" type="text" default="" label="Адрес URL переадресации пользователя при выходе" description="На какую страницу должен быть переадресован пользователь после входа. Если поле для ввода оставлено пустым - будет загружена главная страница" />
 <param name="logout_message" type="radio" default="0" label="Сообщение при выходе" description="Показать/Скрыть всплывающее окно (на javascript) при успешном выходе">

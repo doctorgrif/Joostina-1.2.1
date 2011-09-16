@@ -157,19 +157,15 @@ if (!$def_itemid > 0) {
 </ul>
 <script type="text/javascript">
 $(function() {
-	// define global variables
 	var maxWidth, maxCount;
 	$('li.mostread').each(function(i) {
 		var $this = $(this);
 		var thisCount = ~~$this.find('.view-count').text();
-		// set up some variables if the first iteration
 		if ( i == 0 ) {
 			maxWidth = $this.width() - 40;
 			maxCount = thisCount;
 		}
-		// calculate the width based on the count ratio
 		var thisWidth = (thisCount / maxCount) * maxWidth;
-		// apply the width to the bar
 		$this.find('.view-bar').animate({
 			width : thisWidth
 		}, 200, 'swing');

@@ -1,58 +1,56 @@
 <?php
 /**
 * @package Joostina
-* @copyright ÐÐ²Ñ‚Ð¾Ñ€ÑÐºÐ¸Ðµ Ð¿Ñ€Ð°Ð²Ð° (C) 2008 Joostina team. Ð’ÑÐµ Ð¿Ñ€Ð°Ð²Ð° Ð·Ð°Ñ‰Ð¸Ñ‰ÐµÐ½Ñ‹.
-* @license Ð›Ð¸Ñ†ÐµÐ½Ð·Ð¸Ñ http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL, Ð¸Ð»Ð¸ /help/license.php
-* Joostina! - ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ð¾Ðµ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð½Ð¾Ðµ Ð¾Ð±ÐµÑÐ¿ÐµÑ‡ÐµÐ½Ð¸Ðµ Ñ€Ð°ÑÐ¿Ñ€Ð¾ÑÑ‚Ñ€Ð°Ð½ÑÐµÐ¼Ð¾Ðµ Ð¿Ð¾ ÑƒÑÐ»Ð¾Ð²Ð¸ÑÐ¼ Ð»Ð¸Ñ†ÐµÐ½Ð·Ð¸Ð¸ GNU/GPL
-* Ð”Ð»Ñ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ñ‹Ñ… Ñ€Ð°ÑÑˆÐ¸Ñ€ÐµÐ½Ð¸ÑÑ… Ð¸ Ð·Ð°Ð¼ÐµÑ‡Ð°Ð½Ð¸Ð¹ Ð¾Ð± Ð°Ð²Ñ‚Ð¾Ñ€ÑÐºÐ¾Ð¼ Ð¿Ñ€Ð°Ð²Ðµ, ÑÐ¼Ð¾Ñ‚Ñ€Ð¸Ñ‚Ðµ Ñ„Ð°Ð¹Ð» help/copyright.php.
+* @copyright Àâòîðñêèå ïðàâà (C) 2008 Joostina team. Âñå ïðàâà çàùèùåíû.
+* @license Ëèöåíçèÿ http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL, èëè help/license.php
+* Joostina! - ñâîáîäíîå ïðîãðàììíîå îáåñïå÷åíèå ðàñïðîñòðàíÿåìîå ïî óñëîâèÿì ëèöåíçèè GNU/GPL
+* Äëÿ ïîëó÷åíèÿ èíôîðìàöèè î èñïîëüçóåìûõ ðàñøèðåíèÿõ è çàìå÷àíèé îá àâòîðñêîì ïðàâå, ñìîòðèòå ôàéë help/copyright.php.
 */
-// Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ñ„Ð»Ð°Ð³Ð°, Ñ‡Ñ‚Ð¾ ÑÑ‚Ð¾ - Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÐ¸Ð¹ Ñ„Ð°Ð¹Ð»
+// Óñòàíîâêà ôëàãà, ÷òî ýòî - ðîäèòåëüñêèé ôàéë
 define('_VALID_MOS', 1);
 require ('globals.php');
 require_once ('configuration.php');
 require_once ('includes/definitions.php');
-// Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð±ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ð¾Ð³Ð¾ Ñ€ÐµÐ¶Ð¸Ð¼Ð°
+// îáðàáîòêà áåçîïàñíîãî ðåæèìà
 $http_host = explode(':', $_SERVER['HTTP_HOST']);
 if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isset($http_host[1]) && $http_host[1] == 443) && substr($mosConfig_live_site, 0, 8) != 'https://') {
 	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
 }
 require_once ('includes/joomla.php');
-// Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð²Ñ‹ÐºÐ»ÑŽÑ‡ÐµÐ½Ð½Ð¾Ð³Ð¾ ÑÐ°Ð¹Ñ‚Ð° - Ð¾ÑˆÐ¸Ð±ÐºÐ° 503
+// îòîáðàæåíèå ñòðàíèöû âûêëþ÷åííîãî ñàéòà - îøèáêà 503
 if ($mosConfig_offline == 1) {
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	header('Status: 503 Service Temporarily Unavailable');
 	header('Retry-After: 3600');
-	header('X-Powered-By:');
+	header('Connection: Close');
 	require ($mosConfig_absolute_path . '/offline.php');
 }
-// Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ°Ñ Ð¿ÐµÑ€ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð² ÑŽÐ½Ð¸ÐºÐ¾Ð´, Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ Ð°ÐºÑ‚Ð²Ð¸Ð½Ð¾
+// àâòîìàòè÷åñêàÿ ïåðåêîäèðîâêà â þíèêîä, ïî óìîë÷àíèþ àêòâèíî
 $utf_conv = intval(mosGetParam($_REQUEST, 'utf', 1));
 $option = strval(strtolower(mosGetParam($_REQUEST, 'option', '')));
 $task = strval(mosGetParam($_REQUEST, 'task', ''));
 $commponent = str_replace('com_', '', $option);
-// Ð³Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ñ€Ð°Ð±Ð¾Ñ‡ÐµÐ³Ð¾ ÐºÐ¾Ð¼Ð¿Ð¾Ð½ÐµÐ½Ñ‚Ð° API, Ð´Ð»Ñ Ð²Ð·Ð°Ð¸Ð¼Ð¾Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ Ð¼Ð½Ð¾Ð³Ð¸Ñ… 'ÑÐ´ÐµÑ€'
+// ãëàâíîå îêíî ðàáî÷åãî êîìïîíåíòà API, äëÿ âçàèìîäåéñòâèÿ ìíîãèõ 'ÿäåð'
 $mainframe = new mosMainFrame($database, $option, '.');
 $mainframe->initSession();
-// Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° Ñ„Ð°Ð¹Ð»Ð° Ñ€ÑƒÑÑÐºÐ¾Ð³Ð¾ ÑÐ·Ñ‹ÐºÐ° Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ
+// çàãðóçêà ôàéëà ðóññêîãî ÿçûêà ïî óìîë÷àíèþ
 if ($mosConfig_lang == '') {
 	$mosConfig_lang = 'russian';
 }
 include_once ($mosConfig_absolute_path . '/language/' . $mosConfig_lang . '.php');
-// Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ðµ Ð¸Ð· Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñ‹ ÑÐµÑÑÐ¸Ð¹
+// ïîëó÷åíèå èíôîðìàöèþ î ïîëüçîâàòåëå èç òàáëèöû ñåññèé
 $my = $mainframe->getUser();
-// Ð¾Ð±Ð½Ð°Ñ€ÑƒÐ¶ÐµÐ½Ð¸Ðµ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ Ð¿Ð¾ÑÐµÑ‰ÐµÐ½Ð¸Ñ
+// îáíàðóæåíèå ïåðâîãî ïîñåùåíèÿ
 // $mainframe->detect();
 $gid = intval($my->gid);
-// Ð² Ð·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ÑÑ‚Ð¸ Ð¾Ñ‚ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð°Ð²Ñ‚Ð¾Ð¿ÐµÑ€ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ¸ Ð² UTF-8
+// â çàâèñèìîñòè îò èñïîëüçîâàíèÿ àâòîïåðåêîäèðîâêè â UTF-8
 if ($utf_conv) {
 	header('Content-type: text/html; charset=utf-8');
-	header('Cache-Control: no-cache, must-revalidate');
 	ob_start();
 } else {
 	header('Content-type: text/html; ' . _ISO . '');
-	header('Cache-Control: no-cache, must-revalidate');
 }
-// Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼, ÐºÐ°ÐºÐ¾Ð¹ Ñ„Ð°Ð¹Ð» Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ, Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð±ÐµÑ€ÑƒÑ‚ÑÑ Ð¸Ð· Ð¿Ñ€Ð¸ÑˆÐµÐ´ÑˆÐµÐ³Ð¾ GET Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°
+// ïðîâåðÿåì, êàêîé ôàéë íåîáõîäèìî ïîäêëþ÷èòü, äàííûå áåðóòñÿ èç ïðèøåäøåãî GET çàïðîñà
 if (file_exists($mosConfig_absolute_path . '/components/' . $option . '/' . $commponent . '.ajax.php')) {
 	include_once ($mosConfig_absolute_path . '/components/' . $option . '/' . $commponent . '.ajax.php');
 } else {
@@ -61,7 +59,7 @@ if (file_exists($mosConfig_absolute_path . '/components/' . $option . '/' . $com
 if ($utf_conv) {
 	$_ajax_body = ob_get_contents();
 	ob_end_clean();
-// ÐµÑÐ»Ð¸ Ð°ÐºÑ‚Ð¸Ð²Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ð° Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ°Ñ Ð¿ÐµÑ€ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð² ÑŽÐ½Ð¸ÐºÐ¾Ð´
-	echo joostina_api::convert($_ajax_body, 1); // Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ Ð¿ÐµÑ€ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ Ñ‚ÐµÐºÑÑ‚
+// åñëè àêòèâèðîâàííà àâòîìàòè÷åñêàÿ ïåðåêîäèðîâêà â þíèêîä
+	echo joostina_api::convert($_ajax_body, 1); // âûâîäèì ïåðåêîäèðîâàííûé òåêñò
 }
 ?>

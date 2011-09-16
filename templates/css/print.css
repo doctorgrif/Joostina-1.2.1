@@ -30,7 +30,7 @@ td, th {
 	font-size:12px;
 	color:#000;}
 div#main {page-break-inside:avoid;}
-div.sociable , .sociable {display:none;}
+.buttonheading, .buttonheading ul li, .buttonheading img, .print_button, .jsb, .jsblist ul li, .jsbbefore, .jsbafter, .sociable {list-style:none;display:none;}
 .contentpaneopen, .contentpaneopen, .contentpaneopen table {
 	width:100%;
 	text-align:justify;
@@ -76,7 +76,7 @@ div.logo {
 	border-bottom:1px solid #999 !important;
 	clear:both;
 	color:#888 !important;}
-div.sociable , .sociable {display:none;}
+.buttonheading, .buttonheading ul li, .buttonheading img, .print_button, .jsb, .jsblist ul li, .jsbbefore, .jsbafter, .sociable {list-style:none;display:none;}
 @media screen {
 .printOnly, #ju_foo, span.ju_pr {display:none;}
 }
@@ -94,7 +94,7 @@ div span.small {visibility:hidden;}
 span.article_seperator, .buttonheading {display:none !important;}
 .contentpaneopen, .contentpaneopen {width:100%;text-align:justify;}
 div.logo {font-weight:normal !important;}
-div.sociable {display:none;}
+.buttonheading, .buttonheading ul li, .buttonheading img, .print_button, .jsb, .jsblist ul li, .jsbbefore, .jsbafter, .sociable {list-style:none;display:none;}
 #ju_foo {
 	padding-top:10px;
 	font-size:11px;
@@ -113,5 +113,5 @@ span.ju_pr a {
 	color:#777 !important;
 	text-decoration:none;
 	font-weight:normal!important;}
-div.sociable , .sociable {display:none;}
+.buttonheading, .buttonheading ul li, .buttonheading img, .print_button, .jsb, .jsblist ul li, .jsbbefore, .jsbafter, .sociable {list-style:none;display:none;}
 }

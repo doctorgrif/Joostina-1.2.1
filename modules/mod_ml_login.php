@@ -56,17 +56,6 @@ $params_aray = array(
 	'show_register' => $params->get('show_register', 1),
 	'ml_reg_text' => $params->get('ml_reg_text', _CREATE_ACCOUNT),
 	'submit_button_text' => $params->get('submit_button_text', _BUTTON_LOGIN),
-// openid
-	'openid_login_txt' => $params->get('openid_login_txt'),
-	'openid_example_url' => $params->get('openid_example_url'),
-	'openid_submit_txt' => $params->get('openid_submit_txt', _OPENID_SUB_TEXT),
-	'openid_help_display' => $params->get('openid_help_display', 1),
-	'openid_help_txt' => $params->get('openid_help_txt'),
-	'openid_help_url' => $params->get('openid_help_url'),
-	'openid_provider_display' => $params->get('openid_provider_display', 1),
-	'openid_provider_txt' => $params->get('openid_provider_txt'),
-	'openid_provider_url' => $params->get('openid_provider_url'),
-	'openid_provider_other' => $params->get('openid_provider_other', 1),
 );
 if ($params_aray['show_login_tooltip'] == 1 OR $params_aray['show_pass_tooltip']) {
 	mosCommonHTML::loadOverlib(1);
@@ -136,7 +125,9 @@ function loginForm($params_aray) {
 	});
 	});
 </script>
-<div class="loginbutton" id="log_in"><?php echo $params_aray['dr_login_text']; ?></div>
+<div class="loginbutton" id="log_in">
+	<?php echo $params_aray['dr_login_text']; ?>
+</div>
 <div id="box1">
 	<div class="loginformarea">
 		<div class="loginformareainside">
@@ -145,58 +136,6 @@ function loginForm($params_aray) {
 			</span>
 			<?php BuildLoginForm($params_aray, $params_aray['orientation']); ?>
 			<div class="clearfix"></div>
-			<div class="openidblock">
-				<span class="authtitle">
-					<?php echo _AUTH_OPENID; ?>
-				</span>
-				<form method="post" action="<?php echo sefRelToAbs('index.php'); ?>" class="form" name="login" >
-					<div class="openid">
-						<fieldset>
-							<input type="hidden" name="task" value="try_auth" />
-							<input type="hidden" name="option" value="com_joostinaopenid" />
-							<div id="openlogin">
-								<div>
-									<label for="openlogin"><?php echo $params_aray['openid_login_txt']; ?></label>
-								</div>
-								<input type="text" size="50" maxlength="255" id="openlogin" name="open_login" value="<?php echo $params_aray['openid_example_url']; ?>" placeholder="<?php echo $params_aray['openid_example_url']; ?>" />
-								<input type="submit" name="submit" class="button" value="<?php echo $params_aray['openid_submit_txt']; ?>" />
-							</div>
-						</fieldset>
-					</div>
-				</form>
-				<div class="openidservices">
-					<?php if ($params_aray['openid_help_display'] == 1 ) {
-					echo '<p>' . $params_aray['openid_help_txt'] . ' <a target="_blank" href="' . $params_aray['openid_help_url'] . '" title="' . $params_aray['openid_help_txt'] . '" rel="nofollow">' . $params_aray['openid_help_url'] . '</a></p>';
-					} else {
-					echo '';
-					}
-					if ($params_aray['openid_provider_display'] == 1 ) {
-					echo '<p>' . $params_aray['openid_provider_txt'] . ' <a target="_blank" href="' . $params_aray['openid_provider_url'] . '" title="' . $params_aray['openid_provider_txt'] . '" rel="nofollow">' . $params_aray['openid_provider_url'] . '</a></p>';
-					} else {
-						echo '';
-					}
-					if ($params_aray['openid_provider_other'] == 1 ) {
-		// Информация о других провайдерах OpenID
-					echo '<p>' . _OPENID_PROVS . ' 
-					<a href="http://www.facebook.com/" title="facebook" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/facebook.png" alt="facebook" title="facebook" width="" height="" /></a>
-					<a href="https://open.login.yahooapis.com/openid/op/auth" title="flickr" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/flickr.png" alt="flickr" title="flickr" /></a>
-					<a href="https://www.google.com/accounts/i" title="google" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/google.png" alt="google" title="google" /></a>
-					<a href="http://openid.net/" title="OpenID" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/openid.png" alt="OpenID" title="OpenID" /></a>
-					<a href="https://loginza.ru/server/" title="loginza" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/loginza.png" alt="loginza" title="loginza" /></a>
-					<a href="http://mail.ru/" title="mailru" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/mailru.png" alt="mailru" title="mailru" /></a>
-					<a href="http://www.myopenid.com/server" title="myopenid" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/myopenid.png" alt="myopenid" title="myopenid" /></a>
-					<a href="http://id.rambler.ru/script/openid.cgi" title="rambler" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/rambler.png" alt="rambler" title="rambler" /></a>
-					<a href="http://twitter.com/" title="twitter" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/twitter.png" alt="twitter" title="twitter" /></a>
-					<a href="http://vkontakte.ru/" title="vkontakte" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/vkontakte.png" alt="vkontakte" title="vkontakte" /></a>
-					<a href="https://wmkeeper.com/" title="webmoney" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/webmoney.png" alt="webmoney" title="webmoney" /></a>
-					<a href="http://openid.yandex.ru/server/" title="yandex" target="_blank" class="openidimg" rel="nofollow"><img src="' . $mosConfig_live_site . '/modules/mod_ml_login/yandex.png" alt="yandex" title="yandex" /></a>
-					</p>';
-					} else {
-					echo '';
-					}
-					?>
-				</div>
-			</div>
 		</div>
 		<div class="closewin"></div>
 	</div>
@@ -252,7 +191,8 @@ function BuildLoginForm($params_aray, $orientation) {
 			break;
 	}
 	if ($params_aray['show_remember'] == 1) {
-		$remember_me = '<div><label for="mod_login_remember">' . $params_aray['ml_rem_text'] . '</label></div><input type="checkbox" name="remember" id="mod_login_remember" value="yes" alt="' . $params_aray['ml_rem_text'] . '" />';
+		$remember_me = '<label for="mod_login_remember">' . $params_aray['ml_rem_text'] . '</label>
+		<input type="checkbox" name="remember" id="mod_login_remember" value="yes" alt="' . $params_aray['ml_rem_text'] . '" />';
 	} else {
 		$remember_me = '';
 	}
@@ -271,7 +211,7 @@ function BuildLoginForm($params_aray, $orientation) {
 echo '<div class="formpretext">' . $params_aray['pretext'] . '</div>
 ';
 	?>
-<form action="<?php echo sefRelToAbs('index.php'); ?>" method="post" name="login" class="form">
+<form action="<?php echo sefRelToAbs('index.php?option=login'); ?>" method="post" name="login" class="form">
 	<?php if ($orientation == '1') { ?>
 	<div class="loginform-gorisontal">
 		<div class="login-line">

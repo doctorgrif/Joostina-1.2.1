@@ -107,7 +107,6 @@ function showPathway($Itemid) {
 						$database->setQuery($query);
 						$title = $database->loadResult();
 						$id = max(array_keys($mitems)) + 1;
-//doctorgrif: поправлен вывод &amp;
 						$mitem = pathwayMakeLink($id, $title, 'index.php?option=' . $option . '&amp;task=' . $task . '&amp;id=' . $id . '&amp;Itemid=' . $Itemid, $Itemid);
 						$mitems[$id] = $mitem;
 						$Itemid = $id;
@@ -135,7 +134,6 @@ function showPathway($Itemid) {
 							$title = $result[0]->title;
 							$sectionid = $result[0]->sectionid;
 							$id = max(array_keys($mitems)) + 1;
-//doctorgrif: поправлен вывод &amp;
 							$mitem1 = pathwayMakeLink($Itemid, $title, 'index.php?option=' . $option . '&amp;task=category&amp;sectionid=' . $sectionid . '&amp;id=' . $row->catid, $Itemid);
 							$mitems[$id] = $mitem1;
 						}

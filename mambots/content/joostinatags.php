@@ -30,10 +30,11 @@ function jtContent($published, &$row, &$params, $page=0) {
 	// Если ключевые слова разделены не пробелом, а запятыми, раскомментируйте следующую строку и закомментируйте строку под ней.
 	//$tags=explode(',',$row->metakey);
 	$tags = explode(' ', $row->metakey);
+	$text .= '<div class="clear"></div>';
 	$text .= '<div class="jts">';
-	$text .= '<div class="jt">';
+	$text .= '<ul class="tags">';
 		foreach ($tags as $tag) {
-			$text .= ' <a href="';
+			$text .= '<li><a href="';
 		if ($jt) {
 			$text .= $mosConfig_live_site;
 		} else {
@@ -48,9 +49,9 @@ function jtContent($published, &$row, &$params, $page=0) {
 			$text .= 'index.php?searchword=' . trim($tag) . '&amp;option=com_search&amp;submit=Search&amp;searchphrase=exact&amp;ordering=newest"';
 		}
 		}
-			$text .= 'class="joostag" title="' . trim($tag) . '" rel="category tag" target="_blank">' . trim($tag) . '</a>&nbsp;';
+			$text .= ' title="' . trim($tag) . '" rel="category tag" target="_blank">' . trim($tag) . '</a></li>';
 		}
-	$text .= '</div>';
+	$text .= '</ul>';
 	$text .= '</div>';
 	if (count($tags) > 1 || $tags[0] != '')
 		$row->text .= $text;

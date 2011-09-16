@@ -20,8 +20,6 @@ switch ($text_pos) {
 	case 'inside':
 	default:
 	$output = '<input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="' . $text . '" onblur="if(this.value==\'\') this.value=\'' . $text . '\';" onfocus="if(this.value==\'' . $text . '\') this.value=\'\';" />';
-	// вариация для использования авто очистки поля ввода на jQuery (autoclear.js)
-	//$output = '<input name="searchword" type="text" value="' . $text . '" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . ' autoclear" />';
 	break;
 	case 'left':
 	$output = '<strong>' . $text . '</strong>&nbsp;<input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="" />';

@@ -345,6 +345,18 @@ class mosConfig {
 	@var int Dublin Core rights*/
 	var $config_dcore_rights = null;
 	/**
+	@var int GA*/
+	var $config_ga = 0;
+	/**
+	@var int GA ID*/
+	var $config_ga_id = null;
+	/**
+	@var int Яндекс.Метрика*/
+	var $config_ym = 0;
+	/**
+	@var int Яндекс.Метрика ID*/
+	var $config_ym_id = null;
+	/**
 	@var int отключение модулей на странице редактирования с фронта*/
 	var $config_module_on_edit_off = 0;
 	/**

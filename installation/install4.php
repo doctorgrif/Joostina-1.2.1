@@ -242,6 +242,12 @@ if($siteUrl) {
 	$config .= "\$mosConfig_dcore_relation = '';\n";
 	$config .= "\$mosConfig_dcore_coverage = '';\n";
 	$config .= "\$mosConfig_dcore_rights = '';\n";*/
+	//doctorgrif: GA
+	$config .= "\$mosConfig_ga = '0';\n";
+	$config .= "\$mosConfig_ga_id = '';\n";
+	//doctorgrif: Яндекс.Метрика
+	$config .= "\$mosConfig_ym = '0';\n";
+	$config .= "\$mosConfig_ym_id = '';\n";
 	//boston, отключение модулей при редактировании содержимого на фронте
 	$config .= "\$mosConfig_module_on_edit_off = '0';\n";
 	// boston, оптимизация таблиц бд

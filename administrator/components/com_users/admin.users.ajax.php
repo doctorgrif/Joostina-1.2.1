@@ -41,27 +41,31 @@ switch($task) {
 }
 
 function x_uploadavatar($id){
-	global $mosConfig_absolute_path,$mosConfig_live_site;
+	global $mosConfig_absolute_path, $mosConfig_live_site;
 	$file = $_FILES['avatar']['tmp_name'];
 
-	$res = img_resize($file,$mosConfig_absolute_path.'/images/avatars/'.$id.'.jpg',200,200);
-	$res_normal = img_resize($file,$mosConfig_absolute_path.'/images/avatars/normal/'.$id.'.jpg',100,100);
-	$res_mini = img_resize($file,$mosConfig_absolute_path.'/images/avatars/mini/'.$id.'.jpg',50,50);
+	$res = img_resize($file,$mosConfig_absolute_path . '/images/avatars/' . $id . '.jpg',200,200);
+	$res_normal = img_resize($file,$mosConfig_absolute_path . '/images/avatars/normal/' . $id . '.jpg',100,100);
+	$res_mini = img_resize($file,$mosConfig_absolute_path . '/images/avatars/mini/' . $id . '.jpg',50,50);
+	$res_micro = img_resize($file,$mosConfig_absolute_path . '/images/avatars/micro/' . $id . '.jpg',25,25);
 
 	// ?time() необходимо чтобы браузер не кэшировал изображение, и сразу его обновило
-	if($res && $res_mini && $res_normal) return $mosConfig_live_site.mosUser::avatar($id,'big').'?'.time();
+	if($res && $res_micro && $res_mini && $res_normal)
+	return $mosConfig_live_site.mosUser::avatar($id,'big').'?'.time();
 
 	return 0;
 }
 
 function x_delavatar($id){
-	global $mosConfig_absolute_path,$mosConfig_live_site;
+	global $mosConfig_absolute_path, $mosConfig_live_site;
 
-	$res = unlink ($mosConfig_absolute_path.'/images/avatars/'.$id.'.jpg');
-	$res_normal = unlink ($mosConfig_absolute_path.'/images/avatars/normal/'.$id.'.jpg');
-	$res_mini = unlink ($mosConfig_absolute_path.'/images/avatars/mini/'.$id.'.jpg');
+	$res = unlink ($mosConfig_absolute_path . '/images/avatars/' . $id . '.jpg');
+	$res_normal = unlink ($mosConfig_absolute_path . '/images/avatars/normal/' . $id . '.jpg');
+	$res_mini = unlink ($mosConfig_absolute_path . '/images/avatars/mini/' . $id . '.jpg');
+	$res_micro = unlink ($mosConfig_absolute_path . '/images/avatars/micro/' . $id . '.jpg');
 
-	if($res && $res_mini && $res_normal) return $mosConfig_live_site.mosUser::avatar($id,'big').'?'.time();
+	if($res && $res_micro && $res_mini&& $res_normal)
+	return $mosConfig_live_site.mosUser::avatar($id,'big').'?'.time();
 
 	return 0;
 }
@@ -106,7 +110,7 @@ function x_user_block($id){
 	return $ret_img;
 }
 
-function img_resize($src,$dest,$width=250,$height=250,$quality = 100) {
+function img_resize($src, $dest, $width = 250, $height = 250, $quality = 100) {
 	if(!file_exists($src)) return false;
 	$size = getimagesize($src);
 	list($width_orig, $height_orig) = $size;
@@ -124,14 +128,11 @@ function img_resize($src,$dest,$width=250,$height=250,$quality = 100) {
 	}
 
 	$isrc = $icfunc($src);
-	$idest = imagecreatetruecolor($width,$height);
-	imagecopyresampled($idest,$isrc,0,0,0,0,$width,$height,$size[0],$size[1]);
-	imagejpeg($idest,$dest,$quality);
+	$idest = imagecreatetruecolor($width, $height);
+	imagecopyresampled($idest, $isrc, 0, 0, 0, 0, $width, $height, $size[0] ,$size[1]);
+	imagejpeg($idest, $dest, $quality);
 	imagedestroy($isrc);
 	imagedestroy($idest);
 	return true;
-
 }
-
-
 ?>

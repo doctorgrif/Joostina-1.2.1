@@ -1047,10 +1047,6 @@ class HTML_config {
 								<td valign="top"><?php echo _SITE_KEYWORDS ?></td>
 								<td><textarea class="textarea" cols="50" rows="3" style="width:400px; height:100px;" name="config_MetaKeys"><?php echo $row->config_MetaKeys; ?></textarea><?php echo mosToolTip(_SITE_KEYWORDS2); ?></td>
 							</tr>
-						</table>
-					</td>
-					<td valign="top">
-						<table class="sub_adminform">
 							<tr>
 								<td valign="top"><?php echo _SHOW_TITLE_TAG ?></td>
 								<td><?php echo $lists['MetaTitle'];
@@ -1080,6 +1076,10 @@ class HTML_config {
 									?>
 								</td>
 							</tr>
+						</table>
+					</td>
+					<td valign="top">
+						<table class="sub_adminform">
 							<tr>
 								<td width="100px"><?php echo _EXT_IND_TAGS ?></td>
 								<td><?php echo $lists['index_tag'];
@@ -1120,6 +1120,28 @@ class HTML_config {
 							<tr>
 								<td valign="top"><?php echo _SHOW_DCORE_LANGUAGE ?></td>
 								<td><input class="textarea" type="text" name="config_dcore_language" size="10" value="<?php echo $row->config_dcore_language; ?>" /><?php echo mosToolTip(_SHOW_DCORE2_LANGUAGE); ?></td>
+							</tr>
+							<tr>
+								<td valign="top"><?php echo _SHOW_GA ?></td>
+								<td><?php echo $lists['ga'];
+									echo mosToolTip(_SHOW_GA2);
+									?>
+								</td>
+							</tr>
+							<tr>
+								<td valign="top"><?php echo _SHOW_GA_ID ?></td>
+								<td><input class="textarea" type="text" name="config_ga_id" size="15" value="<?php echo $row->config_ga_id; ?>" /><?php echo mosToolTip(_SHOW_GA2_ID); ?></td>
+							</tr>
+							<tr>
+								<td valign="top"><?php echo _SHOW_YM ?></td>
+								<td><?php echo $lists['ym'];
+									echo mosToolTip(_SHOW_YM2);
+									?>
+								</td>
+							</tr>
+							<tr>
+								<td valign="top"><?php echo _SHOW_YM_ID ?></td>
+								<td><input class="textarea" type="text" name="config_ym_id" size="15" value="<?php echo $row->config_ym_id; ?>" /><?php echo mosToolTip(_SHOW_YM2_ID); ?></td>
 							</tr>
 						</table>
 					</td>

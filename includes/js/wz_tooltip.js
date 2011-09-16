@@ -1,60 +1,14 @@
-/* This notice must be untouched at all times.
-Copyright (c) 2002-2008 Walter Zorn. All rights reserved.
-
-wz_tooltip.js	 v. 5.31
-
-The latest version is available at
-http://www.walterzorn.com
-or http://www.devira.com
-or http://www.walterzorn.de
-
-Created 1.12.2002 by Walter Zorn (Web: http://www.walterzorn.com )
-Last modified: 7.11.2008
-
-Easy-to-use cross-browser tooltips.
-Just include the script at the beginning of the <body> section, and invoke
-Tip('Tooltip text') to show and UnTip() to hide the tooltip, from the desired
-HTML eventhandlers. Example:
-<a onmouseover="Tip('Some text')" onmouseout="UnTip()" href="index.htm">My home page</a>
-No container DIV required.
-By default, width and height of tooltips are automatically adapted to content.
-Is even capable of dynamically converting arbitrary HTML elements to tooltips
-by calling TagToTip('ID_of_HTML_element_to_be_converted') instead of Tip(),
-which means you can put important, search-engine-relevant stuff into tooltips.
-Appearance & behaviour of tooltips can be individually configured
-via commands passed to Tip() or TagToTip().
-
-Tab Width: 4
-LICENSE: LGPL
-
-This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License (LGPL) as published by the Free Software Foundation; either
-version 2.1 of the License, or (at your option) any later version.
-
-This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-For more details on the GNU Lesser General Public License,
-see http://www.gnu.org/copyleft/lesser.html
-*/
-
 var config = new Object();
-
-
 //===================  GLOBAL TOOLTIP CONFIGURATION  =========================//
 var tt_Debug	= true		// false or true - recommended: false once you release your page to the public
 var tt_Enabled	= true		// Allows to (temporarily) suppress tooltips, e.g. by providing the user with a button that sets this global variable to false
 var TagsToTip	= true		// false or true - if true, HTML elements to be converted to tooltips via TagToTip() are automatically hidden;
 							// if false, you should hide those HTML elements yourself
-
 // For each of the following config variables there exists a command, which is
 // just the variablename in uppercase, to be passed to Tip() or TagToTip() to
 // configure tooltips individually. Individual commands override global
 // configuration. Order of commands is arbitrary.
 // Example: onmouseover="Tip('Tooltip text', LEFT, true, BGCOLOR, '#FF9900', FADEIN, 400)"
-
 config. Above			= false		// false or true - tooltip above mousepointer
 config. BgColor			= '#E2E7FF'	// Background colour (HTML colour value, in quotes)
 config. BgImg			= ''		// Path to background image, none if empty string ''
@@ -103,10 +57,6 @@ config. TitlePadding	= 2
 config. Width			= 0			// Tooltip width; 0 for automatic adaption to tooltip content; < -1 (e.g. -240) for a maximum width for that automatic adaption;
 									// -1: tooltip width confined to the width required for the titlebar
 //=======  END OF TOOLTIP CONFIG, DO NOT CHANGE ANYTHING BELOW  ==============//
-
-
-
-
 //=====================  PUBLIC  =============================================//
 function Tip()
 {
@@ -126,12 +76,10 @@ function UnTip()
 	else if(!(tt_aV[STICKY] && (tt_iState & 0x2)))
 		tt_HideInit();
 }
-
 //==================  PUBLIC PLUGIN API	 =====================================//
 // Extension eventhandlers currently supported:
 // OnLoadConfig, OnCreateContentString, OnSubDivsCreated, OnShow, OnMoveBefore,
 // OnMoveAfter, OnHideInit, OnHide, OnKill
-
 var tt_aElt = new Array(10), // Container DIV, outer title & body DIVs, inner title & body TDs, closebutton SPAN, shadow DIVs, and IFRAME to cover windowed elements in IE
 tt_aV = new Array(),	// Caches and enumerates config data for currently active tooltip
 tt_sContent,			// Inner tooltip text or HTML
@@ -285,7 +233,6 @@ function tt_MovDomNode(el, dadFrom, dadTo)
 	if(dadTo)
 		dadTo.appendChild(el);
 }
-
 //======================  PRIVATE  ===========================================//
 var tt_aExt = new Array(),	// Array of extension objects
 
@@ -303,8 +250,6 @@ tt_tShow = new Number(0), tt_tHide = new Number(0), tt_tDurt = new Number(0),
 tt_tFade = new Number(0), tt_tWaitMov = new Number(0),
 tt_bWait = false,
 tt_u = "undefined";
-
-
 function tt_Init()
 {
 	tt_MkCmdEnum();

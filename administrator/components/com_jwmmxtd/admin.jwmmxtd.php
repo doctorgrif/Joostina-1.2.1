@@ -163,7 +163,7 @@ switch($task) {
 
 	case 'emptytmp':
 		if(emptyTmp())
-			$mosmsg = _TMP_DIR_CLEADNED;
+			$mosmsg = _TMP_DIR_CLEANED;
 		else
 			$mosmsg = _TMP_DIR_NOT_CLEANED;
 		viewMediaManager($curdirectory,$mosmsg);
@@ -607,6 +607,7 @@ function viewMediaManager($curdirectory = "",$mosmsg = "",$selectedfile = "") {
 </div>
 <?php
 }
+
 // отмена всех действий по редактированию изображения
 function OriginalImage($aFormValues) {
 	require_once ('class.upload.php');

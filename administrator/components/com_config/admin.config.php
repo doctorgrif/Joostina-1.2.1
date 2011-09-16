@@ -269,6 +269,10 @@ function showconfig($option) {
 	$lists['gtag']= mosHTML::yesnoRadioList('config_gtag','class="inputbox"',$row->config_gtag);
 	// doctorgrif: Dublin Core
 	$lists['dcore']= mosHTML::yesnoRadioList('config_dcore','class="inputbox"',$row->config_dcore);
+	// doctorgrif: Google Analitics
+	$lists['ga']= mosHTML::yesnoRadioList('config_ga','class="inputbox"',$row->config_ga);
+	// doctorgrif: Яндекс.Метрика
+	$lists['ym']= mosHTML::yesnoRadioList('config_ym','class="inputbox"',$row->config_ym);
 	// boston, отключать модули на странице редактирования на фронте
 	$lists['module_on_edit_off']= mosHTML::yesnoRadioList('config_module_on_edit_off','class="inputbox"',$row->config_module_on_edit_off);
 	// boston, ежесуточная оптимизация таблиц бд

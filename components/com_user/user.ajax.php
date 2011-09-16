@@ -31,7 +31,8 @@ function x_uploadavatar($id) {
 	$res = img_resize($file, $mosConfig_absolute_path . '/images/avatars/' . $id . '.jpg', 200, 200);
 	$res_normal = img_resize($file, $mosConfig_absolute_path . '/images/avatars/normal/' . $id . '.jpg', 100, 100);
 	$res_mini = img_resize($file, $mosConfig_absolute_path . '/images/avatars/mini/' . $id . '.jpg', 50, 50);
-	if ($res && $res_mini && $res_normal)
+	$res_micro = img_resize($file, $mosConfig_absolute_path . '/images/avatars/micro/' . $id . '.jpg', 25, 25);
+	if ($res && $res_mini && $res_micro && $res_normal)
 		return $mosConfig_live_site . mosUser::avatar($id, 'big') . '?' . time();
 	return 0;
 }
@@ -42,7 +43,8 @@ function x_delavatar() {
 	$res = unlink($mosConfig_absolute_path . '/images/avatars/' . $id . '.jpg');
 	$res_normal = unlink($mosConfig_absolute_path . '/images/avatars/normal/' . $id . '.jpg');
 	$res_mini = unlink($mosConfig_absolute_path . '/images/avatars/mini/' . $id . '.jpg');
-	if ($res && $res_mini && $res_normal)
+	$res_micro = unlink($mosConfig_absolute_path . '/images/avatars/micro/' . $id . '.jpg');
+	if ($res && $res_mini && $res_micro && $res_normal)
 		return $mosConfig_live_site . mosUser::avatar($id, 'big') . '?' . time();
 	return 0;
 }

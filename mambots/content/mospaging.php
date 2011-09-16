@@ -151,17 +151,17 @@ function createNavigation(&$row, $page, $n) {
 	if ($page < $n - 1) {
 		$link_next = $link . '&amp;limit=1&amp;limitstart=' . ($page + 1);
 		$link_next = sefRelToAbs($link_next);
-		$next = '<a href="' . $link_next . '" title="' . _CMN_NEXT . '">' . _CMN_NEXT . _CMN_NEXT_ARROW . '</a>';
+		$next = '<li class="pagenav_next"><a href="' . $link_next . '">' . _CMN_NEXT . '</a></li>';
 	} else {
-		$next = _CMN_NEXT;
+		$next = '<li class="pagenav_next">' . _CMN_NEXT . '</li>';
 	}
 	if ($page > 0) {
 		$link_prev = $link . '&amp;limit=1&amp;limitstart=' . ($page - 1);
 		$link_prev = sefRelToAbs($link_prev);
-		$prev = '<a href="' . $link_prev . '" title="' . _CMN_PREV . '">' . _CMN_PREV_ARROW . _CMN_PREV . '</a>';
+		$prev = '<li class="pagenav_prev"><a href="' . $link_prev . '">' . _CMN_PREV . '</a></li>';
 	} else {
-		$prev = _CMN_PREV;
+		$prev = '<li class="pagenav_prev">' . _CMN_PREV . '</li>';
 	}
-	$row->text .= '<div>' . $prev . ' - ' . $next . '</div>';
+	$row->text .= '<div class="pagenav_line"><ul>' . $prev . $next . '</ul></div>';
 }
 ?>

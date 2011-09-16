@@ -93,7 +93,7 @@ class XmapSitemap {
 		$query = "SELECT * FROM #__xmap_sitemap where id=$id";
 		$database->setQuery( $query );
 		if( $database->loadObject( $this ) === FALSE ) {
-			return false;														// defaults are still set, though
+			return false; // defaults are still set, though
 		}
 		return true;
 	}
@@ -115,19 +115,19 @@ class XmapSitemap {
 		}
 
 		if ($this->id && !$forceinstall) {
-		    $sep = "";
-		    $values="";
-		    foreach ($fields as $k  => $value) {
+			$sep = "";
+			$values="";
+			foreach ($fields as $k  => $value) {
 			if ($k != 'id') {
 				$values .= "$sep$k=$value";
 				$sep = ",";
 			}
-		    }
-		    $query = "UPDATE #__xmap_sitemap SET $values WHERE id=" . intval($this->id);
-		    $isInsert = 0;
+			}
+			$query = "UPDATE #__xmap_sitemap SET $values WHERE id=" . intval($this->id);
+			$isInsert = 0;
 		} else {
-		    $query = "INSERT INTO #__xmap_sitemap (". implode(',',array_keys($fields)) .") VALUES (".implode(',',$fields).")";
-		    $isInsert = 1;
+			$query = "INSERT INTO #__xmap_sitemap (". implode(',',array_keys($fields)) .") VALUES (".implode(',',$fields).")";
+			$isInsert = 1;
 		}
 		$database->setQuery( $query );
 		# echo $database->getQuery( );
@@ -157,7 +157,7 @@ class XmapSitemap {
 			return false;
 		} else {
 			foreach (get_object_vars($this) as $k => $v) {
-				if( substr( $k, 0, 1 ) != '_' ) {	// internal attributes of an object are ignored
+				if( substr( $k, 0, 1 ) != '_' ) { // internal attributes of an object are ignored
 					if ( isset($array[$k]) ) {
 						$this->$k = get_magic_quotes_gpc() ? mosStripslashes( $array[$k] ) : $array[$k];
 					} elseif ( !in_array($k, array('id','count_xml','views_xml','views_html','lastvisit_xml','count_html','views_html','lastvisit_html')) ) {
@@ -179,9 +179,9 @@ class XmapSitemap {
 		if ($menus[$menutype]->ordering == 0 && $inc < 0) return false;
 		if ($menus[$menutype]->ordering >= count($menus) && $inc > 0) return false;
 
-		$menus[$menutype]->ordering += $inc;		// move position up/down
+		$menus[$menutype]->ordering += $inc; // move position up/down
 	
-		foreach( $menus as $type => $menu ) {		// swap position of previous entry at that position
+		foreach( $menus as $type => $menu ) { // swap position of previous entry at that position
 			if( $type != $menutype
 				&& $menu->ordering == $menus[$menutype]->ordering )
 				$menus[$type]->ordering -= $inc;

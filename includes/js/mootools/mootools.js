@@ -1,5 +1,3 @@
-//MooTools, My Object Oriented Javascript Tools. Copyright (c) 2006-2007 Valerio Proietti, <http://mad4milk.net>, MIT Style License.
-
 var MooTools={version:"1.11"};function $defined(A){return(A!=undefined);}function $type(B){if(!$defined(B)){return false;}if(B.htmlElement){return"element";
 }var A=typeof B;if(A=="object"&&B.nodeName){switch(B.nodeType){case 1:return"element";case 3:return(/\S/).test(B.nodeValue)?"textnode":"whitespace";}}if(A=="object"||A=="function"){switch(B.constructor){case Array:return"array";
 case RegExp:return"regexp";case Class:return"class";}if(typeof B.length=="number"){if(B.item){return"collection";}if(B.callee){return"arguments";}}}return A;

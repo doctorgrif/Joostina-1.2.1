@@ -109,7 +109,7 @@ function online_users($params_aray) {
 function who_online($params_aray) {
 	global $database, $mosConfig_live_site;
 	$output = '';
-	$query = "SELECT  a.username, a.userid, b.name, b.id FROM #__session AS a, #__users AS b WHERE a.guest = 0 AND a.userid=b.id";
+	$query = "SELECT a.username, a.userid, b.name, b.id FROM #__session AS a, #__users AS b WHERE a.guest = 0 AND a.userid=b.id";
 	$database->setQuery($query);
 	$rows = $database->loadObjectList();
 	if (count($rows)) {

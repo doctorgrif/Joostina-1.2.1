@@ -22,7 +22,7 @@ define('_SYSERR3', 'Невозможно подключиться к базе данных.');
 define('_503', 'Извините, сервис временно недоступен.');
 define('_503_RTS', 'Вернитесь на сайт позже.');
 
-// общее
+// common
 DEFINE('_LANGUAGE', 'ru');
 DEFINE('_NOT_AUTH', 'Извините, но для просмотра этой страницы у Вас недостаточно прав.');
 DEFINE('_DO_LOGIN', 'Вы должны авторизоваться или пройти регистрацию.');
@@ -39,6 +39,7 @@ DEFINE('_CMN_APPLY', 'Применить');
 DEFINE('_CMN_CANCEL', 'Отмена');
 DEFINE('_CMN_PRINT', 'Печать');
 DEFINE('_CMN_PDF','PDF');
+DEFINE('_CMN_RSS','RSS');
 DEFINE('_CMN_EMAIL', 'E-mail');
 DEFINE('_CMN_SITEMAP', 'Карта сайта');
 DEFINE('_ICON_SEP', '|');
@@ -47,10 +48,10 @@ DEFINE('_CMN_ORDERING', 'Сортировка');
 DEFINE('_CMN_ACCESS', 'Уровень доступа');
 DEFINE('_CMN_SELECT', 'Выбрать');
 DEFINE('_CMN_SELECT_PH', 'Подтвердите выбор');
-DEFINE('_CMN_NEXT', 'След.');
-DEFINE('_CMN_NEXT_ARROW', '&nbsp;&raquo;');
-DEFINE('_CMN_PREV', 'Пред.');
-DEFINE('_CMN_PREV_ARROW', '&laquo;&nbsp;');
+DEFINE('_CMN_NEXT', '<span class="pagenav_txt">следующая &rarr;</span>');
+//DEFINE('_CMN_NEXT_ARROW', '&nbsp;&raquo;');
+DEFINE('_CMN_PREV', '<span class="pagenav_txt">&larr; предыдущая</span>');
+//DEFINE('_CMN_PREV_ARROW', '&laquo;&nbsp;');
 DEFINE('_CMN_SORT_NONE', 'Без сортировки');
 DEFINE('_CMN_SORT_ASC', 'По возрастанию');
 DEFINE('_CMN_SORT_DESC', 'По убыванию');
@@ -107,7 +108,7 @@ DEFINE('_PJA_4_5', '4 балла из 5');
 DEFINE('_PJA_5_5', '5 баллов из 5');
 
 /* joostinasocialbot */
-DEFINE('_JSB_BEFORE', 'Добавить закладку в');
+DEFINE('_JSB_BEFORE', 'Добавить закладку в социальные сервисы');
 DEFINE('_JSB_ADD', 'Добавить закладку в');
 DEFINE('_JSB_AFTER', 'Работает под управлением Joostina CMS!');
 
@@ -192,14 +193,25 @@ DEFINE('_PN_LT', '&lt;');
 DEFINE('_PN_RT', '&gt;');
 DEFINE('_PN_PAGE', 'Страница');
 DEFINE('_PN_OF', 'из');
-DEFINE('_PN_LLAST', '[Первая]');
-DEFINE('_PN_PREV10', 'Предыдущая');
-DEFINE('_PN_PREV1', 'Предыдущая');
-DEFINE('_PN_NEXT1', 'Следующая');
-DEFINE('_PN_NEXT10', 'Следующие');
-DEFINE('_PN_RLAST', '[Последняя]');
+DEFINE('_PN_LLAST', '<span class="pagenav_txt">первая</span>');
+DEFINE('_PN_PREV10', '<span class="pagenav_txt">предыдущие 10</span>');
+DEFINE('_PN_PREV1', '<span class="pagenav_txt">предыдущая</span>');
+DEFINE('_PN_NEXT1', '<span class="pagenav_txt">следующая</span>');
+DEFINE('_PN_NEXT10', '<span class="pagenav_txt">следующие 10</span>');
+DEFINE('_PN_RLAST', '<span class="pagenav_txt">последняя</span>');
+DEFINE('_PN_L_LLAST', 'первая');
+DEFINE('_PN_L_PREV10', 'предыдущие 10');
+DEFINE('_PN_L_PREV1', 'предыдущая');
+DEFINE('_PN_L_NEXT1', 'следующая');
+DEFINE('_PN_L_NEXT10', 'следующие 10');
+DEFINE('_PN_PAGE_NUMBER', 'страница номер');
+DEFINE('_PN_L_RLAST', 'последняя');
 DEFINE('_PN_DISPLAY_NR', 'Отображать');
 DEFINE('_PN_RESULTS', 'Результаты');
+DEFINE('_PN_START', 'В начало');
+DEFINE('_PN_PREVIOUS', 'Предыдущие');
+DEFINE('_PN_NEXT', 'Следующие');
+DEFINE('_PN_END', 'В конец');
 
 /** письмо другу */
 DEFINE('_EMAIL_TITLE', 'Отправить e-mail другу');
@@ -220,9 +232,10 @@ DEFINE('_EMAIL_SENT', 'Ссылка на эту страницу отправлена для');
 DEFINE('_PROMPT_CLOSE', 'Закрыть окно');
 
 /** classes/html/content.php */
-DEFINE('_AUTHOR_BY', ' Автор');
-DEFINE('_WRITTEN_BY', ' Автор');
-DEFINE('_LAST_UPDATED', 'Последнее обновление:');
+DEFINE('_AUTHOR_BY', 'Автор');
+DEFINE('_WRITTEN_BY', 'Написано');
+//DEFINE('_LAST_UPDATED', 'Последнее обновление');
+DEFINE('_LAST_UPDATED', 'Обновлено');
 DEFINE('_BACK', 'Вернуться');
 DEFINE('_LEGEND', 'История');
 DEFINE('_DATE', 'Дата');
@@ -285,8 +298,8 @@ DEFINE('_E_CANCEL', 'Отмена');
 DEFINE('_E_REGISTERED', 'Только для зарегистрированных пользователей!');
 DEFINE('_E_ITEM_INFO', 'Информация');
 DEFINE('_E_ITEM_SAVED', 'Успешно сохранено!');
-DEFINE('_ITEM_PREVIOUS', '&lt; ');
-DEFINE('_ITEM_NEXT', ' &gt;');
+DEFINE('_ITEM_PREVIOUS', '<span class="pagenav_txt">&larr; предыдущая</span> ');
+DEFINE('_ITEM_NEXT', ' <span class="pagenav_txt">следующая &rarr;</span>');
 DEFINE('_KEY_NOT_FOUND', 'Ключ не найден!');
 
 /** content.php */
@@ -460,11 +473,11 @@ $month_date = array(
 	'10' => "октября",
 	'11' => "ноября",
 	'12' => "декабря",);
-$month = date("m");
+$month = date('m');
 $m = $month_date["$month"];
-// DEFINE('_DATE_FORMAT_LC',"%A, %d ".$m." %Y"); // Используйте PHP strftime формат
-DEFINE('_DATE_FORMAT_LC', '%d.%m.%Y'); // Используйте PHP strftime формат
-// DEFINE('_DATE_FORMAT_LC',$mosConfig_form_date); // Используйте формат PHP-функции strftime
+DEFINE('_DATE_FORMAT_LC', '%A, %d ' . $m . ' %Y'); // Используйте PHP strftime формат
+//DEFINE('_DATE_FORMAT_LC', '%d.%m.%Y'); // Используйте PHP strftime формат
+DEFINE('_DATE_FORMAT_LC',$mosConfig_form_date); // Используйте формат PHP-функции strftime
 DEFINE('_DATE_FORMAT_LC2', $mosConfig_form_date_full); // Полный формат времени
 DEFINE('_SEARCH_BOX', 'Поиск…');
 DEFINE('_NEWSFLASH_BOX', 'Краткие новости!');
@@ -1030,7 +1043,7 @@ DEFINE('_SITE_KEYWORDS', 'Ключевые слова сайта');
 DEFINE('_SITE_KEYWORDS2', ' Вы можете не ограничивать Ваш ключевые слова двадцатью, в зависимости от Поискового сервера, который Вы планируете использовать. Делайте ключевые слова подходящим для содержания вашего сайта.');
 DEFINE('_SHOW_TITLE_TAG', 'Показывать мета-тег <strong>title</strong>');
 DEFINE('_SHOW_TITLE_TAG2', 'Показывает мета-тег <strong>title</strong> при просмотре объектов содержимого');
-DEFINE('_SHOW_GEO_TAG', 'Показывать <strong>Geotagging</strong>');
+DEFINE('_SHOW_GEO_TAG', '<strong>Geotagging</strong>');
 DEFINE('_SHOW_GEO_TAG2', 'Показывает <strong>Geotagging</strong> мета-теги при просмотре объектов содержимого');
 DEFINE('_SHOW_GEO_TAG_LATITUDE', 'Широта');
 DEFINE('_SHOW_GEO_TAG2_LATITUDE', 'Широта объекта. Записывается в формате <strong>50.167958</strong> (пример!). Если объект расположен в западном полушарии, то перед циврами добавляется знак минуса (-).');
@@ -1040,17 +1053,25 @@ DEFINE('_SHOW_GEO_TAG_PLACENAME', 'Месторасположение объекта');
 DEFINE('_SHOW_GEO_TAG2_PLACENAME', 'Месторасположения объекта. Записывется в формате <strong>Город, Страна</strong> (пример!)');
 DEFINE('_SHOW_GEO_TAG_REGION', 'Регион объекта');
 DEFINE('_SHOW_GEO_TAG2_REGION', 'Регион объекта. Записывется в двубуквенном формате страны <strong>ru</strong> (пример!)');
-DEFINE('_SHOW_DCORE', 'Показывать <strong>Dublin Core Metadata Element Set (DCMES)</strong>');
+DEFINE('_SHOW_DCORE', '<strong>Dublin Core Metadata Element Set</strong>');
 DEFINE('_SHOW_DCORE2', 'Показывает <strong>Dublin Core Metadata Element Set (DCMES)</strong> мета-теги при просмотре объектов содержимого');
 DEFINE('_SHOW_DCORE_LANGUAGE', 'Язык');
 DEFINE('_SHOW_DCORE2_LANGUAGE', 'Язык. Записывется в двубуквенном формате страны <strong>ru</strong> (пример!)');
+DEFINE('_SHOW_GA', '<strong>Google Analitics</strong>');
+DEFINE('_SHOW_GA2', 'Показывает код <strong>Google Analitics</strong> в генерируемом коде');
+DEFINE('_SHOW_GA_ID', 'Google Analitics <strong>ID</strong>');
+DEFINE('_SHOW_GA2_ID', '<strong>Google Analitics ID</strong> для отслеживания статистики сайта');
+DEFINE('_SHOW_YM', '<strong>Яндекс.Метрика</strong>');
+DEFINE('_SHOW_YM2', 'Показывает код <strong>Яндекс.Метрика</strong> в генерируемом коде');
+DEFINE('_SHOW_YM_ID', 'Яндекс.Метрика <strong>ID</strong>');
+DEFINE('_SHOW_YM2_ID', '<strong>Яндекс.Метрика ID</strong> для отслеживания статистики сайта');
 DEFINE('_SHOW_AUTHOR_TAG', 'Показывать мета-тег <strong>author</strong>');
 DEFINE('_SHOW_AUTHOR_TAG2', 'Показывает мета-тег <strong>author</strong> при просмотре объектов содержимого');
 DEFINE('_SHOW_BASE_TAG', 'Показывать мета-тег <strong>base</strong>');
 DEFINE('_SHOW_BASE_TAG2', 'Показывает мета-тег <strong>base</strong> в теле каждой страницы');
 DEFINE('_REVISIT_TAG', 'Значение тега <strong>revisit</strong>');
 DEFINE('_REVISIT_TAG2', 'Укажите значение тега <strong>revisit</strong> в днях');
-DEFINE('_DISABLE_GENERATOR_TAG', 'Отключить тег Generator');
+DEFINE('_DISABLE_GENERATOR_TAG', 'Отключить тег <strong>Generator</strong>');
 DEFINE('_DISABLE_GENERATOR_TAG2', 'Если &laquo;Да&raquo;, то из кода каждой HTML страницы будет исключен тег name=&laquo;Generator&raquo;');
 DEFINE('_EXT_IND_TAGS', 'Расширенные теги индексации');
 DEFINE('_EXT_IND_TAGS2', 'Если &laquo;Да&raquo;, то в код каждой страницы будут добавлены специальные теги для лучшей индексации');
@@ -1248,6 +1269,8 @@ DEFINE('_ORDER_BY_HEADERS', 'Заголовкам');
 DEFINE('_ORDER_BY_DATE_CR', 'Дате создания');
 DEFINE('_ORDER_BY_DATE_MOD', 'Дате модификации');
 DEFINE('_ORDER_BY_ID', 'Идентификаторам ID');
+DEFINE('_ORDER_BY_SECTIONID', 'Разделу');
+DEFINE('_ORDER_BY_CATID', 'Категории');
 DEFINE('_ORDER_BY_HITS', 'Просмотрам');
 DEFINE('_CANNOT_EDIT_ARCHIVED_ITEM', 'Вы не можете отредактировать архивный объект');
 DEFINE('_NOW_EDITING_BY_OTHER', 'в настоящее время редактируется другим пользователем');

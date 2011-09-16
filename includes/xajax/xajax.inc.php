@@ -187,9 +187,14 @@ class xajax {
 			if(!empty($_POST["xajaxargs"]))
 				$aArgs = $_POST["xajaxargs"];
 		} else {
-			header('Expires: ' . date('r'));
-			header('Last-Modified: ' . date('r'));
-			header("Cache-Control: no-store, no-cache, must-revalidate");
+			$file_last_modified = filemtime($_SERVER['REQUEST_URI']);
+			header('Last-Modified: ' . date('r', $file_last_modified ) );
+			header('Expires: ' . date('r', $_SERVER['REQUEST_TIME']));
+			$etag = dechex($file_last_modified);
+			header('ETag: ' . $etag );
+			header('Cache-Control: no-store, no-cache, must-revalidate');
+			header('Pragma: private');
+			header('Cache-Control: private');
 			$sFunctionName = $_GET["xajax"];
 			if(!empty($_GET["xajaxargs"]))
 				$aArgs = $_GET["xajaxargs"];

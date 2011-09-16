@@ -64,7 +64,6 @@ if ($mosConfig_offline == 1) {
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	header('Status: 503 Service Temporarily Unavailable');
 	header('Retry-After: 3600');
-	header('X-Powered-By: ' . $mosConfig_sitename . ''); //спорная величина
 	require ($mosConfig_absolute_path . '/offline.php');
 }
 // (c) boston, проверяем, разрешено ли использование системных мамботов
@@ -201,7 +200,7 @@ if ($option == 'login') {
 // Всплывающее сообщение JS
 	if ($message) {
 		?>
-		<script type="text/javascript">alert("<?php echo addslashes(_LOGIN_SUCCESS); ?>");</script>
+		<script type="text/javascript">alert("<?php echo addslashes(_LOGIN_SUCCESS);?>");</script>
 		<?php
 	}
 	if ($return && !(strpos($return, 'com_registration') || strpos($return, 'com_login'))) {
@@ -226,7 +225,7 @@ if ($option == 'logout') {
 // всплывающее сообщение JS
 	if ($message) {
 		?>
-		<script type="text/javascript">alert("<?php echo addslashes(_LOGOUT_SUCCESS); ?>");</script>
+		<script type="text/javascript">alert("<?php echo addslashes(_LOGOUT_SUCCESS);?>");</script>
 		<?php
 	}
 	if ($return && !(strpos($return, 'com_registration') || strpos($return, 'com_login'))) {
@@ -280,20 +279,30 @@ if ($mosConfig_mmb_mainbody_off == 0) {
 }
 initGzip();
 // при активном кэшировании отправим браузеру более "правильные" заголовки
-// правка http заголовков
 if (!$mosConfig_caching) {
 // не кэшируется
-	header('Expires: ' . gmdate('r', $_SERVER['REQUEST_TIME']) . ' GMT');
-	header('Last-Modified: ' . gmdate('r') . ' GMT');
+	$file_last_modified = filemtime(sefRelToAbs($_SERVER['REQUEST_URI']));
+	header('Last-Modified: ' . date('r', $file_last_modified ) );
+	header('Expires: ' . date('r', $_SERVER['REQUEST_TIME']));
+	$etag = md5($file_last_modified);
+	header('ETag: ' . $etag );
 	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Pragma: private');
+	header('Cache-Control: private');
 } else if ($option != 'logout' or $option != 'login') {
 // кэшируется
-	//header('HTTP/1.0 304 Not modified');
-// 60*60=3600 - использования кэширования на 1 час
-	header('Expires: ' . gmdate('r', $_SERVER['REQUEST_TIME'] + 3600) . ' GMT');
-	header('Last-Modified: ' . gmdate('r') . ' GMT');
-	$expr = 60 * 60 * 24 * 7;
-	header('Cache-Control: max-age=(' . $expr . '), must-revalidate');
+	$file_last_modified = filemtime(sefRelToAbs($_SERVER['REQUEST_URI']));
+	header('Last-Modified: ' . date('r', $file_last_modified ) );
+	$max_age = 60 * 60;
+	$expires = $file_last_modified + $max_age;
+	header("Expires: " . date('r', $expires ) );
+	$etag = md5($file_last_modified);
+	header('ETag: ' . $etag );
+	header('Cache-Control: must-revalidate, proxy-revalidate, max-age=' . $max_age . ', s-maxage=' . $max_age );
+	if($_SERVER["HTTP_IF_NONE_MATCH"] == $etag){
+		header( "HTTP/1.1 304 Not Modified" );
+		exit;
+	}
 }
 // буферизация итогового содержимого, необходимо для шаблонов группы templates
 ob_start();

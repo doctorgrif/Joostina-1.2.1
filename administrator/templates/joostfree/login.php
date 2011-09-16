@@ -23,20 +23,16 @@ defined('_VALID_MOS') or die();
 	}
 </script>
 <script type="text/javascript" src="<?php echo $mosConfig_live_site; ?>/includes/js/jquery/jquery.js"></script>
-<script type="text/javascript" src="<?php echo $mosConfig_live_site; ?>/includes/js/jquery/plugins/formalize.js"></script>
 </head>
 <body onload="setFocus();">
-<div class="joo">
-	<img align="left" alt="<?php echo _GO_TO_MAIN_ADMIN_PAGE ?>" src="templates/joostfree/images/logo_121.png" />
-	<span class="sitename"><?php echo $mosConfig_sitename; ?></span>
-</div>
-<div class="clear"></div>
 <?php include_once ($mosConfig_absolute_path . '/' . ADMINISTRATOR_DIRECTORY . '/modules/mod_mosmsg.php'); ?>
+<div class="sitename"><h1><?php echo $mosConfig_sitename; ?></h1></div>
+<div class="sitedesc"><h2><?php echo $mosConfig_MetaDesc;?></h2></div>
 <div class="ctr1">
 	<div class="login">
 		<div class="login-form">
 			<form action="index.php" method="post" name="loginForm" id="loginForm">
-				<div class="form-block">
+				<div class="left-block">
 					<div id="usrname">
 						<div>
 						<label for="usrname"><?php echo _ADMIN_USRNAME; ?></label>
@@ -61,26 +57,27 @@ defined('_VALID_MOS') or die();
 						<input name="captcha" type="text" id="captchatext"class="inputbox" size="15" placeholder="<?php echo _PLEASE_ENTER_CAPTCHA_PH; ?>" />
 					</div>
 					<?php }; ?>
-					<div align="center">
+				</div>
+				<div class="right-block">
 						<div>
-							<p>
-								<input type="submit" name="submit" class="button" value="<?php echo _ADMIN_ENTER_LOGIN; ?>" />
-							</p>
+							<input type="submit" name="submit" class="button adminenterlogin" value="<?php echo _ADMIN_ENTER_LOGIN; ?>" />
 						</div>
 						<div>
-							<p>
-								<input type="button" name="submit" onClick="document.location.href='<?php echo $mosConfig_live_site; ?>'" class="button" value="<?php echo _ADMIN_GO_SITE; ?>" />
-							</p>
+							<input type="button" name="submit" onClick="document.location.href='<?php echo $mosConfig_live_site; ?>'" class="button admingosite" value="<?php echo _ADMIN_GO_SITE; ?>" />
 						</div>
-					</div>
 				</div>
 			</form>
 		</div>
 		<div class="clr"></div>
 	</div>
 </div>
-<div><noscript><div class="message"><?php echo _PLEASE_ENABLE_JAVASCRIPT; ?></div></noscript></div>
-<div class="freeplace"></div>
-<div class="footer"><span><?php echo $_VERSION->URL; ?></span></div>
+<div>
+	<noscript>
+		<div class="message"><?php echo _PLEASE_ENABLE_JAVASCRIPT; ?></div>
+	</noscript>
+</div>
+<div class="footer">
+	<p><?php echo $_VERSION->URL; ?></p>
+</div>
 </body>
 </html>

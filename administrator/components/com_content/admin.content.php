@@ -151,8 +151,12 @@ function viewContent($sectionid,$option) {
 
 	$filter_sectionid = intval($mainframe->getUserStateFromRequest("filter_sectionid{$option}{$sectionid}",'filter_sectionid',0));
 
-	$catid = intval( mosGetParam($_REQUEST,'catid',0));
-	$filter_authorid = intval( mosGetParam($_REQUEST,'filter_authorid',0) );
+	$catid 				= intval( $mainframe->getUserStateFromRequest( "catid{$option}{$sectionid}", 'catid', 0 ) );
+	$filter_authorid 	= intval( $mainframe->getUserStateFromRequest( "filter_authorid{$option}{$sectionid}", 'filter_authorid', 0 ) );
+	$filter_sectionid 	= intval( $mainframe->getUserStateFromRequest( "filter_sectionid{$option}{$sectionid}", 'filter_sectionid', 0 ) );
+
+	//$catid = intval( mosGetParam($_REQUEST,'catid',0));
+	//$filter_authorid = intval( mosGetParam($_REQUEST,'filter_authorid',0) );
 	if ($filter_authorid <> 0)  {
 		$link = '&filter_authorid='.$filter_authorid;
 	}
@@ -188,6 +192,12 @@ function viewContent($sectionid,$option) {
 		case '5': // просмотры
 			$sql_order .= 'c.hits';
 			break;
+		case '6': // просмотры
+			$sql_order .= 'c.catid';
+			break;
+		case '7': // просмотры
+			$sql_order .= 'c.sectionid';
+			break;
 	}
 	if(get_magic_quotes_gpc()) {
 		$search = stripslashes($search);
@@ -220,13 +230,13 @@ function viewContent($sectionid,$option) {
 
 	// used by filter
 	if($filter_sectionid > 0) {
-		$where[] = "c.sectionid = ".(int)$filter_sectionid;
+		$where[] = "c.sectionid = ".(int) $filter_sectionid;
 	}
 	if($catid > 0) {
-		$where[] = "c.catid = ".(int)$catid;
+		$where[] = "c.catid = ".(int) $catid;
 	}
 	if($filter_authorid > 0) {
-		$where[] = "c.created_by = ".(int)$filter_authorid;
+		$where[] = "c.created_by = ".(int) $filter_authorid;
 	}
 
 	if($search) {
@@ -278,6 +288,8 @@ function viewContent($sectionid,$option) {
 	$order_list[] = mosHTML::makeOption('3',_ORDER_BY_DATE_MOD,'order_by','name');
 	$order_list[] = mosHTML::makeOption('4',_ORDER_BY_ID,'order_by','name');
 	$order_list[] = mosHTML::makeOption('5',_ORDER_BY_HITS,'order_by','name');
+	$order_list[] = mosHTML::makeOption('6',_ORDER_BY_CATID,'order_by','name');
+	$order_list[] = mosHTML::makeOption('7',_ORDER_BY_SECTIONID,'order_by','name');
 	$lists['order'] = mosHTML::selectList($order_list,'order_by','class="inputbox" size="1" style="width:99%;" onchange="document.adminForm.submit( );"','order_by','name',$order_by);
 
 	$order_sort_list = array();
@@ -307,7 +319,7 @@ function viewArchive($sectionid,$option) {
 	$redirect = $sectionid;
 
 	if($sectionid == 0) {
-		$where = array("c.state = -1","c.catid	= cc.id","cc.section = s.id","s.scope = 'content'");
+		$where = array("c.state = -1","c.catid = cc.id","cc.section = s.id","s.scope = 'content'");
 		$filter = "\n , #__sections AS s WHERE s.id = c.section";
 		$all = 1;
 	} else {

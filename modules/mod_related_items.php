@@ -12,7 +12,7 @@ global $mosConfig_offset, $option, $task, $my;
 $id = intval(mosGetParam($_REQUEST, 'id', null));
 $now = _CURRENT_SERVER_TIME;
 $nullDate = $database->getNullDate();
-if ($option == 'com_content' && $task == 'view' && $id) {
+if ($option=='com_content' && $task=='view' && $id && $Itemid) {
 // выборка ключевых слов из объекта
 	$query = "SELECT metakey FROM #__content WHERE id = " . (int) $id;
 	$database->setQuery($query);
@@ -59,7 +59,7 @@ if ($option == 'com_content' && $task == 'view' && $id) {
 			if ($option == 'com_content' && $task == 'view') {
 				$Itemid = $mainframe->getItemid($item->id);
 		}
-			$href = sefRelToAbs("index.php?option=com_content&amp;task=view&amp;id=$item->id&amp;Itemid=$Itemid");
+			$href = sefRelToAbs('index.php?option=com_content&amp;task=view&amp;id=' . $item->id . '&amp;Itemid=' . $Itemid);
 	?>
 	<li class="related_items<?php echo $moduleclass_sfx; ?>">
 		<a class="related_items" href="<?php echo $href; ?>" title="<?php echo $item->title; ?>">

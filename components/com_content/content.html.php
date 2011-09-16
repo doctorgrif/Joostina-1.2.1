@@ -1,11 +1,11 @@
 <?php
 /**
- * @package Joostina
- * @copyright Авторские права (C) 2008 Joostina team. Все права защищены.
- * @license Лицензия http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL, или help/license.php
- * Joostina! - свободное программное обеспечение распространяемое по условиям лицензии GNU/GPL
- * Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
- */
+* @package Joostina
+* @copyright Авторские права (C) 2008 Joostina team. Все права защищены.
+* @license Лицензия http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL, или help/license.php
+* Joostina! - свободное программное обеспечение распространяемое по условиям лицензии GNU/GPL
+* Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
+*/
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 
@@ -47,16 +47,14 @@ class HTML_content {
 			mosCommonHTML::loadFullajax();
 ?>
 <script type="text/javascript">
-	//<![CDATA[
-	function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
-		id('img-pub-'+elID).src = ADMINISTRATOR_DIRECTORY.'/images/aload.gif';
-		dax({ url: 'ajax.index.php?option=com_content&amp;utf=0&amp;task=publish&amp;id='+elID, id:'publ-'+elID, callback:
-				function(resp, idTread, status, ops) {
-				log('<?php echo _CONTENT_ANSWER; ?> ' + resp.responseText);
-		id('img-pub-'+elID).src = ADMINISTRATOR_DIRECTORY.'/images/'+resp.responseText; }
-		});
-	}
-	//]]>
+function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
+	id('img-pub-'+elID).src = ADMINISTRATOR_DIRECTORY.'/images/aload.gif';
+	dax({ url: 'ajax.index.php?option=com_content&amp;utf=0&amp;task=publish&amp;id='+elID, id:'publ-'+elID, callback:
+		function(resp, idTread, status, ops) {
+			log('<?php echo _CONTENT_ANSWER; ?> ' + resp.responseText);
+			id('img-pub-'+elID).src = ADMINISTRATOR_DIRECTORY.'/images/'+resp.responseText; }
+	});
+}
 </script>
 <form action="<?php echo sefRelToAbs($link); ?>" method="post" name="adminForm" id="adminForm">
 	<table>
@@ -102,16 +100,34 @@ class HTML_content {
 				$img = $mosConfig_live_site . '/' . ADMINISTRATOR_DIRECTORY . '/images/' . $img;
 		?>
 		<tr class="sectiontableentry<?php echo ($k + 1) . $params->get('pageclass_sfx'); ?>" >
-			<td><?php HTML_content::EditIcon($row, $params, $access); ?></td>
-			<td><a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>"><?php echo $row->title; ?></a><br />
-				<span class="small"><?php if ($row->sectionid != 0)
-					echo $row->section . ' / ' . $row->category; else
-					echo _STATIC_CONTENT; ?>
-				</span>
+			<td>
+				<p><?php HTML_content::EditIcon($row, $params, $access); ?></p>
 			</td>
-			<td <?php echo ($access->canPublish) ? 'onclick="ch_publ(' . $row->id . ');" class="td-state"' : null; ?>><img class="img-mini-state" src="<?php echo $img; ?>" id="img-pub-<?php echo $row->id; ?>" alt="<?php echo _E_PUBLISHING; ?>" /></td>
-			<td class="td-date"><?php echo $row->created; ?></td>
-			<td class="td-hits"><?php echo $row->hits ? $row->hits : 0; ?></td>
+			<td>
+				<p>
+					<a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>"><?php echo $row->title; ?></a>
+				</p>
+				<p>
+					<span class="small">
+						<?php if ($row->sectionid != 0)
+							echo $row->section . ' / ' . $row->category;
+							else
+							echo _STATIC_CONTENT;
+						?>
+					</span>
+				</p>
+			</td>
+			<td <?php echo ($access->canPublish) ? 'onclick="ch_publ(' . $row->id . ');" class="td-state"' : null; ?>>
+				<p>
+					<img class="img-mini-state" src="<?php echo $img; ?>" id="img-pub-<?php echo $row->id; ?>" alt="<?php echo _E_PUBLISHING; ?>" />
+				</p>
+			</td>
+			<td class="td-date">
+				<p><?php echo $row->created; ?></p>
+			</td>
+			<td class="td-hits">
+				<p><?php echo $row->hits ? $row->hits : 0; ?></p>
+			</td>
 		</tr>
 		<?php $k = 1 - $k;
 			} if ($params->get('navigation')) {
@@ -147,48 +163,44 @@ class HTML_content {
 	<?php echo htmlspecialchars($title->name, ENT_QUOTES); ?>
 </div>
 	<?php } ?>
-	<table class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
+	<div class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
 		<?php if (($params->get('description') && $title->description) || ($params->get('description_image') && $title->image)) { ?>
-		<tr>
-			<td width="60%" valign="top" class="contentdescription<?php echo $params->get('pageclass_sfx'); ?>" colspan="2"><?php if ($params->get('description_image') && $title->image) {
-				$link = $mosConfig_live_site . '/images/stories/' . $title->image; ?>
+		<div class="contentdescription<?php echo $params->get('pageclass_sfx'); ?>">
+			<?php if ($params->get('description_image') && $title->image) {
+			$link = $mosConfig_live_site . '/images/stories/' . $title->image; ?>
 				<img src="<?php echo $link; ?>" align="<?php echo $title->image_position; ?>" hspace="6" alt="<?php echo $title->image; ?>" />
-				<?php } if ($params->get('description')) {
-					echo $title->description;
-				} ?>
-			</td>
-		</tr>
+			<?php } if ($params->get('description')) {
+				echo '<p>' . $title->description . '</p>';
+			} ?>
+		</div>
 		<?php } ?>
-		<tr>
-			<td width="100%"><?php
-				if ($items) {
-					HTML_content::showTable($params, $items, $gid, $catid, $id, $pageNav, $access, $sectionid, $lists, $order);
-				} else if ($catid) {
-				?><br />
-				<?php echo _EMPTY_CATEGORY; ?><br /><br />
-				<?php
-					} if (($access->canEdit || $access->canEditOwn) && $categories_exist) {
-					$link = sefRelToAbs('index.php?option=com_content&amp;task=new&amp;sectionid=' . $id . '&amp;Itemid=' . $Itemid); ?>
-				<a href="<?php echo $link; ?>" title="<?php echo _CMN_NEW; ?>">
-					<img src="<?php echo $mosConfig_live_site; ?>/images/M_images/new.png" width="13" height="14" align="middle" alt="<?php echo _CMN_NEW; ?>" />&nbsp;<?php echo _CMN_NEW; ?>…
-				</a><br /><br />
-				<?php } ?>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<?php
-					if (((count($other_categories) > 1) || (count($other_categories) < 2 && count($items) < 1))) {
-						if (($params->get('type') == 'category') && $params->get('other_cat')) {
-							HTML_content::showCategories($params, $items, $gid, $other_categories, $catid, $id, $Itemid);
-						}
-						if (($params->get('type') == 'section') && $params->get('other_cat_section')) {
-							HTML_content::showCategories($params, $items, $gid, $other_categories, $catid, $id, $Itemid);
-						}
-				} ?>
-			</td>
-		</tr>
-	</table>
+		<div>
+			<?php
+			if ($items) {
+				HTML_content::showTable($params, $items, $gid, $catid, $id, $pageNav, $access, $sectionid, $lists, $order);
+			} else if ($catid) {
+			?>
+			<?php echo _EMPTY_CATEGORY; ?>
+			<?php
+				} if (($access->canEdit || $access->canEditOwn) && $categories_exist) {
+				$link = sefRelToAbs('index.php?option=com_content&amp;task=new&amp;sectionid=' . $id . '&amp;Itemid=' . $Itemid); ?>
+			<a href="<?php echo $link; ?>" title="<?php echo _CMN_NEW; ?>">
+				<img src="<?php echo $mosConfig_live_site; ?>/images/M_images/new.png" width="13" height="14" align="middle" alt="<?php echo _CMN_NEW; ?>" />&nbsp;<?php echo _CMN_NEW; ?>…
+			</a>
+			<?php } ?>
+		</div>
+		<div>
+			<?php
+				if (((count($other_categories) > 1) || (count($other_categories) < 2 && count($items) < 1))) {
+					if (($params->get('type') == 'category') && $params->get('other_cat')) {
+						HTML_content::showCategories($params, $items, $gid, $other_categories, $catid, $id, $Itemid);
+					}
+					if (($params->get('type') == 'section') && $params->get('other_cat_section')) {
+						HTML_content::showCategories($params, $items, $gid, $other_categories, $catid, $id, $Itemid);
+					}
+			} ?>
+		</div>
+	</div>
 	<?php mosHTML::BackButton($params);
 	}
 
@@ -277,26 +289,41 @@ class HTML_content {
 			HTML_content::_Itemid($row); ?>
 		<tr class="sectiontableentry<?php echo ($k + 1) . $params->get('pageclass_sfx'); ?>" >
 		<?php if ($params->get('date')) { ?>
-			<td class="td-date"><?php echo $row->created; ?></td>
+			<td class="td-date">
+				<p><?php echo $row->created; ?></p>
+			</td>
 				<?php
 					}
 					if ($params->get('title')) {
 					if ($row->access <= $gid) {
 					$link = sefRelToAbs('index.php?option=com_content&amp;task=view&amp;id=' . $row->id . '&amp;Itemid=' . $Itemid); ?>
 			<td><?php HTML_content::EditIcon($row, $params, $access); ?>
-				<a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>"><?php echo $row->title; ?></a>
+				<p>
+					<a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>"><?php echo $row->title; ?></a>
+				</p>
 			</td>
 			<?php } else { ?>
 			<td>
-				<?php echo $row->title . ' : ';
-					$link = sefRelToAbs('index.php?option=com_registration&amp;task=register'); ?>
-				<a href="<?php echo $link; ?>" title="<?php echo _READ_MORE_REGISTER; ?>"><?php echo _READ_MORE_REGISTER; ?></a>
+				<p>
+					<?php echo $row->title . ' : ';
+						$link = sefRelToAbs('index.php?option=com_registration&amp;task=register'); ?>
+				</p>
+				<p>
+					<a href="<?php echo $link; ?>" title="<?php echo _READ_MORE_REGISTER; ?>"><?php echo _READ_MORE_REGISTER; ?></a>
+				</p>
 			</td>
 			<?php }
 			} if ($params->get('author')) { ?>
-			<td class="td-author"><?php echo $row->created_by_alias ? $row->created_by_alias : $row->author; ?></td>
+			<td class="td-author">
+				<p>
+					<?php echo '<img src="' . $mosConfig_absolute_path . '/images/avatars/micro/' . $row->created_by . '.jpg" alt="' . ($row->created_by_alias ? $row->created_by_alias : $row->author) . '" />'; ?>
+					<?php echo $row->created_by_alias ? $row->created_by_alias : $row->author; ?>
+				</p>
+			</td>
 			<?php } if ($params->get('hits')) { ?>
-			<td class="td-hits"><?php echo $row->hits ? $row->hits : '-'; ?></td>
+			<td class="td-hits">
+				<p><?php echo $row->hits ? $row->hits : '-'; ?></p>
+			</td>
 			<?php } ?>
 		</tr>
 		<?php $k = 1 - $k;
@@ -372,7 +399,7 @@ class HTML_content {
 		$news_uid_css_title = 'id="title-news-uid-' . $news_uid . '" ';
 		$news_uid_css_body = 'id="body-news-uid-' . $news_uid . '" ';
 		}
-		//if($task == 'view') $news_uid_css = 'id="pageclass_uid_'.$params->get( 'pageclass_uids' ).'" ';
+		//if ($task == 'view') $news_uid_css = 'id="pageclass_uid_' . $params->get('pageclass_uids') . '" ';
 		$mainframe->appendMetaTag('description', $row->metadesc);
 		$mainframe->appendMetaTag('keywords', $row->metakey);
 		if (isset($row->page_title) && $row->page_title) {
@@ -396,13 +423,19 @@ class HTML_content {
 	<table <?php echo $news_uid_css_title; ?> class="contentpaneopen<?php echo $params->get('pageclass_sfx'); ?>">
 		<tr>
 		<?php
+			echo '<div class="title_line">';
 			HTML_content::Title($row, $params, $access);
+			echo '<div class="buttonheading">';
+			echo '<ul>';
 			HTML_content::EmailIcon($row, $params, $hide_js);
 			HTML_content::PdfIcon($row, $params, $hide_js);
 			mosHTML::PrintIcon($row, $params, $hide_js, $print_link);
 			// Функция редактирования только своих статей с фронта
 			if ($access->canEdit || $access->canEditOwn)
 			HTML_content::EditIcon2($row, $params, $access);
+			echo '</ul>';
+			echo '</div>';
+			echo '</div>';
 		?>
 		</tr>
 	</table>
@@ -416,21 +449,29 @@ class HTML_content {
 	<table <?php echo $news_uid_css_body; ?> class="contentpaneopen<?php echo $params->get('pageclass_sfx'); ?>">
 		<tr>
 			<td colspan="2">
-				<span class="addinfo"><?php
+				<?php
 					HTML_content::Section_Category($row, $params);
-					HTML_content::Author($row, $params);
-					HTML_content::CreateDate($row, $params);
-					HTML_content::ModifiedDate($row, $params);
-					HTML_content::URL($row, $params);
 				?>
-				</span>
 			</td>
 		</tr>
 		<tr>
-			<td valign="top" colspan="2"><?php HTML_content::TOC($row);
-				echo ampReplace($row->text); ?>
+			<td valign="top" colspan="2">
+				<a href="#" class="mobilehide"><?php echo _CMN_HIDE;?></a> <a href="#" class="mobileshow"><?php echo _CMN_SHOW;?></a>
+				<div class="article">
+					<?php
+						HTML_content::TOC($row);
+						echo ampReplace($row->text);
+					?>
+					<?php
+						HTML_content::Author($row, $params);
+						HTML_content::CreateDate($row, $params);
+						HTML_content::ModifiedDate($row, $params);
+						HTML_content::URL($row, $params);
+					?>
+				</div>
+				<div class="clearfix"></div>
 				<?php
-				HTML_content::ReadMore($row, $params);
+					HTML_content::ReadMore($row, $params);
 				?>
 			</td>
 		</tr>
@@ -481,34 +522,6 @@ class HTML_content {
 		}
 		}
 
-		function Title(&$row, &$params, &$access) {
-		global $mosConfig_title_h1, $mosConfig_title_h1_only_view, $task;
-		if ($params->get('item_title')) {
-		if ($params->get('link_titles') && $row->link_on != '') {
-		?>
-<td class="contentheading<?php echo $params->get('pageclass_sfx'); ?>" width="100%">
-	<a href="<?php echo $row->link_on; ?>" title="<?php echo $row->title; ?>" class="contentpagetitle<?php echo $params->get('pageclass_sfx'); ?>">
-	<?php
-		if ($mosConfig_title_h1 or ($task == 'view') and ($mosConfig_title_h1_only_view))
-			echo '<h1>' . $row->title . '</h1>';
-		else
-			echo '<h2>' . $row->title . '</h2>';
-	?>
-	</a>
-</td>
-<?php } else { ?>
-<td class="contentheading<?php echo $params->get('pageclass_sfx'); ?>" width="100%">
-	<?php
-		if ($mosConfig_title_h1 or ($task == 'view') and ($mosConfig_title_h1_only_view))
-			echo '<h1>' . $row->title . '</h1>';
-		else
-			echo '<h2>' . $row->title . '</h2>'; ?>
-</td>
-<?php
-	}
-}
-}
-
 	function EditIcon(&$row, &$params, &$access) {
 		global $my;
 		if ($params->get('popup')) {
@@ -537,7 +550,11 @@ class HTML_content {
 		$overlib .= '<br />';
 		$overlib .= $author;
 ?>
-<a href="<?php echo sefRelToAbs($link); ?>" onmouseover="return overlib('<?php echo $overlib; ?>', CAPTION, '<?php echo _E_EDIT; ?>', BELOW, RIGHT);" onmouseout="return nd();"><?php echo $image; ?></a>
+<li>
+	<a href="<?php echo sefRelToAbs($link); ?>" onmouseover="return overlib('<?php echo $overlib; ?>', CAPTION, '<?php echo _E_EDIT; ?>', BELOW, RIGHT);" onmouseout="return nd();">
+		<?php echo $image; ?>
+	</a>
+</li>
 <?php
 }
 	function EditIcon2(&$row, &$params, &$access) {
@@ -566,10 +583,13 @@ class HTML_content {
 		$overlib .= '<br />';
 		$overlib .= $date;
 		$overlib .= '<br />';
-		$overlib .= $author; ?>
-<td>
-	<a href="<?php echo sefRelToAbs($link); ?>" onmouseover="return overlib('<?php echo $overlib; ?>', CAPTION, '<?php echo _E_EDIT; ?>', BELOW, RIGHT);" onmouseout="return nd();"><?php echo $image; ?></a>
-</td>
+		$overlib .= $author;
+?>
+<li>
+	<a href="<?php echo sefRelToAbs($link); ?>" onmouseover="return overlib('<?php echo $overlib; ?>', CAPTION, '<?php echo _E_EDIT; ?>', BELOW, RIGHT);" onmouseout="return nd();">
+		<?php echo $image; ?>
+	</a>
+</li>
 <?php
 	}
 
@@ -594,38 +614,68 @@ class HTML_content {
 				$image = _CMN_PDF . '&nbsp;';
 			}
 			?>
-<td class="buttonheading">
-	<a href="<?php echo $link; ?>" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_PDF;?>"><?php echo $image; ?></a>
-</td>
-			<?php
+<li>
+	<a href="<?php echo $link; ?>" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_PDF;?>">
+		<?php echo $image; ?>
+	</a>
+</li>
+<?php
 		}
 	}
 
-						function EmailIcon(&$row, &$params, $hide_js) {
-							global $mosConfig_live_site, $Itemid, $task, $cne_i;
-							if (!isset($cne_i))
-								$cne_i = '';
-							if ($params->get('email') && !$params->get('popup') && !$hide_js) {
-								$status = 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=400,height=250,directories=no,location=no';
-								if ($task == 'view') {
-									$_Itemid = '&amp;itemid=' . $Itemid;
-								} else {
-									$_Itemid = '';
-								}
-								$link = $mosConfig_live_site . '/index2.php?option=com_content&amp;task=emailform&amp;id=' . $row->id . $_Itemid;
-								if ($params->get('icons')) {
-									$image = mosAdminMenus::ImageCheck('emailButton.png', '/images/M_images/', null, null, _CMN_EMAIL, 'email' . $cne_i);
-									$cne_i++;
-								} else {
-									$image = _CMN_EMAIL . '&nbsp;';
-								} ?>
-<td class="buttonheading">
-	<a href="<?php echo $link; ?>" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_EMAIL; ?>"><?php echo $image; ?></a>
-</td>
-		<?php
+	function EmailIcon(&$row, &$params, $hide_js) {
+		global $mosConfig_live_site, $Itemid, $task, $cne_i;
+			if (!isset($cne_i))
+				$cne_i = '';
+			if ($params->get('email') && !$params->get('popup') && !$hide_js) {
+				$status = 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=400,height=250,directories=no,location=no';
+			if ($task == 'view') {
+				$_Itemid = '&amp;itemid=' . $Itemid;
+			} else {
+				$_Itemid = '';
+			}
+			$link = $mosConfig_live_site . '/index2.php?option=com_content&amp;task=emailform&amp;id=' . $row->id . $_Itemid;
+			if ($params->get('icons')) {
+				$image = mosAdminMenus::ImageCheck('emailButton.png', '/images/M_images/', null, null, _CMN_EMAIL, 'email' . $cne_i);
+				$cne_i++;
+			} else {
+				$image = _CMN_EMAIL . '&nbsp;';
+			} ?>
+<li>
+	<a href="<?php echo $link; ?>" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_EMAIL; ?>">
+		<?php echo $image; ?>
+	</a>
+</li>
+<?php
 			}
 		}
-
+		function Title(&$row, &$params, &$access) {
+		global $mosConfig_title_h1, $mosConfig_title_h1_only_view, $task;
+		if ($params->get('item_title')) {
+		if ($params->get('link_titles') && $row->link_on != '') {
+		?>
+<div class="contentheading<?php echo $params->get('pageclass_sfx'); ?>">
+	<a href="<?php echo $row->link_on; ?>" title="<?php echo $row->title; ?>" class="contentpagetitle<?php echo $params->get('pageclass_sfx'); ?>">
+	<?php
+		if ($mosConfig_title_h1 or ($task == 'view') and ($mosConfig_title_h1_only_view))
+			echo '<h1>' . $row->title . '</h1>';
+		else
+			echo '<h2>' . $row->title . '</h2>';
+	?>
+	</a>
+</div>
+<?php } else { ?>
+<div class="contentheading<?php echo $params->get('pageclass_sfx'); ?>">
+	<?php
+		if ($mosConfig_title_h1 or ($task == 'view') and ($mosConfig_title_h1_only_view))
+			echo '<h1>' . $row->title . '</h1>';
+		else
+			echo '<h2>' . $row->title . '</h2>'; ?>
+</div>
+<?php
+	}
+}
+}
 		function Section_Category(&$row, &$params) {
 		if ($params->get('section') || $params->get('category')) {
 		?>
@@ -641,25 +691,31 @@ class HTML_content {
 		function Section(&$row, &$params) {
 		if ($params->get('section')) {
 		?>
-<span class="sectionname"><?php echo $row->section;
-	if ($params->get('category')) {
-	echo ' - ';
-	} ?>
-</span>
+<div class="post_taxonomy">
+	<ul>
+		<li><?php echo $row->section;
+			if ($params->get('category')) {
+			echo '<span>\</span>';
+			echo '</li>';
+			} ?>
 		<?php }
 		}
-
 		function Category(&$row, &$params) {
 		if ($params->get('category')) { ?>
-<span class="categoryname"><?php echo $row->category; ?></span>
+		<li><?php echo $row->category; ?></li>
+	</ul>
+</div>
 		<?php }
-			}
-
+		}
 		function Author(&$row, &$params) {
-		if (($params->get('author')) && ($row->author != '')) { ?>
-<span class="author"><?php echo _WRITTEN_BY; ?>:</span>
-<span class="authorname"><?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?></span>
-		<?php }
+		if (($params->get('author')) && ($row->author != '')) {
+		?>
+<div class="post_meta">
+	<a href="<?php echo $mosConfig_absolute_path;?>/images/avatars/<?php echo $row->created_by;?>.jpg" class="lightbox_trigger" title="<?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?>">
+		<?php echo '<img src="' . $mosConfig_absolute_path . '/images/avatars/micro/' . $row->created_by . '.jpg" alt="' . ($row->created_by_alias ? $row->created_by_alias : $row->author) . '" />'; ?>
+	</a>
+	<p><?php echo _AUTHOR_BY; ?>: <?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?></p>
+	<?php }
 			}
 
 		function CreateDate(&$row, &$params) {
@@ -667,17 +723,14 @@ class HTML_content {
 		if (intval($row->created) != 0) {
 		$create_date = mosFormatDate($row->created);
 		} if ($params->get('createdate')) { ?>
-<span class="createdate"><?php echo _CMN_PUBLISHED; ?>:</span>
-<span class="date"><?php echo $create_date; ?></span>
+		<p><?php echo _CMN_PUBLISHED; ?>: <?php echo $create_date; ?></p>
 		<?php }
 		}
 
 		function URL(&$row, &$params) {
 		if ($params->get('url') && $row->urls) {
 		?>
-<span>
-	<a href="http://<?php echo $row->urls; ?>" target="_blank"><?php echo $row->urls; ?></a>
-</span>
+		<p>Источник: <a href="http://<?php echo $row->urls; ?>" target="_blank"><?php echo $row->urls; ?></a></p>
 		<?php
 			}
 		}
@@ -695,20 +748,22 @@ class HTML_content {
 		}
 		if (($mod_date != '') && $params->get('modifydate')) {
 		?>
-<span class="modifydate"><?php echo _LAST_UPDATED; ?></span>
-<span class="modify"><?php echo $mod_date; ?></span>
+		<p><?php echo _LAST_UPDATED; ?>: <?php echo $mod_date; ?></p>
+</div>
+</div>
 		<?php
 			}
 		}
-
 		function ReadMore(&$row, &$params) {
 		if ($params->get('readmore')) {
 		if ($params->get('intro_only') && $row->link_text) {
 		?>
 		
-<a href="<?php echo $row->link_on; ?>" title="<?php echo $row->title; ?>" class="readon<?php echo $params->get('pageclass_sfx'); ?>">
-	<input type="button" name="readon" value="<?php echo $row->link_text; ?>" class="button" />
-</a>
+<div class="readon">
+	<a href="<?php echo $row->link_on; ?>" title="<?php echo $row->title; ?>" class="readon<?php echo $params->get('pageclass_sfx'); ?>">
+		<input type="button" name="readon" value="<?php echo $row->link_text; ?>" class="button" />
+	</a>
+</div>
 		
 		<?php
 			}
@@ -733,21 +788,26 @@ class HTML_content {
 		if ($params->get('item_navigation') && ($task == 'view') && !$params->get('popup') &&
 		($row->prev || $row->next)) {
 		?>
-<table align="center" style="margin-top:15px;">
-	<tr>
+<div class="pagenav_line">
+	<ul>
 	<?php if ($row->prev) { ?>
-		<th class="pagenav_prev">
-			<a href="<?php echo $row->prev; ?>" title="<?php echo $row->prev_title; ?>"><?php echo _ITEM_PREVIOUS . $row->prev_title; ?></a>
-		</th>
+		<li class="pagenav_prev">
+			<?php echo _ITEM_PREVIOUS; ?>
+		</li>
+		<li class="pagenav_prev">
+			<a href="<?php echo $row->prev; ?>" title="<?php echo $row->prev_title; ?>"><?php echo $row->prev_title; ?></a>
+		</li>
 		<?php } if ($row->prev && $row->next) { ?>
-			<td width="50">&nbsp;</td>
 			<?php } if ($row->next) { ?>
-				<th class="pagenav_next">
-					<a href="<?php echo $row->next; ?>" title="<?php echo $row->next_title; ?>"><?php echo $row->next_title . _ITEM_NEXT; ?></a>
-				</th>
+		<li class="pagenav_next">
+			<a href="<?php echo $row->next; ?>" title="<?php echo $row->next_title; ?>"><?php echo $row->next_title; ?></a>
+		</li>
+		<li class="pagenav_next">
+			<?php echo _ITEM_NEXT; ?>
+		</li>
 		<?php } ?>
-		</tr>
-	</table>
+	</ul>
+</div>
 		<?php
 			}
 			}
@@ -775,7 +835,6 @@ class HTML_content {
 ?>
 <div id="overDiv" style="position:absolute;visibility:hidden;z-index:10000;"></div>
 <script type="text/javascript">
-//<![CDATA[
 onunload = WarnUser;
 <?php if ($allow_img) { ?>
 	var folderimages = new Array;
@@ -815,7 +874,6 @@ onunload = WarnUser;
 	if (document.adminForm.goodexit.value==0) { alert('<?php echo addslashes(_E_WARNUSER); ?>');
 	window.location="<?php echo sefRelToAbs("index.php?option=com_content&amp;task=" . $task . "&amp;sectionid=" . $sectionid . "&amp;id=" . $row->id . "&amp;Itemid=" . $Itemid); ?>";
 	} }
-//]]>
 </script>
 		<?php
 			$docinfo = '' . _E_EXPIRES . '' ;

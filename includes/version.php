@@ -24,13 +24,13 @@ class joomlaVersion {
 	/** @var int Номер основной версии */
 	var $RELEASE = '1.0';
 	/** @var Строка статус разработки */
-	var $DEV_STATUS = '&beta;';
+	var $DEV_STATUS = ' RC1';
 	/** @var int Подверсия */
 	var $DEV_LEVEL = '15';
 	/** @var int Номер сборки */
-	var $BUILD = '3';
+	var $BUILD = '4';
 	/** @var int SVN checkout */
-	var $SVN_R = 'r:16';
+	var $SVN_R = 'r:19';
 	/** @var string Кодовое имя */
 	var $CODENAME = '';
 	/** @var string Дата */

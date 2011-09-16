@@ -118,7 +118,7 @@ if (!defined('_MOS_MAINMENU_MODULE')) {
 				break;
 			case 2:
 // открытие во всплывающем окне
-				$txt = "<a href=\"#\" onclick=\"javascript: window.open('" . $mitem->link . "', '', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=550'); return false\" class=\"$menuclass\" " . $id . ">" . $mitem->name . "</a>\n";
+				$txt = '<a href="#" onclick="javascript: window.open(' . $mitem->link . ', , toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=550); return false" class="' . $menuclass . ' ' . $id . '>' . $mitem->name . '</a>';
 				break;
 			case 3:
 // это не ссылка
@@ -197,7 +197,7 @@ if (!defined('_MOS_MAINMENU_MODULE')) {
 		}
 		$indents = array(
 // префикс блока / префикс объекта / суффикс объекта / суффикс блока
-		array('<table width="100%" border="0" cellpadding="0" cellspacing="0">', '<tr align="left"><td>', '</td></tr>', '</table>'),
+		array('<table width="100%">', '<tr align="left"><td>', '</td></tr>', '</table>'),
 		array('', '<div style="padding-left:4px;">' . $img[1], '</div>', ''),
 		array('', '<div style="padding-left:8px;">' . $img[2], '</div>', ''),
 		array('', '<div style="padding-left:12px;">' . $img[3], '</div>', ''),

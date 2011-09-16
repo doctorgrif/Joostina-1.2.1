@@ -16,31 +16,34 @@
 **/
 
 defined('_VALID_MOS') or die();
-
-
-
 class php_http_status_codes {
 	var $codes;
 	function php_http_status_codes() {
-		$this->codes = array(200 => 'OK',201 => 'CREATED',202 => 'Accepted',203 =>
-			'Partial Information',204 => 'No Response',301 => 'Moved',302 => 'Found',303 =>
-			'Method',304 => 'Not Modified',400 => 'Bad Request',401 => 'Unauthorized',402 =>
-			'PaymentRequired',403 => 'Forbidden',404 => 'Not found',500 => 'Internal Error',
-			501 => 'Not implemented',502 => 'Service temporarily overloaded',503 =>
-			'Gateway timeout');
+		$this->codes = array(
+		200 => 'OK',
+		201 => 'CREATED',
+		202 => 'Accepted',
+		203 => 'Partial Information',
+		204 => 'No Response',
+		301 => 'Moved',
+		302 => 'Found',
+		303 => 'Method',
+		304 => 'Not Modified',
+		400 => 'Bad Request',
+		401 => 'Unauthorized',
+		402 => 'PaymentRequired',
+		403 => 'Forbidden',
+		404 => 'Not found',
+		500 => 'Internal Error',
+		501 => 'Not implemented',
+		502 => 'Service temporarily overloaded',
+		503 => 'Gateway timeout');
 	}
-
 	function getCodes() {
 		return $this->codes;
 	}
-
 	function getCodeString($code) {
 		return $this->codes[$code];
 	}
-
 }
-
-
-
-
 ?>

@@ -105,78 +105,70 @@ class HTML_user {
 			$tabs->startPane('userInfo');
 			$tabs->startTab('Общее', 'main-page');
 			?>
-		<table width="100%" id="table_userprofile">
-			<tr>
-				<td id="user_avatar">
-					<div><img id="userav" src="<?php echo $mosConfig_live_site . mosUser::avatar($row->id, 'big'); ?>" alt="" /></div>
-					<div id="fileavatar">
-						<div>
-							<label for="fileavatar"><?php echo _NEW_AVATAR_UPLOAD; ?></label>
-						</div>
-						<input class="inputbox" type="file" name="avatar" id="fileavatar" />
-					</div>
+		<div id="table_userprofile">
+			<div id="user_avatar">
+				<div>
+					<img id="userav" src="<?php echo $mosConfig_live_site . mosUser::avatar($row->id, 'big'); ?>" alt="" />
+				</div>
+				<div id="fileavatar">
 					<div>
-						<input type="submit" name="send" value="<?php echo _TASK_UPLOAD; ?>" class="button" onclick="addavatar(); return false;" />
-						<input type="submit" name="send" value="<?php echo _CMN_DELETE; ?>" class="button" onclick="delavatar(); return false;" />
+						<label for="fileavatar"><?php echo _NEW_AVATAR_UPLOAD; ?></label>
 					</div>
-				</td>
-				<td valign="top">
+					<input class="inputbox" type="file" name="avatar" id="fileavatar" />
+				</div>
+				<div class="clear"></div>
+				<div>
+					<input type="submit" name="send" value="<?php echo _TASK_UPLOAD; ?>" class="button" onclick="addavatar(); return false;" />
+					<input type="submit" name="send" value="<?php echo _CMN_DELETE; ?>" class="button" onclick="delavatar(); return false;" />
+				</div>
+			</div>
+			<div id="user_info">
+				<div id="username1">
 					<div>
-						<div id="username1">
-							<div>
-								<label for="username1"><?php echo _UNAME; ?></label>
-							</div>
-							<input class="inputbox" type="text" name="username" id="username1" value="<?php echo $row->username; ?>" size="40" placeholder="<?php echo $row->username; ?>" />
-						</div>
-						<div id="name">
-							<div>
-								<label for="name"><?php echo _YOUR_NAME; ?></label>
-							</div>
-							<input class="inputbox" type="text" name="name" id="name" value="<?php echo $row->name; ?>" size="40" placeholder="<?php echo $row->name; ?>" />
-						</div>
-						<div id="email">
-							<div>
-								<label for="email"><?php echo _EMAIL; ?></label>
-							</div>
-							<input class="inputbox" type="email" name="email" id="email" value="<?php echo $row->email; ?>" size="40" placeholder="<?php echo $row->email; ?>" />
-						</div>
-						<div id="password">
-							<div>
-								<label for="password"><?php echo _PASS; ?></label>
-							</div>
-							<input class="inputbox" type="password" name="password" id="password" value="" size="40" placeholder="<?php echo _PASS_PH; ?>" />
-						</div>
-						<div id="verifyPass">
-							<div>
-								<label for="verifyPass"><?php echo _VPASS; ?></label>
-							</div>
-							<input class="inputbox" type="password" name="verifyPass" id="verifyPass" size="40" placeholder="<?php echo _VPASS_PH; ?>" />
-						</div>
+						<label for="username1"><?php echo _UNAME; ?></label>
 					</div>
-				</td>
-			</tr>
-		</table>
-			<?php
+					<input class="inputbox" type="text" name="username" id="username1" value="<?php echo $row->username; ?>" size="40" placeholder="<?php echo $row->username; ?>" />
+				</div>
+				<div id="name">
+					<div>
+						<label for="name"><?php echo _YOUR_NAME; ?></label>
+					</div>
+					<input class="inputbox" type="text" name="name" id="name" value="<?php echo $row->name; ?>" size="40" placeholder="<?php echo $row->name; ?>" />
+				</div>
+				<div id="email">
+					<div>
+						<label for="email"><?php echo _EMAIL; ?></label>
+					</div>
+					<input class="inputbox" type="email" name="email" id="email" value="<?php echo $row->email; ?>" size="40" placeholder="<?php echo $row->email; ?>" />
+				</div>
+				<div id="password">
+					<div>
+						<label for="password"><?php echo _PASS; ?></label>
+					</div>
+					<input class="inputbox" type="password" name="password" id="password" value="" size="40" placeholder="<?php echo _PASS_PH; ?>" />
+				</div>
+				<div id="verifyPass">
+					<div>
+						<label for="verifyPass"><?php echo _VPASS; ?></label>
+					</div>
+					<input class="inputbox" type="password" name="verifyPass" id="verifyPass" size="40" placeholder="<?php echo _VPASS_PH; ?>" />
+				</div>
+			</div>
+		</div>
+		<?php
 			$tabs->endTab();
 			if ($mosConfig_frontend_userparams == '1' || $mosConfig_frontend_userparams == 1 || $mosConfig_frontend_userparams == null) {
 				$tabs->startTab('Дополнительно', 'ext-page');
-				?>
-		<table>
-			<tr>
-				<td colspan="2">
-					<p><?php echo $params->render('params'); ?></p>
-				</td>
-			</tr>
-		</table>
-				<?php
-			}
-			$tabs->endTab();
-			?>
-		<input type="hidden" name="id" value="<?php echo $row->id; ?>" />
-		<input type="hidden" name="option" value="<?php echo $option; ?>" />
-		<input type="hidden" name="task" id="task" value="saveUserEdit" />
-		<input type="hidden" name="<?php echo $validate; ?>" value="1" />
-	</form>
+		?>
+		<div>
+			<p><?php echo $params->render('params'); ?></p>
+		</div>
+		<?php } $tabs->endTab(); ?>
+	<input type="hidden" name="id" value="<?php echo $row->id; ?>" />
+	<input type="hidden" name="option" value="<?php echo $option; ?>" />
+	<input type="hidden" name="task" id="task" value="saveUserEdit" />
+	<input type="hidden" name="<?php echo $validate; ?>" value="1" />
+</form>
 		<?php
 		$tabs->endPane();
 	}

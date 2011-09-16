@@ -1,12 +1,11 @@
 <?php
-
 /**
- * @package Joostina
- * @copyright Авторские права (C) 2008 Joostina team. Все права защищены.
- * @license Лицензия http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL, или help/license.php
- * Joostina! - свободное программное обеспечение распространяемое по условиям лицензии GNU/GPL
- * Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
- */
+* @package Joostina
+* @copyright Авторские права (C) 2008 Joostina team. Все права защищены.
+* @license Лицензия http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL, или help/license.php
+* Joostina! - свободное программное обеспечение распространяемое по условиям лицензии GNU/GPL
+* Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
+*/
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 require_once ($mainframe->getPath('front_html', 'com_content'));
@@ -1064,8 +1063,7 @@ function showArchiveCategory($id = 0, $gid, &$access, $pop, $option, $year, $mon
 		}
 	}
 // initiate form
-	$link = ampReplace('index.php?option=com_content&amp;task=archivecategory&amp;id=' . $id .
-					'&Itemid=' . $Itemid);
+	$link = ampReplace('index.php?option=com_content&amp;task=archivecategory&amp;id=' . $id . '&Itemid=' . $Itemid);
 	echo '<form action="' . sefRelToAbs($link) . '" method="post" class="form">';
 // Dynamic Page Title
 	if ($params->get('header') == "") {
@@ -1183,7 +1181,7 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 			if ($descrip && $description->description) {
 				echo $description->description;
 			}
-			echo '<br/><br/>';
+			//echo '<br/><br/>';
 			echo '</td>';
 			echo '</tr>';
 		}
@@ -1622,8 +1620,7 @@ function show($row, $params, $gid, &$access, $pop) {
 			if ($catLinkURL) {
 				$link = sefRelToAbs($catLinkURL . $_Itemid);
 			} else {
-				$link = sefRelToAbs('index.php?option=com_content&amp;task=category&amp;sectionid=' .
-								$row->sectionid . '&amp;id=' . $row->catid . $_Itemid);
+				$link = sefRelToAbs('index.php?option=com_content&amp;task=category&amp;sectionid=' . $row->sectionid . '&amp;id=' . $row->catid . $_Itemid);
 			}
 			$row->category = '<a href="' . $link . '" title="' . $row->category . '">' . $row->category . '</a>';
 		}
@@ -1631,11 +1628,11 @@ function show($row, $params, $gid, &$access, $pop) {
 // show/hides the intro text
 	if ($params->get('introtext')) {
 		if ($params->get('jeditable'))
-			$row->text = $row->introtext . ($params->get('intro_only') ? '' : chr(13) . '</div><div id="jneditf-' . $row->id . '">' . chr(13) . $row->fulltext . chr(13) . chr(13) . $row->notetext);
+			$row->text = '<div class="introtext">' . $row->introtext . '</div>' . ($params->get('intro_only') ? '' : chr(13) . '<div id="jneditf-' . $row->id . '">' . chr(13) . '</div>' . '<div class="fulltext">' . $row->fulltext . '</div>' . chr(13) . chr(13) . '<div class="notetext">' . $row->notetext . '</div>');
 		else
-			$row->text = $row->introtext . ($params->get('intro_only') ? '' : chr(13) . chr(13) . '' . $row->fulltext . chr(13) . chr(13) . '' . $row->notetext);
+			$row->text = '<div class="introtext">' . $row->introtext . '</div>' . ($params->get('intro_only') ? '' : chr(13) . chr(13) . '<div class="fulltext">' . $row->fulltext . '</div>' . chr(13) . chr(13) . '<div class="notetext">' . $row->notetext . '</div>');
 	} else {
-		$row->text = $row->fulltext;
+		$row->text = '<div class="fulltext">' . $row->fulltext . '</div>';
 	}
 // deal with the {mospagebreak} mambots only permitted in the full text area
 	$page = intval(mosGetParam($_REQUEST, 'limitstart', 0));
@@ -1938,6 +1935,8 @@ function saveContent(&$access, $task) {
 //test start
 	$row->notetext = str_replace('<br>', '<br />', $row->notetext);
 //test end
+	$length = strlen($row->introtext) < 9;
+	$search = strstr($row->introtext, '<br />');
 // remove <br /> take being automatically added to empty fulltext
 	$length = strlen($row->fulltext) < 9;
 	$search = strstr($row->fulltext, '<br />');

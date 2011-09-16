@@ -80,7 +80,7 @@ function searchbox($searchword, &$lists, $params) {
 		$searchphrase = strtolower(strval(mosGetParam($_REQUEST, 'searchphrase', 'any')));
 		$searchphrase = htmlspecialchars($searchphrase);
 		$cleanWord = htmlspecialchars($searchword);
-		$link = $mosConfig_live_site . '/index.php?option=' . $option . '&amp;Itemid=' . $Itemid . '&amp;searchword=' .$cleanWord . '&amp;searchphrase=' . $searchphrase . '&amp;ordering=' . $ordering;
+		$link = $mosConfig_live_site . '/index.php?option=' . $option . '&amp;Itemid=' . $Itemid . '&amp;searchword=' . $cleanWord . '&amp;searchphrase=' . $searchphrase . '&amp;ordering=' . $ordering;
 		$link = sefRelToAbs($link);
 // if($total>0){
 		echo '<br /><div><label class="limitstar">' . _SEARCH_LIMITSTART . ':</label> ' . $pageNav->getLimitBox($link) . '</div><br />';

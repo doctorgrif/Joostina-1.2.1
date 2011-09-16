@@ -160,8 +160,7 @@ INSERT INTO `#__components` VALUES(21, 'Joostina Meta Name', 'option=com_jmn', 0
 INSERT INTO `#__components` VALUES(22, 'Менеджер метатегов', '', 0, 21, 'option=com_jmn', 'Менеджер метатегов', 'com_jmn', 0, 'js/ThemeOffice/tag.png', 0, '');
 INSERT INTO `#__components` VALUES(23, 'Настройки', '', 0, 21, 'option=com_jmn&task=config', 'Настройки', 'com_jmn', 1, 'js/ThemeOffice/edit.png', 0, '');
 INSERT INTO `#__components` VALUES(24, 'Слова-исключения', '', 0, 21, 'option=com_jmn&task=settings', 'Слова-исключения', 'com_jmn', 2, 'js/ThemeOffice/warning.png', 0, '');
-INSERT INTO `#__components` VALUES(25, 'JoostinaOpenID', 'option=com_joostinaopenid', 0, 0, 'option=com_joostinaopenid', 'JoostinaOpenID', 'com_joostinaopenid', 0, 'js/ThemeOffice/openid.png', 0, '');
-INSERT INTO `#__components` VALUES(26, 'JoostinaPDF', 'option=com_joostinapdf', 0, 0, 'option=com_joostinapdf', 'JoostinaPDF', 'com_joostinapdf', 0, '../administrator/components/com_joostinapdf/images/logo.png', 0, '');
+INSERT INTO `#__components` VALUES(25, 'JoostinaPDF', 'option=com_joostinapdf', 0, 0, 'option=com_joostinapdf', 'JoostinaPDF', 'com_joostinapdf', 0, '../administrator/components/com_joostinapdf/images/logo.png', 0, '');
 
 
 

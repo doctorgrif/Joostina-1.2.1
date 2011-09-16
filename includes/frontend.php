@@ -128,7 +128,7 @@ echo '<noindex>';
 		$style = 0;
 	}
 	if ($style == 1) {
-echo '<table cellspacing="1" cellpadding="0" border="0" width="100%"><tr>';
+echo '<table><tr>';
 	}
 $prepend = ($style == 1) ? "<td valign=\"top\">\n" : '';
 $postpend = ($style == 1) ? "</td>\n" : '';
@@ -191,7 +191,7 @@ $postpend = ($style == 1) ? "</td>\n" : '';
 		*/
 		$params = new mosParameters($module->params);
 // кэширование модулей по умолчанию
-//$params->set('cache',1);
+		$params->set('cache',1);
 		echo $prepend;
 		if ((substr($module->module, 0, 4)) == 'mod_') {
 // normal modules
@@ -255,7 +255,6 @@ $mainframe->appendMetaTag('keywords', $mosConfig_MetaKeys);
 		$keys = implode(', ', array_unique(split(', ', $keys)));
 		$mainframe->_head['meta'][$_meta_keys_index][1] = $keys;
 	}
-	//doctorgrif: encoding, ie, width
 $iso = _ISO;
 $mainframe->addMetaTag('Content-Type', 'text/html; charset=' . $iso . '');
 $mainframe->addMetaTag('Content-Language', 'ru');
@@ -281,32 +280,21 @@ $mainframe->addMetaTag('revisit-after', $mosConfig_mtage_revisit . ' days');
 $mainframe->addMetaTag('allow-search', 'yes');
 $mainframe->addMetaTag('language', $mosConfig_lang);
 	}
-//doctorgrif: Dublin Core
-/*ToDo: доделать dc */
+// Dublin Core
 	global $mosConfig_dcore, $mosConfig_dcore_title, $mosConfig_dcore_creator, $mosConfig_dcore_subject, $mosConfig_dcore_description, $mosConfig_dcore_publisher, $mosConfig_dcore_contributor, $mosConfig_dcore_date, $mosConfig_dcore_type, $mosConfig_dcore_format, $mosConfig_dcore_identifier, $mosConfig_dcore_source, $mosConfig_dcore_language, $mosConfig_dcore_relation, $mosConfig_dcore_coverage, $mosConfig_dcore_rights;
 	$pagetitle = $mainframe->getPageTitle();
 	$mosConfig_dcore_title = $pagetitle;
-	/*ToDo: doctorgrif, доделать dcore_creator! */
 	$mosConfig_dcore_creator = '';
-	/*ToDo: doctorgrif, доделать dcore_subject! */
 	$mosConfig_dcore_subject = '';
 	$mosConfig_dcore_description = $mosConfig_MetaDesc;
-	/*ToDo: doctorgrif, доделать dcore_publisher! */
 	$mosConfig_dcore_publisher = '';
-	/*ToDo: doctorgrif, доделать dcore_contributor! */
 	$mosConfig_dcore_contributor = '';
-	/*ToDo: doctorgrif, доделать dcore_date! */
 	$mosConfig_dcore_date = strftime('%Y-%m-%d');
 	$mosConfig_dcore_type = 'Text';
-	/*ToDo: doctorgrif, доделать dcore_format! */
 	$mosConfig_dcore_format = '';
-	/*ToDo: doctorgrif, доделать dcore_identifier! */
 	$mosConfig_dcore_identifier = '';
-	/*ToDo: doctorgrif, доделать dcore_source! */
 	$mosConfig_dcore_source = '';
-	/*ToDo: doctorgrif, доделать dcore_relation! */
 	$mosConfig_dcore_relation = '';
-	/*ToDo: doctorgrif, доделать dcore_coverage! */
 	$mosConfig_dcore_coverage = '';
 	$mosConfig_dcore_rights = '© ' . $mosConfig_sitename . ', ' . date('Y') . '. Все права защищены.';
 	if ($mosConfig_dcore == 1) {
@@ -327,7 +315,7 @@ $mainframe->addMetaTag('DC.Relation', $mosConfig_dcore_relation);
 $mainframe->addMetaTag('DC.Coverage', $mosConfig_dcore_coverage);
 $mainframe->addMetaTag('DC.Rights', $mosConfig_dcore_rights);
 	}
-//doctorgrif: Geotagging
+// Geotagging
 	global $mosConfig_gtag, $mosConfig_gtag_lat, $mosConfig_gtag_long, $mosConfig_gtag_place, $mosConfig_gtag_reg;
 	if ($mosConfig_gtag == 1) {
 $mainframe->addMetaTag('ICBM', '' . $mosConfig_gtag_lat . ',' . $mosConfig_gtag_long . '');
@@ -349,7 +337,7 @@ echo '<base href="' . $mosConfig_live_site . '" />
 	}
 	if ($my->id || $mainframe->get('joomlaJavascript')) {
 		?>
-<script src="<?php echo $mosConfig_live_site; ?>/includes/js/joomla.javascript.js" type="text/javascript"></script>
+<script src="<?php echo $mosConfig_live_site; ?>/includes/js/joomla.javascript.full.js" type="text/javascript"></script>
 		<?php
 	}
 // boston, отключение RSS
@@ -420,9 +408,7 @@ echo '<base href="' . $mosConfig_live_site . '" />
 		}
 	} // boston, окончание хака отключения RSS
 // favourites icon
-/* doctorgrif: favicon разных девайсов */
 	if (!$mosConfig_disable_favicon) {
-		/* doctorgrif: favicon нормальных браузеров */
 		if (!$mosConfig_favicon) {
 			$mosConfig_favicon = 'favicon.png';
 		}
@@ -432,12 +418,10 @@ echo '<base href="' . $mosConfig_live_site . '" />
 		} else {
 			$icon = $mosConfig_live_site . '/' . $mosConfig_favicon;
 		}
-		/* doctorgrif: вывод в header */
 echo '<link rel="icon" href="' . $icon . '" />
 ';
 	}
 	if (!$mosConfig_disable_favicon_ie) {
-		/* doctorgrif: favicon IE */
 		if (!$mosConfig_favicon_ie) {
 			$mosConfig_favicon_ie = 'favicon.ico';
 		}
@@ -447,11 +431,12 @@ echo '<link rel="icon" href="' . $icon . '" />
 		} else {
 			$icon_ie = $mosConfig_live_site . '/' . $mosConfig_favicon_ie;
 		}
-echo '<!--[if IE]><link rel="shortcut icon" href="' . $icon_ie . '" /><![endif]-->
+		if (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
+echo '<link rel="shortcut icon" href="' . $icon_ie . '" />
 ';
+}
 	}
 	if (!$mosConfig_disable_favicon_ipad) {
-		/* doctorgrif: favicon iДевайсов */
 		if (!$mosConfig_favicon_ipad) {
 			$mosConfig_favicon_ipad = 'apple-touch-icon.png';
 		}
@@ -464,7 +449,6 @@ echo '<!--[if IE]><link rel="shortcut icon" href="' . $icon_ie . '" /><![endif]-
 echo '<link rel="apple-touch-icon" href="' . $mosConfig_live_site . '/apple-touch-icon.png" />
 ';
 	}
-	/* doctorgrif: конец favicon */
 }
 
 function set_robot_metatag($robots) {

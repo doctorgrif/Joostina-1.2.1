@@ -50,10 +50,10 @@ class XmapXML extends Xmap {
 			echo '<url>';
 			echo '<loc>', $this->escapeURL($link) ,'</loc>';
 			$timestamp = (isset($node->modified) && $node->modified != FALSE && $node->modified != -1) ? $node->modified : time();
-			$modified = gmdate('Y-m-d\TH:i:s\Z', $timestamp);
-			echo '<lastmod>', $modified, '</lastmod>';
-   			echo '<changefreq>', $node->changefreq, '</changefreq>';
-			echo '<priority>', $node->priority, '</priority>';
+			$modified = gmdate('Y-m-d\TH:i:s\Z' . $timestamp);
+			echo '<lastmod>' . $modified . '</lastmod>';
+   			echo '<changefreq>' . $node->changefreq . '</changefreq>';
+			echo '<priority>' . $node->priority . '</priority>';
  			echo '</url>',"\n";
 		}
 		return true;

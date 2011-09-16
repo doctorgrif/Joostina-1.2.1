@@ -28,7 +28,6 @@ $cur_file_img_path = $mosConfig_live_site . '/' . ADMINISTRATOR_DIRECTORY . '/te
 mosCommonHTML::loadFullajax();
 /* подключаем Jquery и плагины */
 mosCommonHTML::loadJquery();
-mosCommonHTML::loadJqueryPlugins('formalize');
 /** подключение css и js файлов шаблона
 * $mainframe->addCSS(полный_путь_к_файлу) - добавление css файла
 * $mainframe->addJS(полный_путь_к_файлу) - добавление java-script файла

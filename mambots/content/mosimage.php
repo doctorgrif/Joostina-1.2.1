@@ -172,7 +172,7 @@ function processImages(&$row, &$params, &$introCount) {
 				if ($params->def('margin') || $params->def('padding') || $attrib[1] || $attrib[3]) {
 					$style = ' style="' . $border_width . $float . $margin . $padding . $width . ';"';
 				}
-	$img = '<div class="mosimage" ' . $style . '>';
+	$img = '<div class="mosimage ' . $attrib[1] . '" ' . $style . '>';
 // display caption in top position
 				if ($attrib[5] == 'top' && $caption) {
 					$img .= $caption;
@@ -184,19 +184,18 @@ function processImages(&$row, &$params, &$introCount) {
 				}
 	$img .= '</div>';
 			} else {
-	$img = '<div class="mosimage"' . $div_style . ' >' . $image . '</div>';
+	$img = '<div class="mosimage ' . $attrib[1] . '"' . $div_style . ' >' . $image . '</div>';
 			}
 			$images[] = $img;
 		}
 	}
 	return $images;
 }
-
 /**
- * Замена совпадающих тэгов an image
- * @param array - Массив соответствий (см. - preg_match_all)
- * @return string
- */
+* Замена совпадающих тэгов an image
+* @param array - Массив соответствий (см. - preg_match_all)
+* @return string
+*/
 function botMosImage_replacer(&$matches) {
 	$i = $GLOBALS['botMosImageCount']++;
 	return @$GLOBALS['botMosImageArray'][$i];
