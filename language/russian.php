@@ -2308,7 +2308,7 @@ DEFINE('_CONTENT_IS_BEING_EDITED_BY_OTHER_PEOPLE', 'Содержимое сейчас редактируе
 DEFINE('_MODULE_WITH_THIS_NAME_ALREADY_EDISTS', 'Уже существует модуль с таким названием. Введите другое  название.');
 
 /* components com_registration */
-DEFINE('_USER_ACTIVATION_FAILED', '<div class="componentheading">Ошибка активации учетной записи!</div><p>Активация вашей учетной записи невозможна. Пожалуйста, обратитесь к администрации сайта.</p>');
+DEFINE('_USER_ACTIVATION_FAILED', '<div class="componentheading">Ошибка активации!</div><p>Активация вашей учетной записи невозможна. Пожалуйста, обратитесь к администрации сайта.</p>');
 
 /* components com_weblinks */
 DEFINE('_ENTER_CORRECT_URL', 'Введите правильный URL!');
