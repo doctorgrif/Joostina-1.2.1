@@ -35,7 +35,7 @@ function checkInputArray(&$array, $globalise = false) {
 // PHP Zend_Hash_Del_Key_Or_Index bug
 		$failed |= is_numeric($key);
 		if ($failed) {
-			die('Запрещенная переменная <strong>' . implode('</strong> или <strong>', $banned) . '</strong> в скрипте.');
+			die(_FAILED_ITEM . ' <strong>' . implode('</strong> ' . _OR . ' <strong>', $banned) . '</strong> ' . _IN_SCRIPT);
 		}
 		if ($globalise) {
 			$GLOBALS[$key] = $value;

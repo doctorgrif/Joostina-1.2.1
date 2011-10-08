@@ -92,7 +92,7 @@ function logoutForm($params_aray) {
 	<div class="mllogininfo">
 		<?php
 			if ($params_aray['greeting']) {
-				echo $avatar . '<p>' . _HI_AUTH . '<strong>' . $name . '</strong></p>';
+				echo $avatar . '<p>' . _HI_AUTH . '<span class="strong">' . $name . '</span></p>';
 			} 
 				echo $profile_link;
 		?>
@@ -112,19 +112,6 @@ function loginForm($params_aray) {
 		BuildLoginForm($params_aray, $params_aray['orientation']);
 	} else {
 	?>
-<script type="text/javascript">
-	jQuery(document).ready(function(){
-	jQuery('.loginbutton').click (function() {
-	jQuery('.loginformarea').toggle(400);
-	jQuery('body').addClass('tb');
-		return false;
-	});
-	jQuery('.closewin').click(function(){
-	jQuery('.loginformarea').toggle(400);
-	jQuery('.closewin').removeClass('tb');
-	});
-	});
-</script>
 <div class="loginbutton" id="log_in">
 	<?php echo $params_aray['dr_login_text']; ?>
 </div>
@@ -135,7 +122,7 @@ function loginForm($params_aray) {
 				<?php echo _AUTH_DEF; ?>
 			</span>
 			<?php BuildLoginForm($params_aray, $params_aray['orientation']); ?>
-			<div class="clearfix"></div>
+			<div class="cf"></div>
 		</div>
 		<div class="closewin"></div>
 	</div>
@@ -216,24 +203,28 @@ echo '<div class="formpretext">' . $params_aray['pretext'] . '</div>
 	<div class="loginform-gorisontal">
 		<div class="login-line">
 			<div class="login-f-line">
-				<div id="username"><?php echo $input_login; ?></div><div id="password"><?php echo $input_pass; ?></div><div><?php echo $submit_button; ?></div>
+				<div class="username"><?php echo $input_login; ?></div>
+				<div class="password"><?php echo $input_pass; ?></div>
+				<div class="submit"><?php echo $submit_button; ?></div>
 			</div><br />
 			<div class="login-s-line">
-				<div id="mod_login_remember"><?php echo $remember_me; ?></div><div><?php echo $lost_pass; ?></div><div><?php echo $register_me; ?></div>
+				<div class="mod_login_remember"><?php echo $remember_me; ?></div>
+				<div class="lost_pass"><?php echo $lost_pass; ?></div>
+				<div class="register"><?php echo $register_me; ?></div>
 			</div>
 		</div>
 	</div>
 	<?php } else { /* Форма во всплывающем окне */ ?>
 	<div class="loginform">
 		<div class="loginleft">
-			<div id="username"><?php echo $input_login; ?></div>
-			<div id="password"><?php echo $input_pass; ?></div>
-			<?php echo $submit_button; ?>
+			<div class="username"><?php echo $input_login; ?></div>
+			<div class="password"><?php echo $input_pass; ?></div>
+			<div class="submit"><?php echo $submit_button; ?></div>
 		</div>
 		<div class="loginright">
-			<div id="mod_login_remember"><?php echo $remember_me; ?></div>
-			<?php echo $lost_pass; ?>
-			<?php echo $register_me; ?>
+			<div class="mod_login_remember"><?php echo $remember_me; ?></div>
+			<div class="lost_pass"><?php echo $lost_pass; ?></div>
+			<div class="register_me"><?php echo $register_me; ?></div>
 		</div>
 	</div>
 	<?php

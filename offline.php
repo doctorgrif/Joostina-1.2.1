@@ -51,7 +51,7 @@ if (!defined('_ADMIN_OFFLINE') || defined('_INSTALL_CHECK')) {
 		$cur_template = 'newline';
 	}
 /* требуетс€ дл€ разделени€ номера ISO из константы €зыкового файла _ISO */
-	$iso = split('=', _ISO);
+	$iso = preg_split('=', _ISO);
 /* пролог xml */
 echo '<?xml version="1.0" encoding="' . $iso[1] . '"?' . '>';
 ?>
@@ -70,12 +70,11 @@ echo '<!DOCTYPE html>';
 </style>
 <link rel="stylesheet" href="<?php echo $mosConfig_live_site;?>/templates/css/offline.css" type="text/css" />
 <?php
-/* favicon дл€ нормальных браузеров */
+/* favicon дл€ браузеров */
 	if (!$mosConfig_favicon) {
 		$mosConfig_favicon = 'favicon.png';
 	}
 		$icon = $mosConfig_absolute_path . '/' . $mosConfig_favicon;
-/* проверка наличи€ файла */
 	if (!file_exists($icon)) {
 		$icon = $mosConfig_live_site . '/favicon.png';
 	} else {
@@ -86,7 +85,6 @@ echo '<!DOCTYPE html>';
 		$mosConfig_favicon_ie = 'favicon.ico';
 	}
 		$icon_ie = $mosConfig_absolute_path . '/' . $mosConfig_favicon_ie;
-/* проверка наличи€ файла */
 	if (!file_exists($icon_ie)) {
 		$icon_ie = $mosConfig_live_site . '/favicon.ico';
 	} else {
@@ -97,7 +95,6 @@ echo '<!DOCTYPE html>';
 		$mosConfig_favicon_ipad = 'apple-touch-icon.png';
 	}
 		$icon_ipad = $mosConfig_absolute_path . '/' . $mosConfig_favicon_ipad;
-/* проверка наличи€ файла */
 	if (!file_exists($icon_ipad)) {
 		$icon_ipad = $mosConfig_live_site . '/apple-touch-icon.png';
 	} else {
@@ -131,7 +128,7 @@ echo '<!DOCTYPE html>';
 			<?php } else { ?>
 			<div class="installwarning"><p><strong><?php echo _INSTALL_WARN;?></strong></p></div>
 			<?php } ?>
-			<div class="clear"></div>
+			<div class="cf"></div>
 		</div>
 	</div>
 <div id="footeroff">

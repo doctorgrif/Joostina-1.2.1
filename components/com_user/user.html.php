@@ -95,7 +95,6 @@ class HTML_user {
 <form action="<?php echo sefRelToAbs('index.php'); ?>" method="post" name="mosUserForm" id="mosUserForm" enctype="multipart/form-data">
 	<div style="float:right;height:100%;">
 				<?php
-				mosToolBar::spacer();
 				mosToolBar::save();
 				mosToolBar::cancel();
 				?>
@@ -111,12 +110,11 @@ class HTML_user {
 					<img id="userav" src="<?php echo $mosConfig_live_site . mosUser::avatar($row->id, 'big'); ?>" alt="" />
 				</div>
 				<div id="fileavatar">
+					<label for="fileavatar"><?php echo _NEW_AVATAR_UPLOAD; ?></label>
 					<div>
-						<label for="fileavatar"><?php echo _NEW_AVATAR_UPLOAD; ?></label>
+						<input class="inputbox" type="file" name="avatar" id="fileavatar" />
 					</div>
-					<input class="inputbox" type="file" name="avatar" id="fileavatar" />
 				</div>
-				<div class="clear"></div>
 				<div>
 					<input type="submit" name="send" value="<?php echo _TASK_UPLOAD; ?>" class="button" onclick="addavatar(); return false;" />
 					<input type="submit" name="send" value="<?php echo _CMN_DELETE; ?>" class="button" onclick="delavatar(); return false;" />
@@ -124,34 +122,34 @@ class HTML_user {
 			</div>
 			<div id="user_info">
 				<div id="username1">
+					<label for="username1"><?php echo _UNAME; ?></label>
 					<div>
-						<label for="username1"><?php echo _UNAME; ?></label>
+						<input class="inputbox" type="text" name="username" id="username1" value="<?php echo $row->username; ?>" size="40" placeholder="<?php echo $row->username; ?>" />
 					</div>
-					<input class="inputbox" type="text" name="username" id="username1" value="<?php echo $row->username; ?>" size="40" placeholder="<?php echo $row->username; ?>" />
 				</div>
 				<div id="name">
+					<label for="name"><?php echo _YOUR_NAME; ?></label>
 					<div>
-						<label for="name"><?php echo _YOUR_NAME; ?></label>
+						<input class="inputbox" type="text" name="name" id="name" value="<?php echo $row->name; ?>" size="40" placeholder="<?php echo $row->name; ?>" />
 					</div>
-					<input class="inputbox" type="text" name="name" id="name" value="<?php echo $row->name; ?>" size="40" placeholder="<?php echo $row->name; ?>" />
 				</div>
 				<div id="email">
+					<label for="email"><?php echo _EMAIL; ?></label>
 					<div>
-						<label for="email"><?php echo _EMAIL; ?></label>
+						<input class="inputbox" type="email" name="email" id="email" value="<?php echo $row->email; ?>" size="40" placeholder="<?php echo $row->email; ?>" />
 					</div>
-					<input class="inputbox" type="email" name="email" id="email" value="<?php echo $row->email; ?>" size="40" placeholder="<?php echo $row->email; ?>" />
 				</div>
 				<div id="password">
+					<label for="password"><?php echo _PASS; ?></label>
 					<div>
-						<label for="password"><?php echo _PASS; ?></label>
+						<input class="inputbox" type="password" name="password" id="password" value="" size="40" placeholder="<?php echo _PASS_PH; ?>" />
 					</div>
-					<input class="inputbox" type="password" name="password" id="password" value="" size="40" placeholder="<?php echo _PASS_PH; ?>" />
 				</div>
 				<div id="verifyPass">
+					<label for="verifyPass"><?php echo _VPASS; ?></label>
 					<div>
-						<label for="verifyPass"><?php echo _VPASS; ?></label>
+						<input class="inputbox" type="password" name="verifyPass" id="verifyPass" size="40" placeholder="<?php echo _VPASS_PH; ?>" />
 					</div>
-					<input class="inputbox" type="password" name="verifyPass" id="verifyPass" size="40" placeholder="<?php echo _VPASS_PH; ?>" />
 				</div>
 			</div>
 		</div>

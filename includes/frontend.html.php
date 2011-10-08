@@ -137,7 +137,7 @@ class modules_html {
 				$elements = $currChannel->getElementList();
 				$iUrl = 0;
 				foreach ($elements as $element) {
-//image handling
+// image handling
 					if ($element == 'image') {
 						$image = &$currChannel->getElement(DOMIT_RSS_ELEMENT_IMAGE);
 						$iUrl = $image->getUrl();
@@ -313,14 +313,14 @@ class modules_html {
 			}
 			?>
 		</div>
-						<?php
+			<?php
 					}
 
-					/* allows for rounded corners */
-					function modoutput_rounded($module, $params, $Itemid, $moduleclass_sfx, $type = 0) {
-						global $mosConfig_live_site, $mosConfig_sitename, $mosConfig_lang, $mosConfig_absolute_path;
-						global $mainframe, $database, $my;
-						?>
+			/* allows for rounded corners */
+			function modoutput_rounded($module, $params, $Itemid, $moduleclass_sfx, $type = 0) {
+				global $mosConfig_live_site, $mosConfig_sitename, $mosConfig_lang, $mosConfig_absolute_path;
+				global $mainframe, $database, $my;
+			?>
 		<div class="module<?php echo $moduleclass_sfx; ?>">
 			<div>
 				<div>

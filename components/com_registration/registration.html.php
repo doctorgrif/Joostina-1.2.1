@@ -27,29 +27,28 @@ class HTML_registration {
 			<div class="regrequired"><?php echo _NEW_PASS_DESC; ?></div>
 			<div class="regrequired"><?php echo _REGISTER_REQUIRED; ?></div>
 			<div id="checkUName">
+				<label for="checkUName"><?php echo _PROMPT_UNAME; ?> <span class="red">*</span></label>
 				<div>
-					<label for="checkUName"><?php echo _PROMPT_UNAME; ?> <span class="red">*</span></label>
+					<input type="text" name="checkusername" class="inputbox" id="checkUName" size="40" maxlength="25" />
 				</div>
-				<input type="text" name="checkusername" class="inputbox" id="checkUName" size="40" maxlength="25" />
 			</div>
 			<div id="confirmEmail">
+				<label for="confirmEmail"><?php echo _PROMPT_EMAIL; ?> <span class="red">*</span></label>
 				<div>
-					<label for="confirmEmail"><?php echo _PROMPT_EMAIL; ?> <span class="red">*</span></label>
+					<input type="text" name="confirmEmail" class="inputbox" id="confirmEmail" size="40" />
 				</div>
-				<input type="text" name="confirmEmail" class="inputbox" id="confirmEmail" size="40" />
 			</div>
 			<?php if ($mosConfig_captcha_reg) { session_start(); ?>
 			<div id="captchatext">
-				<div>
-					<label for="captchatext"><?php echo _REG_CAPTCHA_REF; ?></label>
-				</div>
+				<label for="captchatext"><?php echo _REG_CAPTCHA_REF; ?></label>
 				<div>
 					<img id="captchaimg" alt="<?php echo _REG_CAPTCHA_REF; ?>" onclick="document.mosForm.captchaimg.src='<?php echo $mosConfig_live_site; ?>/includes/kcaptcha/index.php?'+new String(Math.random())" src="<?php echo $mosConfig_live_site; ?>/includes/kcaptcha/index.php?<?php echo session_id() ?>" />
-				</div><br />
-				<input name="captcha" type="text" id="captchatext" class="inputbox" size="51" placeholder="<?php echo _PLEASE_ENTER_CAPTCHA_PH; ?>" />
+				</div>
+				<div>
+					<input name="captcha" type="text" id="captchatext" class="inputbox" size="51" placeholder="<?php echo _PLEASE_ENTER_CAPTCHA_PH; ?>" />
+				</div>
 			</div>
 			<?php }; ?>
-			<br />
 			<input type="submit" id="button" value="<?php echo _BUTTON_SEND_PASS; ?>" />
 			<input type="hidden" name="option" value="<?php echo $option; ?>" />
 			<input type="hidden" name="task" value="sendNewPass" /> 
@@ -105,47 +104,46 @@ class HTML_registration {
 			<div class="componentheading"><?php echo _REGISTER_TITLE; ?></div>
 			<div class="regrequired"><?php echo _REGISTER_REQUIRED; ?></div>
 			<div id="regname">
+				<label for="regname"><?php echo _REGISTER_NAME; ?><span class="red">*</span></label>
 				<div>
-					<label for="regname"><?php echo _REGISTER_NAME; ?><span class="red">*</span></label>
+					<input type="text" name="name" size="40" value="" id="regname" class="inputbox" maxlength="50" placeholder="<?php echo _REGISTER_NAME_PH; ?>" />
 				</div>
-				<input type="text" name="name" size="40" value="" id="regname" class="inputbox" maxlength="50" placeholder="<?php echo _REGISTER_NAME_PH; ?>" />
 			</div>
 			<div id="reguname">
+				<label for="reguname"><?php echo _REGISTER_UNAME; ?> <span class="red">*</span></label>
 				<div>
-					<label for="reguname"><?php echo _REGISTER_UNAME; ?> <span class="red">*</span></label>
+					<input type="text" name="username" size="40" value="" id="reguname" class="inputbox" maxlength="25" placeholder="<?php echo _REGISTER_UNAME_PH; ?>" />
 				</div>
-				<input type="text" name="username" size="40" value="" id="reguname" class="inputbox" maxlength="25" placeholder="<?php echo _REGISTER_UNAME_PH; ?>" />
 			</div>
 			<div id="regemail">
+				<label for="regemail"><?php echo _REGISTER_EMAIL; ?> <span class="red">*</span></label>
 				<div>
-					<label for="regemail"><?php echo _REGISTER_EMAIL; ?> <span class="red">*</span></label>
+					<input type="text" name="email" size="40" value="" id="regemail" class="inputbox" maxlength="100" placeholder="<?php echo _REGISTER_EMAIL_PH; ?>" />
 				</div>
-				<input type="text" name="email" size="40" value="" id="regemail" class="inputbox" maxlength="100" placeholder="<?php echo _REGISTER_EMAIL_PH; ?>" />
 			</div>
 			<div id="password">
+				<label for="password"><?php echo _REGISTER_PASS; ?> <span class="red">*</span></label>
 				<div>
-					<label for="password"><?php echo _REGISTER_PASS; ?> <span class="red">*</span></label>
+					<input class="inputbox" type="password" id="password" name="password" size="40" value="" />
 				</div>
-				<input class="inputbox" type="password" id="password" name="password" size="40" value="" />
 			</div>
 			<div id="password2">
+				<label for="password2"><?php echo _REGISTER_VPASS; ?> <span class="red">*</span></label>
 				<div>
-					<label for="password2"><?php echo _REGISTER_VPASS; ?> <span class="red">*</span></label>
+					<input class="inputbox" type="password" id="password2" name="password2" size="40" value="" />
 				</div>
-				<input class="inputbox" type="password" id="password2" name="password2" size="40" value="" />
 			</div>
 			<?php if ($mosConfig_captcha_reg) { session_start(); ?>
 			<div id="captchatext">
-				<div>
-					<label for="captchatext"><?php echo _REG_CAPTCHA_REF; ?></label>
-				</div>
+				<label for="captchatext"><?php echo _REG_CAPTCHA_REF; ?></label>
 				<div>
 					<img id="captchaimg" alt="<?php echo _REG_CAPTCHA_REF; ?>" onclick="document.mosForm.captchaimg.src='<?php echo $mosConfig_live_site; ?>/includes/kcaptcha/index.php?'+new String(Math.random())" src="<?php echo $mosConfig_live_site; ?>/includes/kcaptcha/index.php?<?php echo session_id() ?>" />
-				</div><br />
-				<input name="captcha" type="text" id="captchatext" class="inputbox" size="51" placeholder="<?php echo _PLEASE_ENTER_CAPTCHA_PH; ?>" />
+				</div>
+				<div>
+					<input name="captcha" type="text" id="captchatext" class="inputbox" size="51" placeholder="<?php echo _PLEASE_ENTER_CAPTCHA_PH; ?>" />
+				</div>
 			</div>
 		<?php }; ?>
-			<br />
 			<input type="button" value="<?php echo _BUTTON_SEND_REG; ?>" class="button" onclick="submitbutton_reg()" />
 			<input type="hidden" name="id" value="0" />
 			<input type="hidden" name="gid" value="0" />

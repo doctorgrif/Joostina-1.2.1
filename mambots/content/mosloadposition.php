@@ -9,7 +9,6 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'botMosLoadPosition');
-
 // Мамбот, загружающий модули в пределах содержимого
 function botMosLoadPosition($published, &$row) {
 	global $database, $_MAMBOTS;
@@ -46,7 +45,6 @@ function botMosLoadPosition($published, &$row) {
 		processPositions($row, $matches, $count, $regex, $style);
 	}
 }
-
 function processPositions(&$row, &$matches, $count, $regex, $style) {
 	global $database;
 	$query = "SELECT position" . "\n FROM #__template_positions" . "\n ORDER BY position";
@@ -68,7 +66,6 @@ function processPositions(&$row, &$matches, $count, $regex, $style) {
 // удаление тэгов, не соответствующих позиции модуля
 	$row->text = preg_replace($regex, '', $row->text);
 }
-
 function loadPosition($position, $style = -2) {
 	$modules = '';
 	if (mosCountModules($position)) {
@@ -79,5 +76,4 @@ function loadPosition($position, $style = -2) {
 	}
 	return $modules;
 }
-
 ?>

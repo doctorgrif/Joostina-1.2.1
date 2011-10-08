@@ -9,6 +9,6 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 global $mosConfig_absolute_path;
-require_once($mosConfig_absolute_path . '/administrator/components/com_joostinapdf/joostinapdf.php');
+	require_once($mosConfig_absolute_path . '/administrator/components/com_joostinapdf/joostinapdf.php');
 handleRequest();
 ?>

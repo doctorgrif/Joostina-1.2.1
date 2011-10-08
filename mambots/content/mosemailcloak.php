@@ -9,7 +9,6 @@
 // запрет пр€мого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'botMosEmailCloak');
-
 // —окрытие от спамботов адресов электронной почты в содержимом, использу€ javascript
 function botMosEmailCloak($published, &$row) {
 	global $database, $_MAMBOTS;
@@ -105,12 +104,10 @@ function botMosEmailCloak($published, &$row) {
 		$row->text = str_replace($regs[0], $replacement, $row->text);
 	}
 }
-
 function botMosEmailCloak_searchPattern($link, $text) {
 // <a href="mailto:anyLink">anyText</a>
 	$pattern = "(<a [[:alnum:] _\"\'=\@\.\-]*href=[\"\']mailto:" . $link . "[\"\'][[:alnum:] _\"\'=\@\.\-]*)>" .
 			$text . "</a>";
 	return $pattern;
 }
-
 ?>

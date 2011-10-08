@@ -90,16 +90,16 @@ if ($_POST[type] == '')
 <form action="<?= $_SERVER['REQUEST_URI'] ?>#results" method="POST">
 	<table class="contenttable" width="100%" cellspacing="10" >
 		<tr>
-			<td width="150"valign="top" align="left">
-				<input type="radio" name="type" value="url"<? if ($_POST[type] == 'url') echo 'checked'; ?> />
-				<strong><?php echo _MG_ENTERURL; ?>:</strong>
+			<td width="150px" valign="top" align="left">
+				<input type="radio" name="type" id="enrerurl" value="url"<? if ($_POST[type] == 'url') echo 'checked'; ?> />
+				<label for="enrerurl"><?php echo _MG_ENTERURL; ?>:</label>
 			</td>
 			<td align="left"><input type="text" size="40" name="url" value="<?= $_POST[url] ?>"></td>
 		</tr>
 		<tr>
 			<td width="150" valign="top" align="left">
-				<input type="radio" name="type" value="text" <? if ($_POST[type] == 'text') echo 'checked'; ?> />
-				<strong><?php echo _MG_ENTERTXT; ?>:</strong>
+				<input type="radio" name="type" id="enrertxt" value="text" <? if ($_POST[type] == 'text') echo 'checked'; ?> />
+				<label for="enrertxt"><?php echo _MG_ENTERTXT; ?>:</label>
 			</td>
 			<td align="left">
 				<textarea cols="30"rows="10" name="text"><?= stripslashes($_POST[text]) ?></textarea>

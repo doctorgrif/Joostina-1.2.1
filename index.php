@@ -53,13 +53,13 @@ require_once ($mosConfig_absolute_path . '/includes/joomla.php');
 // Расширенный отладчик:start
 $prof = new mosProfiler();
 // :end
-//Проверка подпапки установки, удалена при работе с SVN
+// Проверка подпапки установки, удалена при работе с SVN
 if (file_exists('installation/index.php') && $_VERSION->SVN == 0) {
 	define('_INSTALL_CHECK', 1);
 	include ($mosConfig_absolute_path . '/offline.php');
 	exit();
 }
-// отображение страницы выключенного сайта - ошибка 503
+// ошибка 503
 if ($mosConfig_offline == 1) {
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	header('Status: 503 Service Temporarily Unavailable');
@@ -143,7 +143,7 @@ if ($option == '') {
 		$link = substr($link, $pos + 1) . '&Itemid=' . $Itemid;
 	}
 	parse_str($link, $temp);
-// TODO: это путь, требуется переделать для лучшего управления глобальными переменными
+// TODO: переделать для лучшего управления глобальными переменными
 	foreach ($temp as $k => $v) {
 		$GLOBALS[$k] = $v;
 		$_REQUEST[$k] = $v;
@@ -281,23 +281,13 @@ initGzip();
 // при активном кэшировании отправим браузеру более "правильные" заголовки
 if (!$mosConfig_caching) {
 // не кэшируется
-	$file_last_modified = filemtime(sefRelToAbs($_SERVER['REQUEST_URI']));
-	header('Last-Modified: ' . date('r', $file_last_modified ) );
 	header('Expires: ' . date('r', $_SERVER['REQUEST_TIME']));
-	$etag = md5($file_last_modified);
-	header('ETag: ' . $etag );
 	header('Cache-Control: no-store, no-cache, must-revalidate');
 	header('Pragma: private');
 	header('Cache-Control: private');
 } else if ($option != 'logout' or $option != 'login') {
 // кэшируется
-	$file_last_modified = filemtime(sefRelToAbs($_SERVER['REQUEST_URI']));
-	header('Last-Modified: ' . date('r', $file_last_modified ) );
 	$max_age = 60 * 60;
-	$expires = $file_last_modified + $max_age;
-	header("Expires: " . date('r', $expires ) );
-	$etag = md5($file_last_modified);
-	header('ETag: ' . $etag );
 	header('Cache-Control: must-revalidate, proxy-revalidate, max-age=' . $max_age . ', s-maxage=' . $max_age );
 	if($_SERVER["HTTP_IF_NONE_MATCH"] == $etag){
 		header( "HTTP/1.1 304 Not Modified" );
@@ -336,7 +326,7 @@ if ($mosConfig_time_gen && $my->id == 62) {
 if ($mosConfig_debug && $my->id == 62) {
 	if (function_exists('memory_get_usage')) {
 		$mem_usage = (memory_get_usage() - _MEM_USAGE_START);
-		$debug->add('<strong>' . _SCRIPT_MEMORY_USING . ':</strong> ' . sprintf('%0.2f', $mem_usage / 1048576) . ' MB');
+		$debug->add('<span class="strong">' . _SCRIPT_MEMORY_USING . ':</span> ' . sprintf('%0.2f', $mem_usage / 1048576) . ' MB');
 	}
 	echo $debug->get($mosConfig_front_debug);
 }

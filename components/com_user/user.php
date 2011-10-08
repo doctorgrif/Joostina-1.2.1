@@ -219,7 +219,7 @@ function CheckIn($userid, $access) {
 					echo ' - ' . $tn . '</td>';
 					echo '<td>';
 					echo _CHECKED_IN;
-					echo '<strong>' . $num . '</strong>';
+					echo '<span class="strong">' . $num . '</span>';
 					echo _CHECKED_IN_ITEMS;
 					echo '</td>';
 					echo '</tr>';
@@ -231,7 +231,7 @@ function CheckIn($userid, $access) {
 	?>
 	<tr>
 		<td colspan="2">
-			<strong><?php echo _CONF_CHECKED_IN; ?></strong>
+			<span class="strong"><?php echo _CONF_CHECKED_IN; ?></span>
 		</td>
 	</tr>
 	</table>

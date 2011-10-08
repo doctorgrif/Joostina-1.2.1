@@ -8,7 +8,6 @@
 */
 require_once(str_replace('\\\\', '/', dirname(__FILE__)) . '/config/config.php');
 require_once(str_replace('\\\\', '/', dirname(__FILE__)) . '/class/editor.class.php');
-
 // load plugin configs
 $spaw_pgdir = SpawConfig::getStaticConfigValue('SPAW_ROOT') . 'plugins/';
 if (is_dir($spaw_pgdir)) {

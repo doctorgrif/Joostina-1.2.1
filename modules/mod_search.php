@@ -22,10 +22,13 @@ switch ($text_pos) {
 	$output = '<input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="' . $text . '" onblur="if(this.value==\'\') this.value=\'' . $text . '\';" onfocus="if(this.value==\'' . $text . '\') this.value=\'\';" />';
 	break;
 	case 'left':
-	$output = '<strong>' . $text . '</strong>&nbsp;<input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="" />';
+	$output = '<input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="" />';
+	break;
+	case 'right':
+	$output = '<input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="" />';
 	break;
 	case 'top':
-	$output = '<strong>' . $text . '</strong><br /><input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="" />';
+	$output = '<input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="" />';
 	break;
 	case 'hidden':
 	$output = '<input name="searchword" maxlength="100" alt="search" class="search-text' . $moduleclass_sfx . '" type="text" size="' . $width . '" value="" />';
@@ -38,19 +41,19 @@ if ($button_vis) {
 }
 switch ($button_pos) {
 	case 'top':
-		$button = $button . '<br />';
+		$button = '<div><span class="strong">' . $button . '</span></div>';
 		$output = $button . $output;
 		break;
 	case 'bottom':
-		$button = '<br />' . $button;
+		$button = '<div><span class="strong">' . $button . '</span></div>';
 		$output = $output . $button;
 		break;
 	case 'right':
-		$output = $output . $button;
+		$output = $output . '<span class="strong">' . $button . '</span>';
 		break;
 	case 'left':
 	default:
-		$output = $button . $output;
+		$output = '<span class="strong">' . $button . '</span>' . $output;
 		break;
 }
 // set Itemid id for links

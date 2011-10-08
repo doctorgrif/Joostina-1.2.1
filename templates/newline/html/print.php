@@ -17,6 +17,6 @@ $pg_link = str_replace('index2.php','index.php',$pg_link);
 <div class="logo"><?php echo $mosConfig_sitename; ?></div>
 <div id="main"><?php echo $_MOS_OPTION['buffer']; ?></div>
 <div id="ju_foo"><?php echo _PRINT_PAGE_LINK; ?>:
-	<p style="display:none;"><em><?php echo sefRelToAbs($pg_link); ?></em></p>
+	<p class="nodisplay"><em><?php echo sefRelToAbs($pg_link); ?></em></p>
 	<p>&copy; <?php echo $mosConfig_sitename; ?>, <?php echo date('Y'); ?></p>
 </div>

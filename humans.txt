@@ -1,0 +1,16 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+/* TEAM */
+	doctorgrif
+	Site: http://www.hospsurg.ru
+	Twitter: http://twitter.com/@hospsurg
+	Location: Russia, Chelyabinsk
+/* THANKS */
+	boston
+	Site: http://www.www.joostina.ru
+	Twitter: 
+	Location: Russia, Chelyabinsk
+/* SITE */
+	Standards: HTML4/HTML5, CSS2/CSS3
+	Components: PHP, CSS, JS (jQuery)
+	Software: Netbeans IDE 

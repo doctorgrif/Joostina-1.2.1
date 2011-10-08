@@ -8,13 +8,11 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-
 /**
 * Информация о версии
 * @package Joostina
 */
 class joomlaVersion {
-
 	/** @var Строка Продукт */
 	var $PRODUCT = 'Joomla!';
 	/** @var Строка CMS */
@@ -24,7 +22,7 @@ class joomlaVersion {
 	/** @var int Номер основной версии */
 	var $RELEASE = '1.0';
 	/** @var Строка статус разработки */
-	var $DEV_STATUS = ' RC1';
+	var $DEV_STATUS = ' Stable';
 	/** @var int Подверсия */
 	var $DEV_LEVEL = '15';
 	/** @var int Номер сборки */
@@ -53,7 +51,6 @@ class joomlaVersion {
 	var $SVN = 0;
 	/** @var string Ссылки на сайты поддержки */
 	var $SUPPORT = 'Поддержка: <a href="http://www.joostina.ru" target="_blank" title="Официальный сайт CMS Joostina">www.joostina.ru</a> | <a href="http://www.joomlaportal.ru" target="_blank" title="Joomla! CMS по-русски">www.joomlaportal.ru</a> | <a href="http://www.joom.ru" target="_blank" title="Русский дом Joomla">www.joom.ru</a> | <a href="http://www.joomla.ru" target="_blank" title="Бесплатная система управления сайтом Joomla!">www.joomla.ru</a>.';
-
 	/** @return string Длинный формат версии */
 	function getLongVersion() {
 		return $this->CMS . ' ' . $this->RELEASE . '. ' . $this->CMS_ver . ' [' . $this->CODENAME . '] ' . $this->RELDATE . ' ' . $this->RELTIME . ' ' . $this->RELTZ;
@@ -71,9 +68,7 @@ class joomlaVersion {
 		}
 	}
 }
-
 $_VERSION = new joomlaVersion();
 $version = $_VERSION->CMS . ' ' . $_VERSION->CMS_ver . '.' . $_VERSION->BUILD . '' . $_VERSION->DEV_STATUS . ' ' . $_VERSION->CODENAME . ' ' . $_VERSION->RELDATE . ' ' . $_VERSION->RELTIME . ' ' . $_VERSION->RELTZ;
-
 $jostina_ru = $_VERSION->CMS . ' ' . $_VERSION->CMS_ver . '.' . $_VERSION->BUILD . '' . $_VERSION->DEV_STATUS . ' [' . $_VERSION->SVN_R . '] ' . $_VERSION->CODENAME . ' ' . $_VERSION->RELDATE . ' ' . $_VERSION->RELTIME . ' ' . $_VERSION->RELTZ . ' ' . $_VERSION->COPYRIGHT . '<br />' . $_VERSION->SUPPORT . ' ' . $_VERSION->BROUSER;
 ?>

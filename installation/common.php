@@ -7,13 +7,10 @@
 * Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
 */
 defined('_VALID_MOS') or die();
-
 error_reporting(E_ALL);
-
 header('Content-type: text/html; charset=windows-1251');
 header('Cache-Control: no-cache, must-revalidate'); // HTTP/1.1
 header('Pragma: no-cache'); // HTTP/1.0
-
 /**
 * Сервисные функции для установок значений по умолчанию
 */
@@ -37,7 +34,6 @@ function mosGetParam(&$arr,$name,$def = null,$mask = 0) {
 		return $def;
 	}
 }
-
 function mosMakePassword($length) {
 	$salt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	$len = strlen($salt);
@@ -46,7 +42,6 @@ function mosMakePassword($length) {
 	for($i = 0; $i < $length; $i++) $makepass .= $salt[mt_rand(0,$len - 1)];
 	return $makepass;
 }
-
 /**
 * Права доступа к файлам и директориям
 * @param path начальный файл или директория (без слеша в конце)
@@ -77,7 +72,6 @@ function mosChmodRecursive($path,$filemode = null,$dirmode = null) {
 	} // if
 	return $ret;
 } // mosChmodRecursive
-
 require_once ('../includes/version.php');
 $_VERSION = new joomlaVersion();
 $versioninfo = $_VERSION->RELEASE.'.'.$_VERSION->CMS_ver;

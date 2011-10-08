@@ -51,7 +51,7 @@ if ($mosConfig_enable_stats) {
 		$hits = $database->loadResult();
 		$hits = $hits + $increase;
 		if ($hits == NULL) {
-		// Информация о пользователях, находящихся на сайте
+		// Информация о пользователях на сайте
 			$content .= '<span class="strong">' . _STAT_VISITORS . '</span> 0';
 		} else {
 			$content .= '<span class="strong">' . _STAT_VISITORS . '</span>' . $hits;

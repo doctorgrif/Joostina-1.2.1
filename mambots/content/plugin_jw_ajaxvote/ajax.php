@@ -24,7 +24,6 @@ switch ($_GET['task']) {
 		echo showVotes();
 		break;
 }
-
 function recordVote() {
 	global $database;
 	$user_rating = intval($_GET['user_rating']);
@@ -54,7 +53,6 @@ function recordVote() {
 		return 1;
 	}
 }
-
 function getPercentage() {
 	global $database;
 	$result = 0;
@@ -66,5 +64,4 @@ function getPercentage() {
 	}
 	echo $result;
 }
-
 ?>

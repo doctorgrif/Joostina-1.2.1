@@ -198,12 +198,12 @@ if (!defined('_MOS_MAINMENU_MODULE')) {
 		$indents = array(
 // префикс блока / префикс объекта / суффикс объекта / суффикс блока
 		array('<table width="100%">', '<tr align="left"><td>', '</td></tr>', '</table>'),
-		array('', '<div style="padding-left:4px;">' . $img[1], '</div>', ''),
-		array('', '<div style="padding-left:8px;">' . $img[2], '</div>', ''),
-		array('', '<div style="padding-left:12px;">' . $img[3], '</div>', ''),
-		array('', '<div style="padding-left:16px;">' . $img[4], '</div>', ''),
-		array('', '<div style="padding-left:20px;">' . $img[5], '</div>', ''),
-		array('', '<div style="padding-left:24px;">' . $img[6], '</div>', ''),
+		array('', '<div style="padding-left:.33em;">' . $img[1], '</div>', ''),
+		array('', '<div style="padding-left:.66em;">' . $img[2], '</div>', ''),
+		array('', '<div style="padding-left:1em;">' . $img[3], '</div>', ''),
+		array('', '<div style="padding-left:1.33em;">' . $img[4], '</div>', ''),
+		array('', '<div style="padding-left:1.66em;">' . $img[5], '</div>', ''),
+		array('', '<div style="padding-left:2em;">' . $img[6], '</div>', ''),
 		);
 // создание иерархии меню
 		$children = array();

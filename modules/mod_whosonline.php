@@ -9,12 +9,12 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $params_aray = array(// Основные настройки
-	'moduleclass_sfx' => $params->get('moduleclass_sfx'), // Суффикс класса модуля
-	'all_user' => $params->get('all_user'), // Количество зарегистрированных пользователей
-	'online_user_count' => $params->get('online_user_count'), // Пользователи online
-	'online_users' => $params->get('online_users'), // Кто online
-	'user_avatar' => $params->get('user_avatar'), // Аватары пользователей
-	'module_orientation' => $params->get('module_orientation'), // Ориентация модуля
+	'moduleclass_sfx' => $params->get('moduleclass_sfx'),
+	'all_user' => $params->get('all_user'),
+	'online_user_count' => $params->get('online_user_count'),
+	'online_users' => $params->get('online_users'),
+	'user_avatar' => $params->get('user_avatar'),
+	'module_orientation' => $params->get('module_orientation'),
 );
 $output = '';
 display_module($params_aray);
@@ -88,7 +88,7 @@ function online_users($params_aray) {
 // более 1 гостя
 			$output .= sprintf(_GUESTS_COUNT, $guest_array);
 		}
-// есть ли гости и зарегистрированные пользователи online
+// гости и зарегистрированные пользователи online
 		if ($guest_array != 0 && $user_array != 0) {
 			$output .= _AND;
 		}

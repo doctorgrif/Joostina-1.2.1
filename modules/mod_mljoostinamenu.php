@@ -228,7 +228,7 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 			switch ($style) {
 				case 1:
 					if ($ml_first_hide == 1 && $count_link == 1) {
-						echo '<td style="display:none;" ' . $ml_elementer . '>';
+						echo '<td class="nodisplay" ' . $ml_elementer . '>';
 						echo $prelink . $link . $postlink;
 						echo '</td>';
 					} else {
@@ -239,7 +239,7 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 					break;
 				case 2:
 					if ($ml_first_hide == 1 && $count_link == 1) {
-						echo '<li style="display:none;" ' . $ml_elementer . '>';
+						echo '<li class="nodisplay" ' . $ml_elementer . '>';
 						echo $prelink . $link . $postlink;
 						echo '</li>';
 					} else {
@@ -250,7 +250,7 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 					break;
 				case 3:
 					if ($ml_first_hide == 1 && $count_link == 1) {
-						echo '<div style="display:none;">';
+						echo '<div class="nodisplay">';
 						echo $prelink . $link . $postlink;
 						echo '</div>';
 					} else {
@@ -266,7 +266,7 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 						} else {
 							$ml_td_width = '';
 						}
-						echo '<td style="display:none;" ' . $ml_elementer . ' ' . $ml_td_width . '>';
+						echo '<td class="nodisplay" ' . $ml_elementer . ' ' . $ml_td_width . '>';
 						echo $prelink . $link . $postlink;
 						echo '</td>';
 					} else {
@@ -284,7 +284,7 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 					break;
 				case 5:
 					if ($ml_first_hide == 1 && $count_link == 1) {
-						echo '<div style="display:none;" ' . $ml_elementer . '>';
+						echo '<div class="nodisplay" ' . $ml_elementer . '>';
 						echo $prelink . $link . $postlink;
 						echo '</div>';
 					} else {
@@ -295,7 +295,7 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 					break;
 				case 6:
 					if (($ml_first_hide == 1) && ($count_link == 1)) {
-						echo '<tr style="display:none;"><td ' . $ml_elementer . '>';
+						echo '<tr class="nodisplay"><td ' . $ml_elementer . '>';
 						echo $prelink . $link . $postlink;
 						echo '</td></tr>';
 					} else {

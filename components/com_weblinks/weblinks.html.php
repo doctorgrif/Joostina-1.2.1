@@ -33,7 +33,7 @@ class HTML_weblinks {
 					<?php } echo $currentcat->descrip; ?>
 				</div>
 			</div>
-			<div class="clear"></div>
+			<div class="cf"></div>
 			<div>
 				<div>
 					<?php
@@ -144,21 +144,21 @@ class HTML_weblinks {
 	foreach ($categories as $cat) {
 	if ($catid == $cat->catid) {
 	?>
-	<li class="weblinks">
+	<li>
 		<?php echo stripslashes($cat->name); ?> <span>(<?php echo $cat->numlinks; ?>)</span>
 	</li>
-					<?php
-				} else {
-					$link = 'index.php?option=com_weblinks&amp;catid=' . $cat->catid . '&amp;Itemid=' . $Itemid;
-					?>
-	<li class="weblinks">
+	<?php
+		} else {
+			$link = 'index.php?option=com_weblinks&amp;catid=' . $cat->catid . '&amp;Itemid=' . $Itemid;
+	?>
+	<li>
 		<a href="<?php echo sefRelToAbs($link); ?>" class="category<?php echo $params->get('pageclass_sfx'); ?>" title="<?php echo stripslashes($cat->name); ?>"><?php echo stripslashes($cat->name); ?></a>&nbsp;
 		<span>(<?php echo $cat->numlinks; ?>)</span>
 	</li>
-				<?php
-			}
+	<?php
 		}
-		?>
+	}
+	?>
 </ul>
 		<?php
 	}
@@ -209,25 +209,33 @@ class HTML_weblinks {
 			<td width="20%" align="right">
 				<p><?php echo _NAME; ?></p>
 			</td>
-			<td width="80%"><input class="inputbox" type="text" name="title" size="50" maxlength="250" value="<?php echo htmlspecialchars($row->title, ENT_QUOTES); ?>" /></td>
+			<td width="80%">
+				<input class="inputbox" type="text" name="title" size="50" maxlength="250" value="<?php echo htmlspecialchars($row->title, ENT_QUOTES); ?>" />
+			</td>
 		</tr>
 		<tr>
 			<td valign="top" align="right">
 				<p><?php echo _SECTION; ?></p>
 			</td>
-			<td><?php echo $lists['catid']; ?></td>
+			<td>
+				<?php echo $lists['catid']; ?>
+			</td>
 		</tr>
 		<tr>
 			<td valign="top" align="right">
 				<p><?php echo _URL; ?></p>
 			</td>
-			<td><input class="inputbox" type="text" name="url" value="<?php echo $row->url; ?>" size="50" maxlength="250" /></td>
+			<td>
+				<input class="inputbox" type="text" name="url" value="<?php echo $row->url; ?>" size="50" maxlength="250" />
+			</td>
 		</tr>
 		<tr>
 			<td valign="top" align="right">
 				<p><?php echo _URL_DESC; ?></p>
 			</td>
-			<td><textarea class="inputbox" cols="30" rows="6" name="description" style="width:360px;"><?php echo htmlspecialchars($row->description, ENT_QUOTES); ?></textarea></td>
+			<td>
+				<textarea class="inputbox" cols="30" rows="6" name="description" style="width:360px;"><?php echo htmlspecialchars($row->description, ENT_QUOTES); ?></textarea>
+			</td>
 		</tr>
 	</table>
 	<input type="hidden" name="id" value="<?php echo $row->id; ?>" />

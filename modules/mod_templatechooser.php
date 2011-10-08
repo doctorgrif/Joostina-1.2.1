@@ -33,7 +33,7 @@ if ($templatefolder) {
 	$templatefolder->close();
 }
 sort($darray);
-// Показ изображения предпросмотра. Установки JavaScript для текущего предпросмотра
+// Показ изображения предпросмотра
 $onchange = '';
 if ($show_preview) {
 	$onchange = 'showimage()';
@@ -61,7 +61,7 @@ if ($show_preview) {
 }
 ?>
 <form action="index.php" name="templateform" method="post">
-	<div id="templatechooser">
+	<div class="templatechooser">
 	<div>
 		<label for="templatechooser"><?php echo _CMN_SELECT; ?></label>
 	</div>

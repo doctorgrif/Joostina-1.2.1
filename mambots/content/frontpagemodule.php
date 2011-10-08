@@ -9,7 +9,6 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onAfterDisplayContent', 'frontpagemodule');
-
 function frontpagemodule($row, &$params) {
 	global $option, $mosConfig_absolute_path, $database, $_MAMBOTS;
 // исключаем работу мамбота в модулях и при выводе на печать

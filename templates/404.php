@@ -22,18 +22,24 @@ if (!defined('_404_RTS')) {
 	define('_404_RTS', 'Вернуться на сайт');
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE')) {
+echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+} else {
+echo '<!DOCTYPE html>';
+}
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>404 - Страница не найдена - <?php echo $mosConfig_sitename; ?></title>
+	<title>Error 404: Страница не найдена | <?php echo $mosConfig_sitename; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; <?php echo _ISO; ?>" />
 </head>
 <body class="page_404">
 	<h2><?php echo $mosConfig_sitename; ?></h2>
 	<h2><?php echo _404; ?></h2>
 	<h3><a href="<?php echo $mosConfig_live_site; ?>"><?php echo _404_RTS; ?></a></h3>
-	<p>Ошибка 404 - 404 Error</p>
-	<p>Запрашиваемая вами страница отсутствует в принципе или она была удалена некоторое время назад.</p>
-	<p>Вы можете <a href="mailto:<?php echo $mosConfig_mailfrom; ?>" title="<?php echo _CMN_EMAIL; ?>">написать</a> об этом администратору сайта или вернуться на <a href="<?php echo $mosConfig_live_site; ?>" title="<?php echo $mosConfig_sitename ?>">главную страницу</a>.</p>
+	<p>Ошибка 404 | Error 404</p>
+	<p><?php echo _404_TEXT;?></p>
+	<p><?php echo _404_FULLTEXT; ?></p>
 </body>
 </html>

@@ -56,7 +56,7 @@ if ($rows) {
 				$link = sefRelToAbs('index.php?option=com_content&amp;task=blogsection&amp;id=' . $row->id);
 			}
 		?>
-	<li class="section<?php echo $moduleclass_sfx; ?>">
+	<li>
 		<a class="section" href="<?php echo $link; ?>" title="<?php echo $row->title; ?>"><?php echo $row->title; ?></a>
 	</li>
 		<?php

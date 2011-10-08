@@ -6,8 +6,6 @@
 * Joostina! - свободное программное обеспечение распространяемое по условиям лицензии GNU/GPL
 * Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
 */
-
-
 // Set flag that this is a parent file
 define("_VALID_MOS",1);
 /** Include common.php*/
@@ -23,7 +21,6 @@ $DBSample	= intval(mosGetParam($_POST,'DBSample',1));
 $DBexp		= intval(mosGetParam($_POST,'DBexp',0));
 // заменить на 1 для возможности выбора экспериментального типа базы данных
 $YA_UVEREN = 0;
-
 echo '<?xml version="1.0" encoding="utf-8"?' . '>';?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,37 +30,37 @@ echo '<?xml version="1.0" encoding="utf-8"?' . '>';?>
 <link rel="shortcut icon" href="../images/favicon.ico" />
 <link rel="stylesheet" href="install.css" type="text/css" />
 <script type="text/javascript">
-<!--
-function check() {
-// форма основной конфигурации
-var formValid=false;
-var f = document.form;
-if ( f.DBhostname.value == '' ) {
-alert('Пожалуйста, введите имя Хоста MySQL');
-f.DBhostname.focus();
-formValid=false;
-} else if ( f.DBuserName.value == '' ) {
-alert('Пожалуйста, введите имя пользователя Базы Данных MySQL');
-f.DBuserName.focus();
-formValid=false;
-} else if ( f.DBname.value == '' ) {
-alert('Пожалуйста, введите Имя для своей новой БД');
-f.DBname.focus();
-formValid=false;
-} else if ( f.DBPrefix.value == '' ) {
-alert('Для правильной работы Joostina Вы должны ввести префикс таблиц БД MySQL.');
-f.DBPrefix.focus();
-formValid=false;
-} else if ( f.DBPrefix.value == 'old_' ) {
-alert('Вы не можете использовать префикс таблиц "old_", так как Joostina использует его для создания резервных таблиц.');
-f.DBPrefix.focus();
-formValid=false;
-} else if ( confirm('Вы уверены, что правильно ввели данные? \Joostina будет заполнять таблицы в БД, параметры которой Вы указали.')) {
-formValid=true;
-}
-return formValid;
-}
-//-->
+	<!--
+	function check() {
+	// форма основной конфигурации
+		var formValid=false;
+		var f = document.form;
+			if ( f.DBhostname.value == '' ) {
+				alert('Пожалуйста, введите имя Хоста MySQL');
+					f.DBhostname.focus();
+					formValid=false;
+			} else if ( f.DBuserName.value == '' ) {
+				alert('Пожалуйста, введите имя пользователя Базы Данных MySQL');
+					f.DBuserName.focus();
+					formValid=false;
+			} else if ( f.DBname.value == '' ) {
+				alert('Пожалуйста, введите Имя для своей новой БД');
+					f.DBname.focus();
+					formValid=false;
+			} else if ( f.DBPrefix.value == '' ) {
+				alert('Для правильной работы Joostina Вы должны ввести префикс таблиц БД MySQL.');
+					f.DBPrefix.focus();
+					formValid=false;
+			} else if ( f.DBPrefix.value == 'old_' ) {
+				alert('Вы не можете использовать префикс таблиц "old_", так как Joostina использует его для создания резервных таблиц.');
+					f.DBPrefix.focus();
+					formValid=false;
+			} else if ( confirm('Вы уверены, что правильно ввели данные? \Joostina будет заполнять таблицы в БД, параметры которой Вы указали.')) {
+					formValid=true;
+			}
+		return formValid;
+	}
+	//-->
 </script>
 </head>
 <body onload="document.form.DBhostname.focus();">
@@ -75,7 +72,7 @@ return formValid;
 					<p class="jst"><a href="http://www.joostina.ru">Joostina</a> - свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
 				</div>
 				<div id="navigator">
-					<big>Установка Joostina CMS</big>
+					<span style="font-size:larger;">Установка Joostina CMS</span>
 					<ul>
 						<li class="step"><strong>1</strong><span>Проверка системы</span></li>
 						<li class="arrow">&nbsp;</li>
@@ -93,9 +90,9 @@ return formValid;
 				<div class="buttons">
 					<input class="button" type="submit" name="next" value="Далее &gt;&gt;"/>
 				</div>
-					<div id="wrap">
-						<div class="install-form">
-							<div class="form-block">
+				<div id="wrap">
+					<div class="install-form">
+						<div class="form-block">
 							<table class="content2" width="100%">
 								<tr>
 									<th>Имя хоста MySQL</th>
@@ -161,9 +158,9 @@ return formValid;
 									</td>
 								</tr>
 							</table>
-							</div>
 						</div>
 					</div>
+				</div>
 				<div class="clr"></div>
 			</div>
 		</form>

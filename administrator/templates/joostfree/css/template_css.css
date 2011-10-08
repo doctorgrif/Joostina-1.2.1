@@ -74,10 +74,7 @@ button:focus, button:active, input:focus, input:active, select:focus, select:act
 	-webkit-box-shadow:#06f 0 0 7px;
 	box-shadow:#06f 0 0 7px;
 	z-index:1;}
-input[type="file"]:focus, input[type="file"]:active, input[type="radio"]:focus, input[type="radio"]:active, input[type="checkbox"]:focus, input[type="checkbox"]:active {
-	-moz-box-shadow:none;
-	-webkit-box-shadow:none;
-	box-shadow:none;}
+input[type="file"]:focus, input[type="file"]:active, input[type="radio"]:focus, input[type="radio"]:active, input[type="checkbox"]:focus, input[type="checkbox"]:active {-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;}
 .is_webkit select {
 	background-image:url(../images/select_arrow.gif);
 	background-repeat:no-repeat;
@@ -107,10 +104,7 @@ textarea {
 	overflow:auto;
 	resize:vertical;
 	width:100%;}
-optgroup {
-	color:#000;
-	font-style:normal;
-	font-weight:normal;}
+optgroup {color:#000;font-style:normal;font-weight:normal;}
 .ie6_button, * html button {
 	background:#ddd url(../images/button.png) repeat-x;
 	border:1px solid;
@@ -136,10 +130,7 @@ optgroup {
 .ie6_input_disabled {background:#eee;}
 #ntree{text-align:left;}
 #Init{text-align:left;}
-#pack_step{
-	margin:2px;
-	padding:2px;
-	text-align:left;}
+#pack_step{margin:2px;padding:2px;text-align:left;}
 #pack_step span div{padding:2px 10px 2px 30px;}
 .pack_step{
 	margin-top:5px;
@@ -167,10 +158,7 @@ optgroup {
 	width:150px;}
 /*слой в котором выводится изображение аватара пользователя*/
 #user_avatar{text-align:center;}
-#user_avatar div{
-	width:100%;
-	height:220px;
-	text-align:center;}
+#user_avatar div{width:100%;height:220px;text-align:center;}
 #user_avatar img{
 	margin:2px;
 	padding:2px;
@@ -184,10 +172,7 @@ a.abig{border-bottom:1px dashed #aaa;font-size:12px;}
 #ntdree{width:15%;}
 td#ntdree {}
 /*разделитель ячеек*/
-#tdtoogle{
-	width:5px;
-	padding:0;
-	margin:0;}
+#tdtoogle{width:5px;padding:0;margin:0;}
 .tdtoogleoff{background:url(../../../images/tgl.gif) no-repeat;}
 .tdtoogleon{background:url(../../../images/tgr.gif) no-repeat;}
 .tdtoogleoff:hover, .tdtoogleon:hover{background-color:#ffc;cursor:pointer;}
@@ -197,10 +182,7 @@ td#ntdree {}
 	border:thin dotted gray;
 	padding:1em;
 	width:auto;}
-.c_sql{
-	padding:10px;
-	text-align:left;
-	background-color:#ccc;}
+.c_sql{padding:10px;text-align:left;background-color:#ccc;}
 .td-state {cursor:pointer;}
 /*cpanel*/
 #ico-page {padding:5px;}
@@ -233,10 +215,7 @@ div.cpicons {display:block;float:left;}
 	color:#0b55c4;
 	z-index:-1;
 	max-width:136px;}
-.cpicons img {
-	float:left;
-	margin:0 2px;
-	padding:1px;}
+.cpicons img {float:left;margin:0 2px;padding:1px;}
 .cpicons img.shortcut {
 	border:0;
 	background-color:inherit;
@@ -312,14 +291,8 @@ table.thisform2 td img{
 	padding-right:10px;
 	vertical-align:middle;
 	width:32px;}
-#overDiv {
-	position:absolute;
-	visibility:hidden;
-	z-index:10000;}
-p.joopdfcopy {
-	text-align:center;
-	font-size:10px;
-	color:#666;}
+#overDiv {position:absolute;visibility:hidden;z-index:10000;}
+p.joopdfcopy {text-align:center;font-size:10px;color:#666;}
 /*кнопки тулбара*/
 /*индикатор выполнения*/
 .tb-load {background:url(../../../images/aload.gif);}
@@ -383,10 +356,7 @@ p.joopdfcopy {
 	padding:5px;
 	text-align:center;}
 /*слой для вывода тулбара*/
-#top-toolbar {
-	border-bottom:1px solid #ccc;
-	background-color:#f1f3f5;
-	height:25px;}
+#top-toolbar {border-bottom:1px solid #ccc;background-color:#f1f3f5;height:25px;}
 /*тулбар*/
 #toolbar {
 	text-align:right;
@@ -459,10 +429,7 @@ p.joopdfcopy {
 	position:relative;
 	font-size:10px;
 	text-align:center;}
-.smallgrey {
-	font:12px/1.5 Tahoma, Helvetica, Arial, Sans-Serif;
-	color:#555;
-	text-align:center;}
+.smallgrey {font:12px/1.5 Tahoma, Helvetica, Arial, Sans-Serif;color:#555;text-align:center;}
 #wrapper {
 	border:0px;
 	margin:0px;
@@ -521,10 +488,7 @@ a:link img {border:none;}
 	font-family:'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	font-size:10px;
 	text-decoration:none;}
-.error {
-	color:#c40000;
-	font-size:11px;
-	font-weight:bold;}
+.error {color:#c40000;font-size:11px;font-weight:bold;}
 .content{width:98%;}
 .contentheading, .componentheading, .moduleheading {font-size:14px;font-weight:bold;}
 .menubar {width:100%;}
@@ -539,10 +503,7 @@ table.adminheading {
 	text-align:left;
 	font-size:20px;
 	color:#0b55c4;}
-table.adminheading th {
-	height:32px;
-	padding-left:34px;
-	width:98%;}
+table.adminheading th {height:32px;padding-left:34px;}
 table.adminheading th.filemanager {background:url(../images/th/folder.gif) no-repeat left;}
 table.adminheading th.edit {background:url(../images/th/edit.gif) no-repeat left;}
 /*пользователя*/
@@ -597,10 +558,7 @@ table.adminheading th.quickicons {background:url(../images/th/menus.gif) no-repe
 table.adminheading th.linkeditor {background:url(../images/th/menus.gif) no-repeat left;}
 table.adminheading td {color:#000;}
 /*standard list style table*/
-table.adminlist {
-	background-color:#fff;
-	color:#666;
-	width:100%;}
+table.adminlist {background-color:#fff;color:#666;width:100%;}
 /*заголовки таблиц в админке*/
 table.adminlist th {
 	padding:2px;
@@ -615,18 +573,12 @@ table.adminlist tr.row0 {background-color:#fff;}
 table.adminlist tr.row0 td:hover, table.adminlist tr.row1 td:hover{border-bottom:1px solid #b9b9b9;border-right:1px solid #b9b9b9;}
 table.adminlist tr.row1 {background-color:#fff;}
 table.adminlisttop{vertical-align:top;}
-table.adminlist td {
-	height:25px;
-	border:1px solid #fff;
-	padding:2px;}
+table.adminlist td {height:25px;border:1px solid #fff;padding:2px;}
 table.adminlist tr.row0:hover {background-color:#f1f1f1;}
 table.adminlist tr.row1:hover {background-color:#f1f1f1;}
 table.adminlist td.options {background-color:#fff;}
 table.adminlist td img {vertical-align:middle;}
-select.options, input.options {
-	font-size:8px;
-	font-weight:normal;
-	border:1px solid #3d8fe3;}
+select.options, input.options {font-size:8px;font-weight:normal;border:1px solid #3d8fe3;}
 div.section_cat {background:url(../images/cat.png) no-repeat center left;padding:6px 0 10px 30px;}
 .section_cat a {font-weight:bold;}
 /*standard form style table*/
@@ -722,14 +674,8 @@ td.jtd_nowrap{text-align:right;}
 	padding:0;
 	text-align:left;}
 .img-editor input {margin:0 5px 0  0;}
-a.logoff {
-	margin:0 12px 0 0;
-	background:url(../images/ico/logout.png) left no-repeat;
-	padding:0 0 0 20px;}
-a.preview{
-	margin:0 5px 0 0;
-	background:url(../images/ico/preview.png) left no-repeat;
-	padding:0 0 0 20px;}
+a.logoff {margin:0 12px 0 0;background:url(../images/ico/logout.png) left no-repeat;padding:0 0 0 20px;}
+a.preview{margin:0 5px 0 0;background:url(../images/ico/preview.png) left no-repeat;padding:0 0 0 20px;}
 div.page {min-height:100%;margin:0 0 -34px 0;}
 .quote {
 	margin:4px;
@@ -894,10 +840,7 @@ td.header_info, td.header_info a {
 	height:24px;
 	line-height:24px;
 	white-space:nowrap;}
-td.header_info img {
-	width:22px;
-	height:22px;
-	vertical-align:middle;}
+td.header_info img {width:22px;height:22px;vertical-align:middle;}
 #status-info {display:none;}
 /*Вывод отладочной информации - debug*/
 #jdebug {
@@ -906,7 +849,4 @@ td.header_info img {
 	text-align:left;
 	padding:10px;
 	width:100%;}
-#jdebug strong {
-	background:url(../../../images/publish2.png) no-repeat left top;
-	padding:0 0 0 22px;
-	text-align:left;}
+#jdebug strong {background:url(../../../images/publish2.png) no-repeat left top;padding:0 0 0 22px;text-align:left;}

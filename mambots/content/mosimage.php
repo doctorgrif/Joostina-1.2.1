@@ -9,7 +9,6 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'botMosImage');
-
 function botMosImage($published, &$row, &$params) {
 	global $database, $_MAMBOTS;
 // simple performance check to determine whether bot should process further
@@ -31,7 +30,7 @@ function botMosImage($published, &$row, &$params) {
 	}
 // найти все образцы мамбота и вставить в $matches
 	preg_match_all($regex, $row->text, $matches);
-// Количество мамботов
+// количество мамботов
 	$count = count($matches[0]);
 // мамбот производит обработку, если находит в тексте образцы мамбота
 	if ($count) {
@@ -54,7 +53,7 @@ function botMosImage($published, &$row, &$params) {
 		$GLOBALS['botMosImageCount'] = 0;
 		$GLOBALS['botMosImageParams'] = &$botParams;
 		$GLOBALS['botMosImageArray'] = &$images;
-//$GLOBALS['botMosImageArray']=& $combine;
+//		$GLOBALS['botMosImageArray']=&$combine;
 // выполнение замены
 		$row->text = preg_replace_callback($regex, 'botMosImage_replacer', $row->text);
 // приведение в порядок глобальных значений
@@ -66,7 +65,6 @@ function botMosImage($published, &$row, &$params) {
 	}
 	return true;
 }
-
 function processImages(&$row, &$params, &$introCount) {
 	global $mosConfig_absolute_path, $mosConfig_live_site, $mainframe;
 	$images = array();
@@ -125,9 +123,9 @@ function processImages(&$row, &$params, &$introCount) {
 					$size = ' width="' . $size[0] . '" height="' . $size[1] . '"';
 				}
 			}
-// составление тэга <image>
+// составление тэга img
 	$image = '<img src="' . $mosConfig_live_site . '/images/stories/' . $attrib[0] . '"' . $size;
-// если обнаружен заголовок, то выравнивание не меняется
+// если есть заголовок, то выравнивание не меняем
 			if (!$attrib[4]) {
 				if ($attrib[1] == 'left' or $attrib[1] == 'right') {
 					$image .= ' style="float:' . $attrib[1] . ';"';
@@ -137,7 +135,7 @@ function processImages(&$row, &$params, &$introCount) {
 				}
 			}
 			$image .= ' alt="' . $attrib[2] . '" title="' . $attrib[2] . '" border="' . $border . '" />';
-// создание заголовка если он обнаружен
+// создание заголовка если есть
 			$caption = '';
 			if ($attrib[4]) {
 	$caption = '<div class="caption"';

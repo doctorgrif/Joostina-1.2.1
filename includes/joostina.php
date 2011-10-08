@@ -749,10 +749,10 @@ class mosMainFrame {
 	}
 
 	/*
-	 * Function used to conduct admin session duties
-	 * Added as of 1.0.8
-	 * Deperciated 1.1
-	 */
+	* Function used to conduct admin session duties
+	* Added as of 1.0.8
+	* Deperciated 1.1
+	*/
 
 	function initSessionAdmin($option, $task) {
 		global $_VERSION, $mosConfig_admin_expired, $mosConfig_adm_session_del;
@@ -866,11 +866,11 @@ class mosMainFrame {
 	}
 
 	/*
-	 * Function used to set Session Garbage Cleaning
-	 * garbage cleaning set at configured session time + 600 seconds
-	 * Added as of 1.0.8
-	 * Deperciated 1.1
-	 */
+	* Function used to set Session Garbage Cleaning
+	* garbage cleaning set at configured session time + 600 seconds
+	* Added as of 1.0.8
+	* Deperciated 1.1
+	*/
 
 	function setSessionGarbageClean() {
 		/** ensure that funciton is only called once */
@@ -882,10 +882,10 @@ class mosMainFrame {
 	}
 
 	/*
-	 * Static Function used to generate the Session Cookie Name
-	 * Added as of 1.0.8
-	 * Deperciated 1.1
-	 */
+	* Static Function used to generate the Session Cookie Name
+	* Added as of 1.0.8
+	* Deperciated 1.1
+	*/
 
 	function sessionCookieName() {
 		global $mainframe, $mosConfig_live_site;
@@ -900,10 +900,10 @@ class mosMainFrame {
 	}
 
 	/*
-	 * Static Function used to generate the Session Cookie Value
-	 * Added as of 1.0.8
-	 * Deperciated 1.1
-	 */
+	* Static Function used to generate the Session Cookie Value
+	* Added as of 1.0.8
+	* Deperciated 1.1
+	*/
 
 	function sessionCookieValue($id = null) {
 		global $mainframe;
@@ -931,10 +931,10 @@ class mosMainFrame {
 	}
 
 	/*
-	 * Static Function used to generate the Rememeber Me Cookie Name for Username information
-	 * Added as of 1.0.8
-	 * Depreciated 1.1
-	 */
+	* Static Function used to generate the Rememeber Me Cookie Name for Username information
+	* Added as of 1.0.8
+	* Depreciated 1.1
+	*/
 
 	function remCookieName_User() {
 		$value = mosHash('remembermecookieusername' . mosMainFrame::sessionCookieName());
@@ -942,10 +942,10 @@ class mosMainFrame {
 	}
 
 	/*
-	 * Static Function used to generate the Rememeber Me Cookie Name for Password information
-	 * Added as of 1.0.8
-	 * Depreciated 1.1
-	 */
+	* Static Function used to generate the Rememeber Me Cookie Name for Password information
+	* Added as of 1.0.8
+	* Depreciated 1.1
+	*/
 
 	function remCookieName_Pass() {
 		$value = mosHash('remembermecookiepassword' . mosMainFrame::sessionCookieName());
@@ -953,10 +953,10 @@ class mosMainFrame {
 	}
 
 	/*
-	 * Static Function used to generate the Remember Me Cookie Value for Username information
-	 * Added as of 1.0.8
-	 * Depreciated 1.1
-	 */
+	* Static Function used to generate the Remember Me Cookie Value for Username information
+	* Added as of 1.0.8
+	* Depreciated 1.1
+	*/
 
 	function remCookieValue_User($username) {
 		$value = md5($username . mosHash(@$_SERVER['HTTP_USER_AGENT']));
@@ -964,10 +964,10 @@ class mosMainFrame {
 	}
 
 	/*
-	 * Static Function used to generate the Remember Me Cookie Value for Password information
-	 * Added as of 1.0.8
-	 * Depreciated 1.1
-	 */
+	* Static Function used to generate the Remember Me Cookie Value for Password information
+	* Added as of 1.0.8
+	* Depreciated 1.1
+	*/
 
 	function remCookieValue_Pass($passwd) {
 		$value = md5($passwd . mosHash(@$_SERVER['HTTP_USER_AGENT']));
@@ -975,11 +975,11 @@ class mosMainFrame {
 	}
 
 	/**
-	 * Login validation function
-	 * Username and encoded password is compare to db entries in the jos_users
-	 * table. A successful validation updates the current session record with
-	 * the users details.
-	 */
+	* Login validation function
+	* Username and encoded password is compare to db entries in the jos_users
+	* table. A successful validation updates the current session record with
+	* the users details.
+	*/
 	function login($username = null, $passwd = null, $remember = 0, $userid = null) {
 		global $acl, $_VERSION, $mosConfig_session_front;
 		if ($mosConfig_session_front)
@@ -1107,9 +1107,9 @@ class mosMainFrame {
 	}
 
 	/**
-	 * User logout
-	 * Reverts the current session record back to 'anonymous' parameters
-	 */
+	* User logout
+	* Reverts the current session record back to 'anonymous' parameters
+	*/
 	function logout() {
 		mosCache::cleanCache();
 		$session = &$this->_session;
@@ -1160,9 +1160,9 @@ class mosMainFrame {
 	}
 
 	/**
-	 * @param string The name of the variable (from configuration.php)
-	 * @return mixed The value of the configuration variable or null if not found
-	 */
+	* @param string The name of the variable (from configuration.php)
+	* @return mixed The value of the configuration variable or null if not found
+	*/
 	function getCfg($varname) {
 		$varname = 'mosConfig_' . $varname;
 		if (isset($GLOBALS[$varname])) {
@@ -1172,10 +1172,13 @@ class mosMainFrame {
 		}
 	}
 
-	/** boston, функция определения шаблона, если в панели управления указано что использовать один шаблон - сразу возвращаем его название, функцию не проводим до конца */
+	/** boston, функция определения шаблона
+	* если в панели управления указано, что использовать один шаблон - возвращаем его название,
+	* функцию не проводим до конца
+	*/
 	function _setTemplate($isAdmin = false) {
 		global $Itemid, $mosConfig_one_template;
-		if (!$isAdmin and $mosConfig_one_template != '...') { // boston, если у нас в настройках указан шаблон и определение идёт не для панели управления - возвращаем название шаблона из глобальной конфигурации
+		if (!$isAdmin and $mosConfig_one_template != '...') { // boston, если в настройках указан шаблон и определение идёт не для панели управления - возвращаем название шаблона из глобальной конфигурации
 			$this->_template = $mosConfig_one_template;
 			return;
 		}
@@ -1229,10 +1232,10 @@ class mosMainFrame {
 	}
 
 	/**
-	 * Determines the paths for including engine and menu files
-	 * @param string The current option used in the url
-	 * @param string The base path from which to load the configuration file
-	 */
+	* Determines the paths for including engine and menu files
+	* @param string The current option used in the url
+	* @param string The base path from which to load the configuration file
+	*/
 	function _setAdminPaths($option, $basePath = '.') {
 		$option = strtolower($option);
 		$this->_path = new stdClass();
@@ -1369,11 +1372,11 @@ class mosMainFrame {
 	}
 
 	/**
-	 * Detects a 'visit'
-	 * This function updates the agent and domain table hits for a particular
-	 * visitor.  The user agent is recorded/incremented if this is the first visit.
-	 * A cookie is set to mark the first visit.
-	 */
+	* Detects a 'visit'
+	* This function updates the agent and domain table hits for a particular visitor.
+	* The user agent is recorded/incremented if this is the first visit.
+	* A cookie is set to mark the first visit.
+	*/
 	function detect() {
 		global $mosConfig_enable_stats;
 		if ($mosConfig_enable_stats == 1) {
@@ -2062,7 +2065,7 @@ class mosHTML {
 		if ($params->get('popup') && !$hide_js) {
 ?>
 			<script type="text/javascript">
-				document.write('<div align="center" style="margin-top:30px;margin-bottom:30px;">');
+				document.write('<div class="print_but">');
 				document.write('<a class="print_button" href="#" onclick="javascript:window.close();"><?php echo _PROMPT_CLOSE; ?></a>');
 				document.write('</div>');
 			</script>
@@ -2075,8 +2078,8 @@ class mosHTML {
 // Back Button
 		if ($params->get('back_button') && !$params->get('popup') && !$hide_js) {
 ?>
-			<div class="back_button">
-				<a class="back_button" href="javascript:history.go(-1)">
+			<div class="back_but">
+				<a href="javascript:history.go(-1)">
 					<input type="button" name="back_button" value="<?php echo _BACK; ?>" class="button" />
 				</a>
 			</div>
@@ -2194,7 +2197,7 @@ class mosHTML {
 // XHTML compliance `No Javascript` text handling
 		$replacement .= "<script language='javascript' type='text/javascript'>";
 		$replacement .= "\n <!--";
-		$replacement .= "\n document.write('<span style=\'display:none;\'>');";
+		$replacement .= "\n document.write('<span class=\'nodisplay\'>');";
 		$replacement .= "\n //-->";
 		$replacement .= "\n </script>";
 		$replacement .= _CLOAKING;
@@ -3462,7 +3465,7 @@ function mosToolTip($tooltip, $title = '', $width = '', $image = 'tooltip.png', 
 		$image = $mosConfig_live_site . '/includes/js/ThemeOffice/' . $image;
 		$text = '<img src="' . $image . '" alt="tooltip"/>';
 	}
-	$style = 'style="text-decoration:none;color:#333;"';
+	$style = 'class="tooltip"';
 	if ($href) {
 		$style = '';
 	} else {
@@ -5071,7 +5074,7 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 				$color_access = 'class="red"';
 				$task_access = 'accessspecial';
 			} else {
-				$color_access = 'style="color:black;"';
+				$color_access = 'class="black"';
 				$task_access = 'accesspublic';
 			}
 			if (!$ajax)
@@ -5374,9 +5377,9 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 	}
 
 	/*
-	 * Function to handle an array of integers
-	 * Added 1.0.11
-	 */
+	* Function to handle an array of integers
+	* Added 1.0.11
+	*/
 
 	function josGetArrayInts($name, $type = null) {
 		if ($type == null) {
@@ -5394,12 +5397,12 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 	class patHTML {
 
 		/**
-		 * Converts a named array to an array or named rows suitable to option lists
-		 * @param array The source array[key] = value
-		 * @param mixed A value or array of selected values
-		 * @param string The name for the value field
-		 * @param string The name for selected attribute (use 'checked' for radio of box lists)
-		 */
+		* Converts a named array to an array or named rows suitable to option lists
+		* @param array The source array[key] = value
+		* @param mixed A value or array of selected values
+		* @param string The name for the value field
+		* @param string The name for selected attribute (use 'checked' for radio of box lists)
+		*/
 		function selectArray(&$source, $selected = null, $valueName = 'value', $selectedAttr =
 		'selected') {
 			if (!is_array($selected)) {
@@ -5415,34 +5418,34 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 		}
 
 		/**
-		 * Converts a named array to an array or named rows suitable to checkbox or radio lists
-		 * @param array The source array[key] = value
-		 * @param mixed A value or array of selected values
-		 * @param string The name for the value field
-		 */
+		* Converts a named array to an array or named rows suitable to checkbox or radio lists
+		* @param array The source array[key] = value
+		* @param mixed A value or array of selected values
+		* @param string The name for the value field
+		*/
 		function checkArray(&$source, $selected = null, $valueName = 'value') {
 			patHTML::selectArray($source, $selected, $valueName, 'checked');
 		}
 
 		/**
-		 * @param mixed The value for the option
-		 * @param string The text for the option
-		 * @param string The name of the value parameter (default is value)
-		 * @param string The name of the text parameter (default is text)
-		 */
+		* @param mixed The value for the option
+		* @param string The text for the option
+		* @param string The name of the value parameter (default is value)
+		* @param string The name of the text parameter (default is text)
+		*/
 		function makeOption($value, $text, $valueName = 'value', $textName = 'text') {
 			return array($valueName => $value, $textName => $text);
 		}
 
 		/**
-		 * Writes a radio pair
-		 * @param object Template object
-		 * @param string The template name
-		 * @param string The field name
-		 * @param int The value of the field
-		 * @param array Array of options
-		 * @param string Optional template variable name
-		 */
+		* Writes a radio pair
+		* @param object Template object
+		* @param string The template name
+		* @param string The field name
+		* @param int The value of the field
+		* @param array Array of options
+		* @param string Optional template variable name
+		*/
 		function radioSet(&$tmpl, $template, $name, $value, $a, $varname = null) {
 			patHTML::checkArray($a, $value);
 			$tmpl->addVar('radio-set', 'name', $name);
@@ -5451,13 +5454,13 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 		}
 
 		/**
-		 * Writes a radio pair
-		 * @param object Template object
-		 * @param string The template name
-		 * @param string The field name
-		 * @param int The value of the field
-		 * @param string Optional template variable name
-		 */
+		* Writes a radio pair
+		* @param object Template object
+		* @param string The template name
+		* @param string The field name
+		* @param int The value of the field
+		* @param string Optional template variable name
+		*/
 		function yesNoRadio(&$tmpl, $template, $name, $value, $varname = null) {
 			$a = array(patHTML::makeOption(0, 'Нет'), patHTML::makeOption(1, 'Да'));
 			patHTML::radioSet($tmpl, $template, $name, $value, $a, $varname);
@@ -5466,18 +5469,18 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 	}
 
 	/**
-	 * Provides a secure hash based on a seed
-	 * @param string Seed string
-	 * @return string
-	 */
+	* Provides a secure hash based on a seed
+	* @param string Seed string
+	* @return string
+	*/
 	function mosHash($seed) {
 		return md5($GLOBALS['mosConfig_secret'] . md5($seed));
 	}
 
 	/**
-	 * Format a backtrace error
-	 * @since 1.0.5
-	 */
+	* Format a backtrace error
+	* @since 1.0.5
+	*/
 	function mosBackTrace() {
 		if (function_exists('debug_backtrace')) {
 			echo '<div align="left">';
@@ -5558,10 +5561,10 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 	}
 
 	/**
-	 * Method to determine a hash for anti-spoofing variable names
-	 * @returnstringHashed var name
-	 * @static
-	 */
+	* Method to determine a hash for anti-spoofing variable names
+	* @returnstringHashed var name
+	* @static
+	*/
 	function josSpoofValue($alt=NULL) {
 		global $mainframe, $my;
 		if ($alt) {
@@ -5580,11 +5583,11 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 	}
 
 	/**
-	 * A simple helper function to salt and hash a clear-text password.
-	 * @since1.0.13
-	 * @paramstring$passwordA plain-text password
-	 * @returnstringAn md5 hashed password with salt
-	 */
+	* A simple helper function to salt and hash a clear-text password.
+	* @since1.0.13
+	* @paramstring$passwordA plain-text password
+	* @returnstringAn md5 hashed password with salt
+	*/
 	function josHashPassword($password) {
 // Salt and hash the password
 		$salt = mosMakePassword(16);
@@ -5597,11 +5600,11 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 	class joostina_api {
 
 		/**
-		 * Конвертирование текста из юникода в кириллицу
-		 * Чаще всего используется для Аякс функций.
-		 * В качестве параметра принимает строковое значение в кодировке UTF-8, возвращает строковое значение в кодировке windows-1251
-		 * $type - параметр конвертации, по умолчанию конвертируется из utf-8.
-		 * */
+		* Конвертирование текста из юникода в кириллицу
+		* Чаще всего используется для Аякс функций.
+		* В качестве параметра принимает строковое значение в кодировке UTF-8, возвращает строковое значение в кодировке windows-1251
+		* $type - параметр конвертации, по умолчанию конвертируется из utf-8.
+		*/
 		function convert($text, $type = null) {
 			global $mosConfig_absolute_path;
 			if (is_string($text)) {
@@ -5626,9 +5629,9 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 		}
 
 		/**
-		 * Оптимизация таблиц базы данных
-		 * Основано на мамботе OptimizeTables - smart (C) 2006, Joomlaportal.ru. All rights reserved
-		 */
+		* Оптимизация таблиц базы данных
+		* Основано на мамботе OptimizeTables - smart (C) 2006, Joomlaportal.ru. All rights reserved
+		*/
 		function optimizetables() {
 			global $database, $mosConfig_db, $mosConfig_cachepath;
 			$flag = $mosConfig_cachepath . '/optimizetables.flag';
@@ -5650,9 +5653,9 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 		}
 
 		/**
-		 * Редирект с не WWW адреса
-		 * Основано на мамботе seo_bot_redir - Alecfyz (C) Gorsk.net Studio Dec 2006
-		 */
+		* Редирект с не WWW адреса
+		* Основано на мамботе seo_bot_redir - Alecfyz (C) Gorsk.net Studio Dec 2006
+		*/
 		function check_host() {
 			global $mosConfig_live_site, $mosConfig_www_redir;
 			if (!$mosConfig_www_redir)

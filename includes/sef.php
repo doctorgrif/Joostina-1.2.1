@@ -11,7 +11,7 @@ defined('_VALID_MOS') or die();
 global $mosConfig_sef, $mosConfig_absolute_path, $mosConfig_live_site;
 if ($mosConfig_sef) {
 	/* Обработка GET-параметра - start */
-//$url_array = explode('/',$_SERVER['REQUEST_URI']);
+// $url_array = explode('/',$_SERVER['REQUEST_URI']);
 	$url4parse = $_SERVER['REQUEST_URI'];
 	if (strpos($url4parse, '?'))
 		$url4parse = substr($url4parse, 0, strpos($url4parse, '?'));
@@ -65,11 +65,11 @@ if ($mosConfig_sef) {
 			$_REQUEST['limit'] = $limit;
 			$_GET['limitstart'] = $limitstart;
 			$_REQUEST['limitstart'] = $limitstart;
-			$QUERY_STRING = "option=com_content&amp;task=$task&amp;sectionid=$sectionid&amp;id=$id&Itemid=$Itemid&amp;order=$order&amp;filter=$filter&amp;limit=$limit&amp;limitstart=$limitstart";
+			$QUERY_STRING = "option=com_content&amp;task=$task&amp;sectionid=$sectionid&amp;id=$id&amp;Itemid=$Itemid&amp;order=$order&amp;filter=$filter&amp;limit=$limit&amp;limitstart=$limitstart";
 		} else
 		if (isset($url_array[$pos + 7]) && $url_array[$pos + 7] != '' && $url_array[$pos +
 				5] > 1000 && (in_array('archivecategory', $url_array) || in_array('archivesection', $url_array))) {
-// $option/$task/$id/$limit/$limitstart/year/month/module
+// $option/$task/$id/$limit/$limitstart/$year/$month/$module
 			$task = $url_array[$pos + 1];
 			$id = $url_array[$pos + 2];
 			$limit = $url_array[$pos + 3];
@@ -96,7 +96,7 @@ if ($mosConfig_sef) {
 		} else
 		if (isset($url_array[$pos + 7]) && $url_array[$pos + 7] != '' && $url_array[$pos +
 				6] > 1000 && (in_array('archivecategory', $url_array) || in_array('archivesection', $url_array))) {
-// $option/$task/$id/$Itemid/$limit/$limitstart/year/month
+// $option/$task/$id/$Itemid/$limit/$limitstart/$year/$month
 			$task = $url_array[$pos + 1];
 			$id = $url_array[$pos + 2];
 			$Itemid = $url_array[$pos + 3];
@@ -488,5 +488,4 @@ function sefRelToAbs($string) {
 		return $string;
 	}
 }
-
 ?>

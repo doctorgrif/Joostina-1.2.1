@@ -24,7 +24,7 @@ class HTML_content {
 <div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>">
 	<?php echo $title; ?>
 </div>
-			<?php } ?>
+	<?php } ?>
 <div align="center" class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
 	<div>
 		<div>
@@ -64,11 +64,13 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 				<table>
 					<tr>
 						<?php if ($params->get('filter')) { ?>
-						<td align="right" width="80%"><?php echo _FILTER; ?><br />
-							<input type="text" name="filter" size="50" value="<?php echo $lists['filter']; ?>" class="inputbox" onchange="document.adminForm.submit();" />
+						<td align="right" width="80%">
+							<label for="filter"><?php echo _FILTER; ?></label>
+							<input type="text" name="filter" size="50" value="<?php echo $lists['filter']; ?>" id="filter" class="inputbox" onchange="document.adminForm.submit();" />
 						</td>
 						<?php } if ($params->get('order_select')) { ?>
-						<td align="right" width="20%"><?php echo _ORDER_DROPDOWN; ?><br />
+						<td align="right" width="20%">
+							<label for=""><?php echo _ORDER_DROPDOWN; ?></label>
 							<?php echo $lists['order']; ?>
 						</td>
 						<?php } if ($params->get('display')) { ?>
@@ -184,9 +186,10 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 			<?php
 				} if (($access->canEdit || $access->canEditOwn) && $categories_exist) {
 				$link = sefRelToAbs('index.php?option=com_content&amp;task=new&amp;sectionid=' . $id . '&amp;Itemid=' . $Itemid); ?>
-			<a href="<?php echo $link; ?>" title="<?php echo _CMN_NEW; ?>">
-				<img src="<?php echo $mosConfig_live_site; ?>/images/M_images/new.png" width="13" height="14" align="middle" alt="<?php echo _CMN_NEW; ?>" />&nbsp;<?php echo _CMN_NEW; ?>…
-			</a>
+				<img src="<?php echo $mosConfig_live_site; ?>/images/M_images/new.png" alt="<?php echo _CMN_NEW; ?>" />
+				<a href="<?php echo $link; ?>" title="<?php echo _CMN_NEW; ?>">
+				<?php echo _CMN_NEW; ?>…
+				</a>
 			<?php } ?>
 		</div>
 		<div>
@@ -469,7 +472,7 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 						HTML_content::URL($row, $params);
 					?>
 				</div>
-				<div class="clearfix"></div>
+				<div class="cf"></div>
 				<?php
 					HTML_content::ReadMore($row, $params);
 				?>
@@ -711,8 +714,8 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		if (($params->get('author')) && ($row->author != '')) {
 		?>
 <div class="post_meta">
-	<a href="<?php echo $mosConfig_absolute_path;?>/images/avatars/<?php echo $row->created_by;?>.jpg" class="lightbox_trigger" title="<?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?>">
-		<?php echo '<img src="' . $mosConfig_absolute_path . '/images/avatars/micro/' . $row->created_by . '.jpg" alt="' . ($row->created_by_alias ? $row->created_by_alias : $row->author) . '" />'; ?>
+	<a href="/images/avatars/<?php echo $row->created_by;?>.jpg" class="lightbox_trigger" title="<?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?>">
+		<?php echo '<img src="/images/avatars/micro/' . $row->created_by . '.jpg" alt="' . ($row->created_by_alias ? $row->created_by_alias : $row->author) . '" />'; ?>
 	</a>
 	<p><?php echo _AUTHOR_BY; ?>: <?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?></p>
 	<?php }
@@ -904,11 +907,11 @@ onunload = WarnUser;
 			mosToolBar::cancel();
 			?>
 			<?php if ($access->canPublish || $auto_publish == 1 || $my->usertype == "Super Administrator") { ?>
-			<td>&nbsp;&nbsp;<strong><?php echo _CMN_PUBLISHED; ?>:</strong>&nbsp;&nbsp;</td>
+			<td>&nbsp;&nbsp;<span class="strong"><?php echo _CMN_PUBLISHED; ?>:</span>&nbsp;&nbsp;</td>
 			<td><?php echo mosHTML::yesnoRadioList('state', '', $row->state); ?></td>
 			<?php } ?>
 			<?php if (($row->sectionid || !$content_type) && ($allow_frontpage == 1 || $my->usertype == "Super Administrator")) { ?>
-			<td align="right">&nbsp;&nbsp;<strong><?php echo $front_label; ?>:</strong>&nbsp;&nbsp;</td>
+			<td align="right">&nbsp;&nbsp;<span class="strong"><?php echo $front_label; ?>:</span>&nbsp;&nbsp;</td>
 			<td align="left"><?php echo mosHTML::yesnoRadioList('frontpage', '', $row->frontpage ? 1 : 0); ?></td>
 			<?php } ?>
 		</tr>
@@ -1189,7 +1192,7 @@ onunload = WarnUser;
 <?php $tabs->endTab();
 	} $tabs->endPane();
 	} ?>
-<div style="clear:both;"></div>
+<div class="cf"></div>
 <input type="hidden" name="images" value="" />
 <input type="hidden" name="goodexit" value="0" />
 <input type="hidden" name="option" value="com_content" />

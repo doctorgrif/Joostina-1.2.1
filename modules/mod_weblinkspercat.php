@@ -10,27 +10,27 @@
 //session_start();
 defined('_VALID_MOS') or die();
 global $mainframe, $params, $database, $Itemid, $target, $new, $moduleclass_sfx;
-$wlcategory = $params->get('wlcategory', '0');
-$wlshownew = $params->get('wlshownew', '0');
-$wldaysnew = $params->get('wldaysnew', '3');
-$wlorderby = $params->get('wlorderby', 'date DESC');
-$wlshowhits = $params->get('wlshowhits', '0');
-$wlnumberofrows = $params->get('wlnumberofrows', '10');
-$wlpopuplinks = $params->get('wlpopuplinks', '1');
-$wllengthoftitle = $params->get('wllengthoftitle', '23');
-$wldotaddlenght = $params->get('wldotaddlenght', '20');
-$wlreadmore = $params->get('wlreadmore', '0');
-$moduleclass_sfx = $params->get('moduleclass_sfx', '');
-$and = "";
+	$wlcategory = $params->get('wlcategory', '0');
+	$wlshownew = $params->get('wlshownew', '0');
+	$wldaysnew = $params->get('wldaysnew', '3');
+	$wlorderby = $params->get('wlorderby', 'date DESC');
+	$wlshowhits = $params->get('wlshowhits', '0');
+	$wlnumberofrows = $params->get('wlnumberofrows', '10');
+	$wlpopuplinks = $params->get('wlpopuplinks', '1');
+	$wllengthoftitle = $params->get('wllengthoftitle', '23');
+	$wldotaddlenght = $params->get('wldotaddlenght', '20');
+	$wlreadmore = $params->get('wlreadmore', '0');
+	$moduleclass_sfx = $params->get('moduleclass_sfx', '');
+	$and = "";
 if ($wlcategory > 0) {
 	$and = 'AND a.catid = ' . $wlcategory;
 }
-$query = "SELECT a.id, a.catid, a.title, a.description, DATE_FORMAT(a.date,'%Y-%m-%d') as cdate, hits
-FROM #__weblinks as a
-WHERE a.published ='1' $and 
-ORDER BY $wlorderby LIMIT $wlnumberofrows";
-$database->setQuery($query);
-$rows = $database->loadObjectList();
+	$query = "SELECT a.id, a.catid, a.title, a.description, DATE_FORMAT(a.date,'%Y-%m-%d') as cdate, hits
+	FROM #__weblinks as a
+	WHERE a.published ='1' $and 
+	ORDER BY $wlorderby LIMIT $wlnumberofrows";
+	$database->setQuery($query);
+	$rows = $database->loadObjectList();
 if ($wlpopuplinks == 1) {
 	$target = 'target="_blank"';
 } else {

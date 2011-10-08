@@ -15,21 +15,21 @@ $_MAMBOTS->registerFunction('onEditorArea', 'botNoEditorEditorArea');
 function botNoEditorInit() {
 	return <<< EOD
 <script type="text/javascript">
-function insertAtCursor(myField, myValue) {
-if (document.selection) {
-// IE
-myField.focus();
-sel = document.selection.createRange();
-sel.text = myValue;
-} else if (myField.selectionStart || myField.selectionStart == '0') {
-// MOZILLA/NETSCAPE
-var startPos = myField.selectionStart;
-var endPos = myField.selectionEnd;
-myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length);
-} else {
-myField.value += myValue;
-}
-}
+	function insertAtCursor(myField, myValue) {
+		if (document.selection) {
+			// IE
+			myField.focus();
+			sel = document.selection.createRange();
+			sel.text = myValue;
+		} else if (myField.selectionStart || myField.selectionStart == '0') {
+			// MOZILLA/NETSCAPE
+			var startPos = myField.selectionStart;
+			var endPos = myField.selectionEnd;
+			myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length);
+		} else {
+			myField.value += myValue;
+		}
+	}
 </script>
 EOD;
 }

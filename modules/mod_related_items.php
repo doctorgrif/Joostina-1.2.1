@@ -61,7 +61,7 @@ if ($option=='com_content' && $task=='view' && $id && $Itemid) {
 		}
 			$href = sefRelToAbs('index.php?option=com_content&amp;task=view&amp;id=' . $item->id . '&amp;Itemid=' . $Itemid);
 	?>
-	<li class="related_items<?php echo $moduleclass_sfx; ?>">
+	<li>
 		<a class="related_items" href="<?php echo $href; ?>" title="<?php echo $item->title; ?>">
 			<?php echo $item->title; ?>
 		</a>

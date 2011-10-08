@@ -148,7 +148,7 @@ function changeDirPermsMode(mode)
 			<p class="jst"><a href="http://www.joostina.ru">Joostina</a> - свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
 			</div>
 			<div id="navigator">
-				<big>Установка Joostina CMS</big>
+				<span style="font-size:larger;">Установка Joostina CMS</span>
 				<ul>
 					<li class="step"><strong>1</strong><span>Проверка системы</span></li>
 					<li class="arrow">&nbsp;</li>

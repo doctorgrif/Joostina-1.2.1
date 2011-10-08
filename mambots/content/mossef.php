@@ -9,7 +9,6 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'botMosSef');
-
 /** Конвертирование внутренних относительных ссылок в URL-адреса SEF. */
 function botMosSef($published, &$row, &$params, $page = 0) {
 	global $mosConfig_sef;
@@ -31,12 +30,11 @@ function botMosSef($published, &$row, &$params, $page = 0) {
 	$row->text = preg_replace_callback($regex, 'botMosSef_replacer', $row->text);
 	return true;
 }
-
 /**
- * Замена совпадающих тэгов
- * @param array - Массив соответствий (см. - preg_match_all)
- * @return string
- */
+* Замена совпадающих тэгов
+* @param array - Массив соответствий (см. - preg_match_all)
+* @return string
+*/
 function botMosSef_replacer(&$matches) {
 // original text that might be replaced
 	$original = 'href="' . $matches[1] . '"';
@@ -76,5 +74,4 @@ function botMosSef_replacer(&$matches) {
 		return $original;
 	}
 }
-
 ?>

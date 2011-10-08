@@ -28,12 +28,10 @@ defined('_VALID_MOS') or die();
 * @license http://opensource.org/licenses/lgpl-license.php GNU Lesser General Public License
 * @filesource
 */
-
 /**
 * PHP Sniffer Class
-* Used to determine the browser and other associated properies
-* using nothing other than the HTTP_USER_AGENT value supplied by a
-* user's web browser.
+* Used to determine the browser and other associated properies using nothing other than the
+* HTTP_USER_AGENT value supplied by a user's web browser.
 * @package phpSniff
 * @access public
 * @author Roger Raymond <epsilon7@users.sourceforge.net>
@@ -46,13 +44,13 @@ class phpSniff {
 	*/
 	var $_version = '2.1.4';
 	/**
-	 * $_temp_file_path
-	 * default : /tmp/
-	 * desc: directory writable by the server to store cookie check files.
-	 * : trailing slash is needed. only used if you use the check cookie routine
-	 * @access public
-	 * @var string
-	 */
+	* $_temp_file_path
+	* default : /tmp/
+	* desc: directory writable by the server to store cookie check files.
+	* : trailing slash is needed. only used if you use the check cookie routine
+	* @access public
+	* @var string
+	*/
 	var $_temp_file_path = '/tmp/'; // with trailing slash
 	/**
 	 * $_check_cookies
@@ -134,16 +132,27 @@ class phpSniff {
 		 * the following are true by default
 		 * (see phpSniff.core.php $_feature_set array)
 		 * browsers listed here will be set to false
-		 * */'html' => '', 'images' => 'LI,LX', 'frames' => 'LX', 'tables' => '', 'java' =>
-		'OP3,LI,LX,NS1,MO,IE1,IE2', 'plugins' => 'IE1,IE2,LI,LX', /**
+		 *
+		 */
+		'html' => '',
+		'images' => 'LI,LX',
+		'frames' => 'LX',
+		'tables' => '',
+		'java' => 'OP3,LI,LX,NS1,MO,IE1,IE2',
+		'plugins' => 'IE1,IE2,LI,LX',
+		/**
 		 * the following are false by default
 		 * (see phpSniff.core.php $_feature_set array)
 		 * browsers listed here will be set to true
-		 * */'css2' => 'NS5+,IE5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ3+,OP7+,KM,EP', 'css1' =>
-		'NS4+,IE4+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP', 'iframes' =>
-		'LI,IE3+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP', 'xml' =>
-		'IE5+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP', 'dom' =>
-		'IE5+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP', 'hdml' => '', 'wml' => '');
+		 *
+		 */
+		'css2' => 'NS5+,IE5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ3+,OP7+,KM,EP',
+		'css1' => 'NS4+,IE4+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
+		'iframes' => 'LI,IE3+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
+		'xml' => 'IE5+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
+		'dom' => 'IE5+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
+		'hdml' => '',
+		'wml' => '');
 	/**
 	 * $_browser_quirks
 	 * desc: 2D Array of browser quirks present in which browser
@@ -156,20 +165,35 @@ class phpSniff {
 	 * @access public
 	 * @var string
 	 */
-	var $_browser_quirks = array('must_cache_forms' => 'NS,MZ,FB,PX,FX',
-		'avoid_popup_windows' => 'IE3,LI,LX', 'cache_ssl_downloads' => 'IE',
-		'break_disposition_header' => 'IE5.5', 'empty_file_input_value' => 'KQ',
+	var $_browser_quirks = array(
+		'must_cache_forms' => 'NS,MZ,FB,PX,FX',
+		'avoid_popup_windows' => 'IE3,LI,LX',
+		'cache_ssl_downloads' => 'IE',
+		'break_disposition_header' => 'IE5.5',
+		'empty_file_input_value' => 'KQ',
 		'scrollbar_in_way' => 'IE6');
 	/**
 	 * @access private
 	 * @var array
 	 */
-	var $_browser_info = array('ua' => '', 'browser' => 'Unknown', 'version' => 0,
-		'maj_ver' => 0, 'min_ver' => 0, 'letter_ver' => '', 'javascript' => '0.0',
-		'platform' => 'Unknown', 'os' => 'Unknown', 'ip' => 'Unknown', 'cookies' =>
-		'Unknown', // remains for backwards compatability
-		'ss_cookies' => 'Unknown', 'st_cookies' => 'Unknown', 'language' => '',
-		'long_name' => '', 'gecko' => '', 'gecko_ver' => '');
+	var $_browser_info = array(
+		'ua' => '',
+		'browser' => 'Unknown',
+		'version' => 0,
+		'maj_ver' => 0,
+		'min_ver' => 0,
+		'letter_ver' => '',
+		'javascript' => '0.0',
+		'platform' => 'Unknown',
+		'os' => 'Unknown',
+		'ip' => 'Unknown',
+		'cookies' => 'Unknown', // remains for backwards compatability
+		'ss_cookies' => 'Unknown',
+		'st_cookies' => 'Unknown',
+		'language' => '',
+		'long_name' => '',
+		'gecko' => '',
+		'gecko_ver' => '');
 	/**
 	 * @access private
 	 * @var array

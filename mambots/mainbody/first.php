@@ -10,7 +10,6 @@
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onMainbody', 'body_clear');
 $_MAMBOTS->registerFunction('onTemplate', 'template_clear');
-
 /* функция производит очистку содержимого главного стека компонента от спецсимволов */
 function body_clear() {
 	global $_MOS_OPTION;
@@ -21,7 +20,6 @@ function body_clear() {
 	$_MOS_OPTION['buffer'] = $text;
 	return;
 }
-
 /* очистка всего тела страницы от спецтегов */
 function template_clear() {
 	global $_MOS_OPTION;

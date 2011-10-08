@@ -53,17 +53,17 @@ function showBanners(&$params) {
 	AND #__banners_clients.published = 1) ORDER BY last_show ASC, msec ASC";
 	*/
 	$query = "SELECT b.* FROM #__banners AS b
-INNER JOIN #__banners_categories AS cat ON b.tid = cat.id
-INNER JOIN #__banners_clients AS cl ON b.cid = cl.cid
-WHERE cat.published =1 AND cl.published =1 AND b.access <= '$my->gid' AND b.state = '1'
-AND $where (
-('$date' <= b.publish_down_date OR b.publish_down_date = '0000-00-00')
-AND '$date' >= b.publish_up_date
-AND ((b.reccurtype =0) OR (b.reccurtype =1 AND b.reccurweekdays LIKE '%$weekday%'))
-AND '$time' >= b.publish_up_time
-AND ('$time' <= b.publish_down_time OR b.publish_down_time = '00:00:00')
-)
-ORDER BY b.last_show ASC , b.msec ASC";
+	INNER JOIN #__banners_categories AS cat ON b.tid = cat.id
+	INNER JOIN #__banners_clients AS cl ON b.cid = cl.cid
+	WHERE cat.published =1 AND cl.published =1 AND b.access <= '$my->gid' AND b.state = '1'
+	AND $where (
+	('$date' <= b.publish_down_date OR b.publish_down_date = '0000-00-00')
+	AND '$date' >= b.publish_up_date
+	AND ((b.reccurtype =0) OR (b.reccurtype =1 AND b.reccurweekdays LIKE '%$weekday%'))
+	AND '$time' >= b.publish_up_time
+	AND ('$time' <= b.publish_down_time OR b.publish_down_time = '00:00:00')
+	)
+	ORDER BY b.last_show ASC , b.msec ASC";
 	$database->setQuery($query);
 	$rows = $database->loadObjectList();
 	$numrows = count($rows);
@@ -151,7 +151,6 @@ $result = '<a href="index.php?option=com_banners&amp;task=clk&amp;id=' . $banner
 		<param name="wmode" value="transparent" />
 		<embed src="' . $image_url . '"  width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '" align="middle" quality="high" bgcolor="#fff" wmode="transparent" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" scale="noborder" /> 
 		</object>';
-		//$result = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=4,0,2,0" border="0" width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '" vspace="0"><param name="SRC" value="' . $image_url . '"><embed src="' . $image_url . '" loop="false" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="' . $swfinfo[0] . '" height="' . $swfinfo[1] . '"></object>';
 	}
 	return $result;
 }

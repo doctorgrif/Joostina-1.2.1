@@ -9,7 +9,6 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'jtContent');
-
 function jtContent($published, &$row, &$params, $page=0) {
 	global $mainframe, $Itemid, $database, $_MAMBOTS;
 	if (@$row->content) {
@@ -28,9 +27,9 @@ function jtContent($published, &$row, &$params, $page=0) {
 	$jt = $jparams->get('type_search');
 	$text = $jparams->get('');
 	// Если ключевые слова разделены не пробелом, а запятыми, раскомментируйте следующую строку и закомментируйте строку под ней.
-	//$tags=explode(',',$row->metakey);
+	// $tags=explode(',',$row->metakey);
 	$tags = explode(' ', $row->metakey);
-	$text .= '<div class="clear"></div>';
+	$text .= '<div class="cf"></div>';
 	$text .= '<div class="jts">';
 	$text .= '<ul class="tags">';
 		foreach ($tags as $tag) {

@@ -32,17 +32,19 @@ function searchbox($searchword, &$lists, $params) {
 	<input type="hidden" name="option" value="com_search" />
 	<input type="hidden" name="Itemid" value="<?php echo $Itemid; ?>" />
 	<div id="search" class="contentpaneopen<?php echo $params->get('pageclass_sfx'); ?>">
+		<!--todo: custom styles add!-->
 		<div id="search_searchword">
+			<label for="search_searchword"><?php echo _PROMPT_KEYWORD; ?>:</label>
 			<div>
-				<label for="search_searchword"><?php echo _PROMPT_KEYWORD; ?>:</label>
+				<input type="text" name="searchword" id="search_searchword" size="46" maxlength="30" value="<?php echo stripslashes($searchword); ?>" placeholder="<?php echo _PROMPT_KEYWORD; ?>" /> 
+				<input type="submit" name="submit" value="<?php echo _SEARCH_TITLE; ?>" class="searchbutton" />
 			</div>
-			<input type="text" name="searchword" id="search_searchword" size="46" maxlength="30" value="<?php echo stripslashes($searchword); ?>" placeholder="<?php echo _PROMPT_KEYWORD; ?>" /> 
-			<input type="submit" name="submit" value="<?php echo _SEARCH_TITLE; ?>" class="searchbutton" />
 		</div>
 		<?php echo $lists['searchphrase']; ?>
-		<div id="search_ordering"><br />
+		<div id="search_ordering">
+			<label for="search_ordering"><?php echo _CMN_ORDERING; ?>:</label>
 			<div>
-				<label for="search_ordering"><?php echo _CMN_ORDERING; ?>:</label> <?php echo $lists['ordering']; ?>
+				<?php echo $lists['ordering']; ?>
 			</div>
 		</div>
 	</div>
@@ -83,7 +85,7 @@ function searchbox($searchword, &$lists, $params) {
 		$link = $mosConfig_live_site . '/index.php?option=' . $option . '&amp;Itemid=' . $Itemid . '&amp;searchword=' . $cleanWord . '&amp;searchphrase=' . $searchphrase . '&amp;ordering=' . $ordering;
 		$link = sefRelToAbs($link);
 // if($total>0){
-		echo '<br /><div><label class="limitstar">' . _SEARCH_LIMITSTART . ':</label> ' . $pageNav->getLimitBox($link) . '</div><br />';
+		echo '<label class="limitstar">' . _SEARCH_LIMITSTART . ':</label><div>' . $pageNav->getLimitBox($link) . '</div>';
 //}
 	?>
 <div class="contentpaneopen<?php echo $params->get('pageclass_sfx'); ?>">

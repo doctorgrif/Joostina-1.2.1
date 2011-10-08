@@ -31,10 +31,8 @@ class poll_html {
 			?>
 		<div class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
 			<div id="id">
-				<div>
-					<label for="id"><?php echo _SEL_POLL; ?></label>
-				</div>
-				<?php echo $pollist; ?>
+				<label for="id"><?php echo _SEL_POLL; ?></label>
+				<div><?php echo $pollist; ?></div>
 			</div>
 				<?php
 				if ($votes) {
@@ -118,12 +116,12 @@ class poll_html {
 				$tabcnt = 1 - $tabcnt;
 			}
 			?>
-</table><br />
+</table>
 <div class="polldopinfo">
-	<strong><?php echo _NUM_VOTERS; ?></strong> <?php echo $sumval; ?> <br />
-	<strong><?php echo _FIRST_VOTE; ?></strong> <?php echo $first_vote; ?> <br />
-	<strong><?php echo _LAST_VOTE; ?></strong> <?php echo $last_vote; ?> <br />
-</div><br />
+	<p><span class="strong"><?php echo _NUM_VOTERS; ?></span> <?php echo $sumval; ?></p>
+	<p><span class="strong"><?php echo _FIRST_VOTE; ?></span> <?php echo $first_vote; ?></p>
+	<p><span class="strong"><?php echo _LAST_VOTE; ?></span> <?php echo $last_vote; ?></p>
+</div>
 		<?php
 	}
 }

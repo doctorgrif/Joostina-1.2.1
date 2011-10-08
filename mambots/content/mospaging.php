@@ -9,12 +9,11 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'botMosPaging');
-
 /**
- * Мамбот разрыва страницы. Использование:
- * {mospagebreak} или {mospagebreak title=Заголовок страницы} или {mospagebreak heading=Первая страница} или
- * {mospagebreak title=Заголовок страницы&heading=Первая страница} или {mospagebreak heading=Первая страница&title=Заголовок страницы}
- */
+* Мамбот разрыва страницы. Использование:
+* {mospagebreak} или {mospagebreak title=Заголовок страницы} или {mospagebreak heading=Первая страница} или
+* {mospagebreak title=Заголовок страницы&heading=Первая страница} или {mospagebreak heading=Первая страница&title=Заголовок страницы}
+*/
 function botMosPaging($published, &$row, &$params, $page = 0) {
 	global $mainframe, $Itemid, $database, $_MAMBOTS;
 // simple performance check to determine whether bot should process further
@@ -103,7 +102,6 @@ function botMosPaging($published, &$row, &$params, $page = 0) {
 	}
 	return true;
 }
-
 function createTOC(&$row, &$matches) {
 	global $Itemid;
 	$nonseflink = 'index.php?option=com_content&amp;task=view&amp;id=' . $row->id . '&amp;Itemid=' . $Itemid;
@@ -116,7 +114,7 @@ function createTOC(&$row, &$matches) {
 		if (@$args['heading']) {
 			$heading = $args['heading'];
 // сделано по совету Hammer  http://joomlaforum.ru/index.php/topic,32255.msg187840.html#msg187840
-//$row->title .= ' - '.$heading;
+// $row->title .= ' - '.$heading;
 		}
 	}
 // Заголовок содержания
@@ -144,7 +142,6 @@ function createTOC(&$row, &$matches) {
 	}
 	$row->toc .= '</table>';
 }
-
 function createNavigation(&$row, $page, $n) {
 	global $Itemid;
 	$link = 'index.php?option=com_content&amp;task=view&amp;id=' . $row->id . '&amp;Itemid=' . $Itemid;

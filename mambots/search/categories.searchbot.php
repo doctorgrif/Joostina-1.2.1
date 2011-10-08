@@ -9,7 +9,6 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onSearch', 'botSearchCategories');
-
 /**
 * Метод поиска категорий
 * запрос sql должен возвратить поля, используются в обычной операции 

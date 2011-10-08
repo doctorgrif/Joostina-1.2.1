@@ -68,8 +68,7 @@ body#warning {
 	bottom:0;
 	padding-top:10px;
 	width:100%;
-	background:none;
-	background-color:#000;
+	background: #000 none;
 	margin-top:0px;
 	height:32px;
 	height:32px !important;

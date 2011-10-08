@@ -9,9 +9,23 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 ?>
-<style type="text/css">.copyright{font-family:sans-serif;margin:0;padding:0;height:100%;width:100%;white-space:pre-wrap;}img{float:right;}h3{font-size:1.5em;line-height:1.5;margin:0;}ol,ul{margin-top:5px;}ul{list-style:none;}li{margin:0;padding:0;}.sic{color:red;}</style>
+<style type="text/css">
+.copyright {
+	font-family:sans-serif;
+	margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+	white-space:pre-wrap;}
+img {float:right;}
+h3 {font-size:1.5em;line-height:1.5;margin:0;}
+ol, ul {margin-top:5px;}
+ul {list-style:none;}
+li {margin:0;padding:0;}
+.sic{color:red;}
+</style>
 <div class="copyright">
-<img src="<?php echo $mosConfig_live_site; ?>/help/joostina.png" alt="Joostina License" />
+<img src="<?php echo $mosConfig_live_site; ?>/help/i/joostina.png" alt="Joostina License" />
 <h3>Joostina! распространяется по лицензии <a href="http://www.opensource.org/licenses/gpl-license.php" title="GNU General Public License (GPL)">GNU General Public License (GPL)</a></h3>
 <p>Joostina! включает в себя следующие программные продукты:</p>
 <ol>

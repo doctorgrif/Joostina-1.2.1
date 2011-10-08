@@ -122,11 +122,14 @@ class HTML_contact {
 	foreach ($categories as $cat) {
 		if ($catid == $cat->catid) {
 ?>
-	<li><strong><?php echo $cat->title;?></strong> <span class="small<?php echo $params->get('pageclass_sfx');?>">(<?php echo $cat->numlinks;?>)</span></li>
+	<li>
+		<strong><?php echo $cat->title;?></strong> <span class="small<?php echo $params->get('pageclass_sfx');?>">(<?php echo $cat->numlinks;?>)</span>
+	</li>
 	<?php } else {
 		$link = 'index.php?option=com_contact&amp;catid=' . $cat->catid . '&amp;Itemid=' . $Itemid;?>
-	<li><a href="<?php echo sefRelToAbs($link);?>" class="category<?php echo $params->get('pageclass_sfx');?>" title="<?php echo $cat->title;?>"><?php echo $cat->title;?></a>
-	<?php if ($params->get('cat_items')) { ?>&nbsp;<span class="small<?php echo $params->get('pageclass_sfx');?>">(<?php echo $cat->numlinks;?>)</span>
+	<li>
+		<a href="<?php echo sefRelToAbs($link);?>" class="category<?php echo $params->get('pageclass_sfx');?>" title="<?php echo $cat->title;?>"><?php echo $cat->title;?></a>
+		<?php if ($params->get('cat_items')) { ?>&nbsp;<span class="small<?php echo $params->get('pageclass_sfx');?>">(<?php echo $cat->numlinks;?>)</span>
 	<?php
 		}
 	?>
@@ -181,7 +184,7 @@ class HTML_contact {
 // For the pop window opened for print preview
 			if ($params->get('popup')) {
 				$mainframe->setPageTitle($contact->name);
-				$mainframe->addCustomHeadTag('<link rel="stylesheet" href="templates/' . $template . '/css/style.css" type="text/css" />');
+				$mainframe->addCustomHeadTag('<link rel="stylesheet" href="templates/' . $template . '/css/style.css" type="text/css" media="screen, projection" />');
 			}
 			if ($menu_params->get('page_title')) {
 				?>
@@ -412,46 +415,47 @@ class HTML_contact {
 			<p><?php echo $params->get('email_description_text');?></p>
 			<?php } ?>
 			<div id="contactname">
+				<label for="contactname"><?php echo _NAME_PROMPT;?></label>
 				<div>
-					<label for="contactname"><?php echo _NAME_PROMPT;?></label>
+					<input type="text" name="name" id="contactname" maxlength="50" size="50" value="" placeholder="<?php echo _NAME_PROMPT_PH;?>" />
 				</div>
-				<input type="text" name="name" id="contactname" maxlength="50" size="50" value="" placeholder="<?php echo _NAME_PROMPT_PH;?>" />
 			</div>
 			<div id="contactemail">
+				<label for="contactemail"><?php echo _EMAIL_PROMPT;?></label>
 				<div>
-					<label for="contactemail"><?php echo _EMAIL_PROMPT;?></label>
+					<input type="text" name="email" id="contactemail" size="50" value="" placeholder="<?php echo _EMAIL_PROMPT_PH;?>" />
 				</div>
-				<input type="text" name="email" id="contactemail" size="50" value="" placeholder="<?php echo _EMAIL_PROMPT_PH;?>" />
 			</div>
 			<?php if ($params->get('email_copy')) { ?>
 			<div id="contactemailcopy">
 				<label for="contactemailcopy"><?php echo _EMAIL_A_COPY;?></label>
-				<input type="checkbox" name="email_copy" id="contactemailcopy" value="1" placeholder="<?php echo _EMAIL_A_COPY;?>" />
+				<div>
+					<input type="checkbox" name="email_copy" id="contactemailcopy" value="1" placeholder="<?php echo _EMAIL_A_COPY;?>" />
+				</div>
 			</div>
 			<?php } ?>
 			<div id="contactsubject">
+				<label for="contactsubject"><?php echo _SUBJECT_PROMPT;?></label>
 				<div>
-					<label for="contactsubject"><?php echo _SUBJECT_PROMPT;?></label>
+					<input type="text" name="subject" id="contactsubject" maxlength="100" size="50" value="" placeholder="<?php echo _SUBJECT_PROMPT_PH;?>" />
 				</div>
-				<input type="text" name="subject" id="contactsubject" maxlength="100" size="50" value="" placeholder="<?php echo _SUBJECT_PROMPT_PH;?>" />
 			</div>
 			<div id="contacttext">
+				<label for="contacttext"><?php echo _MESSAGE_PROMPT;?></label>
 				<div>
-					<label for="contacttext"><?php echo _MESSAGE_PROMPT;?></label>
+					<textarea cols="30" rows="10" name="text" maxlength="500" id="contacttext" placeholder="<?php echo _MESSAGE_PROMPT_PH;?>"></textarea>
 				</div>
-				<textarea cols="30" rows="10" name="text" maxlength="500" id="contacttext" placeholder="<?php echo _MESSAGE_PROMPT_PH;?>"></textarea>
 			</div>
 			<?php if ($mosConfig_captcha_cont) { session_start();?>
 			<div id="captchatext">
-				<div>
-					<label for="captchatext"><?php echo _PLEASE_ENTER_CAPTCHA;?></label>
-				</div>
+				<label for="captchatext"><?php echo _PLEASE_ENTER_CAPTCHA;?></label>
 				<div>
 					<img id="captchaimg" alt="Нажмите чтобы обновить изображение" onclick="document.emailForm.captchaimg.src='<?php echo $mosConfig_live_site;?>/includes/kcaptcha/index.php?'+new String(Math.random())" src="<?php echo $mosConfig_live_site;?>/includes/kcaptcha/index.php?<?php echo session_id() ?>" />
-				</div><br />
-				<input name="captcha" type="text" id="captchatext" size="15" placeholder="<?php echo _PLEASE_ENTER_CAPTCHA_PH;?>" />
+				</div>
+				<div>
+					<input name="captcha" type="text" id="captchatext" size="15" placeholder="<?php echo _PLEASE_ENTER_CAPTCHA_PH;?>" />
+				</div>
 			</div>
-			<br />
 			<?php };?>
 			<input type="submit" name="send" value="<?php echo _SEND_BUTTON_CONTACT;?>" class="button" onclick="validate()" />
 			<input type="hidden" name="option" value="com_contact" />

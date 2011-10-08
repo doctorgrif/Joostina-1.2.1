@@ -11,13 +11,13 @@ define('_VALID_MOS', 1);
 require ('globals.php');
 require_once ('configuration.php');
 require_once ('includes/definitions.php');
-/* Проверка SSL - $http_host возвращает <url_сайта>:<номер_порта, если он 443> */
+/* Проверка SSL - $http_host возвращает <url_сайта>:<номер_порта> (если он 443) */
 $http_host = explode(':', $_SERVER['HTTP_HOST']);
 if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isset($http_host[1]) && $http_host[1] == 443) && substr($mosConfig_live_site, 0, 8) != 'https://') {
 	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
 }
 require_once ('includes/joomla.php');
-/* отображение состояния выключенного сайта - ошибка 503 */
+/* ошибка 503 */
 if ($mosConfig_offline == 1) {
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	header('Status: 503 Service Temporarily Unavailable');
@@ -118,7 +118,7 @@ if ($print) {
 		$_MOS_OPTION['buffer'] = '<div class="logo">' . $mosConfig_sitename . '</div><div id="main">'
 				. $_MOS_OPTION['buffer']
 				. "\n</div>\n<div id=\"ju_foo\">"
-				. _PRINT_PAGE_LINK . ":<p style=\"display:none;\"><em>" . sefRelToAbs($pg_link) . "</em></p><p>&copy;"
+				. _PRINT_PAGE_LINK . ":<p class=\"nodisplay\"><em>" . sefRelToAbs($pg_link) . "</em></p><p>&copy;"
 				. $mosConfig_sitename . ",&nbsp;" . date('Y') . '</p></div>';
 	}
 } else {
@@ -132,23 +132,13 @@ initGzip();
 /* при активном кэшировании отправим браузеру более "правильные" заголовки */
 if (!$mosConfig_caching) {
 /* не кэшируется */
-	$file_last_modified = filemtime(sefRelToAbs($_SERVER['REQUEST_URI']));
-	header('Last-Modified: ' . date('r', $file_last_modified ) );
 	header('Expires: ' . date('r', $_SERVER['REQUEST_TIME']));
-	$etag = md5($file_last_modified);
-	header('ETag: ' . $etag );
 	header('Cache-Control: no-store, no-cache, must-revalidate');
 	header('Pragma: private');
 	header('Cache-Control: private');
 } else if ($option != 'logout' or $option != 'login') {
 /* кэшируется */
-	$file_last_modified = filemtime(sefRelToAbs($_SERVER['REQUEST_URI']));
-	header('Last-Modified: ' . date('r', $file_last_modified ) );
 	$max_age = 60 * 60;
-	$expires = $file_last_modified + $max_age;
-	header("Expires: " . date('r', $expires ) );
-	$etag = md5($file_last_modified);
-	header('ETag: ' . $etag );
 	header('Cache-Control: must-revalidate, proxy-revalidate, max-age=' . $max_age . ', s-maxage=' . $max_age );
 	if($_SERVER["HTTP_IF_NONE_MATCH"] == $etag){
 		header( "HTTP/1.1 304 Not Modified" );
@@ -162,7 +152,7 @@ if ($no_html == 0) {
 		require ($customIndex2);
 	} else {
 /* требуется для отделения номера ISO от константы _ISO языкового файла языка */
-		$iso = split('=', _ISO);
+		$iso = preg_split('=', _ISO);
 /* пролог xml */
 echo '<?xml version="1.0" encoding="' . $iso[1] . '"?' . '>';
 ?>
@@ -181,7 +171,6 @@ echo '<!DOCTYPE html>';
 		$mosConfig_favicon = 'favicon.png';
 	}
 		$icon = $mosConfig_absolute_path . '/' . $mosConfig_favicon;
-/* проверка наличия файла */
 	if (!file_exists($icon)) {
 		$icon = $mosConfig_live_site . '/favicon.png';
 	} else {
@@ -192,7 +181,6 @@ echo '<!DOCTYPE html>';
 		$mosConfig_favicon_ie = 'favicon.ico';
 	}
 		$icon_ie = $mosConfig_absolute_path . '/' . $mosConfig_favicon_ie;
-/* проверка наличия файла */
 	if (!file_exists($icon_ie)) {
 		$icon_ie = $mosConfig_live_site . '/favicon.ico';
 	} else {
@@ -203,7 +191,6 @@ echo '<!DOCTYPE html>';
 		$mosConfig_favicon_ipad = 'apple-touch-icon.png';
 	}
 		$icon_ipad = $mosConfig_absolute_path . '/' . $mosConfig_favicon_ipad;
-/* проверка наличия файла */
 	if (!file_exists($icon_ipad)) {
 		$icon_ipad = $mosConfig_live_site . '/apple-touch-icon.png';
 	} else {

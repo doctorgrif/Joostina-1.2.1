@@ -9,11 +9,10 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'botMosCode');
-
 /**
- * Мамбот подсветки кода. Использование:
- * {moscode}...какой-нибудь код...{/moscode}
- */
+* Мамбот подсветки кода. Использование:
+* {moscode}...какой-нибудь код...{/moscode}
+*/
 function botMosCode($published, &$row) {
 // определение правильного выражения для бота
 	if (strpos($row->text, 'moscode') === false) {
@@ -30,12 +29,11 @@ function botMosCode($published, &$row) {
 	$row->text = preg_replace_callback($regex, 'botMosCode_replacer', $row->text);
 	return true;
 }
-
 /**
- * Замена совпадающих тэгов an image
- * @param array - Массив соответствий (см. - preg_match_all)
- * @return string
- */
+* Замена совпадающих тэгов an image
+* @param array - Массив соответствий (см. - preg_match_all)
+* @return string
+*/
 function botMosCode_replacer(&$matches) {
 	$html_entities_match = array('#<#', '#>#');
 	$html_entities_replace = array('&lt;', '&gt;');
@@ -58,5 +56,4 @@ function botMosCode_replacer(&$matches) {
 	$text = str_replace('<font color="#070">;&lt;</font><font color="#00b">br</font><font color="#070">/&gt;', '<br />', $text);
 	return $text;
 }
-
 ?>

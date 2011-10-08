@@ -17,12 +17,11 @@ if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isse
 	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
 }
 require_once ('includes/joomla.php');
-// отображение страницы выключенного сайта - ошибка 503
+// ошибка 503
 if ($mosConfig_offline == 1) {
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	header('Status: 503 Service Temporarily Unavailable');
 	header('Retry-After: 3600');
-	header('Connection: Close');
 	require ($mosConfig_absolute_path . '/offline.php');
 }
 // автоматическая перекодировка в юникод, по умолчанию актвино
@@ -59,7 +58,7 @@ if (file_exists($mosConfig_absolute_path . '/components/' . $option . '/' . $com
 if ($utf_conv) {
 	$_ajax_body = ob_get_contents();
 	ob_end_clean();
-// если активированна автоматическая перекодировка в юникод
-	echo joostina_api::convert($_ajax_body, 1); // выводим перекодированный текст
+// если активированна автоматическая перекодировка в юникод - выводим перекодированный текст
+	echo joostina_api::convert($_ajax_body, 1);
 }
 ?>

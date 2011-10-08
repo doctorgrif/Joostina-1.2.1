@@ -34,15 +34,15 @@ mosMenuBar::endTable();
 }
 function _DEFAULT() {
 mosMenuBar::startTable();
-mosMenuBar::custom( $task='gen_metakey', $icon='browser.png', $iconOver='browser.png', $alt='Ключевые слова', $listSelect=true );
+mosMenuBar::custom( $task='gen_metakey', $icon='', $iconOver='', $alt='Ключевые слова', $listSelect=true );
 mosMenuBar::spacer();
-mosMenuBar::custom( $task='gen_metadesc', $icon='browser.png', $iconOver='browser.png', $alt='Описание', $listSelect=true );
+mosMenuBar::custom( $task='gen_metadesc', $icon='', $iconOver='', $alt='Описание', $listSelect=true );
 mosMenuBar::spacer();
-mosMenuBar::custom( $task='config', $icon='config.png', $iconOver='config.png', $alt='Настройки', $listSelect=false );
+mosMenuBar::custom( $task='config', $icon='', $iconOver='', $alt='Настройки', $listSelect=false );
 mosMenuBar::spacer();
-mosMenuBar::custom( $task='settings', $icon='config.png', $iconOver='config.png', $alt='Слова-исключения', $listSelect=false );
+mosMenuBar::custom( $task='settings', $icon='', $iconOver='', $alt='Слова-исключения', $listSelect=false );
 mosMenuBar::spacer();
-mosMenuBar::custom( $task='save_manager', $icon='save_f2.png', $iconOver='save_f2.png', $alt='Сохранить', $listSelect=true );
+mosMenuBar::custom( $task='save_manager', $icon='', $iconOver='', $alt='Сохранить', $listSelect=true );
 mosMenuBar::spacer();
 mosMenuBar::endTable();
 }

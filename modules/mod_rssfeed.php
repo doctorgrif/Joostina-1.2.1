@@ -11,7 +11,6 @@ defined('_VALID_MOS') or die();
 if (!defined('_JOS_RSSFEED_MODULE')) {
 	/** ensure that functions are declared only once */
 	define('_JOS_RSSFEED_MODULE', 1);
-
 function output_rssfeed($link, $img_default, $img_file, $img_alt, $img_name) {
 	$img = mosAdminMenus::ImageCheck($img_default, '/images/M_images/', $img_file, '/images/M_images/', $img_alt, $img_name);
 ?>

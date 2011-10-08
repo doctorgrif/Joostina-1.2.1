@@ -468,10 +468,10 @@ function sendmail($con_id, $option) {
 // check whether email copy function activated
 		if ($email_copy && $emailcopyCheck) {
 			$copy_text = sprintf(_COPY_TEXT, $contact[0]->name, $mosConfig_sitename);
-			/* Начало - Модификация для отображения в письме IP-адрес автора сообщения */
+			/* Начало - отображение в письме IP-адрес автора сообщения */
 			$text = $prefix . "\n" . $name . ' <' . $email . '>' . "\n\n" . stripslashes($text);
 			$copy_text = $copy_text . "\n\n" . $text . '';
-			/* Конец - Модификация для отображения в письме IP-адрес автора сообщения */
+			/* Конец */
 			$copy_subject = _COPY_SUBJECT . $subject;
 			$success = mosMail($mosConfig_mailfrom, $mosConfig_fromname, $email, $copy_subject, $copy_text);
 			if (!$success) {

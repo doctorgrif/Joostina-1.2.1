@@ -9,9 +9,33 @@
 /* запрет прямого доступа */
 defined('_VALID_MOS') or die();
 ?>
-<style type="text/css">.changelog{font-family:sans-serif;margin:0;padding:0;height:100%;width:100%;white-space:pre-wrap;}img{float:right;}ol{margin-top:5px;}li{margin:0;padding:0;}li.nolist{list-style:none;}pre code{display:block;padding:.5em;background:#f0f0f0;}.tab1{border:0;padding:0;border-collapse:collapse;width:100%;}.tab1 td{padding:0;}</style>
+<style type="text/css">
+.changelog {
+	font-family:sans-serif;
+	margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+	white-space:pre-wrap;}
+img {float:right;}
+ol {margin-top:5px;}
+li {margin:0;padding:0;}
+li.nolist {list-style:none;}
+pre code {display:block;padding:.5em;background:#f0f0f0;}
+.tab1 {
+	border:0;
+	padding:0;
+	border-collapse:collapse;
+	width:100%;}
+.tab1 td {padding:0;}
+</style>
 <div class="changelog">
-<img src="<?php echo $mosConfig_live_site; ?>/help/joostina.png" alt="Joostina Changelog" />
+<img src="<?php echo $mosConfig_live_site; ?>/help/i/joostina.png" alt="Joostina Changelog" />
+<strong>upd. 18.09.11 - 05.10.11</strong>
+<ol>
+<li>Мелкие правки кода</li>
+<li>Joostina 1.2.1.4 Stabile</li>
+</ol>
 <strong>upd. 31.07.11 - 17.09.11</strong>
 <ol>
 <li>Доработал функцию header() для отправки заголовков.</li>

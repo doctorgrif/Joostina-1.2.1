@@ -25,7 +25,7 @@ echo '<ul class="archive' . $moduleclass_sfx . '">';
 		$link = sefRelToAbs('index.php?option=com_content&amp;task=archivecategory&amp;year=' . $created_year . '&amp;month=' . $created_month . '&amp;module=1');
 		$text = $month_name . ', ' . $created_year;
 		?>
-	<li class="archive<?php echo $moduleclass_sfx; ?>">
+	<li>
 		<a class="archive" href="<?php echo $link; ?>" title="<?php echo $text; ?>">
 			<?php echo $text; ?>
 		</a>

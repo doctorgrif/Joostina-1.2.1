@@ -37,9 +37,9 @@ class XmapHtml extends Xmap {
 		$this->_openList = '';
 
 		if ( $Itemid == $node->id )
-			$out .= '<li class="xmap active">';
+			$out .= '<li class="active">';
 		else
-			$out .= '<li class="xmap">';
+			$out .= '<li>';
 
 		$link = Xmap::getItemLink($node);;
 
@@ -51,25 +51,25 @@ class XmapHtml extends Xmap {
 			case 1:	// open url in new window
 				$ext_image = '';
 				if ( $this->sitemap->exlinks ) {
-					$ext_image = '<img src="'. $mosConfig_live_site .'/components/com_xmap/images/'. $this->sitemap->ext_image .'" alt="' . _XMAP_SHOW_AS_EXTERN_ALT . '" title="' . _XMAP_SHOW_AS_EXTERN_ALT . '" class="xmap" />';
+					$ext_image = '<img src="'. $mosConfig_live_site .'/components/com_xmap/images/'. $this->sitemap->ext_image .'" alt="' . _XMAP_SHOW_AS_EXTERN_ALT . '" title="' . _XMAP_SHOW_AS_EXTERN_ALT . '" />';
 				}
-				$out .= '<a href="'. $link .'" title="'. $node->name .'" target="_blank" class="xmap">'. $node->name . $ext_image .'</a>';
+				$out .= '<a href="'. $link .'" title="'. $node->name .'" target="_blank">'. $node->name . $ext_image .'</a>';
 				break;
 
 			case 2:	// open url in javascript popup window
 				$ext_image = '';
 				if( $this->sitemap->exlinks ) {
-					$ext_image = '&nbsp;<img src="'. $mosConfig_live_site .'/components/com_xmap/images/'. $this->sitemap->ext_image .'" alt="' . _XMAP_SHOW_AS_EXTERN_ALT . '" title="' . _XMAP_SHOW_AS_EXTERN_ALT . '" class="xmap" />';
+					$ext_image = '<img src="'. $mosConfig_live_site .'/components/com_xmap/images/'. $this->sitemap->ext_image .'" alt="' . _XMAP_SHOW_AS_EXTERN_ALT . '" title="' . _XMAP_SHOW_AS_EXTERN_ALT . '" />';
 				}
-				$out .= '<a href="'. $link .'" title="'. $node->name .'" target="_blank" class="xmap" '. "onClick=\"javascript: window.open('" . $link ."', '', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=550'); return false;\">" . $node->name . $ext_image . "</a>";
+				$out .= '<a href="'. $link .'" title="'. $node->name .'" target="_blank" '. "onClick=\"javascript: window.open('" . $link ."', '', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=550'); return false;\">" . $node->name . $ext_image . "</a>";
 				break;
 
 			case 3:	// no link
-				$out .= '<span class="xmap">'. $node->name .'</span>';
+				$out .= '<span>'. $node->name .'</span>';
 				break;
 
 			default:	// open url in parent window
-				$out .= '<a href="'. $link .'" title="'. $node->name .'" class="xmap">'. $node->name .'</a>';
+				$out .= '<a href="'. $link .'" title="'. $node->name .'">'. $node->name .'</a>';
 				break;
 		}
 
@@ -126,7 +126,7 @@ class XmapHtml extends Xmap {
 		global $database, $Itemid;
 		$sitemap = &$this->sitemap;
 
-		echo '<div style="clear:left;"></div>';
+		echo '<div class="cf"></div>';
 		echo '</div>';
 		echo '</div>' . "\n";
 	}
@@ -136,7 +136,7 @@ class XmapHtml extends Xmap {
 		if( $sitemap->columns > 1 )	// use columns
 			echo '<div style="float:left;width:' . $this->_width . '%;">';
 		if( $sitemap->show_menutitle )	// show menu titles
-			echo '<h2 class="xmap menutitle">' . $menu->name . '</h2>';
+			echo '<h3>' . $menu->name . '</h3>';
 	}
 
 	function endMenu(&$menu) {

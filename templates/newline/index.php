@@ -4,15 +4,16 @@ global $task, $my, $mainframe, $mosConfig_live_site, $mosConfig_mailfrom, $mosCo
 $iso = explode('=', _ISO);
 if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE')) {
 echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?xml version="1.0" encoding="'.$iso[1].'"?' . '>';
+<?xml version="1.0" encoding="' . $iso[1] . '"?' . '>';
 } else {
 echo '<!DOCTYPE html>
-<?xml version="1.0" encoding="'.$iso[1].'"?' . '>';
+<?xml version="1.0" encoding="' . $iso[1] . '"?' . '>';
 }
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head profile="http://gmpg.org/xfn/11">
+<link type="text/plain" rel="author" href="<?php echo $mosConfig_live_site; ?>/humans.txt" />
 <link rel="stylesheet" href="<?php echo $mosConfig_live_site; ?>/templates/<?php echo $mainframe->getTemplate(); ?>/css/style.css" type="text/css" media="screen, projection" />
 <?php
 if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE')) {
@@ -112,26 +113,21 @@ $block3_count = (mosCountModules('user7') > 0) + (mosCountModules('user8') > 0) 
 </div>
 <?php
 mosCommonHTML::loadJqueryPlugins('preloader');
+/* mosCommonHTML::loadJqueryPlugins('simplegallery'); */
 mosCommonHTML::loadJqueryPlugins('avatar');
+mosCommonHTML::loadJqueryPlugins('login');
+mosCommonHTML::loadJqueryPlugins('counter');
 if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE'))
-echo '<script type="text/javascript" src="'.$mosConfig_live_site.'/includes/js/jquery/plugins/corner.js"></script>';
+echo '<script type="text/javascript" src="' . $mosConfig_live_site . '/includes/js/jquery/plugins/corner.js"></script>';
 ?>
-<script type="text/javascript">
-	jQuery(function(){
-	jQuery('.mosimage').preloader();
-	});
-</script>
+<script type="text/javascript">jQuery(function(){jQuery('.mosimage').preloader();});</script>
 <?php 
 if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE'))
-echo '<script type="text/javascript">
-	jQuery(document).ready(function(){
-	jQuery(\'div.moduletable-round\').corner();
-	jQuery(\'div.block2 h3\').corner();});
-</script>';
+echo '<script type="text/javascript">jQuery(document).ready(function(){jQuery(\'div.moduletable-round\').corner();jQuery(\'div.block2 h3\').corner();});</script>';
 ?>
 <?php
 $ga_script = '<script type="text/javascript">
-	var _gaq = [[\'_setAccount\', \''.$mosConfig_ga_id.'\'], [\'_trackPageview\']];
+	var _gaq = [[\'_setAccount\', \'' . $mosConfig_ga_id . '\'], [\'_trackPageview\']];
 	(function(d, t) {
 	var g = d.createElement(t),s = d.getElementsByTagName(t)[0];
 	g.async = true;
@@ -145,11 +141,14 @@ echo $ga_script;
 ?>
 <?php
 $ym_script = '<script type="text/javascript" src="//mc.yandex.ru/metrika/watch.js"></script>
-<div style="display:none;"><script type="text/javascript">try{var yaCounter' . $mosConfig_ym_id . '=new Ya.Metrika('.$mosConfig_ym_id.');}catch(e){}</script></div>
-<noscript><div style="position:absolute;"><img src="//mc.yandex.ru/watch/' . $mosConfig_ym_id . '" alt="Яндекс Метрика для '.$mosConfig_sitename.'" /></div></noscript>';
+<div class="nodisplay"><script type="text/javascript">try{var yaCounter' . $mosConfig_ym_id . '=new Ya.Metrika(' . $mosConfig_ym_id . ');}catch(e){}</script></div>
+<noscript><div style="position:absolute;"><img src="//mc.yandex.ru/watch/' . $mosConfig_ym_id . '" alt="Яндекс.Метрика для ' . $mosConfig_sitename . '" /></div></noscript>';
 if ($mosConfig_ym == 1) {
 echo $ym_script;
 }
+?>
+<?php
+echo '<!-- This document saved from ' . sefRelToAbs($_SERVER['REQUEST_URI']) . ', created: '.date('l jS \of F Y h:i:s A').' -->';
 ?>
 
 </body>

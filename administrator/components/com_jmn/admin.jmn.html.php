@@ -31,40 +31,42 @@ submitform(pressbutton);
 <form action="index2.php" method="post" name="adminForm">
 <table class="adminheading">
 <tr>
-<th class="edit" rowspan="2" nowrap>
-<?php if ( $all ) { ?><?php echo _MG_MGRMETA;?> <small>[ <?php echo _MG_SECT;?>: <?php echo _MG_ALL;?> ]</small>
+<th class="edit">
+<?php if ( $all ) { ?>
+<?php echo _MG_MGRMETA;?><br /><small>[<?php echo _MG_SECT;?>: <?php echo _MG_ALL;?>]</small>
 <?php } else { ?>
-<?php echo _MG_MGRMETA;?> <small>[ <?php echo _MG_SECT;?>: <?php echo $section->title; ?> ]</small>
-<?php } ?><br />
+<?php echo _MG_MGRMETA;?><br /><small>[<?php echo _MG_SECT;?>: <?php echo $section->title; ?>]</small>
+<?php } ?>
 </th>
 <?php if ( $all ) { ?>
-<td width="right" rowspan="2" valign="top"><?php echo $lists['sectionid'];?></td>
+<td valign="top"><?php echo $lists['sectionid'];?></td>
 <?php } ?>
-<td width="right" valign="top"><?php echo $lists['catid'];?></td>
-<td width="right" valign="top"><?php echo $lists['authorid'];?></td>
-</tr>
-<tr>
-<td align="right"><?php echo _MG_FILTR;?>:</td>
-<td><input type="text" name="search" value="<?php echo $search;?>" class="textarea" onChange="document.adminForm.submit();" /></td>
+<td valign="top"><?php echo $lists['catid'];?></td>
+<td valign="top"><?php echo $lists['authorid'];?></td>
+<td valign="top">
+<label for="filtr"><?php echo _MG_FILTR;?>:</label><input type="text" name="search" id="filtr" value="<?php echo $search;?>" class="textarea" onChange="document.adminForm.submit();" />
+</td>
 </tr>
 </table>
-<table width="100%" cellspacing="10">
+<table width="100%">
 <tr>
 <td align="left"><font><?php echo _MG_DESCCOMMON;?></font></td></tr>
 </table>
-<table class="adminlist">
+<table class="adminlist" width="100%">
 <tr>
-<th width="5">#</th>
-<th width="5"><input type="checkbox" name="toggle" value="" onClick="checkAll(<?php echo count( $rows ); ?>);" /></th>
-<th><?php echo _MG_PREV;?></th>
-<th class="title"><?php echo _MG_TITLE;?></th>
-<th width="2%"><?php echo _MG_ID;?></th>
+<th width="10px">#</th>
+<th width="10px">
+<input type="checkbox" name="toggle" value="" onClick="checkAll(<?php echo count( $rows ); ?>);" />
+</th>
+<th width="10%"><?php echo _MG_PREV;?></th>
+<th width="10%" class="title"><?php echo _MG_TITLE;?></th>
+<th width="10px"><?php echo _MG_ID;?></th>
 <?php if ( $all ) { ?>
-<th align="left"><?php echo _MG_SECT;?></th>
+<th width="10%" align="left"><?php echo _MG_SECT;?></th>
 <?php } ?>
-<th align="left"><?php echo _MG_CAT;?></th>
-<th align="left"><?php echo _MG_KWORDS;?></th>
-<th align="center" width="10"><?php echo _MG_DESC;?></th>
+<th width="10%" align="left"><?php echo _MG_CAT;?></th>
+<th width="25%" align="left"><?php echo _MG_KWORDS;?></th>
+<th width="25%" align="center"><?php echo _MG_DESC;?></th>
 </tr>
 <?php
 $k = 0;
@@ -77,30 +79,30 @@ $row->cat_link = 'index2.php?option=com_categories&task=editA&hidemainmenu=1&id=
 $now = date( 'Y-m-d H:i:s' );
 if ( $now <= $row->publish_up && $row->state == "1" ) {
 $img = 'publish_y.png';
-$alt = '<?php echo _MG_PUBLISH;?>';
+$alt = _MG_PUBLISH;
 } else if ( ( $now <= $row->publish_down || $row->publish_down == $nullDate ) && $row->state == "1" ) {
 $img = 'publish_g.png';
-$alt = '<?php echo _MG_PUBLISH;?>';
+$alt = _MG_PUBLISH;
 } else if ( $now > $row->publish_down && $row->state == "1" ) {
 $img = 'publish_r.png';
-$alt = '<?php echo _MG_EXPIRED;?>';
+$alt = _MG_EXPIRED;
 } else if ( $row->state == "0" ) {
-$img = "publish_x.png";
-$alt = '<?php echo _MG_UNPUBLISH;?>';
+$img = 'publish_x.png';
+$alt = _MG_UNPUBLISH;
 }
 $times = '';
 if (isset($row->publish_up)) {
 if ($row->publish_up == $nullDate) {
-$times .= "<tr><td>"._MG_VIEWPAGE.": ".MG_ALLWAYS."</td></tr>";
+$times .= '<tr><td>'._MG_VIEWPAGE.': '.MG_ALLWAYS.'</td></tr>';
 } else {
-$times .= "<tr><td>"._MG_VIEWPAGE.": ".$row->publish_up."</td></tr>";
+$times .= '<tr><td>'._MG_VIEWPAGE.': '.$row->publish_up.'</td></tr>';
 }
 }
 if (isset($row->publish_down)) {
 if ($row->publish_down == $nullDate) {
-$times .= "<tr><td>"._MG_FINISH.": "._MG_NOEXPIRY."</td></tr>";
+$times .= '<tr><td>'._MG_FINISH.': '._MG_NOEXPIRY.'</td></tr>';
 } else {
-$times .= "<tr><td>"._MG_FINISH.": ".$row->publish_down."</td></tr>";
+$times .= '<tr><td>'._MG_FINISH.': '.$row->publish_down.'</td></tr>';
 }
 }
 if ( $acl->acl_check( 'administration', 'manage', 'users', $my->usertype, 'components', 'com_users' ) ) {
@@ -123,8 +125,12 @@ $checked = mosCommonHTML::CheckedOutProcessing( $row, $i );
 ?>
 <tr class="<?php echo "row$k"; ?>">
 <td><?php echo $pageNav->rowNumber( $i ); ?></td>
-<td align="center"><input type="hidden" name="c_id[]" value='<?=$row->id?>'/><?php echo $checked ?></td>
-<td ><a href="#" onclick="window.open('<?=$mosConfig_live_site?>/index2.php?option=com_content&amp;task=view&amp;id=<?=$row->id?>&amp;Itemid=99999&amp;pop=1&amp;page=0','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no');" alt='<?php echo _MG_VIEWPAGE;?>'><?php echo _MG_VIEWPAGE;?></a></td>
+<td align="center">
+<input type="hidden" name="c_id[]" value='<?=$row->id?>'/><?php echo $checked ?>
+</td>
+<td >
+<a href="#" onclick="window.open('<?php echo $mosConfig_live_site;?>/index2.php?option=com_content&amp;task=view&amp;id=<?php echo $row->id;?>&amp;Itemid=99999&amp;pop=1&amp;page=0','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no');" alt='<?php echo _MG_VIEWPAGE;?>'><?php echo _MG_VIEWPAGE;?></a>
+</td>
 <td>
 <?php if ( $row->checked_out && ( $row->checked_out != $my->id ) ) { echo $row->title; } else { ?>
 <a target='' href="<?php echo $link; ?>" title="<?php echo _MG_CONTEDITE;?>"><?php echo htmlspecialchars($row->title, ENT_QUOTES); ?></a>
@@ -132,11 +138,19 @@ $checked = mosCommonHTML::CheckedOutProcessing( $row, $i );
 </td>
 <td align="left"><?php echo $row->id; ?></td>
 <?php if ( $all ) { ?>
-<td align="left"><a href="<?php echo $row->sect_link; ?>" title="<?php echo _MG_SECTEDITE;?>"><?php echo $row->section_name; ?></a></td>
+<td align="left">
+<a href="<?php echo $row->sect_link; ?>" title="<?php echo _MG_SECTEDITE;?>"><?php echo $row->section_name; ?></a>
+</td>
 <?php } ?>
-<td align="left"><a href="<?php echo $row->cat_link; ?>" title="<?php echo _MG_CATEDITE;?>"><?php echo $row->name; ?></a></td>
-<td align="left"><textarea name="metakey[<?=$row->id;?>]" cols="40" rows="5"><?php echo $row->metakey; ?></textarea></td>
-<td align="left"><textarea name="metadesc[<?=$row->id?>]" cols="40" rows="5"><?php echo $row->metadesc; ?></textarea></td>
+<td align="left">
+<a href="<?php echo $row->cat_link; ?>" title="<?php echo _MG_CATEDITE;?>"><?php echo $row->name; ?></a>
+</td>
+<td align="left">
+<textarea name="metakey[<?=$row->id;?>]" cols="40" rows="5"><?php echo $row->metakey; ?></textarea>
+</td>
+<td align="left">
+<textarea name="metadesc[<?=$row->id?>]" cols="40" rows="5"><?php echo $row->metadesc; ?></textarea>
+</td>
 </tr>
 <?php $k = 1 - $k; } ?>
 </table>

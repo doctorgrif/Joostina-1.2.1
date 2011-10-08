@@ -248,7 +248,7 @@ class FeedCreator extends HtmlDescribable {
 				$this->_redirect($filename);
 			}
 		} else {
-			echo "<br /><strong>" . _ERROR_CREATING_NEWSFEED . "</strong><br />";
+			echo '<br /><span class="strong">' . _ERROR_CREATING_NEWSFEED . '</span><br />';
 		}
 	}
 
@@ -341,6 +341,7 @@ class RSSCreator10 extends FeedCreator {
 		$feed .= "xmlns=\"http://purl.org/rss/1.0/\"\n";
 		$feed .= "xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n";
 		$feed .= "xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"\n";
+		$feed .= "xmlns:trackback=\"http://madskills.com/public/xml/rss/module/trackback/\"\n";
 		$feed .= "xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$feed .= "<channel rdf:about=\"" . $this->syndicationURL . "\">\n";
 		$feed .= "<title>" . htmlspecialchars($this->title) . "</title>\n";
@@ -380,9 +381,9 @@ class RSSCreator10 extends FeedCreator {
 			if ($this->items[$i]->author != "") {
 				$feed .= "<dc:creator>" . htmlspecialchars($this->items[$i]->author) . "</dc:creator>\n";
 			}
-			$feed .= "<title>" . htmlspecialchars(strip_tags(strtr($this->items[$i]->title, "\n\r", "  "))) . "</title>\n";
-			$feed .= "<link>" . htmlspecialchars($this->items[$i]->link) . "</link>\n";
-			$feed .= "<description>" . htmlspecialchars($this->items[$i]->description) . "</description>\n";
+			$feed .= "<dc:title>" . htmlspecialchars(strip_tags(strtr($this->items[$i]->title, "\n\r", "  "))) . "</dc:title>\n";
+			$feed .= "<dc:identifier>" . htmlspecialchars($this->items[$i]->link) . "</dc:identifier>\n";
+			$feed .= "<dc:description>" . htmlspecialchars($this->items[$i]->description) . "</dc:description>\n";
 			$feed .= $this->_createAdditionalElements($this->items[$i]->additionalElements,
 							"");
 			$feed .= "</item>\n";

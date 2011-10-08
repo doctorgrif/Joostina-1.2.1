@@ -14,14 +14,16 @@ if (!($acl->acl_check( 'administration', 'edit', 'users', $my->usertype, 'compon
 | $acl->acl_check( 'administration', 'edit', 'users', $my->usertype, 'components', 'com_jmn' ))) {
 mosRedirect('index2.php',_NOT_AUTH);
 }
-$mgLang = strtolower($mosConfig_lang);
-// load language file
-if( file_exists($mosConfig_absolute_path.'/administrator/components/com_jmn/language/' . $mgLang . '.php') ) {
-require_once($mosConfig_absolute_path.'/administrator/components/com_jmn/language/' . $mgLang . '.php' );
+$thisComponent = 'jmn';
+//Get right Language file
+$file = $mosConfig_absolute_path . '/administrator/components/com_' . $thisComponent . '/language/';
+if (file_exists($file . $mosConfig_lang . '.php')) {
+	include ($file . $mosConfig_lang . '.php');
 } else {
-$mgLang = 'english';
-require_once($mosConfig_absolute_path.'/administrator/components/com_jmn/language/english.php' );
+	// Fallback to english
+	include ($file . 'english.php');
 }
+
 require_once( $mosConfig_absolute_path."/administrator/components/com_jmn/functions_jmn.php");
 require_once( $mainframe->getPath( 'admin_html' ) );
 $sectionid = mosGetParam( $_REQUEST, 'sectionid', 0 );

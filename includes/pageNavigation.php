@@ -15,7 +15,6 @@ defined('_VALID_MOS') or die();
 */
 class mosPageNav {
 	/** @var int The record number to start dislpaying from */
-
 	var $limitstart = null;
 	/** @var int Number of rows to display per page */
 	var $limit = null;
@@ -29,7 +28,6 @@ class mosPageNav {
 		$this->limitstart = (int) max($limitstart, 0);
 		$this->limit = (int) max($limit, 0);
 	}
-
 	/**
 	* Returns the html limit # input box
 	* @param string The basic link to include in the href
@@ -43,13 +41,12 @@ class mosPageNav {
 		$limits[] = mosHTML::makeOption('50');
 		$limits[] = mosHTML::makeOption('100');
 		$limits[] = mosHTML::makeOption('150');
-		$limits[] = mosHTML::makeOption('5000', '-Все-');
-// build the html select list
+		$limits[] = mosHTML::makeOption('5000', _CMN_ALL_LIMITS);
+		// build the html select list
 		$link = $link . "&amp;limit='+this.options[selectedIndex].value+'&amp;limitstart=" . $this->limitstart;
 		$link = sefRelToAbs($link);
 		return mosHTML::selectList($limits, 'limit', 'class="inputbox" size="1" onchange="document.location.href=\'' . $link . '\';"', 'value', 'text', $this->limit);
 	}
-
 	/**
 	* Writes the html limit # input box
 	* @param string The basic link to include in the href
@@ -57,7 +54,6 @@ class mosPageNav {
 	function writeLimitBox($link) {
 		echo mosPageNav::getLimitBox($link);
 	}
-
 	/** Writes the html for the pages counter, eg, Results 1-10 of x */
 	function writePagesCounter() {
 		$txt = '';
@@ -72,7 +68,6 @@ class mosPageNav {
 		}
 		return $to_result ? $txt : '';
 	}
-
 	/** Writes the html for the leafs counter, eg, Page 1 of x */
 	function writeLeafsCounter() {
 		$txt = '';
@@ -83,7 +78,6 @@ class mosPageNav {
 		}
 		return $txt;
 	}
-
 	/**
 	* Writes the html links for pages, eg, previous, next, 1 2 3 ... x
 	* @param string The basic link to include in the href
@@ -93,7 +87,7 @@ class mosPageNav {
 		$txt = '';
 		$displayed_pages = 10;
 		$total_pages = $this->limit ? ceil($this->total / $this->limit) : 0;
-// скрываем навигатор по страницам если их меньше 2х.
+		// скрываем навигатор по страницам если их меньше 2х.
 		if ($total_pages < 2)
 			return;
 		$this_page = $this->limit ? ceil(($this->limitstart + 1) / $this->limit) : 1;
@@ -105,8 +99,8 @@ class mosPageNav {
 		}
 		$link .= '&amp;limit=' . $this->limit;
 		if (!defined('_PN_LT') || !defined('_PN_RT')) {
-			DEFINE('_PN_LT', '&lt;');
-			DEFINE('_PN_RT', '&gt;');
+			DEFINE('_PN_LT', '&larr;');
+			DEFINE('_PN_RT', '&rarr;');
 		}
 		$pnSpace = '&nbsp;';
 		if (_PN_LT || _PN_RT)

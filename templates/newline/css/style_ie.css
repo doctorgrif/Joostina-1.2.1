@@ -21,6 +21,10 @@ a abbr, a acronym {text-decoration:underline;}
 #log_in {_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/log_in.png',sizingMethod='crop');}
 .closewin {_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/cross.png',sizingMethod='crop');}
 .syndicate a.RSS20, .syndicate a.Yandex, .syndicate a.RSS091, .syndicate a.RSS10, .syndicate a.ATOM03, .syndicate a.OPML {_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/rss_small.png',sizingMethod='crop');}
-.search {margin:0;padding:0;}
-.search-text {width:310px;}
+.search {
+	background:url(../images/typo/search.gif) no-repeat center left;
+	margin:0 60px;
+	padding:0 0 0 20px;
+	width:410px;}
+.mod_search {text-align:center;}
 .search-button {width:70px;}

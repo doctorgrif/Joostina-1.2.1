@@ -123,7 +123,7 @@ if (is_dir($abspath_folder)) {
 	<?php
 		} else {
 			$pics_str = implode(',', $pics);
-			/* подлючаем jQuery plugin - simplegallery с выводом скрипта в текущую позицию */
+			/* подлючаем jQuery plugin simplegallery с выводом скрипта в текущую позицию */
 			mosCommonHTML::loadJqueryPlugins('simplegallery', 1);
 			include ($mosConfig_absolute_path . '/modules/mod_random_image/jstSlideShow.php');
 	?>
