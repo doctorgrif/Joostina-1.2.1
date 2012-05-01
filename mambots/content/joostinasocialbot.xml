@@ -14,7 +14,6 @@
 </files>
 <params>
 <param name="jsbbefore" type="text" default="" label="Текст до закладок" description="Текст до закладок социальных серверов" />
-<param name="jsbimg" type="text" default="/images/sociable/" label="Путь до иконок закладок" description="Путь до иконок (изображений) закладок социальных серверов (от корня сайта с начальным и конечным слэшами!)" />
 <param name="jsbafter" type="text" default="" label="Текст после закладок" description="Текст после закладок социальных серверов" />
 </params>
 </mosinstall>

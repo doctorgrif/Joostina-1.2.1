@@ -28,10 +28,8 @@ echo colorizeAppStatus($appStatusGood);
 		<th class="cpanel"><?php echo _JP_BACKUP_MANAGEMENT?></th>
 	</tr>
 </table>
-<table>
-	<tr>
-		<td width="40%" valign="top">
-			<div class="cpicons">
+<div class="col_66">
+	<div class="cpicons">
 <?php
 	$link = "index2.php?option=com_joomlapack&act=pack";
 	quickiconButton($link,'pack.png', _JP_CREATE_BACKUP);
@@ -48,16 +46,14 @@ echo colorizeAppStatus($appStatusGood);
 	$link = "index2.php?option=com_joomlapack&act=log";
 	quickiconButton($link,'log.png', _JP_ACTIONS_LOG);
 ?>
-				</div>
-			<div style="clear:both;">&nbsp;</div>
-		</td>
-		<td valign="top">
-		<?php
-		require_once ($mosConfig_absolute_path.'/'.ADMINISTRATOR_DIRECTORY.'/components/com_joomlapack/includes/html.files.php');
-		?>
-		</td>
-	</tr>
-</table>
+	</div>
+</div>
+<div class="col_33">
+			<?php
+				require_once ($mosConfig_absolute_path.'/'.ADMINISTRATOR_DIRECTORY.'/components/com_joomlapack/includes/html.files.php');
+			?>
+</div>
+<div class="clearfix"></div>
 
 <?php
 

@@ -64,7 +64,7 @@ $spaw_lang_data = array(
 		'error_hspace_nan' => 'Горизонтаьные поля не является числом',
 		'error_vspace_nan' => 'Вертикальные поля не является числом',
 	),
-	'flash_prop' => array(// <= new in 2.0
+	'flash_prop' => array(								// <= new in 2.0
 		'title' => 'Flash',
 		'ok' => 'ГОТОВО',
 		'cancel' => 'Отменить',

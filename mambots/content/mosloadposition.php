@@ -47,6 +47,7 @@ function botMosLoadPosition($published, &$row) {
 }
 function processPositions(&$row, &$matches, $count, $regex, $style) {
 	global $database;
+	/* add STRAIGHT_JOIN */
 	$query = "SELECT position" . "\n FROM #__template_positions" . "\n ORDER BY position";
 	$database->setQuery($query);
 	$positions = $database->loadResultArray();

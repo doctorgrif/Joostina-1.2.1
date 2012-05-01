@@ -7,7 +7,7 @@
 <license>http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL</license>
 <authorEmail>joostinacms@gmail.com</authorEmail>
 <authorUrl>www.joostina.ru</authorUrl>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <description>Этот модуль показывает объекты содержимого, тематически связанные с текущим объектом. Работа модуля основана на совпадении ключевых слов метаданных. Все ключевые слова текущего объекта содержимого сравниваются со всеми ключевыми словами других опубликованных объектов. Например, просматривая статью 'Размножение попугаев' будет показана ссылка на статью 'Разведение черных какаду', если в обеих статьях ключевым словом будет слово "попугай".</description>
 <files>
 <filename module="mod_related_items">mod_related_items.php</filename>
@@ -18,5 +18,13 @@
 <option value="1">Да</option>
 <option value="0">Нет</option>
 </param>
+<param name="count" type="text" default="5" label="Число объектов" description="Количество отображаемых объектов (по умолчанию 5)" />
+<param name="catid" type="text" default="" label="ID категории" description="Выбор категории или категорий для показа (при выборе больше, чем одна категория, разделите их запятыми)." />
+<param name="secid" type="text" default="" label="ID раздела" description="Выбор раздела или разделов для показа (при выборе больше, чем одного раздела, разделите их запятыми)." />
+<param name="show_intro" type="radio" default="1" label="Показать/Скрыть introtext" description="Показать/Скрыть introtext материала (по умолчанию Показать)">
+<option value="0">Скрыть</option>
+<option value="1">Показать</option>
+</param>
+<param name="length_intro" type="text" default="150" label="Размер introtext" description="Число символов, выводимых при отображении introtext (по умолчанию 150 символов)" />
 </params>
 </mosinstall>

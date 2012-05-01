@@ -112,6 +112,7 @@ function pollresult($uid) {
 		$votes = $database->loadObjectList();
 	}
 // list of polls for dropdown selection
+/* add STRAIGHT_JOIN */
 	$query = "SELECT id, title" . "\n FROM #__polls" . "\n WHERE published = 1" . "\n ORDER BY id";
 	$database->setQuery($query);
 	$polls = $database->loadObjectList();

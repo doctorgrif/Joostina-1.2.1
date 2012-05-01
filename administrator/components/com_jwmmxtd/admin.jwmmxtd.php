@@ -522,22 +522,15 @@ function viewMediaManager($curdirectory = "",$mosmsg = "",$selectedfile = "") {
 			<table cellpadding="0" cellspacing="4">
 				<tr>
 					<td>
-					<label for="createfolder"><?php echo _JWMM_CREATE_DIRECTORY?></label><br />
-					<input class="inputbox" type="text" name="createfolder" id="createfolder" />
-					<input type="button" class="createfolder" onclick="javascript:document.adminForm.task.value='createfolder';document.adminForm.submit( );" value="<?php echo _CMN_NEW?>" />
+					<p><label for="createfolder"><?php echo _JWMM_CREATE_DIRECTORY?></label></p>
+					<p><input class="inputbox" type="text" name="createfolder" id="createfolder" /><input type="button" class="createfolder" onclick="javascript:document.adminForm.task.value='createfolder';document.adminForm.submit( );" value="<?php echo _CMN_NEW?>" /></p>
 					</td>
-				</tr>
-				<tr>
 					<td>
-					<label for="uploadfile"><?php echo _UPLOAD_FILE?></label><br />
-					<input type="file" class="inputbox multi" name="upimage[]" maxlength="8" id="uploadfile" />
-					<input type="button" class="uploadfile" onclick="javascript:document.adminForm.task.value='uploadimages';document.adminForm.submit( );" value="<?php echo _TASK_UPLOAD?>" /></td>
-				</tr>
-				<tr>
-					<td>
-					<?php echo _JWMM_FILE_PATH?><br />
-					<?php echo $dirPath; ?>
-					<a href="index2.php?option=com_jwmmxtd&amp;curdirectory=<?php echo $upcategory; ?>" title="<?php echo _JWMM_UP_TO_DIRECTORY?>"><img src="images/uparrow.png" alt="<?php echo _JWMM_UP_TO_DIRECTORY?>" /></a></td>
+					<p><label for="uploadfile"><?php echo _UPLOAD_FILE?></label></p>
+					<p><input type="file" class="inputbox multi" name="upimage[]" maxlength="8" id="uploadfile" /><input type="button" class="uploadfile" onclick="javascript:document.adminForm.task.value='uploadimages';document.adminForm.submit( );" value="<?php echo _TASK_UPLOAD?>" /></p>
+					<p><?php echo _JWMM_FILE_PATH?><?php echo $dirPath; ?>
+					<a href="index2.php?option=com_jwmmxtd&amp;curdirectory=<?php echo $upcategory; ?>" title="<?php echo _JWMM_UP_TO_DIRECTORY?>"><img src="images/uparrow.png" alt="<?php echo _JWMM_UP_TO_DIRECTORY?>" /></a></p>
+</td>
 				</tr>
 			</table>
 		</td>

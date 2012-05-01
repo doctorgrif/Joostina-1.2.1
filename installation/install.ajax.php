@@ -15,9 +15,10 @@ if(!file_exists('../configuration.php')) {
 }
 require_once ('../configuration.php');
 // попытка удаления каталогу установки
-if(!deldir($mosConfig_absolute_path.'/installation/')) echo 'Error!';
-	else
-echo 'www.joostina.ru';
+if(!deldir($mosConfig_absolute_path.'/installation/'))
+	echo 'Error!';
+else
+	echo 'www.joostina.ru';
 function deldir($dir) {
 	$current_dir = opendir($dir);
 	$old_umask = umask(0);

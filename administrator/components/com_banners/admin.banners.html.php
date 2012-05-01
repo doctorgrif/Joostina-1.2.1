@@ -822,22 +822,22 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border="0" alt="" /></a>
 <?php
 
 	$link = 'index2.php?option=com_banners&amp;task=banners';
-	HTML_banners::quickiconButton($link,'pack.png', _ABP_BANNER_MANAGER);
+	HTML_banners::quickiconButton($link, 'pack.png', _ABP_BANNER_MANAGER);
 
 	$link = 'index2.php?option=com_banners&amp;task=categories';
-	HTML_banners::quickiconButton($link,'stopfolder.png', _ABP_BANNER_CATEGORY_MANAGER);
+	HTML_banners::quickiconButton($link, 'stopfolder.png', _ABP_BANNER_CATEGORY_MANAGER);
 
 	$link = 'index2.php?option=com_banners&amp;task=clients';
-	HTML_banners::quickiconButton($link,'users.png', _ABP_BANNER_CLIENT_MANAGER);
+	HTML_banners::quickiconButton($link, 'users.png', _ABP_BANNER_CLIENT_MANAGER);
 
 	$link = 'index2.php?option=com_banners&amp;task=importbanners';
-	HTML_banners::quickiconButton($link,'joostina.png', _ABP_IMPORT_JOOMLA_BANNER);
+	HTML_banners::quickiconButton($link, 'joostina.png', _ABP_IMPORT_JOOMLA_BANNER);
 
 	$link = 'index2.php?option=com_banners&amp;task=backup';
-	HTML_banners::quickiconButton($link,'db.png', 'Архивировать баннеры');
+	HTML_banners::quickiconButton($link, 'db.png', 'Архивировать баннеры');
 
 	$link = 'index2.php?option=com_banners&amp;task=restore';
-	HTML_banners::quickiconButton($link,'down.png', 'Восстановить баннеры');
+	HTML_banners::quickiconButton($link, 'down.png', 'Восстановить баннеры');
 
 ?>
 			</div>
@@ -887,7 +887,7 @@ $onclick; ?>><img src="images/<?php echo $img; ?>" border="0" alt="" /></a>
 		<span>
 			<a href="<?php echo $link; ?>" title="<?php echo $text; ?>">
 	<?php
-				echo mosAdminMenus::imageCheckAdmin($image . '/' . ADMINISTRATOR_DIRECTORY . '/images/',null,null,$text);
+				echo mosAdminMenus::imageCheckAdmin('/' . ADMINISTRATOR_DIRECTORY . '/images/'. $image, null, null, $text);
 				echo $text;
 	?>
 			</a>
@@ -936,7 +936,7 @@ class HTML_bannerClient {
 		<td width="20">
 <?php
 			if($row->checked_out && $row->checked_out != $myid) {
-				echo '<img src="images/checked_out.png" width="12" height="12" border="0" alt="' . _ABP_CICBEBAA . '">';
+				echo '<img src="images/checked_out.png" width="12" height="12" alt="' . _ABP_CICBEBAA . '">';
 			} else {
 				echo '<input type="checkbox" id="cb', $i, '" name="cid[]" value="' . $row->cid . '" onClick="isChecked(this.checked);" />';
 			}

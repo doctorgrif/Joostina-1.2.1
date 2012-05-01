@@ -119,20 +119,20 @@ if(!$DBcreated) {
 	else populate_db($database, 'sql/joostina_old.sql');
 
 	if($DBSample) {
-		populate_db($database, 'lang/' . $lang . '/sample_data.sql');
+		populate_db($database, 'lang/'.$lang.'/sample_data.sql');
 	}
 	$DBcreated = 1;
 }
 
 function db_err($step,$alert) {
 	global $DBhostname,$DBuserName,$DBpassword,$DBDel,$DBname;
-	echo '<form name="' . $step . '" method="post" action="install1.php">
-		<input type="hidden" name="DBhostname" value="' . $DBhostname . '" />
-		<input type="hidden" name="DBuserName" value="' . $DBuserName . '" />
-		<input type="hidden" name="DBpassword" value="' . $DBpassword . '" />
-		<input type="hidden" name="DBDel" value="' . $DBDel . '" />
-		<input type="hidden" name="DBname" value="' . $DBname . '" />
-	</form>' . "\n";
+	echo '<form name="'.$step.'" method="post" action="install1.php">
+		<input type="hidden" name="DBhostname" value="'.$DBhostname.'" />
+		<input type="hidden" name="DBuserName" value="'.$DBuserName.'" />
+		<input type="hidden" name="DBpassword" value="'.$DBpassword.'" />
+		<input type="hidden" name="DBDel" value="'.$DBDel.'" />
+		<input type="hidden" name="DBname" value="'.$DBname.'" />
+	</form>'."\n";
 	echo "<script>alert(\"$alert\"); document.location.href='install1.php';</script>";
 	exit();
 }
@@ -141,8 +141,8 @@ function db_err($step,$alert) {
 * @param object
 * @param string File name
 */
-function populate_db(&$database,$sqlfile = 'mambo.sql') {
-	global $errors,$DBold;
+function populate_db(&$database, $sqlfile = 'joostina.sql') {
+	global $errors, $DBold;
 	// переводим в 'правильное русло'
 	if(!$DBold) $database->setQuery("SET NAMES 'cp1251'");
 
@@ -202,8 +202,11 @@ function split_sql($sql) {
 
 $isErr = intval(count($errors));
 
-echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+echo '<!DOCTYPE html>';
+echo "\n";
+echo '<?xml version="1.0" encoding="utf-8"?>';
+echo "\n";
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Joostina - Web-установка. Шаг 2 - название вашего сайта.</title>
@@ -238,7 +241,7 @@ function check() {
 		<div class="install">
 			<div id="header">
 				<p><?php echo $version; ?></p>
-				<p class="jst"><a href="http://www.joostina.ru">Joostina</a> - свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
+				<p class="jst"><a href="http://www.joostina.ru">Joostina</a> &ndash; свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
 			</div>
 			<div id="navigator">
 				<span style="font-size:larger;">Установка Joostina CMS</span>
@@ -258,7 +261,7 @@ function check() {
 			</div>
 				<div class="buttons">
 				<?php if(!$isErr) { ?>
-					<input class="button" type="submit" name="next" value="Далее &gt;&gt;"/>
+					<input class="button" type="submit" name="next" value="Далее &gt;&gt;" />
 				<?php } ?>
 				</div>
 	<div id="wrap">
@@ -266,9 +269,10 @@ function check() {
 	</div>
 	<div class="install-text">
 	<?php if($isErr) { ?>
-	Произошли ошибки при конфигурировании базы данных!<br />Продолжение установки НЕВОЗМОЖНО!
+	<p>Произошли ошибки при конфигурировании базы данных!</p>
+	<p>Продолжение установки <span class="strong">невозможно!</span></p>
 	<?php } else { ?>
-	Название сайт используется при автоматической отправке сообщений по электронной почте и может отображаться в заголовке сайта.
+	<p>Название сайт используется при автоматической отправке сообщений по электронной почте и может отображаться в заголовке сайта.</p>
 	<?php } ?>
 	</div>
 	<div class="install-form">
@@ -276,24 +280,23 @@ function check() {
 	<?php
 if($isErr) {
 	echo '<tr><td colspan="2">';
-	echo '<strong></strong>';
-	echo '<br /><br /><strong style="color:red;">Ошибки:</strong><br />' . "\n";
+	echo '<p class="strong red">Ошибки:</p>'."\n";
 	echo '<textarea rows="20" cols="140">';
 	foreach($errors as $error) {
 		echo "SQL=$error[0]:\n- - - - - - - - - -\n$error[1]\n= = = = = = = = = =\n\n";
 	}
 	echo '</textarea>';
-	echo '</td></tr>' . "\n";
+	echo '</td></tr>'."\n";
 } else {
 ?>
 	<table class="content2">
 	<tr>
-	<td width="100">Название сайта</td>
+	<td width="100"><p>Название сайта</p></td>
 	<td align="center"><input class="inputbox" type="text" name="sitename" size="40" value="<?php echo $configArray['sitename']; ?>" /></td>
 	</tr>
 	<tr>
 	<td width="100">&nbsp;</td>
-	<td align="center" class="small">Например: Мой новый сайт!</td>
+	<td align="center" class="small"><p>Например: Мой новый сайт!<p></td>
 	</tr>
 	</table>
 	<?php
@@ -301,15 +304,15 @@ if($isErr) {
 ?>
 	</div>
 	</div>
-	<div class="clr"></div>
+	<div class="clearfix"></div>
 	<div id="break"></div>
 	</div>
-	<div class="clr"></div>
+	<div class="clearfix"></div>
 </form>
 </div>
-<div class="clr"></div>
+<div class="clearfix"></div>
 <div class="ctr" id="footer">
-	<a href="http://www.joostina.ru" target="_blank">Joostina</a> - свободное программное обеспечение, распространяемое по лицензии GNU/GPL.
+	<a href="http://www.joostina.ru" target="_blank">Joostina</a> &ndash; свободное программное обеспечение, распространяемое по лицензии GNU/GPL.
 </div>
 </body>
 </html>

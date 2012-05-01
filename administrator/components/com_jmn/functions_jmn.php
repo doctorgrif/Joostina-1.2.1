@@ -11,8 +11,8 @@
 defined('_VALID_MOS') or die();
 function save_manager($_POST,$_GET)
 { global $database,$option2,$cid;
-$metakey=$_POST[metakey];
-$metadesc=$_POST[metadesc];
+$metakey = $_POST['metakey'];
+$metadesc = $_POST['metadesc'];
 foreach($cid as $key=>$id)
 {
 $query = "UPDATE #__content"
@@ -30,8 +30,8 @@ return true;
 function meta_gen($_POST,$_GET,$type)
 { global $mosConfig_absolute_path,$database,$option2,$cid;
 $_POST=array_merge($_GET,$_POST);
-$config=$mosConfig_absolute_path."/administrator/components/com_jmn/jmn_config.php";
-$words=$mosConfig_absolute_path."/components/com_jmn/words.txt";
+$config=$mosConfig_absolute_path.'/administrator/components/com_jmn/jmn_config.php';
+$words=$mosConfig_absolute_path.'/components/com_jmn/words.txt';
 include $config;
 $where=" WHERE 1=1 ";
 if(sizeof($cid)==0)
@@ -49,10 +49,10 @@ $compare=explode("\r\n",$compare);
 // get the subset (based on limits) of required records
 {
 if($type=="metakey")
-if($_POST[kreplace]!=1)
+if($_POST['kreplace']!=1)
 $where.=" AND C.metakey=''";
 if($type=="metadesc")
-if($_POST[dreplace]!=1)
+if($_POST['dreplace']!=1)
 $where.=" AND C.metadesc=''";
 $where.=" AND ( ";
 foreach($cid as $key=>$value)
@@ -152,15 +152,15 @@ $i++;
 }
 foreach($results as $res)
 $sortAux[] = $res['1'];
-if($_POST[nsort]=='SORT_DESC')
+if($_POST['nsort']=='SORT_DESC')
 $tp=SORT_DESC;
-elseif($_POST[nsort]=='SORT_ASC')
+elseif($_POST['nsort']=='SORT_ASC')
 $tp=SORT_ASC;
 array_multisort($sortAux, $tp, $results);
 $result="";
 for($j=0;$j<=$i;$j++)
 {
-if($j>($_POST[nlist]-1))
+if($j>($_POST['nlist']-1))
 break;
 if($results[$j][0]!="")
 $result.=$results[$j][0].$nsep." ";
@@ -170,17 +170,18 @@ return $result;
 function config($_POST,$_GET)
 {
 global $mosConfig_absolute_path;
-$config=$mosConfig_absolute_path."/administrator/components/com_jmn/jmn_config.php";
+$config = $mosConfig_absolute_path.'/administrator/components/com_jmn/jmn_config.php';
 @chmod($config,0777);
+if (isset($_POST['action'])) 
 if($_POST['action']=='save_config')
 {
 $fp=@fopen($config,"w");
 if($fp)
 {
-$_POST[chars]=str_replace(array("'"),array(""),stripslashes($_POST[chars]));
-$_POST[chars]=str_replace(array("\r\n"),array("','"),"'".$_POST[chars]."'");
-$POST[exclude_key]=str_replace(array("'"),array(""),stripslashes($_POST[exclude_key]));
-$_POST[exclude_key]=str_replace(array("\r\n"),array("','"),"'".$_POST[exclude_key]."'");
+$_POST[chars]=str_replace(array("'"),array(""),stripslashes($_POST['chars']));
+$_POST[chars]=str_replace(array("\r\n"),array("','"),"'".$_POST['chars']."'");
+$POST[exclude_key]=str_replace(array("'"),array(""),stripslashes($_POST['exclude_key']));
+$_POST[exclude_key]=str_replace(array("\r\n"),array("','"),"'".$_POST['exclude_key']."'");
 fwrite($fp,'<?'."\n");
 fwrite($fp,'$_POST[nlist]="'.$_POST[nlist].'";'."\n");
 fwrite($fp,'$_POST[nsep]="'.$_POST[nsep].'";'."\n");
@@ -201,17 +202,17 @@ echo "<h3 style='color:red;'>"._MG_ACSINFOCONF."</h3>";
 }
 include $config;
 ?>
-<form name="adminForm" method="POST" action="">
-<table width="100%"><tr><td>
-<table align="center" bgcolor="#eee" width="100%" cellspacing="10">
+<form name="adminForm" method="post" action="">
+<table cellspacing="0" cellpadding="0" width="98%">
 <tr>
-<td><b style="color:#eee;"><font size="2" color="red"><?php echo _MG_KWGEN;?></font></strong></td>
+<td width="100%" colspan="3"><p><strong class="red"><?php echo _MG_KWGEN;?></strong></p></td>
 </tr>
-<tr><td><strong style="color:#000;"><?php echo _MG_TOGEN;?>:</strong></td>
-<td><select name="nlist">
+<tr>
+<td width="33%"><p><strong><?php echo _MG_TOGEN;?>:</strong></p></td>
+<td width="33%"><select name="nlist">
 <?
 if($_POST['nlist'])
-echo "<option value='$_POST[nlist]'>".$_POST[nlist] ._MG_W."</option>";
+echo '<option value="'.$_POST['nlist'].'">'.$_POST['nlist']._MG_W.'</option>';
 ?>
 <option value="5"><?php echo _MG_5W;?></option>
 <option value="10"><?php echo _MG_10W;?></option>
@@ -222,67 +223,64 @@ echo "<option value='$_POST[nlist]'>".$_POST[nlist] ._MG_W."</option>";
 <option value="500"><?php echo _MG_500W;?></option>
 <option value="1000000"><?php echo _MG_UNLIM;?></option>
 </select></td>
-<td><?php echo _MG_COUNTKWVIEW;?></td>
+<td width="33%"><p><?php echo _MG_COUNTKWVIEW;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_SEP;?>:</strong></td>
-<td><select name="nsep">
-<option value="," <? if($_POST['nsep']==',') echo "selected";?> ><?php echo _MG_COMMA;?></option>
-<option value=" " <? if($_POST['nsep']==' ') echo "selected";?> ><?php echo _MG_SPACE;?></option>
+<td width="33%"><p><strong><?php echo _MG_SEP;?>:</strong></p></td>
+<td width="33%"><select name="nsep">
+<option value="," <?php if($_POST['nsep']==',') echo "selected";?> ><?php echo _MG_COMMA;?></option>
+<option value=" " <?php if($_POST['nsep']==' ') echo "selected";?> ><?php echo _MG_SPACE;?></option>
 </select></td>
-<td><?php echo _MG_SEPKW;?></td>
+<td width="33%"><p><?php echo _MG_SEPKW;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_ORDER;?>:</strong></td>
-<td><select name="nsort">
-<option value="SORT_DESC" <? if($_POST['nsort']=='SORT_DESC') echo "selected";?> ><?php echo _MG_SORTDESC;?></option>
-<option value="SORT_ASC" <? if($_POST['nsort']=='SORT_ASC') echo "selected";?> ><?php echo _MG_SORTASC;?></option>
+<td width="33%"><p><strong><?php echo _MG_ORDER;?>:</strong></p></td>
+<td width="33%"><select name="nsort">
+<option value="SORT_DESC" <?php if($_POST['nsort']=='SORT_DESC') echo "selected";?> ><?php echo _MG_SORTDESC;?></option>
+<option value="SORT_ASC" <?php if($_POST['nsort']=='SORT_ASC') echo "selected";?> ><?php echo _MG_SORTASC;?></option>
 </select></td>
-<td><?php echo _MG_CHGSORTKW;?></td>
+<td width="33%"><p><?php echo _MG_CHGSORTKW;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_REWRKW;?>:</strong></td>
-<td><input type="checkbox" name="kreplace" value="1" <? if($_POST['kreplace']) echo "checked";?>></td>
-<td><?php echo _MG_CHEKREWRKW;?></td>
+<td width="33%"><p><strong><?php echo _MG_REWRKW;?>:</strong></p></td>
+<td width="33%"><input type="checkbox" name="kreplace" value="1" <?php if($_POST['kreplace']) echo "checked";?>></td>
+<td width="33%"><p><?php echo _MG_CHEKREWRKW;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_REWRDESC;?>:</strong></td>
-<td><input type="checkbox" name="dreplace" value="1" <? if($_POST['dreplace']) echo "checked";?>></td>
-<td><?php echo _MG_CHEKREWRDESC;?></td>
+<td width="33%"><p><strong><?php echo _MG_REWRDESC;?>:</strong></p></td>
+<td width="33%"><input type="checkbox" name="dreplace" value="1" <?php if($_POST['dreplace']) echo "checked";?>></td>
+<td width="33%"><p><?php echo _MG_CHEKREWRDESC;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_IGNORESIMB;?>:</strong></td>
-<td><textarea cols="40" rows="10" name="chars" ><?foreach($chars as $value) echo $value."\r\n";?></textarea></td>
-<td><?php echo _MG_ENTERIGNORESIMB;?></td>
+<td width="33%"><p><strong><?php echo _MG_IGNORESIMB;?>:</strong></p></td>
+<td width="33%"><textarea cols="40" rows="10" name="chars" ><?php foreach($chars as $value) echo $value."\r\n";?></textarea></td>
+<td width="33%"><p><?php echo _MG_ENTERIGNORESIMB;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#eee;"><font size="2" color="red"><?php echo _MG_DESCGEN;?></font></strong>
+<td width="100%" colspan="3"><p><strong class="red"><?php echo _MG_DESCGEN;?></strong></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_GETDESCFROM;?>:</strong></td>
-<td><select name='gdesc'>
-<option value="intro" <? if($_POST['gdesc']=='intro') echo "selected";?> ><?php echo _MG_INTROTXT;?></option>
-<option value="full" <? if($_POST['gdesc']=='full') echo "selected";?> ><?php echo _MG_MAINTXT;?></option>
+<td width="33%"><p><strong><?php echo _MG_GETDESCFROM;?>:</strong></p></td>
+<td width="33%"><select name='gdesc'>
+<option value="intro" <?php if($_POST['gdesc']=='intro') echo "selected";?> ><?php echo _MG_INTROTXT;?></option>
+<option value="full" <?php if($_POST['gdesc']=='full') echo "selected";?> ><?php echo _MG_MAINTXT;?></option>
 </select></td>
-<td><?php echo _MG_CHEKREWRDESCINFO;?></td>
+<td width="33%"><p><?php echo _MG_CHEKREWRDESCINFO;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_GETFITXT;?>:</strong></td>
-<td><input type="checkbox" name="gdesc_opt" value="1" <? if($_POST['gdesc_opt']) echo "checked";?> ></td>
-<td><?php echo _MG_GETFITXTINFO;?></td>
+<td width="33%"><p><strong><?php echo _MG_GETFITXT;?>:</strong></p></td>
+<td width="33%"><input type="checkbox" name="gdesc_opt" value="1" <?php if($_POST['gdesc_opt']) echo "checked";?> ></td>
+<td width="33%"><p><?php echo _MG_GETFITXTINFO;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_DESCLEN;?>:</strong></td>
-<td><input type="text" name="gdesc_len" value="<?=$_POST['gdesc_len']?>"></td>
-<td><?php echo _MG_DESCLENINFO;?></td>
+<td width="33%"><p><strong><?php echo _MG_DESCLEN;?>:</strong></p></td>
+<td width="33%"><input type="text" name="gdesc_len" value="<?php echo $_POST['gdesc_len'];?>"></td>
+<td width="33%"><p><?php echo _MG_DESCLENINFO;?></p></td>
 </tr>
 <tr>
-<td><strong style="color:#000;"><?php echo _MG_EXKWDESC;?>:</strong></td>
-<td><textarea cols="40" rows="10" name="exclude_key" ><?foreach($exclude_key as $value) echo $value."\r\n";?></textarea></td>
-<td><?php echo _MG_EXKWDESCINFO;?></td>
-</tr>
-</table>
-</td>
+<td width="33%"><p><strong><?php echo _MG_EXKWDESC;?>:</strong></p></td>
+<td width="33%"><textarea cols="40" rows="10" name="exclude_key" ><?php foreach($exclude_key as $value) echo $value."\r\n";?></textarea></td>
+<td width="33%"><p><?php echo _MG_EXKWDESCINFO;?></p></td>
 </tr>
 </table>
 <input type="hidden" name="action" value="save_config">
@@ -295,18 +293,18 @@ return true;
 function settings($_POST,$_GET)
 {
 global $mosConfig_absolute_path;
-$conf=$mosConfig_absolute_path."/components/com_jmn/words.txt";
-$config="";
-if($_POST[action]=='save_settings')
+$conf = $mosConfig_absolute_path.'/components/com_jmn/words.txt';
+$config = '';
+if($_POST['action']=='save_settings')
 {
 $fp=@fopen($conf,"w");
 if($fp)
 {
 fwrite($fp,stripslashes($_POST['config_text']));
 fclose($fp);
-echo "<h3>"._MG_WEXSAVE."</h3>";
+echo '<h3>'._MG_WEXSAVE.'</h3>';
 } else {
-echo "<h3 style='color:red;'>"._MG_ACSINFOCONF."</h3>";
+echo '<h3 class="red">'._MG_ACSINFOCONF.'</h3>';
 }
 }
 $fp=@fopen($conf,"r");
@@ -320,12 +318,12 @@ echo "<h2>"._MG_READINFOCONF."</h2>";
 } ?>
 <form action="" method="POST" name="adminForm">
 <table bgcolor="#eee" align="center">
-<tr><td><center><h3><?php echo _MG_WEXLISTINFO;?></strong><h3></td></tr>
-<tr bgcolor="#bbbbbb"><td><b><?php echo _MG_FILEEDITE;?>: <?=$conf?></strong><br /></td></tr>
+<tr><td><h3><?php echo _MG_WEXLISTINFO;?><h3></td></tr>
+<tr bgcolor="#bbbbbb"><td><strong><?php echo _MG_FILEEDITE;?>: <?php echo $conf;?></strong><br /></td></tr>
 <tr>
 <td align="center">
 <table>
-<tr><td><textarea name="config_text" cols="50" rows="15"><?=$config?></textarea></td></tr>
+<tr><td><textarea name="config_text" cols="50" rows="15"><?php echo $config;?></textarea></td></tr>
 </table>
 </td>
 </tr>

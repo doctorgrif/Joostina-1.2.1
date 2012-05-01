@@ -98,9 +98,9 @@ class HTML_content {
 
 <table class="adminlisttop adminlist">
 	<tr class="row0">
-	<td valign="top" align="left"id="ntdree"><img src="images/con_pix.gif"><?php echo $lists['sectree'];?></td>
-	<td onclick="ntreetoggle();" width="1" id="tdtoogle" <?php echo $lists['sectreetoggle'];?>><img alt="<?php echo _HIDE_NAV_TREE;?>" src="images/tgl.gif" /></td>
-	<td valign="top" width="100%">
+	<td valign="top" align="left" id="ntdree"><img src="images/con_pix.gif"><?php echo $lists['sectree'];?></td>
+	<td onclick="ntreetoggle();" id="tdtoogle" <?php echo $lists['sectreetoggle'];?>><img alt="<?php echo _HIDE_NAV_TREE;?>" src="images/tgl.gif" /></td>
+	<td valign="top" id="ntcontent">
 	<table class="adminlist" width="100%">
 		<thead>
 		<tr>
@@ -161,14 +161,14 @@ class HTML_content {
 			$row->publish_down = mosFormatDate($row->publish_down,_CURRENT_SERVER_TIME_FORMAT);
 			$times = '';
 			if($row->publish_up == $nullDate) {
-				$times .= "<tr><td>"._START.": "._ALWAYS."</td></tr>";
+				$times .= '<tr><td>'._START.': '._ALWAYS.'</td></tr>';
 			} else {
-				$times .= "<tr><td>"._START.": $row->publish_up</td></tr>";
+				$times .= '<tr><td>'._START.': '.$row->publish_up.'</td></tr>';
 			}
 			if($row->publish_down == $nullDate || $row->publish_down == 'Никогда') {
-				$times .= "<tr><td>"._END.": "._WITHOUT_END."</td></tr>";
+				$times .= '<tr><td>'._END.': '._WITHOUT_END.'</td></tr>';
 			} else {
-				$times .= "<tr><td>"._END.": $row->publish_down</td></tr>";
+				$times .= '<tr><td>'._END.': '.$row->publish_down.'</td></tr>';
 			}
 			if($acl->acl_check('administration','manage','users',$my->usertype,'components','com_users')) {
 				if($row->created_by_alias) {

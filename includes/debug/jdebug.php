@@ -27,20 +27,21 @@ class jdebug {
 			$this->add(_SQL_QUERIES_COUNT . ': ' . count($database->_log));
 		}
 		foreach($this->_log as $key => $value) {
-			$this->text .= '<p>' . $value . '</p>';
+			$this->text .= $value;
 		}
-		echo '<div id="jdebug">' . $this->text . '</div>';
+		echo $this->text;
 	}
 	/* отладка sql запросов базы данных*/
 	function _db() {
 		global $database;
 		count($database->_log);
-		$this->add('<pre>');
-		$this->add('SQL запросов: ' . count($database->_log));
+		$this->add('<pre id="database_log"><code>');
+		// подсчет числа SQL запросов и вывод самих запросов
+		$this->add('<p>SQL запросов: ' . count($database->_log));
 		foreach($database->_log as $k => $sql) {
-			$this->add($k + 1 . ': ' . $sql . '<hr />');
+			$this->add($k + 1 . '</p><p>' . $sql . '</p><hr />');
 		}
-		$this->add('</pre>');
+		$this->add('</code></pre>');
 		return;
 	}
 }

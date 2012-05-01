@@ -33,14 +33,14 @@ if(get_magic_quotes_gpc()) {
 
 if($sitename == '') {
 	echo '<form name="stepBack" method="post" action="install2.php">
-		<input type="hidden" name="DBhostname" value="' . $DBhostname . '" />
-		<input type="hidden" name="DBuserName" value="' . $DBuserName . '" />
-		<input type="hidden" name="DBpassword" value="' . $DBpassword . '" />
-		<input type="hidden" name="DBname" value="' . $DBname . '" />
-		<input type="hidden" name="DBPrefix" value="' . $DBPrefix . '" />
-		<input type="hidden" name="DBold" value="' . $DBold . '" />
+		<input type="hidden" name="DBhostname" value="'.$DBhostname.'" />
+		<input type="hidden" name="DBuserName" value="'.$DBuserName.'" />
+		<input type="hidden" name="DBpassword" value="'.$DBpassword.'" />
+		<input type="hidden" name="DBname" value="'.$DBname.'" />
+		<input type="hidden" name="DBPrefix" value="'.$DBPrefix.'" />
+		<input type="hidden" name="DBold" value="'.$DBold.'" />
 		<input type="hidden" name="DBcreated" value="1" />
-	</form>' . "\n";
+	</form>'."\n";
 	echo "<script>alert('Не введено название сайта'); document.stepBack.submit();</script>";
 	return;
 }
@@ -73,8 +73,11 @@ if($filePerms != '') {
 }
 ;
 
-echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+echo '<!DOCTYPE html>';
+echo "\n";
+echo '<?xml version="1.0" encoding="utf-8"?>';
+echo "\n";
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Joostina - Web-установка. Шаг 3 - конфигурация сайта</title>
@@ -84,9 +87,9 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 <script type="text/javascript">
 <!--
 function check() {
-		// form validation check
-		var formValid = true;
-		var f = document.form;
+	// form validation check
+	var formValid = true;
+	var f = document.form;
 		if ( f.siteUrl.value == '' ) {
 				alert('Введите URL сайта');
 				f.siteUrl.focus();
@@ -108,27 +111,27 @@ function check() {
 }
 function changeFilePermsMode(mode)
 {
-		if(document.getElementById) {
-				switch (mode) {
-						case 0:
-								document.getElementById('filePermsFlags').style.display = 'none';
-								break;
-						default:
-								document.getElementById('filePermsFlags').style.display = '';
-				} // switch
-		} // if
+	if(document.getElementById) {
+		switch (mode) {
+			case 0:
+				document.getElementById('filePermsFlags').style.display = 'none';
+				break;
+			default:
+				document.getElementById('filePermsFlags').style.display = '';
+		} // switch
+	} // if
 }
 function changeDirPermsMode(mode)
 {
-		if(document.getElementById) {
-				switch (mode) {
-						case 0:
-								document.getElementById('dirPermsFlags').style.display = 'none';
-								break;
-						default:
-								document.getElementById('dirPermsFlags').style.display = '';
-				} // switch
-		} // if
+	if(document.getElementById) {
+		switch (mode) {
+			case 0:
+				document.getElementById('dirPermsFlags').style.display = 'none';
+				break;
+			default:
+				document.getElementById('dirPermsFlags').style.display = '';
+		} // switch
+	} // if
 }
 //-->
  </script>
@@ -145,7 +148,7 @@ function changeDirPermsMode(mode)
 	<div class="install">
 		<div id="header">
 			<p><?php echo $version; ?></p>
-			<p class="jst"><a href="http://www.joostina.ru">Joostina</a> - свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
+			<p class="jst"><a href="http://www.joostina.ru">Joostina</a> &ndash; свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
 			</div>
 			<div id="navigator">
 				<span style="font-size:larger;">Установка Joostina CMS</span>
@@ -164,85 +167,94 @@ function changeDirPermsMode(mode)
 				</ul>
 			</div>
 			<div class="buttons">
-				<input class="button" type="submit" name="next" value="Далее &gt;&gt;"/>
+				<input class="button" type="submit" name="next" value="Далее &gt;&gt;" />
 			</div>
 <div id="wrap">
 	<div class="install-text">
-		<p>Если вы не уверены в правильности настроек, оставьте значения по умолчанию.<br />Позже Вы сможете изменить эти настройки в глобальной конфигурации сайта.</p>
+		<p>Если вы не уверены в правильности настроек, оставьте значения по умолчанию.</p>
+		<p>Позже Вы сможете изменить эти настройки в глобальной конфигурации сайта.</p>
 	</div>
 	<div class="install-form">
 		<div class="form-block">
 	<table class="content2" width="100%">
 		<tr class="trongate-1">
-			<th>URL сайта</th>
-			<td><input class="inputbox" type="text" name="siteUrl" value="<?php echo $url; ?>" size="40"/></td>
+			<th><p>URI сайта</p></th>
+			<td><input class="inputbox" type="text" name="siteUrl" value="<?php echo $url; ?>" size="40" /></td>
 		</tr>
 		<tr class="trongate-2">
-			<th>Абсолютный путь</th>
+			<th><p>Абсолютный путь</p></th>
 				<td><input class="inputbox" type="text" name="absolutePath" value="<?php echo $abspath; ?>" size="40" /></td>
 		</tr>
 		<tr class="trongate-1">
-			<th>Ваш логин</th>
+			<th><p>Ваш логин</p></th>
 				<td>
 					<input class="inputbox" type="text" name="adminLogin" value="<?php echo $adminLogin; ?>" size="40" />
-					Используется как логин для авторизации главного Администратора сайта
+					<p>Используется как логин для авторизации главного Администратора сайта.</p>
 				</td>
 		</tr>
 		<tr class="trongate-1">
-			<th>Ваш E-mail</th>
+			<th><p>Ваш E-mail</p></th>
 				<td>
 					<input class="inputbox" type="text" name="adminEmail" value="<?php echo $adminEmail; ?>" size="40" />
-				Используется как адрес главного Администратора сайта
+					<p>Используется как адрес главного Администратора сайта.</p>
 			</td>
 		</tr>
 		<tr class="trongate-2">
-			<th>Пароль Администратора</th>
+			<th><p>Пароль Администратора</p></th>
 				<td>
-					<input class="inputbox" type="text" name="adminPassword" id="adminPassword" value="<?php if($adminPassword!='') echo $adminPassword; else mosMakePassword(8); ?>" size="40"/>
-					Рекомендуется использовать пароль не короче <strong>6</strong> символов.
+					<input class="inputbox" type="text" name="adminPassword" id="adminPassword" value="<?php if($adminPassword!='') echo $adminPassword; else mosMakePassword(8); ?>" size="40" />
+					<p>Рекомендуется использовать пароль не короче <span class="strong">6</span> символов.</p>
 				</td>
 		</tr>
 		<tr class="trongate-1">
-				<th>Права доступа к файлам</th>
+				<th><p>Права доступа к файлам</p></th>
 				<td>
 				<table cellpadding="1" cellspacing="1" border="0">
 				<tr>
-				<td><input type="radio" id="filePermsMode0" name="filePermsMode" value="0" onclick="changeFilePermsMode(0)"<?php if(!$mode) echo ' checked="checked"'; ?>/></td>
-				<td><label for="filePermsMode0">Не менять CHMOD (использовать умолчания сервера)</label></td>
+				<td>
+					<input type="radio" id="filePermsMode0" name="filePermsMode" value="0" onclick="changeFilePermsMode(0)"<?php if(!$mode) echo ' checked="checked"'; ?> />
+				</td>
+				<td>
+					<label for="filePermsMode0">Не менять CHMOD (использовать умолчания сервера)</label>
+				</td>
 				</tr>
 				<tr>
-				<td><input type="radio" id="filePermsMode1" name="filePermsMode" value="1" onclick="changeFilePermsMode(1)"<?php if($mode) echo ' checked="checked"'; ?>/></td>
-				<td><label for="filePermsMode1">CHMOD файлов:</label></td>
+				<td>
+					<input type="radio" id="filePermsMode1" name="filePermsMode" value="1" onclick="changeFilePermsMode(1)"<?php if($mode) echo ' checked="checked"'; ?> />
+				</td>
+				<td>
+					<label for="filePermsMode1">CHMOD файлов:</label><
+				/td>
 				</tr>
 				<tr id="filePermsFlags"<?php if(!$mode) echo ' style="display:none"'; ?>>
 				<td>&nbsp;</td>
 				<td>
 					<table cellpadding="1" cellspacing="0" border="0">
 					<tr>
-					<td>Владелец:</td>
-					<td><input type="checkbox" id="filePermsUserRead" name="filePermsUserRead" value="1"<?php if($flags &0400) echo ' checked="checked"'; ?>/></td>
+					<td><p>Владелец:</p></td>
+					<td><input type="checkbox" id="filePermsUserRead" name="filePermsUserRead" value="1"<?php if($flags &0400) echo ' checked="checked"'; ?> /></td>
 					<td><label for="filePermsUserRead">чтение</label></td>
-					<td><input type="checkbox" id="filePermsUserWrite" name="filePermsUserWrite" value="1"<?php if($flags &0200) echo ' checked="checked"'; ?>/></td>
+					<td><input type="checkbox" id="filePermsUserWrite" name="filePermsUserWrite" value="1"<?php if($flags &0200) echo ' checked="checked"'; ?> /></td>
 					<td><label for="filePermsUserWrite">запись</label></td>
-					<td><input type="checkbox" id="filePermsUserExecute" name="filePermsUserExecute" value="1"<?php if($flags &0100) echo ' checked="checked"'; ?>/></td>
+					<td><input type="checkbox" id="filePermsUserExecute" name="filePermsUserExecute" value="1"<?php if($flags &0100) echo ' checked="checked"'; ?> /></td>
 					<td width="100%"><label for="filePermsUserExecute">выполнение</label></td>
 					</tr>
 					<tr>
-					<td>Группа:</td>
-						<td><input type="checkbox" id="filePermsGroupRead" name="filePermsGroupRead" value="1"<?php if($flags &040) echo ' checked="checked"'; ?>/></td>
+					<td><p>Группа:</p></td>
+						<td><input type="checkbox" id="filePermsGroupRead" name="filePermsGroupRead" value="1"<?php if($flags &040) echo ' checked="checked"'; ?> /></td>
 						<td><label for="filePermsGroupRead">чтение</label></td>
-						<td><input type="checkbox" id="filePermsGroupWrite" name="filePermsGroupWrite" value="1"<?php if($flags &020) echo ' checked="checked"'; ?>/></td>
+						<td><input type="checkbox" id="filePermsGroupWrite" name="filePermsGroupWrite" value="1"<?php if($flags &020) echo ' checked="checked"'; ?> /></td>
 						<td><label for="filePermsGroupWrite">запись</label></td>
-						<td><input type="checkbox" id="filePermsGroupExecute" name="filePermsGroupExecute" value="1"<?php if($flags &010) echo ' checked="checked"'; ?>/></td>
+						<td><input type="checkbox" id="filePermsGroupExecute" name="filePermsGroupExecute" value="1"<?php if($flags &010) echo ' checked="checked"'; ?> /></td>
 						<td width="100%"><label for="filePermsGroupExecute">выполнение</label></td>
 					</tr>
 					<tr>
-					<td>Все:</td>
-						<td><input type="checkbox" id="filePermsWorldRead" name="filePermsWorldRead" value="1"<?php if($flags &04) echo ' checked="checked"'; ?>/></td>
+					<td><p>Все:</p></td>
+						<td><input type="checkbox" id="filePermsWorldRead" name="filePermsWorldRead" value="1"<?php if($flags &04) echo ' checked="checked"'; ?> /></td>
 						<td><label for="filePermsWorldRead">чтение</label></td>
-						<td><input type="checkbox" id="filePermsWorldWrite" name="filePermsWorldWrite" value="1"<?php if($flags &02) echo ' checked="checked"'; ?>/></td>
+						<td><input type="checkbox" id="filePermsWorldWrite" name="filePermsWorldWrite" value="1"<?php if($flags &02) echo ' checked="checked"'; ?> /></td>
 						<td><label for="filePermsWorldWrite">запись</label></td>
-						<td><input type="checkbox" id="filePermsWorldExecute" name="filePermsWorldExecute" value="1"<?php if($flags &01) echo ' checked="checked"'; ?>/></td>
+						<td><input type="checkbox" id="filePermsWorldExecute" name="filePermsWorldExecute" value="1"<?php if($flags &01) echo ' checked="checked"'; ?> /></td>
 						<td width="100%"><label for="filePermsWorldExecute">выполнение</label></td>
 					</tr>
 					</table>
@@ -260,46 +272,46 @@ if($dirPerms != '') {
 	$flags = octdec($dirPerms);
 } // if
 ?>
-		<th>Права доступа к каталогам</th>
+		<th><p>Права доступа к каталогам</p></th>
 		<td>
 			<table cellpadding="1" cellspacing="1" border="0">
 			<tr>
-				<td><input type="radio" id="dirPermsMode0" name="dirPermsMode" value="0" onclick="changeDirPermsMode(0)"<?php if(!$mode) echo ' checked="checked"'; ?>/></td>
+				<td><input type="radio" id="dirPermsMode0" name="dirPermsMode" value="0" onclick="changeDirPermsMode(0)"<?php if(!$mode) echo ' checked="checked"'; ?> /></td>
 				<td><label for="dirPermsMode0">Не менять CHMOD (использовать умолчания сервера)</label></td>
 			</tr>
 			<tr>
-			<td><input type="radio" id="dirPermsMode1" name="dirPermsMode" value="1" onclick="changeDirPermsMode(1)"<?php if($mode) echo ' checked="checked"'; ?>/></td>
-			<td><label for="dirPermsMode1"> CHMOD каталогов:</label></td>
+			<td><input type="radio" id="dirPermsMode1" name="dirPermsMode" value="1" onclick="changeDirPermsMode(1)"<?php if($mode) echo ' checked="checked"'; ?> /></td>
+			<td><label for="dirPermsMode1">CHMOD каталогов:</label></td>
 			</tr>
 			<tr id="dirPermsFlags"<?php if(!$mode) echo ' style="display:none"'; ?>>
 			<td>&nbsp;</td>
 			<td>
 				<table cellpadding="1" cellspacing="0" border="0">
 				<tr>
-				<td>Владелец:</td>
-					<td><input type="checkbox" id="dirPermsUserRead" name="dirPermsUserRead" value="1"<?php if($flags &0400) echo ' checked="checked"'; ?>/></td>
+				<td><p>Владелец:</p></td>
+					<td><input type="checkbox" id="dirPermsUserRead" name="dirPermsUserRead" value="1"<?php if($flags &0400) echo ' checked="checked"'; ?> /></td>
 					<td><label for="dirPermsUserRead">чтение</label></td>
-					<td><input type="checkbox" id="dirPermsUserWrite" name="dirPermsUserWrite" value="1"<?php if($flags &0200) echo ' checked="checked"'; ?>/></td>
+					<td><input type="checkbox" id="dirPermsUserWrite" name="dirPermsUserWrite" value="1"<?php if($flags &0200) echo ' checked="checked"'; ?> /></td>
 					<td><label for="dirPermsUserWrite">запись</label></td>
-					<td><input type="checkbox" id="dirPermsUserSearch" name="dirPermsUserSearch" value="1"<?php if($flags &0100) echo ' checked="checked"'; ?>/></td>
+					<td><input type="checkbox" id="dirPermsUserSearch" name="dirPermsUserSearch" value="1"<?php if($flags &0100) echo ' checked="checked"'; ?> /></td>
 					<td width="100%"><label for="dirPermsUserSearch">поиск</label></td>
 				</tr>
 				<tr>
-				<td>Группа:</td>
-				<td><input type="checkbox" id="dirPermsGroupRead" name="dirPermsGroupRead" value="1"<?php if($flags &040) echo ' checked="checked"'; ?>/></td>
+				<td><p>Группа:</p></td>
+				<td><input type="checkbox" id="dirPermsGroupRead" name="dirPermsGroupRead" value="1"<?php if($flags &040) echo ' checked="checked"'; ?> /></td>
 				<td><label for="dirPermsGroupRead">чтение</label></td>
-				<td><input type="checkbox" id="dirPermsGroupWrite" name="dirPermsGroupWrite" value="1"<?php if($flags &020) echo ' checked="checked"'; ?>/></td>
+				<td><input type="checkbox" id="dirPermsGroupWrite" name="dirPermsGroupWrite" value="1"<?php if($flags &020) echo ' checked="checked"'; ?> /></td>
 				<td><label for="dirPermsGroupWrite">запись</label></td>
-				<td><input type="checkbox" id="dirPermsGroupSearch" name="dirPermsGroupSearch" value="1"<?php if($flags &010) echo ' checked="checked"'; ?>/></td>
+				<td><input type="checkbox" id="dirPermsGroupSearch" name="dirPermsGroupSearch" value="1"<?php if($flags &010) echo ' checked="checked"'; ?> /></td>
 				<td width="100%"><label for="dirPermsGroupSearch">поиск</label></td>
 				</tr>
 				<tr>
-				<td>Все:</td>
-				<td><input type="checkbox" id="dirPermsWorldRead" name="dirPermsWorldRead" value="1"<?php if($flags &04) echo ' checked="checked"'; ?>/></td>
+				<td><p>Все:</p></td>
+				<td><input type="checkbox" id="dirPermsWorldRead" name="dirPermsWorldRead" value="1"<?php if($flags &04) echo ' checked="checked"'; ?> /></td>
 				<td><label for="dirPermsWorldRead">чтение</label></td>
-				<td><input type="checkbox" id="dirPermsWorldWrite" name="dirPermsWorldWrite" value="1"<?php if($flags &02) echo ' checked="checked"'; ?>/></td>
+				<td><input type="checkbox" id="dirPermsWorldWrite" name="dirPermsWorldWrite" value="1"<?php if($flags &02) echo ' checked="checked"'; ?> /></td>
 				<td><label for="dirPermsWorldWrite">запись</label></td>
-				<td><input type="checkbox" id="dirPermsWorldSearch" name="dirPermsWorldSearch" value="1"<?php if($flags &01) echo ' checked="checked"'; ?>/></td>
+				<td><input type="checkbox" id="dirPermsWorldSearch" name="dirPermsWorldSearch" value="1"<?php if($flags &01) echo ' checked="checked"'; ?> /></td>
 				<td width="100%"><label for="dirPermsWorldSearch">поиск</label></td>
 				</tr>
 				</table>
@@ -313,10 +325,10 @@ if($dirPerms != '') {
 	</div>
 	<div id="break"></div>
 	</div>
-	<div class="clr"></div>
+	<div class="clearfix"></div>
 	</div>
 	</form>
 </div>
-<div class="clr"></div>
+<div class="clearfix"></div>
 </body>
 </html>

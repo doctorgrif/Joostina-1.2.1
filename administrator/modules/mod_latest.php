@@ -32,19 +32,23 @@ switch ($type) {
 }
 
 $select = $ext ? "\n c.title AS catname, s.name AS secname," : '';
-$query = "SELECT a.id, a.sectionid, a.title, a.created, $select u.name, a.created_by_alias, a.created_by, a.publish_up, a.publish_down, a.state"
-		. "\n FROM #__content AS a"
-		. "\n LEFT JOIN #__users AS u ON u.id = a.created_by"
-		. $where
-		. "\n ORDER BY created DESC"; // сортировка по времени создания, новые первыми
+$query = "SELECT STRAIGHT_JOIN a.id, a.sectionid, a.title, a.created, $select u.name, a.created_by_alias, a.created_by, a.publish_up, a.publish_down, a.state"
+. "\n FROM #__content AS a"
+. "\n LEFT JOIN #__users AS u ON u.id = a.created_by"
+. $where
+. "\n ORDER BY created DESC"; // сортировка по времени создания, новые первыми
 $database->setQuery($query, 0, $limit);
 $rows = $database->loadObjectList();
 ?>
 
 <table class="adminlist">
 	<tr>
-		<th colspan="3" class="title"><?php echo _LAST_ADDED_CONTENT ?> <small> (<a href="index2.php?option=com_content&sectionid=0"><?php echo _ADMINLIST_ALL; ?></a>)</small></th>
-		<th align="center"><?php echo _USER_WHO_ADD_CONTENT ?></th>
+		<th colspan="3" class="title">
+			<p><?php echo _LAST_ADDED_CONTENT ?> <small>(<a href="index2.php?option=com_content&sectionid=0"><?php echo _ADMINLIST_ALL; ?></a>)</small></p>
+		</th>
+		<th align="center">
+			<p><?php echo _USER_WHO_ADD_CONTENT ?></p>
+		</th>
 	</tr>
 	<?php
 	$nullDate = $database->getNullDate();
@@ -88,10 +92,13 @@ $rows = $database->loadObjectList();
 		}
 		?>
 	<tr class="row<?php echo $k; ?>">
-		<td width="10%" align="center"><?php echo $row->created; ?></td>
-		<td align="left" width="60%">
-			<a href="<?php echo $link; ?>"><?php echo htmlspecialchars($row->title, ENT_QUOTES); ?></a><br />
-				<?php
+		<td width="20%">
+			<p><?php echo $row->created; ?></p>
+		</td>
+		<td width="60%">
+			<p>
+				<a href="<?php echo $link; ?>" title="<?php echo htmlspecialchars($row->title, ENT_QUOTES); ?>"><?php echo htmlspecialchars($row->title, ENT_QUOTES); ?></a></p>
+			<p><?php
 				if ($ext) {
 					if ($row->sectionid != 0)
 						echo $row->secname . ' / ' . $row->catname; // раздел / категория
@@ -99,11 +106,16 @@ $rows = $database->loadObjectList();
 						echo _STATIC_CONTENT; // тип добавленного содержимого - статичное содержимое
 				}
 				?>
+			</p>
 		</td>
-		<td width="5%" class="td-state" align="center" onclick="ch_publ(<?php echo $row->id; ?>,'com_content');">
-			<img id="img-pub-<?php echo $row->id; ?>" class="img-mini-state" alt="<?php echo _E_PUBLISHING ?>" src="images/<?php echo $img; ?>" />
+		<td width="5%" class="td-state" onclick="ch_publ(<?php echo $row->id; ?>,'com_content');">
+			<p>
+				<img id="img-pub-<?php echo $row->id; ?>" class="img-mini-state" alt="<?php echo _E_PUBLISHING ?>" src="images/<?php echo $img; ?>" />
+			</p>
 		</td>
-		<td align="left" width="20%"><?php echo $author; ?></td>
+		<td width="15%">
+			<p><?php echo $author; ?></p>
+		</td>
 	</tr>
 		<?php
 		$k = 1 - $k;

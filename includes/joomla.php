@@ -8,4 +8,4 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-require_once 'joostina.php';
+	require_once 'joostina.php';

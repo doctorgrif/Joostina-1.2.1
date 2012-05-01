@@ -359,12 +359,13 @@ class mosParameters {
 	 */
 	function _form_mos_section($name, $value, &$node, $control_name) {
 		global $database;
-		$query = "SELECT id, title" . "\n FROM #__sections" . "\n WHERE published = 1" . "\n AND scope = 'content'" .
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN id, title" . "\n FROM #__sections" . "\n WHERE published = 1" . "\n AND scope = 'content'" .
 				"\n ORDER BY title";
 		$database->setQuery($query);
 		$options = $database->loadObjectList();
 		array_unshift($options, mosHTML::makeOption('0', '- Выберите раздел -', 'id', 'title'));
-		return mosHTML::selectList($options, '' . $control_name . '[' . $name . ']', 'class="inputbox"', 'id', 'title', $value);
+		return mosHTML::selectList($options, '' . $control_name . '[' . $name . ']', 'class="text-input"', 'id', 'title', $value);
 	}
 
 	/**
@@ -383,11 +384,13 @@ class mosParameters {
 		if ($scope == 'content') {
 // This might get a conflict with the dynamic translation
 // TODO: search for better solution
-			$query = "SELECT c.id, CONCAT_WS( '/',s.title, c.title ) AS title" . "\n FROM #__categories AS c" .
+/* add STRAIGHT_JOIN */
+			$query = "SELECT STRAIGHT_JOIN c.id, CONCAT_WS( '/',s.title, c.title ) AS title" . "\n FROM #__categories AS c" .
 					"\n LEFT JOIN #__sections AS s ON s.id=c.section" . "\n WHERE c.published = 1" . "\n AND s.scope = " .
 					$database->Quote($scope) . "\n ORDER BY c.title";
 		} else {
-			$query = "SELECT c.id, c.title" . "\n FROM #__categories AS c" . "\n WHERE c.published = 1" .
+		/* add STRAIGHT_JOIN */
+			$query = "SELECT STRAIGHT_JOIN c.id, c.title" . "\n FROM #__categories AS c" . "\n WHERE c.published = 1" .
 					"\n AND c.section = " . $database->Quote($scope) . "\n ORDER BY c.title";
 		}
 		$database->setQuery($query);

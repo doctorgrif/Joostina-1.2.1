@@ -66,7 +66,7 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 						<?php if ($params->get('filter')) { ?>
 						<td align="right" width="80%">
 							<label for="filter"><?php echo _FILTER; ?></label>
-							<input type="text" name="filter" size="50" value="<?php echo $lists['filter']; ?>" id="filter" class="inputbox" onchange="document.adminForm.submit();" />
+							<input type="text" name="filter" size="50" value="<?php echo $lists['filter']; ?>" id="filter" class="text-input" onchange="document.adminForm.submit();" />
 						</td>
 						<?php } if ($params->get('order_select')) { ?>
 						<td align="right" width="20%">
@@ -235,7 +235,7 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 	<?php }
 
 		function showTable(&$params, &$items, &$gid, $catid, $id, &$pageNav, &$access, &$sectionid, &$lists, $order) {
-			global $Itemid;
+			global $Itemid, $mosConfig_absolute_path, $mosConfig_live_site;
 			$link = 'index.php?option=com_content&amp;task=category&amp;sectionid=' . $sectionid . '&amp;id=' . $catid . '&amp;Itemid=' . $Itemid; ?>
 <form action="<?php echo sefRelToAbs($link); ?>" method="post" name="adminForm">
 	<table>
@@ -246,10 +246,10 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 					<tr>
 						<?php if ($params->get('filter')) { ?>
 						<td align="right" width="100%" class="jtd_nowrap"><?php echo _FILTER . '&nbsp;'; ?><br />
-							<input type="text" name="filter" value="<?php echo $lists['filter']; ?>" class="inputbox" onchange="document.adminForm.submit();" />
+							<input type="text" name="filter" value="<?php echo $lists['filter']; ?>" class="text-input" onchange="document.adminForm.submit();" />
 						</td>
 						<?php } if ($params->get('order_select')) { ?>
-						<td align="right" width="100%" class="jtd_nowrap"><?php echo '&nbsp;&nbsp;&nbsp;' . _ORDER_DROPDOWN . '&nbsp;';
+						<td align="right" width="100%" class="jtd_nowrap"><?php echo _ORDER_DROPDOWN ;
 							echo '<br />';
 							echo $lists['order']; ?>
 						</td>
@@ -264,7 +264,7 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 								$filter = '&amp;filter=' . $lists['filter'];
 							}
 							$link = 'index.php?option=com_content&amp;task=category&amp;sectionid=' . $sectionid . '&amp;id=' . $catid . '&amp;Itemid=' . $Itemid . $order . $filter;
-							echo '&nbsp;&nbsp;&nbsp;' . _PN_DISPLAY_NR . '&nbsp;';
+							echo _PN_DISPLAY_NR;
 							echo '<br />';
 							echo $pageNav->getLimitBox($link);
 							?>
@@ -319,7 +319,7 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 			} if ($params->get('author')) { ?>
 			<td class="td-author">
 				<p>
-					<?php echo '<img src="' . $mosConfig_absolute_path . '/images/avatars/micro/' . $row->created_by . '.jpg" alt="' . ($row->created_by_alias ? $row->created_by_alias : $row->author) . '" />'; ?>
+					<?php echo '<figure><img src="' . $mosConfig_live_site . mosUser::avatar($row->id, 'micro') . '" alt="' . ($row->created_by_alias ? $row->created_by_alias : $row->author) . '" width="25" height="25" /></figure>'; ?>
 					<?php echo $row->created_by_alias ? $row->created_by_alias : $row->author; ?>
 				</p>
 			</td>
@@ -416,7 +416,7 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		};
 		HTML_content::_Itemid($row);
 		HTML_content::_linkInfo($row, $params);
-		$print_link = $mosConfig_live_site . '/index2.php?option=com_content&amp;task=view&amp;id=' . $row->id . '&amp;pop=1&amp;page=' . $page . $row->Itemid_link;
+		$print_link = $mosConfig_live_site . '/index2.php?option=com_content&task=view&id=' . $row->id . '&pop=1&page=' . $page . $row->Itemid_link;
 		if ($mosConfig_mmb_content_off != 1) {
 		$_MAMBOTS->loadBotGroup('content');
 		$results = $_MAMBOTS->trigger('onPrepareContent', array(&$row, &$params, $page), true);
@@ -426,19 +426,9 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 	<table <?php echo $news_uid_css_title; ?> class="contentpaneopen<?php echo $params->get('pageclass_sfx'); ?>">
 		<tr>
 		<?php
-			echo '<div class="title_line">';
+			//echo '<div>';
 			HTML_content::Title($row, $params, $access);
-			echo '<div class="buttonheading">';
-			echo '<ul>';
-			HTML_content::EmailIcon($row, $params, $hide_js);
-			HTML_content::PdfIcon($row, $params, $hide_js);
-			mosHTML::PrintIcon($row, $params, $hide_js, $print_link);
-			// Функция редактирования только своих статей с фронта
-			if ($access->canEdit || $access->canEditOwn)
-			HTML_content::EditIcon2($row, $params, $access);
-			echo '</ul>';
-			echo '</div>';
-			echo '</div>';
+			//echo '</div>';
 		?>
 		</tr>
 	</table>
@@ -453,33 +443,55 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		<tr>
 			<td colspan="2">
 				<?php
+					//echo '<div>';
 					HTML_content::Section_Category($row, $params);
+					//echo '</div>';
+					echo '<div class="buttonheading">';
+					echo '<ul>';
+					echo '<li>';
+					HTML_content::EmailIcon($row, $params, $hide_js);
+					echo '</li>';
+					echo '<li>';
+					HTML_content::PdfIcon($row, $params, $hide_js);
+					echo '</li>';
+					echo '<li>';
+					mosHTML::PrintIcon($row, $params, $hide_js, $print_link);
+					echo '</li>';
+					/* Функция редактирования только своих статей с фронта */
+					if ($access->canEdit || $access->canEditOwn)
+					echo '<li>';
+					HTML_content::EditIcon2($row, $params, $access);
+					echo '</li>';
+					echo '</ul>';
+					echo '</div>';
+					//echo '<div class="clearfix"></div>';
+				?>
+				<?php
+					//echo '<div>';
+					HTML_content::Author($row, $params);
+					HTML_content::CreateDate($row, $params);
+					HTML_content::ModifiedDate($row, $params);
+					HTML_content::URL($row, $params);
+					//echo '</div>';
 				?>
 			</td>
 		</tr>
 		<tr>
 			<td valign="top" colspan="2">
-				<a href="#" class="mobilehide"><?php echo _CMN_HIDE;?></a> <a href="#" class="mobileshow"><?php echo _CMN_SHOW;?></a>
-				<div class="article">
+				<!--<div class="article">-->
 					<?php
 						HTML_content::TOC($row);
 						echo ampReplace($row->text);
 					?>
-					<?php
-						HTML_content::Author($row, $params);
-						HTML_content::CreateDate($row, $params);
-						HTML_content::ModifiedDate($row, $params);
-						HTML_content::URL($row, $params);
-					?>
-				</div>
-				<div class="cf"></div>
+				<!--</div>
+				<div class="clearfix"></div>-->
 				<?php
 					HTML_content::ReadMore($row, $params);
 				?>
 			</td>
 		</tr>
 	</table>
-	<span class="articlesep"></span>
+	<span class="articelesep"></span>
 	<?php
 		$results = $_MAMBOTS->trigger('onAfterDisplayContent', array(&$row, &$params, $page));
 		echo trim(implode("\n", $results));
@@ -524,7 +536,6 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		}
 		}
 		}
-
 	function EditIcon(&$row, &$params, &$access) {
 		global $my;
 		if ($params->get('popup')) {
@@ -538,7 +549,7 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		}
 		mosCommonHTML::loadOverlib();
 		$link = 'index.php?option=com_content&amp;task=edit&amp;id=' . $row->id . $row->Itemid_link . '&amp;Returnid=' . $row->_Itemid;
-		$image = mosAdminMenus::ImageCheck('edit.png', '/images/M_images/', null, null, _E_EDIT, 'edit');
+		$image = mosAdminMenus::ImageCheck('editBtn.png', '/images/M_images/', null, null, _E_EDIT, 'edit');
 		if ($row->state == 0) {
 			$overlib = _CMN_UNPUBLISHED;
 		} else {
@@ -553,11 +564,9 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		$overlib .= '<br />';
 		$overlib .= $author;
 ?>
-<li>
-	<a href="<?php echo sefRelToAbs($link); ?>" onmouseover="return overlib('<?php echo $overlib; ?>', CAPTION, '<?php echo _E_EDIT; ?>', BELOW, RIGHT);" onmouseout="return nd();">
-		<?php echo $image; ?>
-	</a>
-</li>
+<a href="<?php echo sefRelToAbs($link); ?>" onmouseover="return overlib('<?php echo $overlib; ?>', CAPTION, '<?php echo _E_EDIT; ?>', BELOW, RIGHT);" onmouseout="return nd();">
+	<?php echo $image; ?>
+</a>
 <?php
 }
 	function EditIcon2(&$row, &$params, &$access) {
@@ -573,7 +582,7 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		}
 		mosCommonHTML::loadOverlib();
 		$link = 'index.php?option=com_content&amp;task=edit&amp;id=' . $row->id . $row->Itemid_link . '&amp;Returnid=' . $row->_Itemid;
-		$image = mosAdminMenus::ImageCheck('edit.png', '/images/M_images/', null, null, _E_EDIT, 'edit');
+		$image = mosAdminMenus::ImageCheck('editBtn.png', '/images/M_images/', null, null, _E_EDIT, 'edit');
 		if ($row->state == 0) {
 			$overlib = _CMN_UNPUBLISHED;
 		} else {
@@ -588,11 +597,9 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		$overlib .= '<br />';
 		$overlib .= $author;
 ?>
-<li>
-	<a href="<?php echo sefRelToAbs($link); ?>" onmouseover="return overlib('<?php echo $overlib; ?>', CAPTION, '<?php echo _E_EDIT; ?>', BELOW, RIGHT);" onmouseout="return nd();">
-		<?php echo $image; ?>
-	</a>
-</li>
+<a id="edit" href="<?php echo sefRelToAbs($link); ?>" onmouseover="return overlib('<?php echo $overlib; ?>', CAPTION, '<?php echo _E_EDIT; ?>', BELOW, RIGHT);" onmouseout="return nd();">
+	<?php echo $image; ?>
+</a>
 <?php
 	}
 
@@ -612,16 +619,14 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 			$link = $mosConfig_live_site. '/index2.php?option=com_content&amp;do_pdf=1&amp;id='. $row->id . $_Itemid;
 
 			if ( $params->get( 'icons' ) ) {
-				$image = mosAdminMenus::ImageCheck('pdfButton.png', '/images/M_images/', null, null, _CMN_PDF, 'pdf' );
+				$image = mosAdminMenus::ImageCheck('pdfBtn.png', '/images/M_images/', null, null, _CMN_PDF, 'pdf');
 			} else {
 				$image = _CMN_PDF . '&nbsp;';
 			}
 			?>
-<li>
-	<a href="<?php echo $link; ?>" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_PDF;?>">
-		<?php echo $image; ?>
-	</a>
-</li>
+<a id="pdf" href="<?php echo $link; ?>" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_PDF;?>">
+	<?php echo $image; ?>
+</a>
 <?php
 		}
 	}
@@ -639,16 +644,14 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 			}
 			$link = $mosConfig_live_site . '/index2.php?option=com_content&amp;task=emailform&amp;id=' . $row->id . $_Itemid;
 			if ($params->get('icons')) {
-				$image = mosAdminMenus::ImageCheck('emailButton.png', '/images/M_images/', null, null, _CMN_EMAIL, 'email' . $cne_i);
+				$image = mosAdminMenus::ImageCheck('emailBtn.png', '/images/M_images/', null, null, _CMN_EMAIL, 'email' . $cne_i);
 				$cne_i++;
 			} else {
 				$image = _CMN_EMAIL . '&nbsp;';
 			} ?>
-<li>
-	<a href="<?php echo $link; ?>" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_EMAIL; ?>">
-		<?php echo $image; ?>
-	</a>
-</li>
+<a id="email" href="<?php echo $link; ?>" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_EMAIL; ?>">
+	<?php echo $image; ?>
+</a>
 <?php
 			}
 		}
@@ -690,7 +693,6 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		?>
 		<?php }
 			}
-
 		function Section(&$row, &$params) {
 		if ($params->get('section')) {
 		?>
@@ -698,26 +700,28 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 	<ul>
 		<li><?php echo $row->section;
 			if ($params->get('category')) {
-			echo '<span>\</span>';
-			echo '</li>';
+			echo ' &frasl; ';
 			} ?>
 		<?php }
 		}
 		function Category(&$row, &$params) {
 		if ($params->get('category')) { ?>
-		<li><?php echo $row->category; ?></li>
+		<?php echo $row->category; ?></li>
 	</ul>
 </div>
 		<?php }
 		}
 		function Author(&$row, &$params) {
+		global $userid, $mosConfig_live_site;
 		if (($params->get('author')) && ($row->author != '')) {
 		?>
 <div class="post_meta">
-	<a href="/images/avatars/<?php echo $row->created_by;?>.jpg" class="lightbox_trigger" title="<?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?>">
-		<?php echo '<img src="/images/avatars/micro/' . $row->created_by . '.jpg" alt="' . ($row->created_by_alias ? $row->created_by_alias : $row->author) . '" />'; ?>
+	<ul>
+		<li>
+		<a href="<?php echo $mosConfig_live_site . mosUser::avatar($row->id, 'big'); ?>" class="lightbox_trigger" title="<?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?>">
+		<?php echo '<figure><img src="' . $mosConfig_live_site . mosUser::avatar($row->id, 'micro') . '" alt="' . ($row->created_by_alias ? $row->created_by_alias : $row->author) . '" width="25" height="25" /></figure>'; ?>
 	</a>
-	<p><?php echo _AUTHOR_BY; ?>: <?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?></p>
+	<p><!--<?php echo _AUTHOR_BY; ?>: --><?php echo($row->created_by_alias ? $row->created_by_alias : $row->author); ?></p></li>
 	<?php }
 			}
 
@@ -726,16 +730,15 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		if (intval($row->created) != 0) {
 		$create_date = mosFormatDate($row->created);
 		} if ($params->get('createdate')) { ?>
-		<p><?php echo _CMN_PUBLISHED; ?>: <?php echo $create_date; ?></p>
+		<li><p><?php echo _CMN_PUBLISHED; ?>: <?php echo $create_date; ?></p></li>
 		<?php }
 		}
 
 		function URL(&$row, &$params) {
 		if ($params->get('url') && $row->urls) {
 		?>
-		<p>Источник: <a href="http://<?php echo $row->urls; ?>" target="_blank"><?php echo $row->urls; ?></a></p>
-		<?php
-			}
+		<li><p><a href="http://<?php echo $row->urls; ?>" target="_blank"><?php echo $row->urls; ?></a></p></li>
+		<?php }
 		}
 
 		function TOC(&$row) {
@@ -751,7 +754,8 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		}
 		if (($mod_date != '') && $params->get('modifydate')) {
 		?>
-		<p><?php echo _LAST_UPDATED; ?>: <?php echo $mod_date; ?></p>
+		<li><p><?php echo _LAST_UPDATED; ?>: <?php echo $mod_date; ?></p></li>
+	</ul>
 </div>
 </div>
 		<?php
@@ -761,13 +765,13 @@ function ch_publ(elID) { log('<?php echo _CONTENT_CNG_STAT_PUB; ?>'+elID);
 		if ($params->get('readmore')) {
 		if ($params->get('intro_only') && $row->link_text) {
 		?>
-		
-<div class="readon">
-	<a href="<?php echo $row->link_on; ?>" title="<?php echo $row->title; ?>" class="readon<?php echo $params->get('pageclass_sfx'); ?>">
-		<input type="button" name="readon" value="<?php echo $row->link_text; ?>" class="button" />
-	</a>
+<div class="readon_div">
+	<p>
+		<a class="readon" href="<?php echo $row->link_on; ?>" title="<?php echo $row->title; ?>">
+			<input type="button" name="readon" value="<?php echo $row->link_text; ?>" class="button" />
+		</a>
+	</p>
 </div>
-		
 		<?php
 			}
 		}
@@ -919,213 +923,193 @@ onunload = WarnUser;
 	<table class="cedit_main">
 		<tr>
 			<td>
-				<div id="title">
-					<div>
-						<label for="title"><?php echo _E_TITLE; ?></label>
-					</div>
-					<input class="textarea" type="text" name="title" id="title" size="30" maxlength="255" style="width:100%;" value="<?php echo $row->title; ?>" />
-				</div>
+				<p>
+					<label for="title"><?php echo _E_TITLE; ?></label><br />
+					<textarea placeholder="<?php echo $row->title; ?>" cols="70" rows="1" id="title" type="textarea"></textarea>
+				</p>
 			</td>
 		</tr>
 		<?php if ($row->sectionid || $allow_alias) { ?>
 		<tr>
 			<td>
-				<div id="title_alias">
-					<div>
-						<label for="title_alias"><?php echo _ALIAS; ?></label>
-					</div>
-					<input name="title_alias" type="text" class="textarea" id="title_alias" value="<?php echo $row->title_alias; ?>" size="30" style="width:100%;" maxlength="255" />
-				</div>
+				<p>
+					<label for="title_alias"><?php echo _ALIAS; ?></label><br />
+					<textarea cols="70" rows="1" id="title_alias" value="<?php echo $row->title_alias; ?>" name="title_alias" type="textarea"></textarea>
+				</p>
 			</td>
 		</tr>
 		<?php } ?>
 		<?php if ($content_type == 0 || $row->sectionid > 0) { ?>
 		<tr>
 			<td>
-				<div id="category">
-					<div>
-						<label for="category"><?php echo _E_CATEGORY; ?></label>
-					</div>
+				<p>
+					<label for="category"><?php echo _E_CATEGORY; ?></label><br />
 					<?php echo $lists['catid']; ?>
-				</div>
+				</p>
 			</td>
 		</tr>
 		<?php } ?>
 		<?php if ($allow_tags) { ?>
 		<tr>
 			<td align="left" valign="top">
-				<div id="metakey">
-					<div>
-						<label for="metakey"><?php echo _E_M_KEY; ?></label>
-					</div>
-					<input class="inputbox" id="metakey" style="width:100%;" type="text" name="metakey" value="<?php echo str_replace('&', '&amp;', $row->metakey); ?>">
-				</div>
+				<p>
+					<label for="metakey"><?php echo _E_M_KEY; ?></label><br />
+					<textarea cols="70" rows="1" id="metakey" type="textarea"><?php echo str_replace('&', '&amp;', $row->metakey); ?></textarea>
+				</p>
 			</td>
 		</tr>
 		<?php } ?>
 		<?php if ($allow_desc) { ?>
 		<tr>
 			<td align="left" valign="top">
-				<div id="metadesc">
-					<div>
-						<label for="metadesc"><?php echo _E_M_DESC; ?></label>
-					</div>
-					<textarea cols="" class="inputbox" style="width:100%;"  rows="2" id="metadesc" name="metadesc"><?php echo str_replace('&', '&amp;', $row->metadesc); ?></textarea>
-				</div>
+				<p>
+					<label for="metadesc"><?php echo _E_M_DESC; ?></label><br />
+					<textarea cols="70" rows="1" id="metadesk" type="textarea"><?php echo str_replace('&', '&amp;', $row->metadesc); ?></textarea>
+				</p>
 			</td>
 		</tr>
 	<?php } ?>
-	</table><br />
-	<div class="cedit_introtext">
-		<div id="introtext">
-			<div>
-				<label for="introtext"><?php echo _E_INTRO . ' (' . _CMN_REQUIRED . ')'; ?></label>
-			</div>
-			<?php
+	</table>
+<div class="cedit_introtext">
+	<p>
+		<label for="introtext"><?php echo _E_INTRO . ' (' . _CMN_REQUIRED . ')'; ?></label><br />
+		<?php
 			if ($p_wwig) {
 			editorArea('editor1', $row->introtext, 'introtext', '700', '400', '70', '15');
 			} else {
-			?>
-			<textarea style="width:700px;height:400px;" class="inputbox" rows="15" cols="70" id="introtext" name="introtext"><?php echo $row->introtext; ?></textarea>
-			<?php } ?>
-		</div>
-	</div>
-	<?php if (($content_type == 0 && $p_fulltext) || ($row->sectionid && $p_fulltext)) { ?><br /><br />
-	<div class="cedit_fulltext">
-		<div id="fulltext">
-			<div>
-				<label for="fulltext"><?php echo _E_MAIN . ' (' . _CMN_OPTIONAL . ')'; ?></label>
-			</div>
-			<?php if ($p_wwig) {
-			editorArea('editor2', $row->fulltext, 'fulltext', '600', '400', '70', '15');
+		?>
+		<textarea cols="70" rows="15" id="introtext" name="introtext" type="textarea"><?php echo $row->introtext;?></textarea>
+<?php } ?>
+	</p>
+</div>
+<?php if(($content_type==0 && $p_fulltext) || ($row->sectionid &&  $p_fulltext) ){?><br /><br />
+<div class="cedit_fulltext">
+	<p>
+		<label for="fulltext"><?php echo _E_MAIN . ' (' . _CMN_OPTIONAL . ')'; ?></label><br />
+		<?php if ($p_wwig) {
+			editorArea('editor2', $row->fulltext, 'fulltext', '700', '400', '70', '15');
 			} else {
-			?>
-			<textarea style="width:700px;height:400px;" class="inputbox" rows="15" cols="70" id="fulltext" name="fulltext"><?php echo $row->fulltext; ?></textarea>
-			<?php } ?>
-		</div>
-	</div>
-			<?php
-				}
-				if ($allow_params || $allow_img) {
-				$tabs->startPane('content-pane');
-				if ($allow_img) {
-				$tabs->startTab(_E_IMAGES, 'images-page');
-			?>
+		?>
+		<textarea cols="70" rows="15" id="fulltext" name="fulltext" type="textarea"><?php echo $row->fulltext;?></textarea>
+		<?php } ?>
+	</p>
+</div>
+	<?php
+		}
+		if ($allow_params || $allow_img) {
+		$tabs->startPane('content-pane');
+		if ($allow_img) {
+		$tabs->startTab(_E_IMAGES, 'images-page');
+	?>
 <table class="adminform">
 	<tr>
-		<td colspan="4"><?php echo _CMN_SUBFOLDER; ?>: <?php echo $lists['folders']; ?></td>
+		<td colspan="4"><p><?php echo _CMN_SUBFOLDER; ?>: <?php echo $lists['folders']; ?></p></td>
 	</tr>
 	<tr>
-		<td align="top"><?php echo _E_GALLERY_IMAGES; ?></td>
+		<td align="top"><p><?php echo _E_GALLERY_IMAGES; ?></p></td>
 		<td width="2%">&nbsp;</td>
-		<td align="top"><?php echo _E_CONTENT_IMAGES; ?></td>
-		<td align="top"><?php echo _E_EDIT_IMAGE; ?></td>
+		<td align="top"><p><?php echo _E_CONTENT_IMAGES; ?></p></td>
+		<td align="top"><p><?php echo _E_EDIT_IMAGE; ?></p></td>
 	</tr>
 	<tr>
-	<td valign="top"><?php echo $lists['imagefiles']; ?><br />
-		<input class="button" type="button" value="<?php echo _E_INSERT; ?>" onclick="addSelectedToList('adminForm','imagefiles','imagelist')" />
+	<td valign="top"><?php echo $lists['imagefiles']; ?>
+		<p>
+			<input class="button" type="button" value="<?php echo _E_INSERT; ?>" onclick="addSelectedToList('adminForm','imagefiles','imagelist')" />
+		</p>
 	</td>
 	<td width="2%">
-		<input class="button" type="button" value=">>" onclick="addSelectedToList('adminForm','imagefiles','imagelist')" title="<?php echo _E_ADD; ?>" /><br />
-		<input class="imagebutton" type="button" value="<<" onclick="delSelectedFromList('adminForm','imagelist')" title="<?php echo _E_REMOVE; ?>" />
+		<p>
+			<input class="button" type="button" value="&rarr;" onclick="addSelectedToList('adminForm','imagefiles','imagelist')" title="<?php echo _E_ADD; ?>" /> <input class="button" type="button" value="&larr;" onclick="delSelectedFromList('adminForm','imagelist')" title="<?php echo _E_REMOVE; ?>" />
+		</p>
 	</td>
-	<td valign="top"><?php echo $lists['imagelist']; ?><br />
-		<input class="button" type="button" value="<?php echo _E_UP; ?>" onclick="moveInList('adminForm','imagelist',adminForm.imagelist.selectedIndex,-1)" />
-		<input class="imagebutton" type="button" value="<?php echo _E_DOWN; ?>" onclick="moveInList('adminForm','imagelist',adminForm.imagelist.selectedIndex,+1)" />
+	<td valign="top"><?php echo $lists['imagelist']; ?>
+		<p>
+			<input class="button" type="button" value="&uarr;" onclick="moveInList('adminForm','imagelist',adminForm.imagelist.selectedIndex,-1)" /> <input class="button" type="button" value="&darr;" onclick="moveInList('adminForm','imagelist',adminForm.imagelist.selectedIndex,+1)" />
+		</p>
 	</td>
 	<td valign="top">
 		<table>
 			<tr>
 				<td>
-					<div id="_source">
-						<div>
-							<label for="_source"><?php echo _E_SOURCE; ?></label>
-						</div>
-						<input class="inputbox" type="text" id= "_source" name= "_source" value="" size="15" />
-					</div>
+					<p>
+						<label for="_source"><?php echo _E_SOURCE; ?></label><br />
+						<input class="text-input" type="text" id= "_source" name= "_source" value="" size="15" />
+					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div id="_align">
-						<div>
-							<label for="_align"><?php echo _E_ALIGN; ?></label>
-						</div>
+					<p>
+						<label for="_align"><?php echo _E_ALIGN; ?></label><br />
 						<?php echo $lists['_align']; ?>
-					</div>
+					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div id="_alt">
-						<div>
-							<label for="_alt"><?php echo _E_ALT; ?></label>
-						</div>
-						<input class="inputbox" type="text" id="_alt" name="_alt" value="" size="15" />
-					</div>
+					<p>
+						<label for="_alt"><?php echo _E_ALT; ?></label><br />
+						<input class="text-input" type="text" id="_alt" name="_alt" value="" size="15" />
+					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div id="_border">
-						<div>
-							<label for="_border"><?php echo _E_BORDER; ?></label>
-						</div>
-						<input class="inputbox" type="text" id="_border" name="_border" value="" size="3" maxlength="1" />
-					</div>
+					<p>
+						<label for="_border"><?php echo _E_BORDER; ?></label><br />
+						<input class="text-input" type="text" id="_border" name="_border" value="" size="3" maxlength="1" />
+					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div id="_caption">
-						<div>
-							<label for="_caption"><?php echo _E_CAPTION; ?></label>
-						</div>
+					<p>
+						<label for="_caption"><?php echo _E_CAPTION; ?></label><br />
 						<input class="textarea" id="_caption" type="text" name="_caption" value="" size="30" />
-					</div>
+					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div id="_caption_position">
-						<div>
-							<label for="_caption_position"><?php echo _E_CAPTION_POSITION; ?></label>
-						</div>
+					<p>
+						<label for="_caption_position"><?php echo _E_CAPTION_POSITION; ?></label><br />
 						<?php echo $lists['_caption_position']; ?>
-					</div>
+					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div id="_caption_align">
-						<div>
-							<label for="_caption_align"><?php echo _E_CAPTION_ALIGN; ?></label>
-						</div>
+					<p>
+						<label for="_caption_align"><?php echo _E_CAPTION_ALIGN; ?></label><br />
 						<?php echo $lists['_caption_align']; ?>
-					</div>
+					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div id="_caption_width">
-						<div>
-							<label for="_caption_width"><?php echo _E_CAPTION_WIDTH; ?></label>
-						</div>
+					<p>
+						<label for="_caption_width"><?php echo _E_CAPTION_WIDTH; ?></label><br />
 						<input class="textarea" type="text" name="_width" id="_caption_width" value="" size="5" maxlength="5" />
-					</div>
+					</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div><input class="button" type="button" value="<?php echo _E_APPLY; ?>" onclick="sapplyImageProps()" /></div>
+					<p>
+						<input class="button" type="button" value="<?php echo _E_APPLY; ?>" onclick="sapplyImageProps()" />
+					</p>
 				</td>
 			</tr>
 		</table>
 	</td>
 </tr>
 <tr>
-	<td><img name="view_imagefiles" src="<?php echo $mosConfig_live_site; ?>/images/M_images/blank.png" width="50" alt="<?php echo _E_NO_IMAGE; ?>" /></td>
-	<td><img name="view_imagelist" src="<?php echo $mosConfig_live_site; ?>/images/M_images/blank.png" width="50" alt="<?php echo _E_NO_IMAGE; ?>" /></td>
+	<td>
+		<img name="view_imagefiles" src="<?php echo $mosConfig_live_site; ?>/images/M_images/blank.png" width="50" alt="<?php echo _E_NO_IMAGE; ?>" />
+	</td>
+	<td>
+		<img name="view_imagelist" src="<?php echo $mosConfig_live_site; ?>/images/M_images/blank.png" width="50" alt="<?php echo _E_NO_IMAGE; ?>" />
+	</td>
 </tr>
 </table>
 <?php $tabs->endTab();
@@ -1134,45 +1118,35 @@ onunload = WarnUser;
 <table class="adminform">
 	<tr>
 		<td>
-			<div id="access">
-				<div>
-					<label for="access"><?php echo _E_ACCESS_LEVEL; ?></label>
-				</div>
+			<p>
+				<label for="access"><?php echo _E_ACCESS_LEVEL; ?></label><br />
 				<?php echo $lists['access']; ?>
-			</div>
+			</p>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<div id="created_by_alias">
-				<div>
-					<label for="created_by_alias"><?php echo _E_AUTHOR_ALIAS; ?></label>
-				</div>
-				<input type="text" name="created_by_alias" size="50" id="created_by_alias" maxlength="255" value="<?php echo $row->created_by_alias; ?>" class="inputbox" />
-			</div>
+			<p>
+				<label for="created_by_alias"><?php echo _E_AUTHOR_ALIAS; ?></label><br />
+				<input type="text" name="created_by_alias" size="50" id="created_by_alias" maxlength="255" value="<?php echo $row->created_by_alias; ?>" class="text-input" />
+			</p>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<div id="ordering">
-				<div>
-					<label for="ordering"><?php echo _E_ORDERING; ?></label>
-				</div>
+			<p>
+				<label for="ordering"><?php echo _E_ORDERING; ?></label><br />
 				<?php echo $lists['ordering']; ?>
-			</div>
+			</p>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<div id="publish_up">
-				<div>
-					<label for="publish_up"><?php echo _E_START_PUB; ?></label>
-				</div>
-				<div>
-					<input class="inputbox" type="text" name="publish_up" id="publish_up" size="25" maxlength="19" value="<?php echo $row->publish_up; ?>" />
-				</div>
+			<p>
+				<label for="publish_up"><?php echo _E_START_PUB; ?></label><br />
+				<input class="text-input" type="text" name="publish_up" id="publish_up" size="25" maxlength="19" value="<?php echo $row->publish_up; ?>" />
 				<input type="reset" class="button" value="..." onclick="return showCalendar('publish_up', 'y-mm-dd');" />
-			</div>
+			</p>
 		</td>
 	</tr>
 	<tr>
@@ -1182,7 +1156,7 @@ onunload = WarnUser;
 					<label for="publish_down"><?php echo _E_FINISH_PUB; ?></label>
 				</div>
 				<div>
-					<input class="inputbox" type="text" name="publish_down" id="publish_down" size="25" maxlength="19" value="<?php echo $row->publish_down; ?>" />
+					<input class="text-input" type="text" name="publish_down" id="publish_down" size="25" maxlength="19" value="<?php echo $row->publish_down; ?>" />
 				</div>
 				<input type="reset" class="button" value="..." onclick="return showCalendar('publish_down', 'y-mm-dd');" />
 			</div>
@@ -1192,7 +1166,7 @@ onunload = WarnUser;
 <?php $tabs->endTab();
 	} $tabs->endPane();
 	} ?>
-<div class="cf"></div>
+<div class="clearfix"></div>
 <input type="hidden" name="images" value="" />
 <input type="hidden" name="goodexit" value="0" />
 <input type="hidden" name="option" value="com_content" />
@@ -1237,7 +1211,7 @@ onunload = WarnUser;
 					<div>
 						<label for="email_friend"><?php echo _EMAIL_FRIEND_ADDR; ?></label>
 					</div>
-					<input type="text" name="email" class="inputbox" id="email_friend" size="25" />
+					<input type="text" name="email" class="text-input" id="email_friend" size="25" />
 				</div>
 			</td>
 		</tr>
@@ -1247,7 +1221,7 @@ onunload = WarnUser;
 					<div>
 						<label for="yourname_friend"><?php echo _EMAIL_YOUR_NAME; ?></label>
 					</div>
-					<input type="text" name="yourname" id="yourname_friend" class="inputbox" size="25" />
+					<input type="text" name="yourname" id="yourname_friend" class="text-input" size="25" />
 				</div>
 			</td>
 		</tr>
@@ -1257,7 +1231,7 @@ onunload = WarnUser;
 					<div>
 						<label for="youremail_friend"><?php echo _EMAIL_YOUR_MAIL; ?></label>
 					</div>
-					<input type="text" id="youremail_friend" name="youremail" class="inputbox" size="25" />
+					<input type="text" id="youremail_friend" name="youremail" class="text-input" size="25" />
 				</div>
 			</td>
 		</tr>
@@ -1267,7 +1241,7 @@ onunload = WarnUser;
 					<div>
 						<label for="subject_friend"><?php echo _SUBJECT_PROMPT; ?></label>
 					</div>
-					<input type="text" name="subject" for="subject_friend" class="inputbox" maxlength="100" size="40" />
+					<input type="text" name="subject" for="subject_friend" class="text-input" maxlength="100" size="40" />
 				</div>
 			</td>
 		</tr>

@@ -72,7 +72,7 @@ function botSearchNewsfeedslinks($text, $phrase = '', $ordering = '') {
 		default:
 			$order = 'a.name ASC';
 	}
-	$query = "SELECT a.name AS title," . "\n '' AS created," . "\n a.link AS text," . "\n CONCAT_WS( ' / '," .
+	$query = "SELECT STRAIGHT_JOIN a.name AS title," . "\n '' AS created," . "\n a.link AS text," . "\n CONCAT_WS( ' / '," .
 			$database->Quote(_SEARCH_NEWSFEEDS) . ", b.title )AS section," . "\n CONCAT( 'index.php?option=com_newsfeeds&task=view&feedid=', a.id ) AS href," .
 			"\n '1' AS browsernav" . "\n FROM #__newsfeeds AS a" . "\n INNER JOIN #__categories AS b ON b.id = a.catid" .
 			"\n WHERE ( $where )" . "\n AND a.published = 1" . "\n AND b.published = 1" . "\n AND b.access <= " . (int)

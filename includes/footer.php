@@ -8,6 +8,8 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-global $_VERSION;
+global $mosConfig_sitename, $mosConfig_live_site;
 ?>
-<div align="center">&copy; <?php echo date('Y'); ?> <a href="<?php echo $mosConfig_live_site; ?>" title="<?php echo $mosConfig_sitename; ?>" target="_self"><?php echo $mosConfig_sitename; ?></a></div>
+<div>
+	&copy; <?php echo date('Y'); ?> <a href="<?php echo $mosConfig_live_site; ?>" title="<?php echo $mosConfig_sitename; ?>"><?php echo $mosConfig_sitename; ?></a>
+</div>

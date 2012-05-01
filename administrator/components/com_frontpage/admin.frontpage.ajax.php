@@ -59,15 +59,15 @@ function x_access($id){
 	if(!$row->store()) return 'error-store';
 
 	if(!$row->access) {
-		$color_access	= 'style="color: green;"';
+		$color_access	= 'style="color:green;"';
 		$task_access	= 'accessregistered';
 		$text_href		= _USER_GROUP_ALL;
 	} elseif($row->access == 1) {
-		$color_access	= 'style="color: red;"';
+		$color_access	= 'style="color:red;"';
 		$task_access	= 'accessspecial';
 		$text_href		= _USER_GROUP_REGISTERED;
 	} else {
-		$color_access	= 'style="color: black;"';
+		$color_access	= 'style="color:black;"';
 		$task_access	= 'accesspublic';
 		$text_href		= _USER_GROUP_SPECIAL;
 	}

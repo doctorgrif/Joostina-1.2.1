@@ -1,24 +1,24 @@
-/*------------------------------------------------------------------------------
-File: print.js
-Developer:Denys Nosov (a.k.a. Dutch)
-Creation Date:15.11.2007
-Version:1.0
-Homepage: http://www.joomla-ua.org/
-License:Creative Commons Attribution-ShareAlike 2.0 License http://creativecommons.org/licenses/by-sa/2.0/
-Note: Do not change in code!!!
-Function: footnoteLinks()
-Author: Aaron Gustafson (aaron at easy-designs dot net)
-Creation Date:8 May 2005
-Version:1.3
-Homepage: http://www.easy-designs.net/code/footnoteLinks/
-License:Creative Commons Attribution-ShareAlike 2.0 License http://creativecommons.org/licenses/by-sa/2.0/
-Note: If you change or improve on this script, please let us know by emailing the author (above) with a link to your demo page.
-Excerpts from the jsUtilities Library
-Version:2.1
-Homepage: http://www.easy-designs.net/code/jsUtilities/
-License:Creative Commons Attribution-ShareAlike 2.0 License http://creativecommons.org/licenses/by-sa/2.0/
-Note: If you change or improve on this script, please let us know.
-------------------------------------------------------------------------------*/
+/*
+* File: print.js
+* Developer:Denys Nosov (a.k.a. Dutch)
+* Creation Date:15.11.2007
+* Version:1.0
+* Homepage: http://www.joomla-ua.org/
+* License:Creative Commons Attribution-ShareAlike 2.0 License http://creativecommons.org/licenses/by-sa/2.0/
+* Note: Do not change in code!!!
+* Function: footnoteLinks()
+* Author: Aaron Gustafson (aaron at easy-designs dot net)
+* Creation Date:8 May 2005
+* Version:1.3
+* Homepage: http://www.easy-designs.net/code/footnoteLinks/
+* License:Creative Commons Attribution-ShareAlike 2.0 License http://creativecommons.org/licenses/by-sa/2.0/
+* Note: If you change or improve on this script, please let us know by emailing the author (above) with a link to your demo page.
+* Excerpts from the jsUtilities Library
+* Version:2.1
+* Homepage: http://www.easy-designs.net/code/jsUtilities/
+* License:Creative Commons Attribution-ShareAlike 2.0 License http://creativecommons.org/licenses/by-sa/2.0/
+* Note: If you change or improve on this script, please let us know.
+*/
 function footnoteLinks(containerID,targetID) {
 if (!document.getElementById || !document.getElementsByTagName || !document.createElement)
 return false;
@@ -34,7 +34,7 @@ addClass.apply(ol,['printOnly']);
 var myArr = [];
 var thisLink;
 var num = 1;
-var h2_txt = document.createTextNode('—сылки :');
+var h2_txt = document.createTextNode('—сылки:');
 for (var i=0; i<coll.length; i++) {
 var thisClass = coll[i].className;
 if ( (coll[i].getAttribute('href') || coll[i].getAttribute('cite')) && (thisClass == '' || thisClass.indexOf('ignore') == -1) && (thisClass == '' || thisClass.indexOf('lightwindow') == -1) && (thisClass == '' || thisClass.indexOf('comment-link') == -1)&& (thisClass == '' || thisClass.indexOf('highslide') == -1) ) {

@@ -86,7 +86,7 @@ this.oAll(false);
 };
 // Outputs the tree to the page
 dTree.prototype.toString = function() {
-var str = '<div class="dtree">\n';
+var str = '<div class="dtree">';
 if (document.getElementById) {
 if (this.config.useCookies) this.selectedNode = this.getSelected();
 str += this.addNode(this.root);
@@ -123,7 +123,7 @@ return str;
 };
 // Creates the node icon, url and text
 dTree.prototype.node = function(node, nodeId) {
-var str = '<div class="dTreeNode">' + this.indent(node, nodeId);
+var str = '<div class="dTreeNode"><ul>' + this.indent(node, nodeId);
 if (this.config.useIcons) {
 if (!node.icon) node.icon = (this.root.id == node.pid) ? this.icon.root : ((node._hc) ? this.icon.folder : this.icon.node);
 if (!node.iconOpen) node.iconOpen = (node._hc) ? this.icon.folderOpen : this.icon.node;
@@ -131,7 +131,7 @@ if (this.root.id == node.pid) {
 node.icon = this.icon.root;
 node.iconOpen = this.icon.root;
 }
-str += '<img id="i' + this.obj + nodeId + '" src="' + ((node._io) ? node.iconOpen : node.icon) + '" alt="" />';
+str += '<li><p><img id="i' + this.obj + nodeId + '" src="' + ((node._io) ? node.iconOpen : node.icon) + '" alt="" style="float:left;" />';
 }
 if (node.url) {
 str += '<a id="s' + this.obj + nodeId + '" class="' + ((this.config.useSelection) ? ((node._is ? 'nodeSel' : 'node')) : 'node') + '" href="' + node.url + '"';
@@ -145,12 +145,12 @@ str += '>';
 else if ((!this.config.folderLinks || !node.url) && node._hc && node.pid != this.root.id)
 str += '<a href="javascript: ' + this.obj + '.o(' + nodeId + ');" class="node">';
 str += node.name;
-if (node.url || ((!this.config.folderLinks || !node.url) && node._hc)) str += '</a>';
-str += '</div>';
+if (node.url || ((!this.config.folderLinks || !node.url) && node._hc)) str += '</a></p></li>';
+str += '</ul></div>';
 if (node._hc) {
-str += '<div id="d' + this.obj + nodeId + '" class="clip" style="display:' + ((this.root.id == node.pid || node._io) ? 'block' : 'none') + ';">';
-str += this.addNode(node);
-str += '</div>';
+str += '<div id="d' + this.obj + nodeId + '" class="clip" style="display:' + ((this.root.id == node.pid || node._io) ? 'block' : 'none') + ';"><ul>';
+str += '<li><p>' + this.addNode(node) + '</p></li>';
+str += '</ul></div>';
 }
 this.aIndent.pop();
 return str;
@@ -160,14 +160,14 @@ dTree.prototype.indent = function(node, nodeId) {
 var str = '';
 if (this.root.id != node.pid) {
 for (var n=0; n<this.aIndent.length; n++)
-str += '<img src="' + ( (this.aIndent[n] == 1 && this.config.useLines) ? this.icon.line : this.icon.empty ) + '" alt="" />';
+str += '<p><img src="' + ( (this.aIndent[n] == 1 && this.config.useLines) ? this.icon.line : this.icon.empty ) + '" alt="" style="float:left;" />';
 (node._ls) ? this.aIndent.push(0) : this.aIndent.push(1);
 if (node._hc) {
 str += '<a href="javascript: ' + this.obj + '.o(' + nodeId + ');"><img id="j' + this.obj + nodeId + '" src="';
 if (!this.config.useLines) str += (node._io) ? this.icon.nlMinus : this.icon.nlPlus;
 else str += ( (node._io) ? ((node._ls && this.config.useLines) ? this.icon.minusBottom : this.icon.minus) : ((node._ls && this.config.useLines) ? this.icon.plusBottom : this.icon.plus ) );
-str += '" alt="" /></a>';
-} else str += '<img src="' + ( (this.config.useLines) ? ((node._ls) ? this.icon.joinBottom : this.icon.join ) : this.icon.empty) + '" alt="" />';
+str += '" alt="" style="float:left;" /></a></p>';
+} else str += '<p><img src="' + ( (this.config.useLines) ? ((node._ls) ? this.icon.joinBottom : this.icon.join ) : this.icon.empty) + '" alt="" style="float:left;" /></p>';
 }
 return str;
 };

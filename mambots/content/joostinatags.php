@@ -10,7 +10,7 @@
 defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'jtContent');
 function jtContent($published, &$row, &$params, $page=0) {
-	global $mainframe, $Itemid, $database, $_MAMBOTS;
+	global $mainframe, $Itemid, $database, $_MAMBOTS, $mosConfig_live_site;
 	if (@$row->content) {
 		return;
 	}
@@ -26,12 +26,11 @@ function jtContent($published, &$row, &$params, $page=0) {
 	$jparams = new mosParameters($mambot->params);
 	$jt = $jparams->get('type_search');
 	$text = $jparams->get('');
-	// Если ключевые слова разделены не пробелом, а запятыми, раскомментируйте следующую строку и закомментируйте строку под ней.
-	// $tags=explode(',',$row->metakey);
-	$tags = explode(' ', $row->metakey);
-	$text .= '<div class="cf"></div>';
-	$text .= '<div class="jts">';
-	$text .= '<ul class="tags">';
+	// Если ключевые слова разделены запятыми, раскомментируйте следующую строку и закомментируйте строку под ней.
+	 $tags=explode(', ',$row->metakey);
+	//$tags = explode(' ', $row->metakey);
+	$text .= '<div class="clearfix"></div>';
+	$text .= '<ul class="tag">';
 		foreach ($tags as $tag) {
 			$text .= '<li><a href="';
 		if ($jt) {
@@ -40,18 +39,18 @@ function jtContent($published, &$row, &$params, $page=0) {
 			$text .= '';
 		}
 		if ($jt == 0) {
-			$text .= 'index.php?searchword=' . trim($tag) . '&amp;option=com_search&amp;submit=Search&amp;searchphrase=any&amp;ordering=newest"';
+			$text .= '/index.php?searchword=' . trim($tag) . '&amp;option=com_search&amp;submit=Search&amp;searchphrase=any&amp;ordering=newest"';
 		} else {
 		if ($jt == 1) {
-			$text .= 'index.php?searchword=' . trim($tag) . '&amp;option=com_search&amp;submit=Search&amp;searchphrase=all&amp;ordering=newest"';
+			$text .= '/index.php?searchword=' . trim($tag) . '&amp;option=com_search&amp;submit=Search&amp;searchphrase=all&amp;ordering=newest"';
 		} else {
-			$text .= 'index.php?searchword=' . trim($tag) . '&amp;option=com_search&amp;submit=Search&amp;searchphrase=exact&amp;ordering=newest"';
+			$text .= '/index.php?searchword=' . trim($tag) . '&amp;option=com_search&amp;submit=Search&amp;searchphrase=exact&amp;ordering=newest"';
 		}
 		}
-			$text .= ' title="' . trim($tag) . '" rel="category tag" target="_blank">' . trim($tag) . '</a></li>';
+			$text .= ' title="' . trim($tag) . '" rel="category tag">' . trim($tag) . '</a></li>';
 		}
 	$text .= '</ul>';
-	$text .= '</div>';
+	$text .= '<div class="clearfix"></div>';
 	if (count($tags) > 1 || $tags[0] != '')
 		$row->text .= $text;
 	return true;

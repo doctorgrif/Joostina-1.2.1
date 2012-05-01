@@ -20,11 +20,11 @@ $mosConfig_db_cache_handler = 'none';
 // SSL check - $http_host returns <live site url>:<port number if it is 443>
 $http_host = explode(':', $_SERVER['HTTP_HOST']);
 if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isset($http_host[1]) && $http_host[1] == 443) && substr($mosConfig_live_site, 0, 8) != 'https://') {
-	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
+	$mosConfig_live_site = 'https://'.substr($mosConfig_live_site, 7);
 }
-require_once ($mosConfig_absolute_path . '/includes/joomla.php');
-include_once ($mosConfig_absolute_path . '/language/' . $mosConfig_lang . '.php');
-require_once ($mosConfig_absolute_path . '/' . ADMINISTRATOR_DIRECTORY . '/includes/admin.php');
+require_once ($mosConfig_absolute_path.'/includes/joomla.php');
+include_once ($mosConfig_absolute_path.'/language/'.$mosConfig_lang.'.php');
+require_once ($mosConfig_absolute_path.'/'.ADMINISTRATOR_DIRECTORY.'/includes/admin.php');
 // must start the session before we create the mainframe object
 session_name(md5($mosConfig_live_site));
 session_start();
@@ -49,21 +49,25 @@ if ($no_html) {
 }
 initGzip();
 ?>
-<?php echo "<?xml version=\"1.0\"?>"; ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+echo '<!DOCTYPE html>';
+echo "\n";
+echo '<?xml version="1.0" encoding="'.$iso[1].'"?>';
+echo "\n";
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; <?php echo _ISO; ?>" />
-<title><?php echo $mosConfig_sitename; ?> - Joostina</title>
-<link rel="stylesheet" href="<?php echo $mosConfig_live_site; ?>/administrator/templates/<?php echo $mainframe->getTemplate(); ?>/css/template_css.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; <?php echo _ISO;?>" />
+<title><?php echo $mosConfig_sitename;?> - Joostina</title>
+<link type="text/css" rel="stylesheet" href="<?php echo $mosConfig_live_site;?>/administrator/templates/<?php echo $mainframe->getTemplate();?>/css/template_css.css" />
 <?php
 	$mainframe->set('loadEditor', true);
-	include_once ($mosConfig_absolute_path . '/editor/editor.php');
+	include_once ($mosConfig_absolute_path.'/editor/editor.php');
 	initEditor();
 ?>
-<script src="<?php echo $mosConfig_live_site; ?>/includes/js/JSCookMenu.js" type="text/javascript"></script>
-<script src="<?php echo $mosConfig_live_site; ?>/administrator/includes/js/ThemeOffice/theme.js" type="text/javascript"></script>
-<script src="<?php echo $mosConfig_live_site; ?>/includes/js/joomla.javascript.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo $mosConfig_live_site;?>/includes/js/JSCookMenu.js"></script>
+<script type="text/javascript" src="<?php echo $mosConfig_live_site;?>/administrator/includes/js/ThemeOffice/theme.js"></script>
+<script type="text/javascript" src="<?php echo $mosConfig_live_site;?>/includes/js/joomla.javascript.js"></script>
 </head>
 <body>
 	<?php

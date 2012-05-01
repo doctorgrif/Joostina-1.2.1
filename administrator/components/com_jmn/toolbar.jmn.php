@@ -11,25 +11,25 @@
 defined('_VALID_MOS') or die();
 require_once( $mainframe->getPath('toolbar_html') );
 switch ($task) {
-case "save_manager":
+case 'save_manager':
 TOOLBAR_jmn::_DEFAULT();
 break;
-case "settings":
+case 'settings':
 TOOLBAR_jmn::_SETTINGS();
 break;
-case "config":
+case 'config':
 TOOLBAR_jmn::_CONFIG();
 break;
-case "save_config":
+case 'save_config':
 TOOLBAR_jmn::_CONFIG();
 break;
-case "gen_metakey":
+case 'gen_metakey':
 TOOLBAR_jmn::_DEFAULT();
 break;
-case "gen_metadesc":
+case 'gen_metadesc':
 TOOLBAR_jmn::_DEFAULT();
 break;
-case "about":
+case 'about':
 break;
 case 'new':
 break;

@@ -2,11 +2,11 @@
 <mosinstall type="template" version="1.0.x">
 <name>NewLine</name>
 <creationDate>Февраль 2009</creationDate>
-<author>Joostina Team (Irina Chernova and doctorgrif)</author>
+<author>Joostina Team (Irina Chernova &amp; doctorgrif)</author>
 <authorEmail>info@joostina.ru</authorEmail>
 <authorUrl>http://www.joostina.ru</authorUrl>
-<copyright>(C) 2009-2011 Joostina Team.</copyright>
-<version>1.0.3</version>
+<copyright>(C) 2009-2012 Joostina Team.</copyright>
+<version>1.0.4</version>
 <license>GNU/GPL</license>
 <description>Шаблон Joostina 1.2.1. Updated.</description>
 </mosinstall>

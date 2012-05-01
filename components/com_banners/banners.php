@@ -28,7 +28,6 @@ switch ($task) {
 		break;
 }
 /* Function to redirect the clicks to the correct url and add 1 click */
-
 function clickArtBanner($id) {
 	global $database;
 	$banner = new mosArtBanner($database);
@@ -39,7 +38,6 @@ function clickArtBanner($id) {
 		$click_url = 'http://' . $banner->click_url;
 	mosRedirect($click_url);
 }
-
 function showStatistics($id) {
 	global $database;
 	$password = strval(mosGetParam($_REQUEST, 'password', ''));
@@ -51,10 +49,9 @@ function showStatistics($id) {
 // verifico password
 		if ($password == mosHash($banner->password)) {
 			global $mosConfig_live_site, $mosConfig_absolute_path;
-			echo '<br />';
-			echo '<strong>', _ABP_CLICKS, '</strong>', '&nbsp;:&nbsp;', $banner->complete_clicks, ' / ', $banner->clicks, ' (dal ', $banner->dta_mod_clicks, ')<br /><br />';
-			echo '<strong>', _ABP_IMPMADE, '</strong>', '&nbsp;:&nbsp;', $banner->imp_made, '<br /><br />';
-			echo '<strong>', _ABP_TOT_IMP_CLIC, '</strong>', '&nbsp;:&nbsp;', $banner->click_value * $banner->complete_clicks + $banner->imp_value * $banner->imp_made, '<br /><br />';
+			echo '<p class="strong">', _ABP_CLICKS, '</p>', '&nbsp;:&nbsp;', $banner->complete_clicks, ' / ', $banner->clicks, '<p> (dal ', $banner->dta_mod_clicks, ')</p>';
+			echo '<p class="strong">', _ABP_IMPMADE, '</p>', '&nbsp;:&nbsp;', $banner->imp_made, '<p></p>';
+			echo '<p class="strong">', _ABP_TOT_IMP_CLIC, '</p>', '&nbsp;:&nbsp;', $banner->click_value * $banner->complete_clicks + $banner->imp_value * $banner->imp_made, '<p></p>';
 			if ($banner->custom_banner_code != '') {
 				echo $banner->custom_banner_code;
 			} else
@@ -80,5 +77,4 @@ function showStatistics($id) {
 		}
 	}
 }
-
 ?>

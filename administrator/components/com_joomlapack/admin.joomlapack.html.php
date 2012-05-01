@@ -57,7 +57,7 @@ class HTML_joomlapack {
 				."</table>\n"
 				."<table class=\"adminlist\" id=\"adminlist\" >\n"
 					."<tr>\n"
-						."\t<th width=\"1%\"><!--<input type=\"checkbox\" name=\"toggle\" value=\"\" onclick=\"checkAll(".count($table_lists).");\" />--></th>\n"
+						."\t<th width=\"1%\"><input type=\"checkbox\" name=\"toggle\" value=\"\" onclick=\"checkAll(".count($table_lists).");\" /></th>\n"
 						."\t<th align=\"left\">"._JP_TABLES."</th>\n"
 						."\t<th width=\"5%\">"._JP_TABLE_ROWS."</th>\n"
 						."\t<th width=\"5%\">"._JP_SIZE."</th>\n"

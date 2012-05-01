@@ -19,18 +19,14 @@ $joostina13link = $params->get('joostina13link');
 		<div class="dmodarrow"></div>
 		<div class="dmodcap"></div>
 		<div class="dmodversion">
-			<a href="<?php echo $joostina12link; ?>" title="<?php echo _DJOOSTINA_12; ?>" target="_blank">
-				v. <?php echo $joostina12; ?>
-			</a>
+			<a href="<?php echo $joostina12link; ?>" title="<?php echo _DJOOSTINA_12; ?>">v. <?php echo $joostina12; ?></a>
 		</div>
 	</div>
 	<div id="dmodgreen">
 		<div class="dmodarrow"></div>
 		<div class="dmodcap"></div>
 		<div class="dmodversion">
-			<a href="<?php echo $joostina13link; ?>" title="<?php echo _DJOOSTINA_13; ?>" target="_blank">
-				v. <?php echo $joostina13; ?>
-			</a>
+			<a href="<?php echo $joostina13link; ?>" title="<?php echo _DJOOSTINA_13; ?>">v. <?php echo $joostina13; ?></a>
 		</div>
 	</div>
 </div>

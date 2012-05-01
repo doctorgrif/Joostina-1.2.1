@@ -34,16 +34,17 @@ $total = $database->loadResult();
 
 // page navigation
 $pageNav = new mosPageNav($total, $limitstart, $limit);
-
-$query = "SELECT* FROM #__session WHERE userid != 0"
-		. $and
-		. "\n ORDER BY usertype, username";
+$query = "SELECT * FROM #__session WHERE userid != 0"
+. $and
+. "\n ORDER BY usertype, username";
 $database->setQuery($query, $pageNav->limitstart, $pageNav->limit);
 $rows = $database->loadObjectList();
 ?>
 <table class="adminlist">
 	<tr>
-		<th colspan="4" class="title"><?php echo _NOW_ON_SITE_REGISTERED; ?></th>
+		<th colspan="4" class="title">
+			<p><?php echo _NOW_ON_SITE_REGISTERED; ?></p>
+		</th>
 	</tr>
 	<?php
 	$i = 0;
@@ -57,16 +58,24 @@ $rows = $database->loadObjectList();
 		}
 		?>
 	<tr class="row<?php echo $k; ?>">
-		<td width="5%"><?php echo $pageNav->rowNumber($i); ?></td>
-		<td width="60%"><?php echo $name; ?></td>
-		<td><?php echo $row->usertype; ?></td>
+		<td width="5%">
+			<p><?php echo $pageNav->rowNumber($i); ?></p>
+		</td>
+		<td width="60%">
+			<p><?php echo $name; ?></p>
+		</td>
+		<td width="35%">
+			<p><?php echo $row->usertype; ?></p>
+		</td>
 			<?php
 			if ($acl->acl_check('administration', 'manage', 'users', $my->usertype, 'components', 'com_users')) {
 				?>
 		<td>
-			<a href="index2.php?option=com_users&task=flogout&id=<?php echo $row->userid; ?>&<?php echo josSpoofValue(); ?>=1">
-				<img src="images/publish_x.png" width="12" height="12" alt="<?php echo _DISABLE; ?>" title="<?php echo _DISABLE ?>" />
-			</a>
+			<p>
+				<a href="index2.php?option=com_users&task=flogout&id=<?php echo $row->userid; ?>&<?php echo josSpoofValue(); ?>=1">
+					<img src="images/publish_x.png" width="12" height="12" alt="<?php echo _DISABLE; ?>" title="<?php echo _DISABLE ?>" />
+				</a>
+			</p>
 		</td>
 				<?php
 			}

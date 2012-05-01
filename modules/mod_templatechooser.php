@@ -15,14 +15,14 @@ $preview_height = $params->get('preview_height', 90);
 $preview_width = $params->get('preview_width', 140);
 $show_preview = $params->get('show_preview', 0);
 // Чтение файлов из каталога шаблона
-$template_path = $mosConfig_absolute_path . '/templates';
+$template_path = $mosConfig_absolute_path.'/templates';
 $templatefolder = @dir($template_path);
 $darray = array();
 if ($templatefolder) {
 	while ($templatefile = $templatefolder->read()) {
-	if ($templatefile != "." && $templatefile != ".." && $templatefile != ".svn" && $templatefile != "css" && is_dir($template_path . '/' . $templatefile)) {
+	if ($templatefile != "." && $templatefile != ".." && $templatefile != ".svn" && $templatefile != "css" && is_dir($template_path.'/'.$templatefile)) {
 		if (strlen($templatefile) > $titlelength) {
-		$templatename = substr($templatefile, 0, $titlelength - 3);
+		$templatename = mb_substr($templatefile, 0, $titlelength - 3);
 		$templatename .= '…';
 		} else {
 		$templatename = $templatefile;
@@ -38,34 +38,34 @@ $onchange = '';
 if ($show_preview) {
 	$onchange = 'showimage()';
 	?>
-	<img src="<?php echo "templates/$cur_template/template_thumbnail.png"; ?>" name="preview" width="<?php echo $preview_width; ?>" height="<?php echo $preview_height; ?>" id="preview" alt="<?php echo $cur_template; ?>" />
-	<script type='text/javascript'>
-		//<![CDATA[
-		function showimage() {
-			//if (!document.images) return;
-			document.images.preview.src = 'templates/' + getSelectedValue('templateform', 'jos_change_template') + '/template_thumbnail.png';
-		}
-		function getSelectedValue(frmName, srcListName) {
-			var form = eval('document.' + frmName);
-			var srcList = eval('form.' + srcListName);
-			i = srcList.selectedIndex;
-			if (i != null && i > -1) {
-			return srcList.options[i].value;
-			} else {
-			return null;
-			}
-		}
-		//]]>
-	</script>
-	<?php
+<figure>
+	<img src="<?php echo 'templates/'.$cur_template.'/template_thumbnail.png'; ?>" name="preview" width="<?php echo $preview_width; ?>" height="<?php echo $preview_height; ?>" id="preview" alt="<?php echo $cur_template; ?>" />
+</figure>
+<script type='text/javascript'>
+//<![CDATA[
+function showimage() {
+	//if (!document.images) return;
+	document.images.preview.src = 'templates/' + getSelectedValue('templateform', 'templatecange') + '/template_thumbnail.png';
 }
-?>
+function getSelectedValue(frmName, srcListName) {
+	var form = eval('document.' + frmName);
+	var srcList = eval('form.' + srcListName);
+	i = srcList.selectedIndex;
+	if (i != null && i > -1) {
+		return srcList.options[i].value;
+	} else {
+		return null;
+	}
+}
+//]]>
+</script>
+<?php } ?>
 <form action="index.php" name="templateform" method="post">
-	<div class="templatechooser">
-	<div>
-		<label for="templatechooser"><?php echo _CMN_SELECT; ?></label>
-	</div>
-		<?php echo mosHTML::selectList($darray, 'jos_change_template', 'id="mod_templatechooser_jos_change_template" class="button" onchange="' . $onchange . '"', 'value', 'text', $cur_template); ?>
-		<input class="button" type="submit" id="templatechooser" value="<?php echo _CMN_SELECT_PH; ?>" />
-	</div>
+<div class="template">
+	<p>
+		<label for="submit"><?php echo _CMN_SELECT; ?></label><br />
+		<?php echo mosHTML::selectList($darray, 'templatecange', 'id="templatecange" class="button" onchange="'.$onchange.'"', 'value', 'text', $cur_template); ?>
+		<input class="button" type="submit" id="submit" value="<?php echo _CMN_SELECT_PH; ?>" />
+	</p>
+</div>
 </form>

@@ -109,7 +109,7 @@ class poll_html {
 					}
 					?>
 		<td class="graph">
-			<img src="<?php echo $mosConfig_live_site; ?>/components/com_poll/images/blank.png" class="<?php echo $tdclass; ?>" height="<?php echo $polls_barheight; ?>" width="<?php echo $width; ?>" alt="" />
+			<img src="<?php echo $mosConfig_live_site; ?>/templates/newline/i/c/poll/blank.png" class="<?php echo $tdclass; ?>" height="<?php echo $polls_barheight; ?>" width="<?php echo $width; ?>" alt="" />
 		</td>
 	</tr>
 				<?php

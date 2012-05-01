@@ -18,7 +18,6 @@ require_once ($mainframe->getPath('admin_html'));
 // отключаем кэширование базы данных
 $mosConfig_db_cache_handler = 'none';
 
-
 $option = 'com_joomlapack';
 
 $act	= mosGetParam($_REQUEST,'act','default');
@@ -95,8 +94,6 @@ function processSave() {
 	$JPConfiguration->logLevel			= $logLevel;
 	$JPConfiguration->sql_pack			= $sql_pack;
 	$JPConfiguration->sql_pref			= $sql_pref;
-
-
 
 	$JPConfiguration->SaveConfiguration();
 }

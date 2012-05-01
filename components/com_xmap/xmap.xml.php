@@ -29,7 +29,7 @@ class XmapXML extends Xmap {
 		$len_live_site = strlen( $mosConfig_live_site );
 		$link = Xmap::getItemLink($node);
 
-		$is_extern = ( 0 != strcasecmp( substr($link, 0, $len_live_site), $mosConfig_live_site ) );
+		$is_extern = ( 0 != strcasecmp( mb_substr($link, 0, $len_live_site), $mosConfig_live_site ) );
 
 		if( !isset($node->browserNav) )
 			$node->browserNav = 0;

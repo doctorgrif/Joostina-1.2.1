@@ -70,7 +70,8 @@ function &initModules() {
 		else
 			$where_ac = '';
 #$query = "SELECT id, title, module, position, content, showtitle, params, assign_to_url FROM #__modules AS m"
-		$query = "SELECT id, title, module, position, content, showtitle, params FROM #__modules AS m"
+/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN id, title, module, position, content, showtitle, params FROM #__modules AS m"
 				. "\n INNER JOIN #__modules_menu AS mm ON mm.moduleid = m.id"
 				. "\n WHERE m.published = 1"
 				. $where_ac
@@ -256,7 +257,7 @@ $mainframe->appendMetaTag('keywords', $mosConfig_MetaKeys);
 		$mainframe->_head['meta'][$_meta_keys_index][1] = $keys;
 	}
 $iso = _ISO;
-$mainframe->addMetaTag('Content-Type', 'text/html; charset=' . $iso . '');
+$mainframe->addMetaTag('Content-Type', 'text/html; ' . $iso . '');
 $mainframe->addMetaTag('Content-Language', 'ru');
 if (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE'))
 $mainframe->addCustomHeadTag('<meta http-equiv="imagetoolbar" content="no" />');
@@ -375,6 +376,17 @@ echo '<base href="' . $mosConfig_live_site . '" />
 				if (!$syndicateParams->get('atom03', 1)) {
 					$live_bookmark = 0;
 				}
+				// add opml & yandex rss feeds
+				break;
+			case 'OPML':
+				if (!$syndicateParams->get('opml', 1)) {
+					$live_bookmark = 0;
+				}
+				break;
+			case 'Yandex':
+				if (!$syndicateParams->get('yandex', 1)) {
+					$live_bookmark = 0;
+				}
 				break;
 		}
 // support for Live Bookmarks ability for site syndication
@@ -409,6 +421,7 @@ echo '<base href="' . $mosConfig_live_site . '" />
 	} // boston, окончание хака отключения RSS
 // favourites icon
 	if (!$mosConfig_disable_favicon) {
+			global $mosConfig_favicon_ie, $mosConfig_disable_favicon_ie, $mosConfig_favicon_ipad, $mosConfig_disable_favicon_ipad;
 		if (!$mosConfig_favicon) {
 			$mosConfig_favicon = 'favicon.png';
 		}

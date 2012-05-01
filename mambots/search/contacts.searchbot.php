@@ -52,7 +52,7 @@ function botSearchContacts($text, $phrase = '', $ordering = '') {
 			$order = 'a.name DESC';
 			break;
 	}
-	$query = "SELECT a.name AS title," . "\n CONCAT_WS( ', ', a.name, a.con_position, a.misc ) AS text," .
+	$query = "SELECT STRAIGHT_JOIN a.name AS title," . "\n CONCAT_WS( ', ', a.name, a.con_position, a.misc ) AS text," .
 			"\n '' AS created," . "\n CONCAT_WS( ' / ', " . $database->Quote($section) .
 			", b.title ) AS section," . "\n '2' AS browsernav," . "\n CONCAT( 'index.php?option=com_contact&task=view&contact_id=', a.id ) AS href" .
 			"\n FROM #__contact_details AS a" . "\n INNER JOIN #__categories AS b ON b.id = a.catid" .

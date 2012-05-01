@@ -10,7 +10,7 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 
-global $mosConfig_live_site,$mainframe,$task;
+global $mosConfig_live_site,$mainframe, $task;
 
 class HTML_mmxtd {
 // отображения подкаталога текущего каталога
@@ -47,7 +47,7 @@ class HTML_mmxtd {
 		</td>
 	</tr>
 </table>
-<div style="text-align:center;margin:2px auto;"><a href="<?php echo $link; ?>"><img src="components/com_jwmmxtd/images/folder.gif" alt="" /></a> </div>
+<div style="text-align:center;margin:2px auto;"><a href="<?php echo $link; ?>"><img src="components/com_jwmmxtd/images/folder.gif" alt="" /></a></div>
 </div>
 <?php
 	}
@@ -78,7 +78,7 @@ class HTML_mmxtd {
 <table cellpadding="0" cellspacing="0">
 		<tr>
 			<td class="filename" colspan="2">
-				<h2><a href="<?php echo $img_url_link; ?>" title="<?php echo $file; ?>" rel="lightbox[jwmmxtd-title]">
+				<h2><a href="<?php echo $img_url_link; ?>" title="<?php echo $file; ?>" rel="lightbox">
 				<?php echo htmlspecialchars(substr($file,0,20).(strlen($file) > 20?'...':''),ENT_QUOTES); ?></a></h2>
 			</td>
 		</tr>
@@ -98,8 +98,7 @@ class HTML_mmxtd {
 		</tr>
 </table>
 <div class="fileimage">
-	<a href="<?php echo $img_url_link; ?>" rel="lightbox[jwmmxtd]" title="<?php echo _FILE?>:<br /><?php echo $file; ?>" title="<?php echo _CLICK_TO_PREVIEW?>">
-	<img src="<?php echo $img_url_link; ?>?ok=ok" <?php echo $img_dimensions; ?> alt="<?php echo _CLICK_TO_PREVIEW?>" title="<?php echo _CLICK_TO_PREVIEW?>" /></a>
+	<p><a href="<?php echo $img_url_link; ?>" rel="lightbox" title="<?php echo _FILE?>: <?php echo $file; ?>" title="<?php echo _CLICK_TO_PREVIEW?>"><img src="<?php echo $img_url_link; ?>?ok=ok" <?php echo $img_dimensions; ?> alt="<?php echo _CLICK_TO_PREVIEW?>" title="<?php echo _CLICK_TO_PREVIEW?>" /></a></p>
 </div>
 <?php echo _JWMM_FILESIZE?>: <strong><?php echo $filesize; ?></strong><br />
 <?php echo _WIDTH?>: <strong><?php echo $info[0]; ?>px</strong>, <?php echo _HEIGHT?>: <strong><?php echo $info[1]; ?>px</strong>
@@ -175,8 +174,8 @@ if($icon == "../images/icons/zip.png") { ?>
 	} elseif($icon == "../images/icons/swf.png") {
 		$swfinfo = @getimagesize($doc_url_link);
 ?>
-	<a href="<?php echo $doc_url_link; ?>" rel="vidbox <?php echo $swfinfo[0]; ?> <?php echo $swfinfo[1]; ?>" title="<?php echo _FILE?>:<br /><?php echo $doc; ?>" title="<?php echo _CLICK_TO_PREVIEW?>">
-	<img src="<?php echo $icon ?>" alt="<?php echo $doc; ?>" title="<?php echo _CLICK_TO_PREVIEW?>" /></a>
+	<p><a href="<?php echo $doc_url_link; ?>" rel="vidbox <?php echo $swfinfo[0]; ?> <?php echo $swfinfo[1]; ?>" title="<?php echo _FILE?>: <?php echo $doc; ?>" title="<?php echo _CLICK_TO_PREVIEW?>">
+	<img src="<?php echo $icon ?>" alt="<?php echo $doc; ?>" title="<?php echo _CLICK_TO_PREVIEW?>" /></a></p>
 <?php
 	} else {
 ?>

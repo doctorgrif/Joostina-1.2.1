@@ -59,7 +59,7 @@ function listWeblinks($catid) {
 		}
 	}
 	/* Query to retrieve all categories that belong under the web links section and that are published. */
-	$query = "SELECT cc.*, a.catid, a.title, a.url, COUNT(a.id) AS numlinks"
+	$query = "SELECT STRAIGHT_JOIN cc.*, a.catid, a.title, a.url, COUNT(a.id) AS numlinks"
 			. "\n FROM #__categories AS cc LEFT JOIN #__weblinks AS a ON a.catid = cc.id"
 			. "\n WHERE a.published = 1" . "\n AND section = 'com_weblinks' AND cc.published = 1"
 			. "\n AND cc.access <= " . (int) $my->gid . "\n GROUP BY cc.id"

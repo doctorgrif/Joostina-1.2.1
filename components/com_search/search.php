@@ -53,7 +53,7 @@ function viewSearch() {
 	$searchword = preg_replace('/\s{2,}/s', ' ', $searchword);
 // boston, воспользуемся хаком smart'a, увеличим число символов для поиска до 100
 	if (strlen($searchword) > 100) {
-		$searchword = substr($searchword, 0, 99);
+		$searchword = mb_substr($searchword, 0, 99);
 		$restriction = 1;
 	}
 // searchword must contain a minimum of 3 characters
@@ -77,7 +77,7 @@ function viewSearch() {
 			$restriction = 1;
 		}
 	}
-	@include "$mosConfig_absolute_path/language/$mosConfig_lang.ignore.php";
+	include $mosConfig_absolute_path . '/language/' . $mosConfig_lang . '.ignore.php';
 	$orders = array();
 	$orders[] = mosHTML::makeOption('newest', _SEARCH_NEWEST);
 	$orders[] = mosHTML::makeOption('oldest', _SEARCH_OLDEST);
@@ -87,7 +87,7 @@ function viewSearch() {
 	$ordering = mosGetParam($_REQUEST, 'ordering', 'newest');
 	$ordering = preg_replace('/[^a-z]/', '', strtolower($ordering));
 	$lists = array();
-	$lists['ordering'] = mosHTML::selectList($orders, 'ordering', 'id="search_ordering" class="inputbox"', 'value', 'text', $ordering);
+	$lists['ordering'] = mosHTML::selectList($orders, 'ordering', 'id="search-ordering" class="inputbox"', 'value', 'text', $ordering);
 	$searchphrases = array();
 	$phrase = new stdClass();
 	$phrase->value = 'any';
@@ -101,7 +101,7 @@ function viewSearch() {
 	$phrase->value = 'exact';
 	$phrase->text = _SEARCH_PHRASE;
 	$searchphrases[] = $phrase;
-	$lists['searchphrase'] = mosHTML::radioList($searchphrases, 'searchphrase', '', $searchphrase);
+	$lists['searchphrase'] = mosHTML::radioList($searchphrases, 'searchphrase', ' ', $searchphrase);
 // html output
 	search_html::searchbox(htmlspecialchars($searchword), $lists, $params);
 	if (!$searchword) {
@@ -185,7 +185,6 @@ function viewSearch() {
 		search_html::conclusion($searchword_clean, $pageNav);
 	}
 // displays back button
-	echo '<br />';
 	mosHTML::BackButton($params, 0);
 }
 
@@ -193,7 +192,7 @@ function mosLogSearch($search_term) {
 	global $database;
 	global $mosConfig_enable_log_searches;
 
-	if (@$mosConfig_enable_log_searches) {
+	if ($mosConfig_enable_log_searches) {
 		$query = "SELECT hits FROM #__core_log_searches WHERE LOWER( search_term ) = " .
 				$database->Quote($search_term);
 		$database->setQuery($query);

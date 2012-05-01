@@ -337,15 +337,19 @@ class database {
 			$count=count($backs);
 			$str='';
 			for($i=0;$i<$count;++$i)
-				$str.='<br /><-'.$backs[$i]['file'].':'.$backs[$i]['line'];
+			if (isset($backs[$i]['file']) && !empty($backs[$i]['line'])) /*add*/
+				{ /*add*/
+					$str.='<br /><-'.$backs[$i]['file'].':'.$backs[$i]['line'];
+				} /*add*/
+			if (isset($prof->start)) 
 			$this->_log[] = ($timer1-$prof->start).' sec: ('.($timer2-$timer1).' sec)<br />'.
 					$this->_sql.' <small>['.$str.']</small>';
 		}
 		// --:end
 		// для оптимизации расхода памяти можно раскомментировать следующие строки, но некоторые особенно кривые расширения сразу же отвалятся
-		//unset($this->_sql);
-		//return $this->_cursor;
-		// /*
+		unset($this->_sql);
+		return $this->_cursor;
+		/*
 		if(!$this->_cursor) {
 			$this->_errorNum = mysql_errno($this->_resource);
 			$this->_errorMsg = mysql_error($this->_resource)." SQL=$this->_sql";
@@ -363,7 +367,7 @@ class database {
 			return false;
 		}
 		// тут тоже раскомментировать, что бы верхнее условие оказалось в комментариях, или еще лучше его вообще удалить
-		//*/
+		*/
 		return $this->_cursor;
 	}
 

@@ -81,18 +81,18 @@ echo '<?xml version="1.0" encoding="' . $iso[1] . '"?' . '>';
 <form method="post" action="uploadbanners.php" enctype="multipart/form-data" name="filename">
 	<table class="adminform">
 	<tr>
-		<th class="title" colspan="2"><?php echo _UPLOAD_BANNER_FILE?></th>
+		<th class="title" colspan="2"><?php echo _UPLOAD_BANNER_FILE; ?></th>
 	</tr>
 	<tr>
 		<td align="center">
 			<input class="inputbox" name="userfile" type="file" />
 		</td>
 		<td>
-			<input class="button" type="submit" value="<?php echo _TASK_UPLOAD?>" name="fileupload" />
+			<input class="button" type="submit" value="<?php echo _TASK_UPLOAD; ?>" name="fileupload" />
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2"><?php echo _MAX_SIZE?> = <?php echo ini_get('post_max_size'); ?></td>
+		<td colspan="2"><?php echo _MAX_SIZE; ?> = <?php echo ini_get('post_max_size'); ?></td>
 	</tr>
 	</table>
 <input type="hidden" name="directory" value="banners" />

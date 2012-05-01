@@ -191,24 +191,24 @@ class HTML_config {
 					<td>
 						<table class="sub_adminform">
 							<tr>
-								<td><?php echo _SITE_NAME ?></td>
-								<td><input class="textarea" style="width:98%;" type="text" name="config_sitename" size="50" value="<?php echo $row->config_sitename; ?>" /></td>
+								<td width="45%"><?php echo _SITE_NAME ?></td>
+								<td width="55%"><input class="textarea" type="text" name="config_sitename" size="30" value="<?php echo $row->config_sitename; ?>" /></td>
 							</tr>
 							<tr>
-								<td width="185"><?php echo _SITE_OFFLINE ?></td>
-								<td><?php echo $lists['offline']; ?></td>
+								<td width="45%"><?php echo _SITE_OFFLINE ?></td>
+								<td width="55%"><?php echo $lists['offline']; ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SITE_OFFLINE_MESSAGE ?></td>
-								<td><textarea class="textarea" cols="60" rows="2" style="width:98%;height:50px;" name="config_offline_message"><?php echo $row->config_offline_message; ?></textarea>
+								<td width="45%"><?php echo _SITE_OFFLINE_MESSAGE ?></td>
+								<td width="55%"><textarea class="textarea" cols="30" rows="4" name="config_offline_message"><?php echo $row->config_offline_message; ?></textarea>
 									<?php $tip = _SITE_OFFLINE_MESSAGE2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SYSTEM_ERROR_MESSAGE ?></td>
-								<td><textarea class="textarea" cols="60" rows="2" style="width:98%;height:50px;" name="config_error_message"><?php echo $row->config_error_message; ?></textarea>
+								<td width="45%"><?php echo _SYSTEM_ERROR_MESSAGE ?></td>
+								<td width="55%"><textarea class="textarea" cols="30" rows="4" name="config_error_message"><?php echo $row->config_error_message; ?></textarea>
 								<?php $tip = _SYSTEM_ERROR_MESSAGE2;
 								echo mosToolTip($tip);
 								?>
@@ -219,52 +219,52 @@ class HTML_config {
 					<td valign="top">
 						<table class="sub_adminform">
 							<tr>
-								<td><?php echo _SHOW_READMORE_TO_AUTH ?></td>
-								<td><?php echo $lists['shownoauth']; ?>
+								<td width="40%"><?php echo _SHOW_READMORE_TO_AUTH ?></td>
+								<td width="60%"><?php echo $lists['shownoauth']; ?>
 									<?php $tip = _SHOW_READMORE_TO_AUTH2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 								</tr>
 								<tr>
-									<td><?php echo _ENABLE_USER_REGISTRATION ?></td>
-									<td><?php echo $lists['allowUserRegistration']; ?>
+									<td width="40%"><?php echo _ENABLE_USER_REGISTRATION ?></td>
+									<td width="60%"><?php echo $lists['allowUserRegistration']; ?>
 										<?php $tip = _ENABLE_USER_REGISTRATION2;
 										echo mosToolTip($tip);
 										?>
 									</td>
 								</tr>
 								<tr>
-									<td><?php echo _ACCOUNT_ACTIVATION ?></td>
-									<td><?php echo $lists['useractivation']; ?>
+									<td width="40%"><?php echo _ACCOUNT_ACTIVATION ?></td>
+									<td width="60%"><?php echo $lists['useractivation']; ?>
 										<?php $tip = _ACCOUNT_ACTIVATION2;
 										echo mosToolTip($tip);
 										?>
 									</td>
 								</tr>
 								<tr>
-									<td><?php echo _UNIQUE_EMAIL ?></td>
-									<td><?php echo $lists['uniquemail']; ?>
+									<td width="40%"><?php echo _UNIQUE_EMAIL ?></td>
+									<td width="60%"><?php echo $lists['uniquemail']; ?>
 										<?php $tip = _UNIQUE_EMAIL2;
 										echo mosToolTip($tip);
 										?>
 									</td>
 								</tr>
 								<tr>
-									<td><?php echo _USER_PARAMS ?></td>
-									<td><?php echo $lists['frontend_userparams']; ?>
+									<td width="40%"><?php echo _USER_PARAMS ?></td>
+									<td width="60%"><?php echo $lists['frontend_userparams']; ?>
 										<?php $tip = _USER_PARAMS2;
 										echo mosToolTip($tip);
 										?>
 									</td>
 								</tr>
 								<tr>
-									<td><?php echo _DEFAULT_EDITOR ?></td>
-									<td><?php echo $lists['editor']; ?></td>
+									<td width="40%"><?php echo _DEFAULT_EDITOR ?></td>
+									<td width="60%"><?php echo $lists['editor']; ?></td>
 								</tr>
 								<tr>
-									<td><?php echo _LIST_LIMIT ?></td>
-									<td><?php echo $lists['list_limit'];
+									<td width="40%"><?php echo _LIST_LIMIT ?></td>
+									<td width="60%"><?php echo $lists['list_limit'];
 										$tip = _LIST_LIMIT2;
 										echo mosToolTip($tip);
 										?>
@@ -282,28 +282,28 @@ class HTML_config {
 					<td>
 						<table class="sub_adminform">
 							<tr>
-								<td width="300"><?php echo _SITE_LANGUAGE; ?></td>
-								<td><?php echo $lists['lang']; ?></td>
+								<td width="40%"><?php echo _SITE_LANGUAGE; ?></td>
+								<td width="60%"><?php echo $lists['lang']; ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _CUSTOM_PRINT ?></td>
-								<td><?php echo $lists['config_custom_print'];
+								<td width="40%"><?php echo _CUSTOM_PRINT ?></td>
+								<td width="60%"><?php echo $lists['config_custom_print'];
 									$tip = _CUSTOM_PRINT2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _MODULES_MULTI_LANG ?></td>
-								<td><?php echo $lists['config_module_multilang'];
+								<td width="40%"><?php echo _MODULES_MULTI_LANG ?></td>
+								<td width="60%"><?php echo $lists['config_module_multilang'];
 									$tip = _MODULES_MULTI_LANG2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DATE_FORMAT_TXT ?></td>
-								<td><input class="textarea" type="text" name="config_form_date" size="35" value="<?php echo $row->config_form_date; ?>" />
+								<td width="40%"><?php echo _DATE_FORMAT_TXT ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_form_date" size="30" value="<?php echo $row->config_form_date; ?>" />
 									<?php echo $lists['form_date_help'];
 									$tip = _DATE_FORMAT2;
 									echo mosToolTip($tip);
@@ -311,8 +311,8 @@ class HTML_config {
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DATE_FORMAT_FULL ?></td>
-								<td><input class="textarea" type="text" name="config_form_date_full" size="35" value="<?php echo $row->config_form_date_full; ?>" />
+								<td width="40%"><?php echo _DATE_FORMAT_FULL ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_form_date_full" size="30" value="<?php echo $row->config_form_date_full; ?>" />
 									<?php echo $lists['form_date_full_help'];
 									$tip = _DATE_FORMAT_FULL2;
 									echo mosToolTip($tip);
@@ -320,104 +320,104 @@ class HTML_config {
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _USE_H1_FOR_HEADERS ?></td>
-								<td><?php echo $lists['config_title_h1_only_view'];
+								<td width="40%"><?php echo _USE_H1_FOR_HEADERS ?></td>
+								<td width="60%"><?php echo $lists['config_title_h1_only_view'];
 									$tip = _USE_H1_FOR_HEADERS2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _USE_H1_HEADERS_ALWAYS ?></td>
-								<td><?php echo $lists['config_title_h1'];
+								<td width="40%"><?php echo _USE_H1_HEADERS_ALWAYS ?></td>
+								<td width="60%"><?php echo $lists['config_title_h1'];
 									$tip = _USE_H1_HEADERS_ALWAYS2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_RSS ?></td>
-								<td><?php echo $lists['syndicate_off'];
+								<td width="40%"><?php echo _DISABLE_RSS ?></td>
+								<td width="60%"><?php echo $lists['syndicate_off'];
 									$tip = _DISABLE_RSS2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _USE_TEMPLATE ?></td>
-								<td><?php echo $lists['one_template'];
+								<td width="40%"><?php echo _USE_TEMPLATE ?></td>
+								<td width="60%"><?php echo $lists['one_template'];
 									$tip = _USE_TEMPLATE2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _FAVICON_IMAGE ?></td>
-								<td><input class="textarea" type="text" name="config_favicon" size="20" value="<?php echo $row->config_favicon; ?>" />
+								<td width="40%"><?php echo _FAVICON_IMAGE ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_favicon" size="30" value="<?php echo $row->config_favicon; ?>" />
 									<?php $tip = _FAVICON_IMAGE2;
 									echo mosToolTip($tip, _FAVICON_IMAGE3);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_FAVICON ?></td>
-								<td><?php echo $lists['config_disable_favicon'];
+								<td width="40%"><?php echo _DISABLE_FAVICON ?></td>
+								<td width="60%"><?php echo $lists['config_disable_favicon'];
 									$tip = _DISABLE_FAVICON2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _FAVICON_IMAGE_IE ?></td>
-								<td><input class="textarea" type="text" name="config_favicon_ie" size="20" value="<?php echo $row->config_favicon_ie; ?>" />
+								<td width="40%"><?php echo _FAVICON_IMAGE_IE ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_favicon_ie" size="30" value="<?php echo $row->config_favicon_ie; ?>" />
 									<?php $tip = _FAVICON_IMAGE2_IE;
 									echo mosToolTip($tip, _FAVICON_IMAGE3_IE);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_FAVICON_IE ?></td>
-								<td><?php echo $lists['config_disable_favicon_ie'];
+								<td width="40%"><?php echo _DISABLE_FAVICON_IE ?></td>
+								<td width="60%"><?php echo $lists['config_disable_favicon_ie'];
 									$tip = _DISABLE_FAVICON2_IE;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _FAVICON_IMAGE_IPAD ?></td>
-								<td><input class="textarea" type="text" name="config_favicon_ipad" size="20" value="<?php echo $row->config_favicon_ipad; ?>" />
+								<td width="40%"><?php echo _FAVICON_IMAGE_IPAD ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_favicon_ipad" size="30" value="<?php echo $row->config_favicon_ipad; ?>" />
 									<?php $tip = _FAVICON_IMAGE2_IPAD;
 									echo mosToolTip($tip, _FAVICON_IMAGE3_IPAD);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_FAVICON_IPAD ?></td>
-								<td><?php echo $lists['config_disable_favicon_ipad'];
+								<td width="40%"><?php echo _DISABLE_FAVICON_IPAD ?></td>
+								<td width="60%"><?php echo $lists['config_disable_favicon_ipad'];
 									$tip = _DISABLE_FAVICON2_IPAD;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_SYSTEM_MAMBOTS ?></td>
-								<td><?php echo $lists['mmb_system_off'];
+								<td width="40%"><?php echo _DISABLE_SYSTEM_MAMBOTS ?></td>
+								<td width="60%"><?php echo $lists['mmb_system_off'];
 									$tip = _DISABLE_SYSTEM_MAMBOTS2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_CONTENT_MAMBOTS ?></td>
-								<td><?php echo $lists['mmb_content_off'];
+								<td width="40%"><?php echo _DISABLE_CONTENT_MAMBOTS ?></td>
+								<td width="60%"><?php echo $lists['mmb_content_off'];
 									$tip = _DISABLE_CONTENT_MAMBOTS2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_MAINBODY_MAMBOTS ?></td>
-								<td><?php echo $lists['config_mmb_mainbody_off'];
+								<td width="40%"><?php echo _DISABLE_MAINBODY_MAMBOTS ?></td>
+								<td width="60%"><?php echo $lists['config_mmb_mainbody_off'];
 									$tip = _DISABLE_MAINBODY_MAMBOTS2;
 									echo mosToolTip($tip);
 									?>
@@ -428,80 +428,79 @@ class HTML_config {
 					<td valign="top">
 						<table class="sub_adminform">
 							<tr>
-								<td><?php echo _SITE_AUTH ?></td>
-								<td><?php echo $lists['frontend_login'];
+								<td width="40%"><?php echo _SITE_AUTH ?></td>
+								<td width="60%"><?php echo $lists['frontend_login'];
 									$tip = _SITE_AUTH2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _FRONT_SESSION_TIME ?></td>
-								<td><input class="textarea" type="text" name="config_lifetime" size="10" value="<?php echo $row->config_lifetime; ?>" />&nbsp;секунд&nbsp;
-									<?php echo mosWarning(_FRONT_SESSION_TIME2); ?>
+								<td width="40%"><?php echo _FRONT_SESSION_TIME ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_lifetime" size="30" value="<?php echo $row->config_lifetime; ?>" />&nbsp;секунд&nbsp;<?php echo mosWarning(_FRONT_SESSION_TIME2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_FRONT_SESSIONS ?></td>
-								<td><?php echo $lists['session_front'];
+								<td width="40%"><?php echo _DISABLE_FRONT_SESSIONS ?></td>
+								<td width="60%"><?php echo $lists['session_front'];
 									$tip = _DISABLE_FRONT_SESSIONS2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_ACCESS_CHECK_TO_CONTENT ?></td>
-								<td><?php echo $lists['config_disable_access_control'];
+								<td width="40%"><?php echo _DISABLE_ACCESS_CHECK_TO_CONTENT ?></td>
+								<td width="60%"><?php echo $lists['config_disable_access_control'];
 									$tip = _DISABLE_ACCESS_CHECK_TO_CONTENT2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _COUNT_CONTENT_HITS ?></td>
-								<td><?php echo $lists['config_content_hits'];
+								<td width="40%"><?php echo _COUNT_CONTENT_HITS ?></td>
+								<td width="60%"><?php echo $lists['config_content_hits'];
 									echo mosToolTip(_COUNT_CONTENT_HITS2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_CHECK_CONTENT_DATE ?></td>
-								<td><?php echo $lists['config_disable_date_state'];
+								<td width="40%"><?php echo _DISABLE_CHECK_CONTENT_DATE ?></td>
+								<td width="60%"><?php echo $lists['config_disable_date_state'];
 									echo mosToolTip(_DISABLE_CHECK_CONTENT_DATE2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_MODULES_WHEN_EDIT ?></td>
-								<td><?php echo $lists['module_on_edit_off'];
+								<td width="40%"><?php echo _DISABLE_MODULES_WHEN_EDIT ?></td>
+								<td width="60%"><?php echo $lists['module_on_edit_off'];
 									$tip = _DISABLE_MODULES_WHEN_EDIT2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _COUNT_GENERATION_TIME ?></td>
-								<td><?php echo $lists['time_gen'];
+								<td width="40%"><?php echo _COUNT_GENERATION_TIME ?></td>
+								<td width="60%"><?php echo $lists['time_gen'];
 									$tip = _COUNT_GENERATION_TIME2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _ENABLE_GZIP ?></td>
-								<td><?php echo $lists['gzip'];
+								<td width="40%"><?php echo _ENABLE_GZIP ?></td>
+								<td width="60%"><?php echo $lists['gzip'];
 									echo mosToolTip(_ENABLE_GZIP2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _IS_SITE_DEBUG ?></td>
-								<td><?php echo $lists['debug'];
+								<td width="40%"><?php echo _IS_SITE_DEBUG ?></td>
+								<td width="60%"><?php echo $lists['debug'];
 									$tip = _IS_SITE_DEBUG2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _EXTENDED_DEBUG ?></td>
-								<td><?php echo $lists['config_front_debug'];
+								<td width="40%"><?php echo _EXTENDED_DEBUG ?></td>
+								<td width="60%"><?php echo $lists['config_front_debug'];
 									echo mosToolTip(_EXTENDED_DEBUG2); ?>
 								</td>
 							</tr>
@@ -518,26 +517,26 @@ class HTML_config {
 					<td>
 						<table class="sub_adminform">
 							<tr>
-								<td width="300"><?php echo _DISABLE_ADMIN_SESS_DEL ?></td>
-								<td><?php echo $lists['config_adm_session_del'];
+								<td width="40%"><?php echo _DISABLE_ADMIN_SESS_DEL ?></td>
+								<td width="60%"><?php echo $lists['config_adm_session_del'];
 									echo mosToolTip(_DISABLE_ADMIN_SESS_DEL2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_HELP_BUTTON ?></td>
-								<td><?php echo $lists['config_disable_button_help'];
+								<td width="40%"><?php echo _DISABLE_HELP_BUTTON ?></td>
+								<td width="60%"><?php echo $lists['config_disable_button_help'];
 									echo mosToolTip(_DISABLE_HELP_BUTTON2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td width="300"><?php echo _USE_OLD_TOOLBAR ?></td>
-								<td><?php echo $lists['config_old_toolbar'];
+								<td width="40%"><?php echo _USE_OLD_TOOLBAR ?></td>
+								<td width="60%"><?php echo $lists['config_old_toolbar'];
 									echo mosToolTip(_USE_OLD_TOOLBAR2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_IMAGES_TAB ?></td>
-								<td><?php echo $lists['config_disable_image_tab'];
+								<td width="40%"><?php echo _DISABLE_IMAGES_TAB ?></td>
+								<td width="60%"><?php echo $lists['config_disable_image_tab'];
 									echo mosToolTip(_DISABLE_IMAGES_TAB2); ?>
 								</td>
 							</tr>
@@ -546,20 +545,19 @@ class HTML_config {
 					<td valign="top">
 						<table class="sub_adminform">
 							<tr>
-								<td><?php echo _ADMIN_SESS_TIME ?></td>
-								<td><input class="textarea" type="text" name="config_session_life_admin" size="10" value="<?php echo $row->config_session_life_admin; ?>" />&nbsp;<?php echo _SECONDS ?>&nbsp;
-									<?php echo mosWarning(_ADMIN_SESS_TIME2); ?>
+								<td width="40%"><?php echo _ADMIN_SESS_TIME ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_session_life_admin" size="10" value="<?php echo $row->config_session_life_admin; ?>" />&nbsp;<?php echo _SECONDS ?>&nbsp;<?php echo mosWarning(_ADMIN_SESS_TIME2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _SAVE_LAST_PAGE ?></td>
-								<td><?php echo $lists['admin_expired'];
+								<td width="40%"><?php echo _SAVE_LAST_PAGE ?></td>
+								<td width="60%"><?php echo $lists['admin_expired'];
 									echo mosToolTip(_SAVE_LAST_PAGE2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _HTML_CSS_EDITOR ?></td>
-								<td><?php echo $lists['config_codepress'];
+								<td width="40%"><?php echo _HTML_CSS_EDITOR ?></td>
+								<td width="60%"><?php echo $lists['config_codepress'];
 									echo mosToolTip(_HTML_CSS_EDITOR2); ?>
 								</td>
 							</tr>
@@ -579,71 +577,71 @@ class HTML_config {
 								<td colspan="3"><?php echo _THIS_PARAMS_CONTROL_CONTENT ?></td>
 							</tr>
 							<tr>
-								<td width="250"><?php echo _LINK_TITLES ?></td>
-								<td width="150"><?php echo $lists['link_titles']; ?></td>
-								<td><?php $tip = _LINK_TITLES2;
+								<td width="40%"><?php echo _LINK_TITLES ?></td>
+								<td width="50%"><?php echo $lists['link_titles']; ?></td>
+								<td width="5%"><?php $tip = _LINK_TITLES2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td width="250"><?php echo _READMORE_LINK ?></td>
-								<td width="150"><?php echo $lists['readmore']; ?></td>
-								<td><?php $tip = _READMORE_LINK2;
+								<td width="40%"><?php echo _READMORE_LINK ?></td>
+								<td width="55%"><?php echo $lists['readmore']; ?></td>
+								<td width="5%"><?php $tip = _READMORE_LINK2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _VOTING_ENABLE ?></td>
-								<td><?php echo $lists['vote']; ?></td>
-								<td><?php $tip = _VOTING_ENABLE2;
+								<td width="40%"><?php echo _VOTING_ENABLE ?></td>
+								<td width="55%"><?php echo $lists['vote']; ?></td>
+								<td width="5%"><?php $tip = _VOTING_ENABLE2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _AUTHOR_NAMES ?></td>
-								<td><?php echo $lists['hideAuthor']; ?></td>
-								<td><?php $tip = _AUTHOR_NAMES2;
+								<td width="40%"><?php echo _AUTHOR_NAMES ?></td>
+								<td width="55%"><?php echo $lists['hideAuthor']; ?></td>
+								<td width="5%"><?php $tip = _AUTHOR_NAMES2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DATE_TIME_CREATION ?></td>
-								<td><?php echo $lists['hideCreateDate']; ?></td>
-								<td><?php $tip = _DATE_TIME_CREATION2;
+								<td width="40%"><?php echo _DATE_TIME_CREATION ?></td>
+								<td width="55%"><?php echo $lists['hideCreateDate']; ?></td>
+								<td width="5%"><?php $tip = _DATE_TIME_CREATION2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _DATE_TIME_MODIFICATION ?></td>
-								<td><?php echo $lists['hideModifyDate']; ?></td>
-								<td><?php $tip = _DATE_TIME_MODIFICATION2;
+								<td width="40%"><?php echo _DATE_TIME_MODIFICATION ?></td>
+								<td width="55%"><?php echo $lists['hideModifyDate']; ?></td>
+								<td width="5%"><?php $tip = _DATE_TIME_MODIFICATION2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _VIEW_COUNT ?></td>
-								<td><?php echo $lists['hits']; ?></td>
-								<td><?php $tip = _VIEW_COUNT2;
+								<td width="40%"><?php echo _VIEW_COUNT ?></td>
+								<td width="55%"><?php echo $lists['hits']; ?></td>
+								<td width="5%"><?php $tip = _VIEW_COUNT2;
 									echo mosToolTip($tip);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td><?php echo _LINK_PDF ?></td>
-								<td><?php echo $lists['hidePdf']; ?></td>
+								<td width="40%"><?php echo _LINK_PDF ?></td>
+								<td width="55%"><?php echo $lists['hidePdf']; ?></td>
 									<?php if (!is_writable("$mosConfig_absolute_path/media/")) {
-										echo "<td align=\"left\">";
+										echo '<td align="left">';
 										echo mosToolTip(_PRINT_PDF_ICON);
-										echo "</td>";
+										echo '</td>';
 									} else {
 									?>
-								<td>&nbsp;</td>
+								<td width="5%">&nbsp;</td>
 								<?php } ?>
 							</tr>
 						</table>
@@ -651,57 +649,59 @@ class HTML_config {
 					<td valign="top">
 						<table class="sub_adminform">
 							<tr>
-								<td><?php echo _LINK_PRINT ?></td>
-								<td><?php echo $lists['hidePrint']; ?></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _LINK_PRINT ?></td>
+								<td width="55%"><?php echo $lists['hidePrint']; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _LINK_EMAIL ?></td>
-								<td><?php echo $lists['hideEmail']; ?></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _LINK_EMAIL ?></td>
+								<td width="55%"><?php echo $lists['hideEmail']; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _PRINT_EMAIL_ICONS ?></td>
-								<td><?php echo $lists['icons']; ?></td>
-								<td><?php echo mosToolTip(_PRINT_EMAIL_ICONS2); ?></td>
+								<td width="40%"><?php echo _PRINT_EMAIL_ICONS ?></td>
+								<td width="55%"><?php echo $lists['icons']; ?></td>
+								<td width="5%"><?php echo mosToolTip(_PRINT_EMAIL_ICONS2); ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _ENABLE_TOC ?></td>
-								<td><?php echo $lists['multipage_toc']; ?></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _ENABLE_TOC ?></td>
+								<td width="55%"><?php echo $lists['multipage_toc']; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _BACK_BUTTON ?></td>
-								<td><?php echo $lists['back_button']; ?></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _BACK_BUTTON ?></td>
+								<td width="55%"><?php echo $lists['back_button']; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _CONTENT_NAV ?></td>
-								<td><?php echo $lists['item_navigation']; ?></td>
+								<td width="40%"><?php echo _CONTENT_NAV ?></td>
+								<td width="55%"><?php echo $lists['item_navigation']; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _UNIQ_ITEMS_IDS ?></td>
-								<td><?php echo $lists['config_uid_news']; ?></td>
-								<td><?php echo mosToolTip(_UNIQ_ITEMS_IDS2); ?></td>
+								<td width="40%"><?php echo _UNIQ_ITEMS_IDS ?></td>
+								<td width="55%"><?php echo $lists['config_uid_news']; ?></td>
+								<td width="5%"><?php echo mosToolTip(_UNIQ_ITEMS_IDS2); ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _AUTO_PUBLICATION_FRONT ?></td>
-								<td><?php echo $lists['auto_frontpage']; ?></td>
-								<td><?php echo mosToolTip(_AUTO_PUBLICATION_FRONT2); ?></td>
+								<td width="40%"><?php echo _AUTO_PUBLICATION_FRONT ?></td>
+								<td width="55%"><?php echo $lists['auto_frontpage']; ?></td>
+								<td width="5%"><?php echo mosToolTip(_AUTO_PUBLICATION_FRONT2); ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_BLOCK ?></td>
-								<td><?php echo $lists['config_disable_checked_out']; ?></td>
-								<td><?php echo mosToolTip(_DISABLE_BLOCK2); ?></td>
+								<td width="40%"><?php echo _DISABLE_BLOCK ?></td>
+								<td width="55%"><?php echo $lists['config_disable_checked_out']; ?></td>
+								<td width="5%"><?php echo mosToolTip(_DISABLE_BLOCK2); ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _ITEMID_COMPAT ?></td>
-								<td><?php echo $lists['itemid_compat']; ?></td>
+								<td width="40%"><?php echo _ITEMID_COMPAT ?></td>
+								<td width="55%"><?php echo $lists['itemid_compat']; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _ONE_EDITOR ?></td>
-								<td><?php echo $lists['one_editor']; ?></td>
-								<td><?php echo mosToolTip(_ONE_EDITOR2); ?></td>
+								<td width="40%"><?php echo _ONE_EDITOR ?></td>
+								<td width="55%"><?php echo $lists['one_editor']; ?></td>
+								<td width="5%"><?php echo mosToolTip(_ONE_EDITOR2); ?></td>
 							</tr>
 						</table>
 					</td>
@@ -714,41 +714,41 @@ class HTML_config {
 			?>
 			<table class="adminform">
 				<tr>
-					<td width="185"><?php echo _TIME_OFFSET ?></td>
-					<td><?php echo $lists['offset'];
-						$tip = _TIME_OFFSET2 . " " . mosCurrentDate(_DATE_FORMAT_LC2);
+					<td width="40%"><?php echo _TIME_OFFSET ?></td>
+					<td width="55%"><?php echo $lists['offset'];
+						$tip = _TIME_OFFSET2 . ' ' . mosCurrentDate(_DATE_FORMAT_LC2);
 						echo mosToolTip($tip);
 						?>
 					</td>
-					<td>&nbsp;</td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr>
-					<td width="185"><?php echo _TIME_DIFF ?></td>
-					<td><input class="textarea" type="text" name="config_offset" size="15" value="<?php echo $row->config_offset; ?>" disabled="disabled" /></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _TIME_DIFF ?></td>
+					<td width="55%"><input class="textarea" type="text" name="config_offset" size="20" value="<?php echo $row->config_offset; ?>" disabled="disabled" /></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr>
-					<td width="185"><?php echo _TIME_DIFF2 ?></td>
-					<td><?php echo $lists['feed_timeoffset']; ?>
-						<?php $tip = _CURR_DATE_TIME_RSS . ": " . mosCurrentDate(_DATE_FORMAT_LC2);
+					<td width="40%"><?php echo _TIME_DIFF2 ?></td>
+					<td width="55%"><?php echo $lists['feed_timeoffset']; ?>
+						<?php $tip = _CURR_DATE_TIME_RSS . ': ' . mosCurrentDate(_DATE_FORMAT_LC2);
 						echo mosToolTip($tip);
 						?>
 					</td>
-					<td>&nbsp;</td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr valign="top">
-					<td width="185"><?php echo _COUNTRY_LOCALE ?></td>
-					<td><input class="textarea" type="text" name="config_locale" size="15" value="<?php echo $row->config_locale; ?>" />
+					<td width="40%"><?php echo _COUNTRY_LOCALE ?></td>
+					<td width="55%"><input class="textarea" type="text" name="config_locale" size="20" value="<?php echo $row->config_locale; ?>" />
 						<?php $tip = _COUNTRY_LOCALE2;
 						echo mosToolTip($tip);
 						?>
 					</td>
-					<td>&nbsp;</td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr valign="top">
-					<td width="185">&nbsp;</td>
-					<td><?php echo _LOCALE_WINDOWS ?></td>
-					<td>&nbsp;</td>
+					<td width="40%">&nbsp;</td>
+					<td width="55%"><?php echo _LOCALE_WINDOWS ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 			</table>
 			<?php
@@ -757,42 +757,42 @@ class HTML_config {
 			?>
 			<table class="adminform">
 				<tr>
-					<td width="185"><?php echo _DB_HOST ?></td>
-					<td><input class="textarea" type="text" name="config_host" size="25" value="<?php echo $row->config_host; ?>" /></td>
+					<td width="40%"><?php echo _DB_HOST ?></td>
+					<td width="60%"><input class="textarea" type="text" name="config_host" size="30" value="<?php echo $row->config_host; ?>" /></td>
 				</tr>
 				<tr>
-					<td><?php echo _DB_USER ?></td>
-					<td><input class="textarea" type="text" name="config_user" size="25" value="<?php echo $row->config_user; ?>" /></td>
+					<td width="40%"><?php echo _DB_USER ?></td>
+					<td width="60%"><input class="textarea" type="text" name="config_user" size="30" value="<?php echo $row->config_user; ?>" /></td>
 				</tr>
 				<tr>
-					<td><?php echo _DB_NAME ?></td>
-					<td><input class="textarea" type="text" name="config_db" size="25" value="<?php echo $row->config_db; ?>" /></td>
+					<td width="40%"><?php echo _DB_NAME ?></td>
+					<td width="60%"><input class="textarea" type="text" name="config_db" size="30" value="<?php echo $row->config_db; ?>" /></td>
 				</tr>
 				<tr>
-					<td><?php echo _DB_PREFIX ?></td>
-					<td><input class="textarea" type="text" name="config_dbprefix" size="10" value="<?php echo $row->config_dbprefix; ?>" />
+					<td width="40%"><?php echo _DB_PREFIX ?></td>
+					<td width="60%"><input class="textarea" type="text" name="config_dbprefix" size="30" value="<?php echo $row->config_dbprefix; ?>" />
 						&nbsp;<?php echo mosWarning(_DB_PREFIX2); ?>
 					</td>
 				</tr>
 				<tr>
-					<td><?php echo _EVERYDAY_OPTIMIZATION ?></td>
-					<td><?php echo $lists['optimizetables'];
+					<td width="40%"><?php echo _EVERYDAY_OPTIMIZATION ?></td>
+					<td width="60%"><?php echo $lists['optimizetables'];
 						$tip = _EVERYDAY_OPTIMIZATION2;
 						echo mosToolTip($tip);
 						?>
 					</td>
 				</tr>
 				<tr>
-					<td><?php echo _OLD_MYSQL_SUPPORT ?></td>
-					<td><?php echo $lists['config_dbold'];
+					<td width="40%"><?php echo _OLD_MYSQL_SUPPORT ?></td>
+					<td width="60%"><?php echo $lists['config_dbold'];
 						$tip = _OLD_MYSQL_SUPPORT2;
 						echo mosToolTip($tip);
 						?>
 					</td>
 				</tr>
 				<tr>
-					<td><?php echo _DISABLE_SET_SQL ?></td>
-					<td><?php echo $lists['config_sql_mode_off'];
+					<td width="40%"><?php echo _DISABLE_SET_SQL ?></td>
+					<td width="60%"><?php echo $lists['config_sql_mode_off'];
 						$tip = _DISABLE_SET_SQL2;
 						echo mosToolTip($tip);
 						?>
@@ -808,53 +808,54 @@ class HTML_config {
 					<td>
 						<table class="sub_adminform">
 							<tr>
-								<td>URL сайта</td>
-								<td><strong><?php echo $row->config_live_site; ?></strong></td>
-								<td>&nbsp;</td>
+								<td width="45%">URL сайта</td>
+								<td width="55%"><?php echo $row->config_live_site; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td width="185"><?php echo _ABS_PATH ?></td>
-								<td width="450"><strong><?php echo $row->config_absolute_path; ?></strong></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _ABS_PATH ?></td>
+								<td width="55%"><?php echo $row->config_absolute_path; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _MEDIA_ROOT ?></td>
-								<td><input class="textarea" type="text" name="config_media_dir" size="50" value="<?php echo $row->config_media_dir; ?>" />
+								<td width="5%"><?php echo _MEDIA_ROOT ?></td>
+								<td width="5%"><input class="textarea" type="text" name="config_media_dir" size="30" value="<?php echo $row->config_media_dir; ?>" />
 									<?php echo mosToolTip(_MEDIA_ROOT2); ?>
 								</td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _FILE_ROOT ?></td>
-								<td><input class="textarea" type="text" name="config_joomlaxplorer_dir" size="50" value="<?php echo $row->config_joomlaxplorer_dir; ?>"/>
+								<td width="40%"><?php echo _FILE_ROOT ?></td>
+								<td width="55%"><input class="textarea" type="text" name="config_joomlaxplorer_dir" size="30" value="<?php echo $row->config_joomlaxplorer_dir; ?>"/>
 									<?php echo mosToolTip(_FILE_ROOT2); ?>
 								</td>
-								<td>&nbsp;</td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _SECRET_WORD ?></td>
-								<td><strong><?php echo $row->config_secret; ?></strong></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _SECRET_WORD ?></td>
+								<td width="55%"><?php echo $row->config_secret; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _GZ_CSS_JS ?></td>
-								<td><?php echo $lists['config_gz_js_css']; ?></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _GZ_CSS_JS ?></td>
+								<td width="55%"><?php echo $lists['config_gz_js_css']; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _SESSION_TYPE ?></td>
-								<td><?php echo $lists['session_type']; ?>&nbsp;<?php echo mosWarning(_SESSION_TYPE2); ?></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _SESSION_TYPE ?></td>
+								<td width="55%"><?php echo $lists['session_type']; ?>&nbsp;<?php echo mosWarning(_SESSION_TYPE2); ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _ERROR_REPORTING ?></td>
-								<td><?php echo $lists['error_reporting']; ?></td>
-								<td>&nbsp;</td>
+								<td width="40%"><?php echo _ERROR_REPORTING ?></td>
+								<td width="55%"><?php echo $lists['error_reporting']; ?></td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 							<tr>
-								<td><?php echo _HELP_SERVER ?></td>
-								<td><input class="textarea" type="text" name="config_helpurl" size="50" value="<?php echo $row->config_helpurl; ?>" />
+								<td width="40%"><?php echo _HELP_SERVER ?></td>
+								<td width="55%"><input class="textarea" type="text" name="config_helpurl" size="30" value="<?php echo $row->config_helpurl; ?>" />
 									<?php echo mosToolTip(_HELP_SERVER2); ?></td>
-								<td>&nbsp;</td>
+								<td width="5%">&nbsp;</td>
 							</tr>
 						</table>
 					</td>
@@ -873,7 +874,7 @@ class HTML_config {
 								<td>
 									<fieldset>
 										<legend><?php echo _FILE_MODE2 ?></legend>
-											<table cellpadding="1" cellspacing="1" border="0">
+											<table border="0">
 												<tr>
 													<td><input type="radio" id="filePermsMode0" name="filePermsMode" value="0" onclick="changeFilePermsMode(0)" <?php if (!$mode) echo ' checked="checked"'; ?> /></td>
 													<td><label for="filePermsMode0"><?php echo _FILE_MODE3 ?></label></td>
@@ -891,37 +892,37 @@ class HTML_config {
 												<tr id="filePermsFlags"<?php if (!$mode) echo ' style="display:none;"'; ?>>
 													<td>&nbsp;</td>
 													<td>
-														<table cellpadding="0" cellspacing="1" border="0">
+														<table border="0">
 															<tr>
-																<td style="padding:0px;"><?php echo _OWNER ?></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsUserRead" name="filePermsUserRead" value="1" onclick="saveFilePerms()"<?php if ($flags & 0400) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="filePermsUserRead"><?php echo _O_READ ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsUserWrite" name="filePermsUserWrite" value="1" onclick="saveFilePerms()"<?php if ($flags & 0200) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px"><label for="filePermsUserWrite"><?php echo _O_WRITE ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsUserExecute" name="filePermsUserExecute" value="1" onclick="saveFilePerms()"<?php if ($flags & 0100) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;" colspan="3"><label for="filePermsUserExecute"><?php echo _O_EXEC ?></label></td>
+																<td><?php echo _OWNER ?></td>
+																<td><input type="checkbox" id="filePermsUserRead" name="filePermsUserRead" value="1" onclick="saveFilePerms()"<?php if ($flags & 0400) echo ' checked="checked"'; ?> /></td>
+																<td><label for="filePermsUserRead"><?php echo _O_READ ?></label></td>
+																<td><input type="checkbox" id="filePermsUserWrite" name="filePermsUserWrite" value="1" onclick="saveFilePerms()"<?php if ($flags & 0200) echo ' checked="checked"'; ?> /></td>
+																<td><label for="filePermsUserWrite"><?php echo _O_WRITE ?></label></td>
+																<td><input type="checkbox" id="filePermsUserExecute" name="filePermsUserExecute" value="1" onclick="saveFilePerms()"<?php if ($flags & 0100) echo ' checked="checked"'; ?> /></td>
+																<td colspan="3"><label for="filePermsUserExecute"><?php echo _O_EXEC ?></label></td>
 															</tr>
 															<tr>
-																<td style="padding:0px;"><?php echo _O_GROUP ?></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsGroupRead" name="filePermsGroupRead" value="1" onclick="saveFilePerms()"<?php if ($flags & 040) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="filePermsGroupRead"><?php echo _O_READ ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsGroupWrite" name="filePermsGroupWrite" value="1" onclick="saveFilePerms()"<?php if ($flags & 020) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="filePermsGroupWrite"><?php echo _O_WRITE ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsGroupExecute" name="filePermsGroupExecute" value="1" onclick="saveFilePerms()"<?php if ($flags & 010) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;" width="70"><label for="filePermsGroupExecute"><?php echo _O_EXEC ?></label></td>
+																<td><?php echo _O_GROUP ?></td>
+																<td><input type="checkbox" id="filePermsGroupRead" name="filePermsGroupRead" value="1" onclick="saveFilePerms()"<?php if ($flags & 040) echo ' checked="checked"'; ?> /></td>
+																<td><label for="filePermsGroupRead"><?php echo _O_READ ?></label></td>
+																<td><input type="checkbox" id="filePermsGroupWrite" name="filePermsGroupWrite" value="1" onclick="saveFilePerms()"<?php if ($flags & 020) echo ' checked="checked"'; ?> /></td>
+																<td><label for="filePermsGroupWrite"><?php echo _O_WRITE ?></label></td>
+																<td><input type="checkbox" id="filePermsGroupExecute" name="filePermsGroupExecute" value="1" onclick="saveFilePerms()"<?php if ($flags & 010) echo ' checked="checked"'; ?> /></td>
+																<td width="70"><label for="filePermsGroupExecute"><?php echo _O_EXEC ?></label></td>
 																<td><input type="checkbox" id="applyFilePerms" name="applyFilePerms" value="1" /></td>
 																<td class="jtd_nowrap">
 																	<label for="applyFilePerms"><?php echo _APPLY_TO_FILES ?>&nbsp;<?php echo mosWarning(_APPLY_TO_FILES2); ?></label>
 																</td>
 															</tr>
 															<tr>
-																<td style="padding:0px;"><?php echo _CMN_ALL ?></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsWorldRead" name="filePermsWorldRead" value="1" onclick="saveFilePerms()"<?php if ($flags & 04) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="filePermsWorldRead"><?php echo _O_READ ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsWorldWrite" name="filePermsWorldWrite" value="1" onclick="saveFilePerms()"<?php if ($flags & 02) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="filePermsWorldWrite"><?php echo _O_WRITE ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="filePermsWorldExecute" name="filePermsWorldExecute" value="1" onclick="saveFilePerms()"<?php if ($flags & 01) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;" colspan="4"><label for="filePermsWorldExecute"><?php echo _O_EXEC ?></label></td>
+																<td><?php echo _CMN_ALL ?></td>
+																<td><input type="checkbox" id="filePermsWorldRead" name="filePermsWorldRead" value="1" onclick="saveFilePerms()"<?php if ($flags & 04) echo ' checked="checked"'; ?> /></td>
+																<td><label for="filePermsWorldRead"><?php echo _O_READ ?></label></td>
+																<td><input type="checkbox" id="filePermsWorldWrite" name="filePermsWorldWrite" value="1" onclick="saveFilePerms()"<?php if ($flags & 02) echo ' checked="checked"'; ?> /></td>
+																<td><label for="filePermsWorldWrite"><?php echo _O_WRITE ?></label></td>
+																<td><input type="checkbox" id="filePermsWorldExecute" name="filePermsWorldExecute" value="1" onclick="saveFilePerms()"<?php if ($flags & 01) echo ' checked="checked"'; ?> /></td>
+																<td colspan="4"><label for="filePermsWorldExecute"><?php echo _O_EXEC ?></label></td>
 															</tr>
 														</table>
 													</td>
@@ -944,14 +945,14 @@ class HTML_config {
 								<td>
 									<fieldset>
 										<legend><?php echo _DIR_CREATION2 ?></legend>
-											<table cellpadding="1" cellspacing="1" border="0">
+											<table border="0">
 												<tr>
-													<td><input type="radio" id="dirPermsMode0" name="dirPermsMode" value="0" onclick="changeDirPermsMode(0)"<?php if (!$mode) echo ' checked="checked"'; ?> /></td>
-													<td><label for="dirPermsMode0"><?php echo _DIR_CREATION3 ?></label></td>
+													<td width="10%"><input type="radio" id="dirPermsMode0" name="dirPermsMode" value="0" onclick="changeDirPermsMode(0)"<?php if (!$mode) echo ' checked="checked"'; ?> /></td>
+													<td width="90%"><label for="dirPermsMode0"><?php echo _DIR_CREATION3 ?></label></td>
 												</tr>
 												<tr>
-													<td><input type="radio" id="dirPermsMode1" name="dirPermsMode" value="1" onclick="changeDirPermsMode(1)"<?php if ($mode) echo ' checked="checked"'; ?> /></td>
-													<td>
+													<td width="10%"><input type="radio" id="dirPermsMode1" name="dirPermsMode" value="1" onclick="changeDirPermsMode(1)"<?php if ($mode) echo ' checked="checked"'; ?> /></td>
+													<td width="90%">
 														<label for="dirPermsMode1"><?php echo _DIR_CREATION4 ?></label>
 														<span id="dirPermsValue"<?php if (!$mode) echo ' style="display:none;"'; ?>>
 															<?php echo _O_AS ?>: <input class="textarea" type="text" readonly="readonly" name="config_dirperms" size="4" value="<?php echo $row->config_dirperms; ?>" />
@@ -962,37 +963,37 @@ class HTML_config {
 												<tr id="dirPermsFlags"<?php if (!$mode) echo ' style="display:none;"'; ?>>
 													<td>&nbsp;</td>
 													<td>
-														<table cellpadding="1" cellspacing="0" border="0">
+														<table border="0">
 															<tr>
-																<td style="padding:0px;"><?php echo _OWNER ?></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsUserRead" name="dirPermsUserRead" value="1" onclick="saveDirPerms()"<?php if ($flags & 0400) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="dirPermsUserRead"><?php echo _O_READ ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsUserWrite" name="dirPermsUserWrite" value="1" onclick="saveDirPerms()"<?php if ($flags & 0200) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="dirPermsUserWrite"><?php echo _O_WRITE ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsUserSearch" name="dirPermsUserSearch" value="1" onclick="saveDirPerms()"<?php if ($flags & 0100) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;" colspan="3"><label for="dirPermsUserSearch"><?php echo _O_SEARCH ?></label></td>
+																<td><?php echo _OWNER ?></td>
+																<td><input type="checkbox" id="dirPermsUserRead" name="dirPermsUserRead" value="1" onclick="saveDirPerms()"<?php if ($flags & 0400) echo ' checked="checked"'; ?> /></td>
+																<td><label for="dirPermsUserRead"><?php echo _O_READ ?></label></td>
+																<td><input type="checkbox" id="dirPermsUserWrite" name="dirPermsUserWrite" value="1" onclick="saveDirPerms()"<?php if ($flags & 0200) echo ' checked="checked"'; ?> /></td>
+																<td><label for="dirPermsUserWrite"><?php echo _O_WRITE ?></label></td>
+																<td><input type="checkbox" id="dirPermsUserSearch" name="dirPermsUserSearch" value="1" onclick="saveDirPerms()"<?php if ($flags & 0100) echo ' checked="checked"'; ?> /></td>
+																<td colspan="3"><label for="dirPermsUserSearch"><?php echo _O_SEARCH ?></label></td>
 															</tr>
 															<tr>
-																<td style="padding:0px;"><?php echo _O_GROUP ?></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsGroupRead" name="dirPermsGroupRead" value="1" onclick="saveDirPerms()"<?php if ($flags & 040) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="dirPermsGroupRead"><?php echo _O_READ ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsGroupWrite" name="dirPermsGroupWrite" value="1" onclick="saveDirPerms()"<?php if ($flags & 020) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="dirPermsGroupWrite"><?php echo _O_WRITE ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsGroupSearch" name="dirPermsGroupSearch" value="1" onclick="saveDirPerms()"<?php if ($flags & 010) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;" width="70"><label for="dirPermsGroupSearch"><?php echo _O_SEARCH ?></label></td>
+																<td><?php echo _O_GROUP ?></td>
+																<td><input type="checkbox" id="dirPermsGroupRead" name="dirPermsGroupRead" value="1" onclick="saveDirPerms()"<?php if ($flags & 040) echo ' checked="checked"'; ?> /></td>
+																<td><label for="dirPermsGroupRead"><?php echo _O_READ ?></label></td>
+																<td><input type="checkbox" id="dirPermsGroupWrite" name="dirPermsGroupWrite" value="1" onclick="saveDirPerms()"<?php if ($flags & 020) echo ' checked="checked"'; ?> /></td>
+																<td><label for="dirPermsGroupWrite"><?php echo _O_WRITE ?></label></td>
+																<td><input type="checkbox" id="dirPermsGroupSearch" name="dirPermsGroupSearch" value="1" onclick="saveDirPerms()"<?php if ($flags & 010) echo ' checked="checked"'; ?> /></td>
+																<td width="70"><label for="dirPermsGroupSearch"><?php echo _O_SEARCH ?></label></td>
 																<td><input type="checkbox" id="applyDirPerms" name="applyDirPerms" value="1"/></td>
 																<td class="jtd_nowrap">
 																	<label for="applyDirPerms"><?php echo _APPLY_TO_DIRS ?>&nbsp;<?php echo mosWarning(_APPLY_TO_DIRS2); ?></label>
 																</td>
 															</tr>
 															<tr>
-																<td style="padding:0px;"><?php echo _CMN_ALL ?></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsWorldRead" name="dirPermsWorldRead" value="1" onclick="saveDirPerms()"<?php if ($flags & 04) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="dirPermsWorldRead"><?php echo _O_READ ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsWorldWrite" name="dirPermsWorldWrite" value="1" onclick="saveDirPerms()"<?php if ($flags & 02) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;"><label for="dirPermsWorldWrite"><?php echo _O_WRITE ?></label></td>
-																<td style="padding:0px;"><input type="checkbox" id="dirPermsWorldSearch" name="dirPermsWorldSearch" value="1" onclick="saveDirPerms()"<?php if ($flags & 01) echo ' checked="checked"'; ?> /></td>
-																<td style="padding:0px;" colspan="3"><label for="dirPermsWorldSearch"><?php echo _O_SEARCH ?></label></td>
+																<td><?php echo _CMN_ALL ?></td>
+																<td><input type="checkbox" id="dirPermsWorldRead" name="dirPermsWorldRead" value="1" onclick="saveDirPerms()"<?php if ($flags & 04) echo ' checked="checked"'; ?> /></td>
+																<td><label for="dirPermsWorldRead"><?php echo _O_READ ?></label></td>
+																<td><input type="checkbox" id="dirPermsWorldWrite" name="dirPermsWorldWrite" value="1" onclick="saveDirPerms()"<?php if ($flags & 02) echo ' checked="checked"'; ?> /></td>
+																<td style="padding:0;"><label for="dirPermsWorldWrite"><?php echo _O_WRITE ?></label></td>
+																<td><input type="checkbox" id="dirPermsWorldSearch" name="dirPermsWorldSearch" value="1" onclick="saveDirPerms()"<?php if ($flags & 01) echo ' checked="checked"'; ?> /></td>
+																<td colspan="3"><label for="dirPermsWorldSearch"><?php echo _O_SEARCH ?></label></td>
 															</tr>
 														</table>
 													</td>
@@ -1013,14 +1014,14 @@ class HTML_config {
 								<td>
 									<fieldset>
 									<legend><?php echo _RG_EMULATION_TXT ?></legend>
-											<table cellpadding="1" cellspacing="1" border="0">
+											<table border="0">
 												<tr>
-													<td><input type="radio" id="rgemulation" name="rgemulation" value="0"<?php if (!$rgmode) echo ' checked="checked"'; ?> /></td>
-													<td><label for="rgemulation"><?php echo _RG_DISABLE ?></label></td>
+													<td width="10%"><input type="radio" id="rgemulation" name="rgemulation" value="0"<?php if (!$rgmode) echo ' checked="checked"'; ?> /></td>
+													<td width="90%"><label for="rgemulation"><?php echo _RG_DISABLE ?></label></td>
 												</tr>
 												<tr>
-													<td><input type="radio" id="rgemulation" name="rgemulation" value="1"<?php if ($rgmode) echo ' checked="checked"'; ?> /></td>
-													<td><label for="rgemulation"><?php echo _RG_ENABLE ?></label></td>
+													<td width="10%"><input type="radio" id="rgemulation" name="rgemulation" value="1"<?php if ($rgmode) echo ' checked="checked"'; ?> /></td>
+													<td width="90%"><label for="rgemulation"><?php echo _RG_ENABLE ?></label></td>
 												</tr>
 											</table>
 									</fieldset>
@@ -1040,38 +1041,38 @@ class HTML_config {
 					<td>
 						<table class="sub_adminform">
 							<tr>
-								<td width="100px" valign="top"><?php echo _SITE_DESC ?></td>
-								<td><textarea class="textarea" cols="50" rows="3" style="width:400px; height:100px;" name="config_MetaDesc"><?php echo $row->config_MetaDesc; ?></textarea><?php echo mosToolTip(_SITE_DESC2); ?></td>
+								<td width="40%" valign="top"><?php echo _SITE_DESC ?></td>
+								<td width="60%"><textarea class="textarea" cols="30" rows="4" style="width:400px;height:100px;" name="config_MetaDesc"><?php echo $row->config_MetaDesc; ?></textarea><?php echo mosToolTip(_SITE_DESC2); ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SITE_KEYWORDS ?></td>
-								<td><textarea class="textarea" cols="50" rows="3" style="width:400px; height:100px;" name="config_MetaKeys"><?php echo $row->config_MetaKeys; ?></textarea><?php echo mosToolTip(_SITE_KEYWORDS2); ?></td>
+								<td width="40%" valign="top"><?php echo _SITE_KEYWORDS ?></td>
+								<td width="60%"><textarea class="textarea" cols="30" rows="4" style="width:400px;height:100px;" name="config_MetaKeys"><?php echo $row->config_MetaKeys; ?></textarea><?php echo mosToolTip(_SITE_KEYWORDS2); ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_TITLE_TAG ?></td>
-								<td><?php echo $lists['MetaTitle'];
+								<td width="40%" valign="top"><?php echo _SHOW_TITLE_TAG ?></td>
+								<td width="60%"><?php echo $lists['MetaTitle'];
 									echo mosToolTip(_SHOW_TITLE_TAG2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_AUTHOR_TAG ?></td>
-								<td><?php echo $lists['MetaAuthor'];
+								<td width="40%" valign="top"><?php echo _SHOW_AUTHOR_TAG ?></td>
+								<td width="60%"><?php echo $lists['MetaAuthor'];
 									echo mosToolTip(_SHOW_AUTHOR_TAG2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_BASE_TAG ?></td>
-								<td><?php echo $lists['mtage_base'];
+								<td width="40%" valign="top"><?php echo _SHOW_BASE_TAG ?></td>
+								<td width="60%"><?php echo $lists['mtage_base'];
 									echo mosToolTip(_SHOW_BASE_TAG2); ?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _REVISIT_TAG ?></td>
-								<td><input class="textarea" type="text" name="config_mtage_revisit" size="10" value="<?php echo $row->config_mtage_revisit; ?>" /><?php echo mosToolTip(_REVISIT_TAG2); ?></td>
+								<td width="40%" valign="top"><?php echo _REVISIT_TAG ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_mtage_revisit" size="30" value="<?php echo $row->config_mtage_revisit; ?>" /><?php echo mosToolTip(_REVISIT_TAG2); ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _DISABLE_GENERATOR_TAG ?></td>
-								<td><?php echo $lists['generator_off'];
+								<td width="40%"><?php echo _DISABLE_GENERATOR_TAG ?></td>
+								<td width="60%"><?php echo $lists['generator_off'];
 									echo mosToolTip(_DISABLE_GENERATOR_TAG2);
 									?>
 								</td>
@@ -1081,67 +1082,67 @@ class HTML_config {
 					<td valign="top">
 						<table class="sub_adminform">
 							<tr>
-								<td width="100px"><?php echo _EXT_IND_TAGS ?></td>
-								<td><?php echo $lists['index_tag'];
+								<td width="40%"><?php echo _EXT_IND_TAGS ?></td>
+								<td width="60%"><?php echo $lists['index_tag'];
 									echo mosToolTip(_EXT_IND_TAGS2);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_GEO_TAG ?></td>
-								<td><?php echo $lists['gtag'];
+								<td width="40%" valign="top"><?php echo _SHOW_GEO_TAG ?></td>
+								<td width="60%"><?php echo $lists['gtag'];
 									echo mosToolTip(_SHOW_GEO_TAG2);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_GEO_TAG_LATITUDE ?></td>
-								<td><input class="textarea" type="text" name="config_gtag_lat" size="10" value="<?php echo $row->config_gtag_lat; ?>" /><?php echo mosToolTip(_SHOW_GEO_TAG2_LATITUDE); ?></td>
+								<td width="40%" valign="top"><?php echo _SHOW_GEO_TAG_LATITUDE ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_gtag_lat" size="10" value="<?php echo $row->config_gtag_lat; ?>" /><?php echo mosToolTip(_SHOW_GEO_TAG2_LATITUDE); ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_GEO_TAG_LONGITUDE ?></td>
-								<td><input class="textarea" type="text" name="config_gtag_long" size="10" value="<?php echo $row->config_gtag_long; ?>" /><?php echo mosToolTip(_SHOW_GEO_TAG2_LONGITUDE); ?></td>
+								<td width="40%" valign="top"><?php echo _SHOW_GEO_TAG_LONGITUDE ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_gtag_long" size="10" value="<?php echo $row->config_gtag_long; ?>" /><?php echo mosToolTip(_SHOW_GEO_TAG2_LONGITUDE); ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_GEO_TAG_PLACENAME ?></td>
-								<td><textarea class="textarea" cols="50" rows="2" style="width:300px; height:10px;" name="config_gtag_place"><?php echo $row->config_gtag_place; ?></textarea><?php echo mosToolTip(_SHOW_GEO_TAG2_PLACENAME); ?></td>
+								<td width="40%" valign="top"><?php echo _SHOW_GEO_TAG_PLACENAME ?></td>
+								<td width="60%"><textarea class="textarea" cols="30" rows="2" style="width:300px;height:10px;" name="config_gtag_place"><?php echo $row->config_gtag_place; ?></textarea><?php echo mosToolTip(_SHOW_GEO_TAG2_PLACENAME); ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_GEO_TAG_REGION ?></td>
-								<td><input class="textarea" type="text" name="config_gtag_reg" size="10" value="<?php echo $row->config_gtag_reg; ?>" /><?php echo mosToolTip(_SHOW_GEO_TAG2_REGION); ?></td>
+								<td width="40%" valign="top"><?php echo _SHOW_GEO_TAG_REGION ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_gtag_reg" size="10" value="<?php echo $row->config_gtag_reg; ?>" /><?php echo mosToolTip(_SHOW_GEO_TAG2_REGION); ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_DCORE ?></td>
-								<td><?php echo $lists['dcore'];
+								<td width="40%" valign="top"><?php echo _SHOW_DCORE ?></td>
+								<td width="60%"><?php echo $lists['dcore'];
 									echo mosToolTip(_SHOW_DCORE2);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_DCORE_LANGUAGE ?></td>
-								<td><input class="textarea" type="text" name="config_dcore_language" size="10" value="<?php echo $row->config_dcore_language; ?>" /><?php echo mosToolTip(_SHOW_DCORE2_LANGUAGE); ?></td>
+								<td width="40%" valign="top"><?php echo _SHOW_DCORE_LANGUAGE ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_dcore_language" size="10" value="<?php echo $row->config_dcore_language; ?>" /><?php echo mosToolTip(_SHOW_DCORE2_LANGUAGE); ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_GA ?></td>
-								<td><?php echo $lists['ga'];
+								<td width="40%" valign="top"><?php echo _SHOW_GA ?></td>
+								<td width="60%"><?php echo $lists['ga'];
 									echo mosToolTip(_SHOW_GA2);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_GA_ID ?></td>
-								<td><input class="textarea" type="text" name="config_ga_id" size="15" value="<?php echo $row->config_ga_id; ?>" /><?php echo mosToolTip(_SHOW_GA2_ID); ?></td>
+								<td width="40%" valign="top"><?php echo _SHOW_GA_ID ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_ga_id" size="15" value="<?php echo $row->config_ga_id; ?>" /><?php echo mosToolTip(_SHOW_GA2_ID); ?></td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_YM ?></td>
-								<td><?php echo $lists['ym'];
+								<td width="40%" valign="top"><?php echo _SHOW_YM ?></td>
+								<td width="60%"><?php echo $lists['ym'];
 									echo mosToolTip(_SHOW_YM2);
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top"><?php echo _SHOW_YM_ID ?></td>
-								<td><input class="textarea" type="text" name="config_ym_id" size="15" value="<?php echo $row->config_ym_id; ?>" /><?php echo mosToolTip(_SHOW_YM2_ID); ?></td>
+								<td width="40%" valign="top"><?php echo _SHOW_YM_ID ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_ym_id" size="15" value="<?php echo $row->config_ym_id; ?>" /><?php echo mosToolTip(_SHOW_YM2_ID); ?></td>
 							</tr>
 						</table>
 					</td>
@@ -1156,40 +1157,40 @@ class HTML_config {
 					<td>
 						<table class="sub_adminform">
 							<tr>
-								<td width="185"><?php echo _MAIL_METHOD ?></td>
-								<td><?php echo $lists['mailer']; ?></td>
+								<td width="40%"><?php echo _MAIL_METHOD ?></td>
+								<td width="60%"><?php echo $lists['mailer']; ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _MAIL_FROM_ADR ?></td>
-								<td><input class="textarea" type="text" name="config_mailfrom" size="50" value="<?php echo $row->config_mailfrom; ?>" /></td>
+								<td width="40%"><?php echo _MAIL_FROM_ADR ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_mailfrom" size="30" value="<?php echo $row->config_mailfrom; ?>" /></td>
 							</tr>
 							<tr>
-								<td><?php echo _MAIL_FROM_NAME ?></td>
-								<td><input class="textarea" type="text" name="config_fromname" size="50" value="<?php echo $row->config_fromname; ?>" /></td>
+								<td width="40%"><?php echo _MAIL_FROM_NAME ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_fromname" size="30" value="<?php echo $row->config_fromname; ?>" /></td>
 							</tr>
 							<tr>
-								<td><?php echo _SENDMAIL_PATH ?></td>
-								<td><input class="textarea" type="text" name="config_sendmail" size="50" value="<?php echo $row->config_sendmail; ?>" /></td>
+								<td width="40%"><?php echo _SENDMAIL_PATH ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_sendmail" size="30" value="<?php echo $row->config_sendmail; ?>" /></td>
 							</tr>
 						</table>
 					</td>
 					<td valign="top">
 						<table class="sub_adminform">
 							<tr>
-								<td><?php echo _USE_SMTP ?></td>
-								<td><?php echo $lists['smtpauth']; ?>&nbsp;<?php echo mosToolTip(_USE_SMTP2); ?></td>
+								<td width="40%"><?php echo _USE_SMTP ?></td>
+								<td width="60%"><?php echo $lists['smtpauth']; ?>&nbsp;<?php echo mosToolTip(_USE_SMTP2); ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _SMTP_USER ?></td>
-								<td><input class="textarea" type="text" name="config_smtpuser" size="50" value="<?php echo $row->config_smtpuser; ?>" />&nbsp;<?php echo mosToolTip(_SMTP_USER2); ?></td>
+								<td width="40%"><?php echo _SMTP_USER ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_smtpuser" size="30" value="<?php echo $row->config_smtpuser; ?>" />&nbsp;<?php echo mosToolTip(_SMTP_USER2); ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _SMTP_PASS ?></td>
-								<td><input class="textarea" type="text" name="config_smtppass" size="50" value="<?php echo $row->config_smtppass; ?>" />&nbsp;<?php echo mosToolTip(_SMTP_PASS2); ?></td>
+								<td width="40%"><?php echo _SMTP_PASS ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_smtppass" size="30" value="<?php echo $row->config_smtppass; ?>" />&nbsp;<?php echo mosToolTip(_SMTP_PASS2); ?></td>
 							</tr>
 							<tr>
-								<td><?php echo _SMTP_SERVER ?></td>
-								<td><input class="textarea" type="text" name="config_smtphost" size="50" value="<?php echo $row->config_smtphost; ?>" /></td>
+								<td width="40%"><?php echo _SMTP_SERVER ?></td>
+								<td width="60%"><input class="textarea" type="text" name="config_smtphost" size="30" value="<?php echo $row->config_smtphost; ?>" /></td>
 							</tr>
 						</table>
 					</td>
@@ -1202,35 +1203,35 @@ class HTML_config {
 			<table class="adminform" >
 			<?php if (is_writeable($row->config_cachepath)) { ?>
 				<tr>
-					<td width="350"><?php echo _ENABLE_CACHE ?></td>
-					<td><?php echo $lists['caching']; ?><?php echo mosToolTip(_ENABLE_CACHE2); ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _ENABLE_CACHE ?></td>
+					<td width="55%"><?php echo $lists['caching']; ?><?php echo mosToolTip(_ENABLE_CACHE2); ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr>
-					<td><?php echo _CACHE_OPTIMIZATION ?></td>
-					<td><?php echo $lists['config_cache_opt']; ?><?php echo mosToolTip(_CACHE_OPTIMIZATION2); ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _CACHE_OPTIMIZATION ?></td>
+					<td width="55%"><?php echo $lists['config_cache_opt']; ?><?php echo mosToolTip(_CACHE_OPTIMIZATION2); ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr>
-					<td><?php echo _AUTOCLEAN_CACHE_DIR ?></td>
-					<td><?php echo $lists['config_clearCache']; ?><?php echo mosToolTip(_AUTOCLEAN_CACHE_DIR2); ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _AUTOCLEAN_CACHE_DIR ?></td>
+					<td width="55%"><?php echo $lists['config_clearCache']; ?><?php echo mosToolTip(_AUTOCLEAN_CACHE_DIR2); ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr>
-					<td><?php echo _CACHE_MENU ?></td>
-					<td><?php echo $lists['adm_menu_cache']; ?><?php echo mosToolTip(_CACHE_MENU2); ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _CACHE_MENU ?></td>
+					<td width="55%"><?php echo $lists['adm_menu_cache']; ?><?php echo mosToolTip(_CACHE_MENU2); ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<?php } else { ?>
 				<tr>
-					<td width="350"><?php echo _CANNOT_CACHE ?></td>
-					<td><?php echo _CANNOT_CACHE2 ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _CANNOT_CACHE ?></td>
+					<td width="55%"><?php echo _CANNOT_CACHE2 ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<?php } ?>
 				<tr>
-					<td><?php echo _CACHE_DIR ?></td>
-					<td><input class="textarea" type="text" name="config_cachepath" size="50" value="<?php echo $row->config_cachepath; ?>" />
+					<td width="40%"><?php echo _CACHE_DIR ?></td>
+					<td width="55%"><input class="textarea" type="text" name="config_cachepath" size="30" value="<?php echo $row->config_cachepath; ?>" />
 						<?php if (is_writeable($row->config_cachepath)) {
 						echo mosToolTip(_CACHE_DIR2);
 						} else {
@@ -1238,22 +1239,22 @@ class HTML_config {
 						}
 						?>
 					</td>
-					<td>&nbsp;</td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr>
-					<td><?php echo _CACHE_TIME ?></td>
-					<td><input class="textarea" type="text" name="config_cachetime" size="5" value="<?php echo $row->config_cachetime; ?>" /> <?php echo _SECONDS ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _CACHE_TIME ?></td>
+					<td width="55%"><input class="textarea" type="text" name="config_cachetime" size="5" value="<?php echo $row->config_cachetime; ?>" /> <?php echo _SECONDS ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr>
-					<td><?php echo _DB_CACHE ?></td>
-					<td><?php echo $lists['db_cache_handler']; ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _DB_CACHE ?></td>
+					<td width="55%"><?php echo $lists['db_cache_handler']; ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 				<tr>
-					<td><?php echo _DB_CACHE_TIME ?></td>
-					<td><input class="textarea" type="text" name="config_db_cache_time" size="5" value="<?php echo $row->config_db_cache_time; ?>" /> <?php echo _SECONDS ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _DB_CACHE_TIME ?></td>
+					<td width="55%"><input class="textarea" type="text" name="config_db_cache_time" size="5" value="<?php echo $row->config_db_cache_time; ?>" /> <?php echo _SECONDS ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 			</table>
 			<?php
@@ -1262,19 +1263,19 @@ class HTML_config {
 			?>
 			<table class="adminform">
 				<tr>
-					<td width="185"><?php echo _ENABLE_STATS ?></td>
-					<td width="100"><?php echo $lists['enable_stats']; ?></td>
-					<td><?php echo mostooltip(_ENABLE_STATS2); ?></td>
+					<td width="40%"><?php echo _ENABLE_STATS ?></td>
+					<td width="55%"><?php echo $lists['enable_stats']; ?></td>
+					<td width="5%"><?php echo mostooltip(_ENABLE_STATS2); ?></td>
 					</tr>
 				<tr>
-					<td><?php echo _STATS_HITS_DATE ?></td>
-					<td><?php echo $lists['log_items']; ?></td>
-					<td><span class="error"><?php echo mosWarning(_STATS_HITS_DATE2); ?></span></td>
+					<td width="40%"><?php echo _STATS_HITS_DATE ?></td>
+					<td width="55%"><?php echo $lists['log_items']; ?></td>
+					<td width="5%"><span class="error"><?php echo mosWarning(_STATS_HITS_DATE2); ?></span></td>
 				</tr>
 				<tr>
-					<td><?php echo _STATS_SEARCH_QUERIES ?></td>
-					<td><?php echo $lists['log_searches']; ?></td>
-					<td>&nbsp;</td>
+					<td width="40%"><?php echo _STATS_SEARCH_QUERIES ?></td>
+					<td width="55%"><?php echo $lists['log_searches']; ?></td>
+					<td width="5%">&nbsp;</td>
 				</tr>
 			</table>
 			<?php
@@ -1283,55 +1284,55 @@ class HTML_config {
 			?>
 			<table class="adminform">
 				<tr>
-					<td><?php echo _SEF_URLS ?></td>
-					<td><?php echo $lists['sef'];
+					<td width="40%"><?php echo _SEF_URLS ?></td>
+					<td width="60%"><?php echo $lists['sef'];
 						echo mosWarning(_SEF_URLS2);
 						?>
 					</td>
 				</tr>
 				<tr>
-					<td><?php echo _DYNAMIC_PAGETITLES ?></td>
-					<td><?php echo $lists['pagetitles'];
+					<td width="40%"><?php echo _DYNAMIC_PAGETITLES ?></td>
+					<td width="60%"><?php echo $lists['pagetitles'];
 						echo mosToolTip(_DYNAMIC_PAGETITLES2);
 						?>
 					</td>
 				</tr>
 				<tr>
-					<td><?php echo _CLEAR_FRONTPAGE_LINK ?></td>
-					<td><?php echo $lists['com_frontpage_clear'];
+					<td width="40%"><?php echo _CLEAR_FRONTPAGE_LINK ?></td>
+					<td width="60%"><?php echo $lists['com_frontpage_clear'];
 						echo mosToolTip(_CLEAR_FRONTPAGE_LINK2);
 						?>
 					</td>
 				</tr>
 				<tr>
-					<td><?php echo _DISABLE_PATHWAY_ON_FRONT ?></td>
-					<td><?php echo $lists['config_pathway_clean'];
+					<td width="40%"><?php echo _DISABLE_PATHWAY_ON_FRONT ?></td>
+					<td width="60%"><?php echo $lists['config_pathway_clean'];
 						echo mosToolTip(_DISABLE_PATHWAY_ON_FRONT2);
 						?>
 						</td>
 				</tr>
 				<tr>
-					<td><?php echo _TITLE_ORDER ?></td>
-					<td><?php echo $lists['pagetitles_first'];
+					<td width="40%"><?php echo _TITLE_ORDER ?></td>
+					<td width="60%"><?php echo $lists['pagetitles_first'];
 						echo mosToolTip(_TITLE_ORDER2);
 						?>
 					</td>
 				</tr>
 				<tr>
-					<td><?php echo _TITLE_SEPARATOR ?></td>
-					<td><input class="textarea" type="text" name="config_tseparator" size="5" value="<?php echo $row->config_tseparator; ?>" /><?php echo mosToolTip(_TITLE_SEPARATOR2); ?></td>
+					<td width="40%"><?php echo _TITLE_SEPARATOR ?></td>
+					<td width="60%"><input class="textarea" type="text" name="config_tseparator" size="5" value="<?php echo $row->config_tseparator; ?>" /><?php echo mosToolTip(_TITLE_SEPARATOR2); ?></td>
 				</tr>
 				<tr>
-					<td><?php echo _INDEX_PRINT_PAGE ?></td>
-					<td><?php echo $lists['index_print'];
+					<td width="40%"><?php echo _INDEX_PRINT_PAGE ?></td>
+					<td width="60%"><?php echo $lists['index_print'];
 						$tip = _INDEX_PRINT_PAGE2;
 						echo mosToolTip($tip);
 						?>
 					</td>
 				</tr>
 				<tr>
-					<td><?php echo _REDIR_FROM_NOT_WWW ?></td>
-					<td><?php echo $lists['www_redir'];
+					<td width="40%"><?php echo _REDIR_FROM_NOT_WWW ?></td>
+					<td width="60%"><?php echo $lists['www_redir'];
 						$tip = _REDIR_FROM_NOT_WWW2;
 						echo mosToolTip($tip);
 						?>
@@ -1344,20 +1345,20 @@ class HTML_config {
 			?>
 			<table class="adminform">
 				<tr>
-					<td width="300"><?php echo _ADMIN_CAPTCHA ?></td>
-					<td><?php echo $lists['captcha'];
+					<td width="40%"><?php echo _ADMIN_CAPTCHA ?></td>
+					<td width="60%"><?php echo $lists['captcha'];
 						echo mosToolTip(_ADMIN_CAPTCHA2); ?>
 					</td>
 				</tr>
 				<tr>
-					<td width="300"><?php echo _REGISTRATION_CAPTCHA ?></td>
-					<td><?php echo $lists['config_captcha_reg'];
+					<td width="40%"><?php echo _REGISTRATION_CAPTCHA ?></td>
+					<td width="60%"><?php echo $lists['config_captcha_reg'];
 						echo mosToolTip(_REGISTRATION_CAPTCHA2); ?>
 					</td>
 				</tr>
 				<tr>
-					<td width="300"><?php echo _CONTACTS_CAPTCHA ?></td>
-					<td><?php echo $lists['config_captcha_cont'];
+					<td width="40%"><?php echo _CONTACTS_CAPTCHA ?></td>
+					<td width="60%"><?php echo $lists['config_captcha_cont'];
 						echo mosToolTip(_CONTACTS_CAPTCHA2); ?>
 					</td>
 				</tr>
@@ -1376,10 +1377,10 @@ class HTML_config {
 			?>
 			<table class="adminform">
 				<tr>
-					<td><p><span class="red">Файл .htaccess отображается только для чтения!</span></p></td>
+					<td><p class="red">Файл .htaccess отображается только для чтения!</p></td>
 				</tr>
 				<tr>
-					<td><textarea style="width:100%;height:auto;" cols="80" rows="25" name="htaccess" class="inputbox"><?php echo $htaccess; ?></textarea></td>
+					<td><textarea style="width:98%;height:auto;" cols="70" rows="25" name="htaccess" class="inputbox"><?php echo $htaccess; ?></textarea></td>
 				</tr>
 			</table>
 			<?php

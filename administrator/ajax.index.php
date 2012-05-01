@@ -24,12 +24,12 @@ $mosConfig_db_cache_handler = 'none';
 // обработка безопасного режима
 $http_host = explode(':', $_SERVER['HTTP_HOST']);
 if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isset($http_host[1]) && $http_host[1] == 443) && substr($mosConfig_live_site, 0, 8) != 'https://') {
-	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
+	$mosConfig_live_site = 'https://'.substr($mosConfig_live_site, 7);
 }
 // подключаем ядро и язык
-require_once ($mosConfig_absolute_path . '/includes/joomla.php');
-include_once ($mosConfig_absolute_path . '/language/' . $mosConfig_lang . '.php');
-require_once ($mosConfig_absolute_path . '/' . ADMINISTRATOR_DIRECTORY . '/includes/admin.php');
+require_once ($mosConfig_absolute_path.'/includes/joomla.php');
+include_once ($mosConfig_absolute_path.'/language/'.$mosConfig_lang.'.php');
+require_once ($mosConfig_absolute_path.'/'.ADMINISTRATOR_DIRECTORY.'/includes/admin.php');
 
 // создаём сессии
 session_name(md5($mosConfig_live_site));

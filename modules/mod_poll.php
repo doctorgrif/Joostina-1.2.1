@@ -22,7 +22,7 @@ if (!defined('_JOS_POLL_MODULE')) {
 		$database->setQuery($query);
 		$polls = $database->loadObjectList();
 		if ($database->getErrorNum()) {
-			echo 'MB ' . $database->stderr(true);
+			echo 'MB '.$database->stderr(true);
 			return;
 		}
 // try to find poll component's Itemid
@@ -30,7 +30,7 @@ if (!defined('_JOS_POLL_MODULE')) {
 		$database->setQuery($query);
 		$_Itemid = $database->loadResult();
 		if ($_Itemid) {
-			$_Itemid = '&amp;Itemid=' . $_Itemid;
+			$_Itemid = '&amp;Itemid='.$_Itemid;
 		}
 		$z = 1;
 		foreach ($polls as $poll) {
@@ -62,47 +62,47 @@ if (!defined('_JOS_POLL_MODULE')) {
 		$validate = josSpoofValue('poll');
 		?>
 <script type="text/javascript">
-	function submitbutton_Poll<?php echo $z; ?>() {
-		var form= document.pollxtd<?php echo $z; ?>;
-		var radio= form.voteid;
-		var radioLength = radio.length;
-		var check= 0;
-		if ( '<?php echo $voted; ?>' != 'z' ) {
-			alert('<?php echo addslashes(_ALREADY_VOTE); ?>');
-			return;
-		}
-		for(var i = 0; i < radioLength; ++i) {
-			if(radio[i].checked) {
-				form.submit();
-				check = 1;
-			}
-		}
-		if (check == 0) {
-			alert('<?php echo addslashes(_NO_SELECTION); ?>');
+function submitbutton_Poll<?php echo $z; ?>() {
+	var form= document.pollxtd<?php echo $z; ?>;
+	var radio= form.voteid;
+	var radioLength = radio.length;
+	var check= 0;
+	if ( '<?php echo $voted; ?>' != 'z' ) {
+		alert('<?php echo addslashes(_ALREADY_VOTE); ?>');
+		return;
+	}
+	for(var i = 0; i < radioLength; ++i) {
+		if(radio[i].checked) {
+			form.submit();
+			check = 1;
 		}
 	}
+	if (check == 0) {
+		alert('<?php echo addslashes(_NO_SELECTION); ?>');
+	}
+}
 </script>
-<form name="pollxtd<?php echo $z; ?>" method="post" action="<?php echo sefRelToAbs("index.php?option=com_poll$_Itemid"); ?>">
+<form name="pollxtd<?php echo $z; ?>" method="post" action="<?php echo sefRelToAbs('index.php?option=com_poll'.$_Itemid); ?>">
 	<div class="mpoll<?php echo $moduleclass_sfx; ?>">
 	<legend><?php echo $poll->title; ?></legend>
 		<div class="stableborder<?php echo $moduleclass_sfx; ?>">
-			<?php for ($i = 0, $n = count($options); $i < $n; ++$i) { ?>
-			<div class="poll-question<?php echo $moduleclass_sfx; ?>">
+		<?php for ($i = 0, $n = count($options); $i < $n; ++$i) { ?>
+			<p class="poll-question<?php echo $moduleclass_sfx; ?>">
 				<input type="radio" name="voteid" id="voteid<?php echo $options[$i]->id; ?>" value="<?php echo $options[$i]->id; ?>" alt="<?php echo $options[$i]->id; ?>" />
 				<label for="voteid<?php echo $options[$i]->id; ?>"><?php echo stripslashes($options[$i]->text); ?></label>
-			</div>
-			<?php
-				if ($tabcnt == 1) {
-					$tabcnt = 0;
-				} else {
-					$tabcnt++;
-				}
+			</p>
+		<?php
+			if ($tabcnt == 1) {
+				$tabcnt = 0;
+			} else {
+				$tabcnt++;
 			}
-			?>
+		}
+		?>
 		</div>
 		<div class="pollbuttons">
 			<input type="button" onclick="submitbutton_Poll<?php echo $z; ?>();" name="task_button" class="button" value="<?php echo _BUTTON_VOTE; ?>" />
-			<input type="button" onclick="document.location.href='<?php echo sefRelToAbs("index.php?option=com_poll&amp;task=results&amp;id=$poll->id$_Itemid"); ?>';" name="option" class="button" value="<?php echo _BUTTON_RESULTS; ?>" />
+			<input type="button" onclick="document.location.href='<?php echo sefRelToAbs('index.php?option=com_poll&amp;task=results&amp;id='.$poll->id . $_Itemid); ?>';" name="option" class="button" value="<?php echo _BUTTON_RESULTS; ?>" />
 		</div>
 	</div>
 	<input type="hidden" name="id" value="<?php echo $poll->id; ?>" />

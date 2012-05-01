@@ -11,11 +11,11 @@
 * Joostina! - свободное программное обеспечение распространяемое по условиям лицензии GNU/GPL
 * Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
 * info:
-* images - Функциональные изображения галереи
-* wrapperid - ID of main gallery container,
-* dimensions - ширина/высота
-* pause - пауза между слайдами (msecs) 
-* fadeduration - transition duration (msecs)
+*	images - Функциональные изображения галереи;
+*	wrapperid - ID главного контейнера галереи;
+*	dimensions - ширина/высота;
+*	pause - пауза между слайдами (msecs);
+*	fadeduration - transition duration (msecs)
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
@@ -29,10 +29,10 @@ var simpleGallery_navpanel={
 		fontStyle:'<?php echo $panel_font; ?>'
 	},
 	images: [
-		'/modules/mod_random_image/images/left.gif',
-		'/modules/mod_random_image/images/play.gif',
-		'/modules/mod_random_image/images/right.gif',
-		'/modules/mod_random_image/images/pause.gif'
+		'/templates/<?php echo $mainframe->getTemplate(); ?>/i/m/random_image/left.gif',
+		'/templates/<?php echo $mainframe->getTemplate(); ?>/i/m/random_image/play.gif',
+		'/templates/<?php echo $mainframe->getTemplate(); ?>/i/m/random_image/right.gif',
+		'/templates/<?php echo $mainframe->getTemplate(); ?>/i/m/random_image/pause.gif'
 	],
 	imageSpacing: {
 		offsetTop:[-4, 0, -4],
@@ -41,7 +41,7 @@ var simpleGallery_navpanel={
 	slideduration: 500
 }
 var gallery_<?php echo $slideshow_name; ?>=new simpleGallery({
-	wrapperid: "<?php echo $slideshow_name; ?>",
+	wrapperid: '<?php echo $slideshow_name; ?>',
 	dimensions: [<?php echo $width; ?>, <?php echo $height; ?>],
 	imagearray: [<?php echo $pics_str; ?> ],
 	autoplay: <?php echo $s_autoplay; ?>,

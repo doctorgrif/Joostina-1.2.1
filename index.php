@@ -15,8 +15,8 @@ if (function_exists('memory_get_usage')) {
 }
 // проверка конфигурационного файла, если не обнаружен, то загружается страница установки
 if (!file_exists('configuration.php') || filesize('configuration.php') < 10) {
-	$self = rtrim(dirname($_SERVER['PHP_SELF']), '/\\') . '/';
-	header('Location: http://' . $_SERVER['HTTP_HOST'] . $self . 'installation/index.php');
+	$self = rtrim(dirname($_SERVER['PHP_SELF']), '/\\').'/';
+	header('Location: http://'.$_SERVER['HTTP_HOST'] . $self.'installation/index.php');
 	exit();
 }
 // подключение файла эмуляции отключения регистрации глобальных переменных
@@ -32,6 +32,7 @@ if ($mosConfig_time_gen) {
 	$sysstart = ((float) $usec + (float) $sec);
 }
 // проверка и активация расширенного отладчика
+global $debug;
 if ($mosConfig_debug) {
 	require_once 'includes/debug/jdebug.php';
 	$debug = new jdebug();
@@ -39,7 +40,7 @@ if ($mosConfig_debug) {
 // Проверка SSL - $http_host возвращает <url_сайта>:<номер_порта, если он 443>
 $http_host = explode(':', $_SERVER['HTTP_HOST']);
 if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isset($http_host[1]) && $http_host[1] == 443) && substr($mosConfig_live_site, 0, 8) != 'https://') {
-	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
+	$mosConfig_live_site = 'https://'.substr($mosConfig_live_site, 7);
 }
 // Расширенный отладчик:start
 if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
@@ -49,14 +50,14 @@ if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
 }
 // :end
 // подключение главного файла - ядра системы
-require_once ($mosConfig_absolute_path . '/includes/joomla.php');
+require_once ($mosConfig_absolute_path.'/includes/joomla.php');
 // Расширенный отладчик:start
 $prof = new mosProfiler();
 // :end
 // Проверка подпапки установки, удалена при работе с SVN
 if (file_exists('installation/index.php') && $_VERSION->SVN == 0) {
 	define('_INSTALL_CHECK', 1);
-	include ($mosConfig_absolute_path . '/offline.php');
+	include ($mosConfig_absolute_path.'/offline.php');
 	exit();
 }
 // ошибка 503
@@ -64,7 +65,7 @@ if ($mosConfig_offline == 1) {
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	header('Status: 503 Service Temporarily Unavailable');
 	header('Retry-After: 3600');
-	require ($mosConfig_absolute_path . '/offline.php');
+	require ($mosConfig_absolute_path.'/offline.php');
 }
 // (c) boston, проверяем, разрешено ли использование системных мамботов
 if ($mosConfig_mmb_system_off == 0) {
@@ -74,16 +75,16 @@ if ($mosConfig_mmb_system_off == 0) {
 }
 // если в глобальной конфигурации не указано использовать sef - не будем даже файлы подключать
 if ($mosConfig_sef == 1) {
-	if (file_exists($mosConfig_absolute_path . '/components/com_sef/sef.php')) {
-		require_once ($mosConfig_absolute_path . '/components/com_sef/sef.php');
+	if (file_exists($mosConfig_absolute_path.'/components/com_sef/sef.php')) {
+		require_once ($mosConfig_absolute_path.'/components/com_sef/sef.php');
 	} else {
-		require_once ($mosConfig_absolute_path . '/includes/sef.php');
+		require_once ($mosConfig_absolute_path.'/includes/sef.php');
 	}
 } else {
 
 // функция sefRelToAbs() - системная, создадим для неё заглушку
 	function sefRelToAbs($string) {
-		global $mosConfig_com_frontpage_clear, $mosConfig_live_site;
+		global $mosConfig_com_frontpage_clear, $mosConfig_live_site, $debug;
 		if (eregi('option=com_frontpage', $string) & $mosConfig_com_frontpage_clear & !eregi('limit', $string))
 			$string = '';
 // если ссылка идёт на компонент главной страницы - очистим её
@@ -104,34 +105,34 @@ if ($mosConfig_sef == 1) {
 					}
 				}
 				if ($check) {
-					$string = $mosConfig_live_site . '/' . $string;
+					$string = $mosConfig_live_site.'/'.$string;
 				}
 			}
 		}
 		return $string;
 	}
-
 }
 // проверка и переадресация с не WWW адреса
 joostina_api::check_host();
-require_once ($mosConfig_absolute_path . '/includes/frontend.php');
+require_once ($mosConfig_absolute_path.'/includes/frontend.php');
 // поиск некоторых аргументов url (или form)
 $option = strval(strtolower(mosGetParam($_REQUEST, 'option')));
 $Itemid = intval(mosGetParam($_REQUEST, 'Itemid', null));
 if ($option == '') {
 	if ($Itemid) {
 		$query = "SELECT id, link"
-				. "\n FROM #__menu"
-				. "\n WHERE menutype = 'mainmenu'"
-				. "\n AND id = " . (int) $Itemid
-				. "\n AND published = 1";
+		. "\n FROM #__menu"
+		. "\n WHERE menutype = 'mainmenu'"
+		. "\n AND id = " . (int) $Itemid
+		. "\n AND published = 1";
 		$database->setQuery($query);
 	} else {
-		$query = "SELECT id, link"
-				. "\n FROM #__menu"
-				. "\n WHERE menutype = 'mainmenu'"
-				. "\n AND published = 1"
-				. "\n ORDER BY parent, ordering";
+	/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN id, link"
+		. "\n FROM #__menu"
+		. "\n WHERE menutype = 'mainmenu'"
+		. "\n AND published = 1"
+		. "\n ORDER BY parent, ordering";
 		$database->setQuery($query, 0, 1);
 	}
 	$menu = new mosMenu($database);
@@ -140,7 +141,7 @@ if ($option == '') {
 	}
 	$link = $menu->link;
 	if (($pos = strpos($link, '?')) !== false) {
-		$link = substr($link, $pos + 1) . '&Itemid=' . $Itemid;
+		$link = substr($link, $pos + 1).'&Itemid='.$Itemid;
 	}
 	parse_str($link, $temp);
 // TODO: переделать для лучшего управления глобальными переменными
@@ -172,11 +173,12 @@ if ($option == 'com_content' && $Itemid === 0) {
 // до сих пор не правильный Itemid?
 if ($Itemid === 0) {
 // Нет, используется именно главная страница.
-	$query = "SELECT id"
-			. "\n FROM #__menu"
-			. "\n WHERE menutype = 'mainmenu'"
-			. "\n AND published = 1"
-			. "\n ORDER BY parent, ordering";
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN id"
+	. "\n FROM #__menu"
+	. "\n WHERE menutype = 'mainmenu'"
+	. "\n AND published = 1"
+	. "\n ORDER BY parent, ordering";
 	$database->setQuery($query, 0, 1);
 	$Itemid = $database->loadResult();
 }
@@ -188,7 +190,7 @@ if ($option == 'search') {
 if ($mosConfig_lang == '') {
 	$mosConfig_lang = 'russian';
 }
-include_once ($mosConfig_absolute_path . '/language/' . $mosConfig_lang . '.php');
+include_once ($mosConfig_absolute_path.'/language/'.$mosConfig_lang.'.php');
 // контроль входа и выхода в фронт-энд
 $return = strval(mosGetParam($_REQUEST, 'return', null));
 $message = intval(mosGetParam($_POST, 'message', 0));
@@ -209,14 +211,14 @@ if ($option == 'login') {
 		if (isset($_COOKIE[mosMainFrame::sessionCookieName()])) {
 			mosRedirect($return);
 		} else {
-			mosRedirect($mosConfig_live_site . '/index.php?option=cookiecheck&return=' . urlencode($return));
+			mosRedirect($mosConfig_live_site.'/index.php?option=cookiecheck&return='.urlencode($return));
 		}
 	} else {
 // If a sessioncookie exists, redirect to the start page. Otherwise, take an extra round for a cookiecheck
 		if (isset($_COOKIE[mosMainFrame::sessionCookieName()])) {
-			mosRedirect($mosConfig_live_site . '/index.php');
+			mosRedirect($mosConfig_live_site.'/index.php');
 		} else {
-			mosRedirect($mosConfig_live_site . '/index.php?option=cookiecheck&return=' . urlencode($mosConfig_live_site . '/index.php'));
+			mosRedirect($mosConfig_live_site.'/index.php?option=cookiecheck&return='.urlencode($mosConfig_live_site.'/index.php'));
 		}
 	}
 } else
@@ -232,7 +234,7 @@ if ($option == 'logout') {
 // checks for the presence of a return url and ensures that this url is not the registration or logout pages
 		mosRedirect($return);
 	} else {
-		mosRedirect($mosConfig_live_site . '/index.php');
+		mosRedirect($mosConfig_live_site.'/index.php');
 	}
 } else
 if ($option == 'cookiecheck') {
@@ -254,7 +256,7 @@ $cur_template = $mainframe->getTemplate();
 $_MOS_OPTION = array();
 // (c) boston, подключение функций редактора, т.к. сессии(авторизация ) на фронте отключены - это тоже запрещаем
 if ($mosConfig_frontend_login == 1)
-	require_once ($mosConfig_absolute_path . '/editor/editor.php');
+	require_once ($mosConfig_absolute_path.'/editor/editor.php');
 // начало буферизации основного содержимого
 ob_start();
 if ($path = $mainframe->getPath('front')) {
@@ -278,29 +280,43 @@ if ($mosConfig_mmb_mainbody_off == 0) {
 	$_MAMBOTS->trigger('onMainbody');
 }
 initGzip();
-// при активном кэшировании отправим браузеру более "правильные" заголовки
+/* при активном кэшировании отправим браузеру более "правильные" заголовки */
 if (!$mosConfig_caching) {
-// не кэшируется
-	header('Expires: ' . date('r', $_SERVER['REQUEST_TIME']));
-	header('Cache-Control: no-store, no-cache, must-revalidate');
-	header('Pragma: private');
-	header('Cache-Control: private');
+/* не кэшируется */
+	header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
+	//header('Expires: '.date('r', $_SERVER['REQUEST_TIME']));
+	header('Expires: Thu, 31 Dec 2020 20:00:00 GMT');
+	header('Pragma: no-cache');
 } else if ($option != 'logout' or $option != 'login') {
-// кэшируется
-	$max_age = 60 * 60;
-	header('Cache-Control: must-revalidate, proxy-revalidate, max-age=' . $max_age . ', s-maxage=' . $max_age );
-	if($_SERVER["HTTP_IF_NONE_MATCH"] == $etag){
-		header( "HTTP/1.1 304 Not Modified" );
-		exit;
-	}
+/* кэшируется */
+// get the last-modified-date of this very file
+	$lastModified = filemtime($_SERVER['REQUEST_URI']);
+// get a unique hash of this file (etag)
+	$etagFile = md5($_SERVER['REQUEST_URI']);
+// get the HTTP_IF_MODIFIED_SINCE header if set
+	$ifModifiedSince = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : false);
+// get the HTTP_IF_NONE_MATCH header if set (etag: unique file hash)
+	$etagHeader = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? trim($_SERVER['HTTP_IF_NONE_MATCH']) : false);
+// set last-modified header
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s', $lastModified).' GMT');
+// set etag-header
+	header('Etag: '.$etagFile);
+// make sure caching is turned on
+	header('Cache-Control: public');
+// check if page has changed. If not, send 304 and exit
+	if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $lastModified || $etagHeader == $etagFile)
+{
+	header('HTTP/1.1 304 Not Modified');
+	exit;
+}
 }
 // буферизация итогового содержимого, необходимо для шаблонов группы templates
 ob_start();
 // загрузка файла шаблона
-if (!file_exists($mosConfig_absolute_path . '/templates/' . $cur_template . '/index.php')) {
+if (!file_exists($mosConfig_absolute_path.'/templates/'.$cur_template.'/index.php')) {
 	echo _TEMPLATE_WARN . $cur_template;
 } else {
-	require_once ($mosConfig_absolute_path . '/templates/' . $cur_template . '/index.php');
+	require_once ($mosConfig_absolute_path.'/templates/'.$cur_template.'/index.php');
 }
 $_MOS_OPTION['mainbody'] = ob_get_contents(); // главное содержимое - стек вывода компонента - mainbody
 ob_end_clean();
@@ -314,21 +330,21 @@ unset($_MAMBOTS, $mainframe);
 // вывод стека всего тела страницы, уже после обработки мамботами группы onTemplate
 echo $_MOS_OPTION['mainbody'];
 // подсчет времени генерации страницы (время генерации видно только Super Administrator)
-if ($mosConfig_time_gen && $my->id == 62) {
+// вывод лога отладки (лог отладки виден только Super Administrator)
+if ($mosConfig_time_gen &&$mosConfig_debug && $my->id == 62) {
 	list($usec, $sec) = explode(" ", microtime());
 	$sysstop = ((float) $usec + (float) $sec);
 // Расширенный отладчик:start
-	echo '<div id="time_gen">The page is generated in ' . strip_tags($prof->mark('')) . ' sec.</div>';
-// --:end
-//echo '<div id="time_gen">' . round($sysstop - $sysstart, 4) . '</div>';
-}
-// вывод лога отладки (лог отладки виден только Super Administrator)
-if ($mosConfig_debug && $my->id == 62) {
+	echo '<div id="jdebug">';
+	// подсчет времени генерации страницы
+	echo '<p id="time_gen">Страница сгенерирована за '.strip_tags($prof->mark('')).' секунд.</p>';
+	// подсчет памяти, использованного скриптом
 	if (function_exists('memory_get_usage')) {
 		$mem_usage = (memory_get_usage() - _MEM_USAGE_START);
-		$debug->add('<span class="strong">' . _SCRIPT_MEMORY_USING . ':</span> ' . sprintf('%0.2f', $mem_usage / 1048576) . ' MB');
+		$debug->add('<p id="memory_using"><span class="strong">'._SCRIPT_MEMORY_USING.':</span> '.sprintf('%0.2f', $mem_usage / 1048576).' MB</p>');
 	}
 	echo $debug->get($mosConfig_front_debug);
+	echo '</div>';
 }
 doGzip();
 // запускаем встроенный оптимизатор таблиц

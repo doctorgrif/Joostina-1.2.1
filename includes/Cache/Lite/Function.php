@@ -45,8 +45,8 @@ class Cache_Lite_Function extends Cache_Lite {
 			if(strstr($target,'::')) {
 				list($class,$method) = explode('::',$target);
 				// סמגלוסעטלמסעü ס php 5.3.x
-				//$result = call_user_func_array(array($class,$method),$arguments);
-				$result = call_user_func_array(array($class, $method), &$arguments);
+				$result = call_user_func_array(array($class,$method),$arguments);
+				//$result = call_user_func_array(array($class, $method), &$arguments);
 			} else
 				if(strstr($target,'->')) {
 					list($object_123456789,$method) = explode('->',$target);
@@ -54,8 +54,8 @@ class Cache_Lite_Function extends Cache_Lite {
 					$result = call_user_func_array(array($$object_123456789,$method),$arguments);
 				} else {
 					// סמגלוסעטלמסעü ס php 5.3.x
-					//$result = call_user_func_array($target,$arguments);
-					$result = call_user_func_array($target, &$arguments);
+					$result = call_user_func_array($target,$arguments);
+					//$result = call_user_func_array($target, &$arguments);
 				}
 				$output = ob_get_contents();
 			ob_end_clean();

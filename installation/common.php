@@ -45,8 +45,10 @@ function mosMakePassword($length) {
 /**
 * ѕрава доступа к файлам и директори€м
 * @param path начальный файл или директори€ (без слеша в конце)
-* @param filemode «начение переменной дл€ установки прав доступа к файлам. NULL = без установки прав доступа.
-* @param dirmode «начение переменной дл€ установки прав доступа к директори€м. NULL = без установки прав доступа..
+* @param filemode «начение переменной дл€ установки прав доступа к файлам.
+* NULL = без установки прав доступа.
+* @param dirmode «начение переменной дл€ установки прав доступа к директори€м.
+* NULL = без установки прав доступа..
 * @return TRUE=all следовательно FALSE=one дл€ прав доступа ко всем файлам
 */
 function mosChmodRecursive($path,$filemode = null,$dirmode = null) {
@@ -75,4 +77,4 @@ function mosChmodRecursive($path,$filemode = null,$dirmode = null) {
 require_once ('../includes/version.php');
 $_VERSION = new joomlaVersion();
 $versioninfo = $_VERSION->RELEASE.'.'.$_VERSION->CMS_ver;
-$version = $_VERSION->CMS . ' ' . $_VERSION->CMS_ver . '.' . $_VERSION->BUILD . '' . $_VERSION->DEV_STATUS . ' ' . $_VERSION->CODENAME . ' ' . $_VERSION->RELDATE . ' ' . $_VERSION->RELTIME . ' ' . $_VERSION->RELTZ;
+$version = $_VERSION->CMS.' '.$_VERSION->CMS_ver.'.'.$_VERSION->BUILD.''.$_VERSION->DEV_STATUS.' '.$_VERSION->CODENAME.' '.$_VERSION->RELDATE.' '.$_VERSION->RELTIME.' '.$_VERSION->RELTZ;

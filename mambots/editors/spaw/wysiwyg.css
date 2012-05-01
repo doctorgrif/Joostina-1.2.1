@@ -1,6 +1,16 @@
 body {background-color:#fff;}
-body, tr, td, table {color:#000;font-size:9pt;}
-body , .style1, .style2 {font-family:'helveticaneue-light', 'helvetica neue light', 'helvetica neue', helvetica, arial, 'lucida grande', verdana, sans-serif;}
-.style1, .style2 {font-weight:bolder;}
-.style1 {color:green;font-size:10pt;}
-.style2 {color:red;background-color:#ddd;font-size:12pt;}
+body, tr, td, table {
+	color:#000;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:9pt;}
+.style1 {
+	color:green;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bolder;
+	font-size:10pt;}
+.style2 {
+	color:red;
+	background-color:#ddd;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bolder;
+	font-size:12pt;}

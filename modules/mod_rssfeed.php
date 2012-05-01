@@ -14,10 +14,8 @@ if (!defined('_JOS_RSSFEED_MODULE')) {
 function output_rssfeed($link, $img_default, $img_file, $img_alt, $img_name) {
 	$img = mosAdminMenus::ImageCheck($img_default, '/images/M_images/', $img_file, '/images/M_images/', $img_alt, $img_name);
 ?>
-<a class="<?php echo $img_name; ?>" href="<?php echo sefRelToAbs($link); ?>" title="<?php echo $img_alt; ?>">
-	<?php echo $img ?>
-</a>
-		<?php
+<a class="<?php echo $img_name; ?>" href="<?php echo sefRelToAbs($link); ?>" title="<?php echo $img_alt; ?>"><?php echo $img ?></a>
+<?php
 	}
 }
 global $mosConfig_live_site, $mosConfig_absolute_path, $cur_template;
@@ -36,8 +34,8 @@ $atom_image = $params->get('atom_image', '');
 $opml_image = $params->get('opml_image', '');
 $yandex_image = $params->get('yandex_image', '');
 $cur_template = $mainframe->getTemplate();
-$t_path = $mosConfig_live_site . '/templates/' . $cur_template . '/images/';
-$d_path = $mosConfig_live_site . '/images/M_images/';
+$t_path = $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/rssfeed/';
+$d_path = $mosConfig_live_site.'/images/M_images/';
 // needed to reduce query
 if (isset($GLOBALS['syndicateParams'])) {
 // load value stored in GLOBALS
@@ -73,12 +71,12 @@ if (!$syndicateParams->get('yandex', 1)) {
 	$yandex = 0;
 }
 ?>
-<div class="syndicate<?php echo $moduleclass_sfx; ?>">
+<div class="rssfeed<?php echo $moduleclass_sfx; ?>">
 	<?php
 // текст
 	if ($text) {
 	?>
-	<div class="syndicate_text<?php echo $moduleclass_sfx; ?>"><?php echo $text; ?></div>
+	<div class="rssfeed_text<?php echo $moduleclass_sfx; ?>"><?php echo $text; ?></div>
 	<?php
 	}
 // Yandex

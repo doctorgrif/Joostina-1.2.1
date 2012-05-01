@@ -29,6 +29,7 @@ define('_FAILED_ITEM', 'Запрещенная переменная');
 define('_OR', 'или');
 define('_IN_SCRIPT', 'в скрипте.');
 define('_LANGUAGE', 'ru');
+define('_NEW', 'Новый');
 define('_NOT_AUTH', 'Извините, но для просмотра этой страницы у Вас недостаточно прав.');
 define('_DO_LOGIN', 'Вы должны авторизоваться или пройти регистрацию.');
 define('_VALID_AZ09', 'Пожалуйста, проверьте, правильно ли написано %s.  Имя не должно содержать пробелов, только символы 0-9, a-z, A-Z и иметь длину не менее %d символов.');
@@ -49,6 +50,7 @@ define('_CMN_EMAIL', 'E-mail');
 define('_CMN_SITEMAP', 'Карта сайта');
 define('_ICON_SEP', '|');
 define('_CMN_PARENT', 'Родитель');
+define('_CMN_SEARCHPHRASE', 'Тип поиска по ключевой фразе');
 define('_CMN_ORDERING', 'Сортировка');
 define('_CMN_ACCESS', 'Уровень доступа');
 define('_CMN_SELECT', 'Выбрать');
@@ -118,7 +120,8 @@ define('_JSB_ADD', 'Добавить закладку в');
 define('_JSB_AFTER', 'Работает под управлением Joostina CMS!');
 
 /**  содержимое */
-define('_READ_MORE', 'Подробнее…');
+define('_READ_MORE', 'Подробнее… &crarr;');
+define('_READ_ITEM', 'Читать полностью &crarr;');
 define('_READ_MORE_REGISTER', 'Только для зарегистрированных пользователей…');
 define('_MORE', 'Далее…');
 define('_ON_NEW_CONTENT', 'Пользователь [ %s ] добавил новый объект [ %s ]. Раздел: [ %s ]/Категория: [ %s ]');
@@ -138,7 +141,7 @@ define('_BUTTON_RESULTS', 'Результаты');
 define('_USERNAME', 'Пользователь');
 define('_LOST_PASSWORD', 'Забыли пароль?');
 define('_PASSWORD', 'Пароль');
-define('_BUTTON_LOGIN', 'Войти');
+define('_BUTTON_LOGIN', 'Войти &crarr;');
 define('_BUTTON_LOGOUT', 'Выйти');
 define('_NO_ACCOUNT', 'Ещё не зарегистрированы?');
 define('_CREATE_ACCOUNT', 'Регистрация');
@@ -147,6 +150,7 @@ define('_VOTE_BEST', 'Лучшая');
 define('_USER_RATING', 'Рейтинг');
 define('_RATE_BUTTON', 'Оценить');
 define('_REMEMBER_ME', 'Запомнить');
+define('_REMEMBER_ME_2', 'Запомнить меня');
 
 /** contact.php */
 define('_ENQUIRY', 'Контакт');
@@ -176,7 +180,8 @@ define('_MESSAGE_PROMPT', 'Введите текст сообщения');
 define('_MESSAGE_PROMPT_PH', 'Введите текст Вашего сообщения');
 define('_PLEASE_ENTER_CAPTCHA_PH', 'Введите код');
 define('_SEND_BUTTON', 'Отправить');
-define('_SEND_BUTTON_CONTACT', 'Отправить сообщение');
+define('_SEND_BUTTON_CONTACT', 'Отправить сообщение &crarr;');
+define('_SEND_EMAIL_CONTACT', 'Отправить сообщение ');
 define('_CONTACT_FORM_NC', 'Пожалуйста, заполните форму полностью и правильно.');
 define('_CONTACT_TELEPHONE', 'Телефон');
 define('_CONTACT_MOBILE', 'Мобильный');
@@ -241,7 +246,7 @@ define('_AUTHOR_BY', 'Автор');
 define('_WRITTEN_BY', 'Написано');
 //define('_LAST_UPDATED', 'Последнее обновление');
 define('_LAST_UPDATED', 'Обновлено');
-define('_BACK', 'Вернуться');
+define('_BACK', '&larr; Вернуться');
 define('_LEGEND', 'История');
 define('_DATE', 'Дата');
 define('_ORDER_DROPDOWN', 'Порядок');
@@ -433,8 +438,10 @@ define('_SENDING_PASSWORD', 'Ваш пароль будет отправлен на указанный выше адрес 
 /** classes/html/search.php */
 define('_SEARCH_TITLE', 'Поиск');
 define('_SEARCH_SEL_CATEGORY', 'Выберите категорию');
-define('_SEARCH_RESULT', 'Результаты поиска:');
-define('_SEARCH_LIMITSTART', 'Показывать объектов на странице');
+define('_SEARCH_RESULT', 'Результаты поиска');
+define('_SEARCH_SEARCHPHRASE', 'Тип поиска по ключевой фразе');
+define('_SEARCH_ORDERING', 'Сортировка поиска');
+define('_SEARCH_LIMITSTART', 'Показывать на странице');
 define('_PROMPT_KEYWORD', 'Поиск по ключевой фразе');
 define('_SEARCH_MATCHES', 'найдено %d совпадений');
 define('_CONCLUSION', 'Всего найдено $totalRows материалов.');
@@ -465,9 +472,9 @@ define('_DATE_FORMAT', 'Сегодня: d.m.Y г.'); // Используйте формат PHP-функции D
  * измените строчку ниже, для изменения вывода даты на сайте
  * например, define("_DATE_FORMAT_LC"," %d %B %Y г. %H:%M"); // Используйте формат PHP-функции strftime
  */
-define('_DATE_FORMAT_LC', '%A, %d-го %B %Y г. в %H:%m'); // Используйте PHP strftime формат
+//define('_DATE_FORMAT_LC', '%A, %d-го %B %Y г. в %H:%m'); // Используйте PHP strftime формат
 //define('_DATE_FORMAT_LC', '%d.%m.%Y'); // Используйте PHP strftime формат
-//define('_DATE_FORMAT_LC',$mosConfig_form_date); // Используйте формат PHP-функции strftime
+define('_DATE_FORMAT_LC',$mosConfig_form_date); // Используйте формат PHP-функции strftime
 define('_DATE_FORMAT_LC2', $mosConfig_form_date_full); // Полный формат времени
 define('_SEARCH_BOX', 'Поиск…');
 define('_NEWSFLASH_BOX', 'Краткие новости!');
@@ -597,12 +604,12 @@ define('_RANDOM_IMAGE_ERROR', 'Проверьте настройки модуля mod_random_image и нал
 
 /** modules/mod_ml_login */
 define('_AUTH', 'Авторизация');
-define('_AUTH_DEF', 'Стандартная авторизация');
+define('_AUTH_DEF', 'Авторизация');
 define('_REM_PASS', 'Напомним');
 define('_NO_REGISTRED', 'Не зарегистрированы?');
-define('_AUTH_OPENID', 'Войти, используя <img src="' . $mosConfig_live_site . '/modules/mod_ml_login/openid_big.png" alt="Войти, используя OpenID" class="openidimg" title="Войти, используя OpenID" width="99" height="20" />');
+/*define('_AUTH_OPENID', 'Войти, используя <img src="' . $mosConfig_live_site . '/modules/mod_ml_login/openid_big.png" alt="Войти, используя OpenID" class="openidimg" title="Войти, используя OpenID" width="99" height="20" />');
 define('_OPENID_PROVS', 'Провайдеры OpenID');
-define('_OPENID_SUB_TEXT', 'Войти с OpenID');
+define('_OPENID_SUB_TEXT', 'Войти с OpenID');*/
 define('_ENTER_YOUR_LOGIN', 'Введите Ваш Логин');
 define('_ENTER_YOUR_PASSWORD', 'Введите Ваш пароль');
 
@@ -1032,37 +1039,37 @@ define('_SITE_DESC', 'Описание сайта, которое индексируется поисковиками');
 define('_SITE_DESC2', ' Вы можете не ограничивать Ваше описание двадцатью словами, в зависимости от Поискового сервера, который Вы планируете использовать. Делайте описание кратким и подходящим для содержания вашего сайта. Вы можете включить некоторые из ваших ключевых слов и ключевых фраз. Так как некоторые поисковые серверы читают больше 20 слов, то Вы можете добавить одно или два предложения. Пожалуйста удостоверьтесь, что самая важная часть вашего описания находится в первых 20 словах.');
 define('_SITE_KEYWORDS', 'Ключевые слова сайта');
 define('_SITE_KEYWORDS2', ' Вы можете не ограничивать Ваш ключевые слова двадцатью, в зависимости от Поискового сервера, который Вы планируете использовать. Делайте ключевые слова подходящим для содержания вашего сайта.');
-define('_SHOW_TITLE_TAG', 'Показывать мета-тег <strong>title</strong>');
-define('_SHOW_TITLE_TAG2', 'Показывает мета-тег <strong>title</strong> при просмотре объектов содержимого');
-define('_SHOW_GEO_TAG', '<strong>Geotagging</strong>');
-define('_SHOW_GEO_TAG2', 'Показывает <strong>Geotagging</strong> мета-теги при просмотре объектов содержимого');
+define('_SHOW_TITLE_TAG', 'Показывать мета-тег title');
+define('_SHOW_TITLE_TAG2', 'Показывает мета-тег title при просмотре объектов содержимого');
+define('_SHOW_GEO_TAG', 'Geotagging');
+define('_SHOW_GEO_TAG2', 'Показывает Geotagging мета-теги при просмотре объектов содержимого');
 define('_SHOW_GEO_TAG_LATITUDE', 'Широта');
-define('_SHOW_GEO_TAG2_LATITUDE', 'Широта объекта. Записывается в формате <strong>50.167958</strong> (пример!). Если объект расположен в западном полушарии, то перед циврами добавляется знак минуса (-).');
+define('_SHOW_GEO_TAG2_LATITUDE', 'Широта объекта. Записывается в формате 50.167958 (пример!). Если объект расположен в западном полушарии, то перед циврами добавляется знак минуса (-).');
 define('_SHOW_GEO_TAG_LONGITUDE', 'Долгота');
-define('_SHOW_GEO_TAG2_LONGITUDE', 'Долгота объекта. Записывается в формате <strong>50.167958</strong> (пример!). Если объект расположен в южном полушарии, то перед циврами добавляется знак минуса (-).');
+define('_SHOW_GEO_TAG2_LONGITUDE', 'Долгота объекта. Записывается в формате 50.167958 (пример!). Если объект расположен в южном полушарии, то перед циврами добавляется знак минуса (-).');
 define('_SHOW_GEO_TAG_PLACENAME', 'Месторасположение объекта');
-define('_SHOW_GEO_TAG2_PLACENAME', 'Месторасположения объекта. Записывется в формате <strong>Город, Страна</strong> (пример!)');
+define('_SHOW_GEO_TAG2_PLACENAME', 'Месторасположения объекта. Записывется в формате Город, Страна (пример!)');
 define('_SHOW_GEO_TAG_REGION', 'Регион объекта');
-define('_SHOW_GEO_TAG2_REGION', 'Регион объекта. Записывется в двубуквенном формате страны <strong>ru</strong> (пример!)');
-define('_SHOW_DCORE', '<strong>Dublin Core Metadata Element Set</strong>');
-define('_SHOW_DCORE2', 'Показывает <strong>Dublin Core Metadata Element Set (DCMES)</strong> мета-теги при просмотре объектов содержимого');
+define('_SHOW_GEO_TAG2_REGION', 'Регион объекта. Записывется в двубуквенном формате страны ru (пример!)');
+define('_SHOW_DCORE', 'Dublin Core Metadata Element Set');
+define('_SHOW_DCORE2', 'Показывает Dublin Core Metadata Element Set (DCMES) мета-теги при просмотре объектов содержимого');
 define('_SHOW_DCORE_LANGUAGE', 'Язык');
-define('_SHOW_DCORE2_LANGUAGE', 'Язык. Записывется в двубуквенном формате страны <strong>ru</strong> (пример!)');
-define('_SHOW_GA', '<strong>Google Analitics</strong>');
-define('_SHOW_GA2', 'Показывает код <strong>Google Analitics</strong> в генерируемом коде');
-define('_SHOW_GA_ID', 'Google Analitics <strong>ID</strong>');
-define('_SHOW_GA2_ID', '<strong>Google Analitics ID</strong> для отслеживания статистики сайта');
-define('_SHOW_YM', '<strong>Яндекс.Метрика</strong>');
-define('_SHOW_YM2', 'Показывает код <strong>Яндекс.Метрика</strong> в генерируемом коде');
-define('_SHOW_YM_ID', 'Яндекс.Метрика <strong>ID</strong>');
-define('_SHOW_YM2_ID', '<strong>Яндекс.Метрика ID</strong> для отслеживания статистики сайта');
-define('_SHOW_AUTHOR_TAG', 'Показывать мета-тег <strong>author</strong>');
-define('_SHOW_AUTHOR_TAG2', 'Показывает мета-тег <strong>author</strong> при просмотре объектов содержимого');
-define('_SHOW_BASE_TAG', 'Показывать мета-тег <strong>base</strong>');
-define('_SHOW_BASE_TAG2', 'Показывает мета-тег <strong>base</strong> в теле каждой страницы');
-define('_REVISIT_TAG', 'Значение тега <strong>revisit</strong>');
-define('_REVISIT_TAG2', 'Укажите значение тега <strong>revisit</strong> в днях');
-define('_DISABLE_GENERATOR_TAG', 'Отключить тег <strong>Generator</strong>');
+define('_SHOW_DCORE2_LANGUAGE', 'Язык. Записывется в двубуквенном формате страны ru (пример!)');
+define('_SHOW_GA', 'Google Analitics');
+define('_SHOW_GA2', 'Показывает код Google Analitics в генерируемом коде');
+define('_SHOW_GA_ID', 'Google Analitics ID');
+define('_SHOW_GA2_ID', 'Google Analitics ID для отслеживания статистики сайта');
+define('_SHOW_YM', 'Яндекс.Метрика');
+define('_SHOW_YM2', 'Показывает код Яндекс.Метрика в генерируемом коде');
+define('_SHOW_YM_ID', 'Яндекс.Метрика ID');
+define('_SHOW_YM2_ID', 'Яндекс.Метрика ID для отслеживания статистики сайта');
+define('_SHOW_AUTHOR_TAG', 'Показывать мета-тег author');
+define('_SHOW_AUTHOR_TAG2', 'Показывает мета-тег author при просмотре объектов содержимого');
+define('_SHOW_BASE_TAG', 'Показывать мета-тег base');
+define('_SHOW_BASE_TAG2', 'Показывает мета-тег base в теле каждой страницы');
+define('_REVISIT_TAG', 'Значение тега revisit');
+define('_REVISIT_TAG2', 'Укажите значение тега revisit в днях');
+define('_DISABLE_GENERATOR_TAG', 'Отключить тег Generator');
 define('_DISABLE_GENERATOR_TAG2', 'Если &laquo;Да&raquo;, то из кода каждой HTML страницы будет исключен тег name=&laquo;Generator&raquo;');
 define('_EXT_IND_TAGS', 'Расширенные теги индексации');
 define('_EXT_IND_TAGS2', 'Если &laquo;Да&raquo;, то в код каждой страницы будут добавлены специальные теги для лучшей индексации');
@@ -1144,29 +1151,29 @@ define('_TIME_OFFSET_M_4', '(UTC -04:00) Атлантическое время (Канада), Каракас, 
 define('_TIME_OFFSET_M_3_5', '(UTC -03:30) Ньюфаундленд и Лабрадор');
 define('_TIME_OFFSET_M_3', '(UTC -03:00) Бразилия, Буэнос Айрес, Джорджтаун');
 define('_TIME_OFFSET_M_2', '(UTC -02:00) Средне-Атлантическое время');
-define('_TIME_OFFSET_M_1', '(UTC -01:00 час) Азорские острова, Острова Зеленого Мыса');
+define('_TIME_OFFSET_M_1', '(UTC -01:00) Азорские острова, Острова Зеленого Мыса');
 define('_TIME_OFFSET_M_0', '(UTC 00:00) Западно-Европейское время, Лондон, Лиссабон, Касабланка');
-define('_TIME_OFFSET_P_1', '(UTC +01:00 час) Брюссель, Копенгаген, Мадрид, Париж');
-define('_TIME_OFFSET_P_2', '(UTC +02:00) Украина, Киев, Минск, Калининград, Южная Африка');
-define('_TIME_OFFSET_P_3', '(UTC +03:00) Москва, Санкт-Петербург, Багдад, Эр-Рияд');
+define('_TIME_OFFSET_P_1', '(UTC +01:00) Брюссель, Копенгаген, Мадрид, Париж');
+define('_TIME_OFFSET_P_2', '(UTC +02:00) Киевское время - Украина; Минское время &ndash; Белорусия; Further-eastern European Time (FET) &ndash; Приднестровская Молдавская Республика; Южная Африка');
+define('_TIME_OFFSET_P_3', '(UTC +03:00) Kaliningrad Time (MSK-1) 1-я часовая зона &ndash; Калининградская область; Багдад, Эр-Рияд');
 define('_TIME_OFFSET_P_3_5', '(UTC +03:30) Тегеран');
-define('_TIME_OFFSET_P_4', '(UTC +04:00) Самара, Баку, Тбилиси, Абу-Даби, Мускат');
+define('_TIME_OFFSET_P_4', '(UTC +04:00) Moscow Time (MSK) 2-я часовая зона &ndash; Москва и вся европейская часть России;<br />Московское время - Абхазия, Южная Осетия; Баку, Тбилиси, Абу-Даби, Мускат');
 define('_TIME_OFFSET_P_4_5', '(UTC +04:30) Кабул');
-define('_TIME_OFFSET_P_5', '(UTC +05:00) Оренбург, Екатеринбург, Пермь, Ташкент, Исламабад, Карачи');
+define('_TIME_OFFSET_P_5', '(UTC +05:00) Ташкент, Ереванское время - Армения, Исламабад, Карачи');
 define('_TIME_OFFSET_P_5_5', '(UTC +05:30) Бомбей, Калькутта, Мадрас, Нью-Дели');
 define('_TIME_OFFSET_P_5_75', '(UTC +05:45) Катманду');
-define('_TIME_OFFSET_P_6', '(UTC +06:00) Омск, Новосибирск, Алматы, Дака, Коломбо');
+define('_TIME_OFFSET_P_6', '(UTC +06:00) Yekaterinburg Time (MSK+2) 3-я часовая зона &ndash; Республика Башкортостан, Пермский край, Курганская область, Оренбургская область, Свердловская область, Тюменская область, Челябинская область,<br />Ханты-Мансийский автономный округ &ndash; Югра, Ямало-Ненецкий автономный округ; Алматы, Дака, Коломбо');
 define('_TIME_OFFSET_P_6_5', '(UTC +06:30) Ягун');
-define('_TIME_OFFSET_P_7', '(UTC +07:00) Красноярск, Бангкок, Ханой, Джакарта');
-define('_TIME_OFFSET_P_8', '(UTC +08:00) Иркутск, Улан-Батор, Пекин, Сингапур, Гонконг');
+define('_TIME_OFFSET_P_7', '(UTC +07:00) Omsk Time (MSK+3) 4-я часовая зона &ndash; Республика Алтай, Алтайский край, Кемеровская область, Новосибирская область, Омская область, Томская область; Бангкок, Ханой, Джакарта');
+define('_TIME_OFFSET_P_8', '(UTC +08:00) Krasnoyarsk Time (MSK+4) 5-я часовая зона &ndash; Республика Тыва, Республика Хакасия, Красноярский край; Улан-Батор, Пекин, Сингапур, Гонконг');
 define('_TIME_OFFSET_P_8_75', '(UTC +08:00) Западная Австралия');
-define('_TIME_OFFSET_P_9', '(UTC +09:00) Якутск, Токио, Сеул, Осака, Саппоро');
+define('_TIME_OFFSET_P_9', '(UTC +09:00) Irkutsk Time (MSK+5) 6-я часовая зона &ndash; Республика Бурятия, Иркутская область; Токио, Сеул, Осака, Саппоро');
 define('_TIME_OFFSET_P_9_5', '(UTC +09:30) Аделаида, Дарвин');
-define('_TIME_OFFSET_P_10', '(UTC +10:00) Владивосток, Гуам, Восточная Австралия');
+define('_TIME_OFFSET_P_10', '(UTC +10:00) Yakutsk Time (MSK+6) 7-я часовая зона &ndash; Республика Саха (Якутия) (кроме Верхоянского, Оймяконского, Усть-Янского, Абыйского, Аллаиховского, Верхнеколымского, Момского, Нижнеколымского, Среднеколымского районов), включая Якутск, Забайкальский край, Амурская область; Гуам, Восточная Австралия');
 define('_TIME_OFFSET_P_10_5', '(UTC +10:30) остров Lord Howe (Австралия)');
-define('_TIME_OFFSET_P_11', '(UTC +11:00) Магадан, Соломоновы острова, Новая Каледония');
+define('_TIME_OFFSET_P_11', '(UTC +11:00) Vladivostok Time (MSK+7) 8-я часовая зона &ndash; Приморский край, Хабаровский край, Еврейская автономная область, Республика Саха (Якутия) (Верхоянский, Оймяконский, Усть-Янский районы), Сахалинская область (кроме Северо-Курильского района); Соломоновы острова, Новая Каледония');
 define('_TIME_OFFSET_P_11_5', '(UTC +11:30) остров Норфолк');
-define('_TIME_OFFSET_P_12', '(UTC +12:00) Камчатка, Окленд, Уэллингтон, Фиджи');
+define('_TIME_OFFSET_P_12', '(UTC +12:00) Magadan Time (MSK+8) 9-я часовая зона &ndash; Камчатский край, Магаданская область, Чукотский автономный округ, Республика Саха (Якутия) (Абыйский, Аллаиховский, Верхнеколымский, Момский, Нижнеколымский, Среднеколымский районы), Сахалинская область (Северо-Курильский район); Окленд, Уэллингтон, Фиджи');
 define('_TIME_OFFSET_P_12_75', '(UTC +12:45) Остров Чатем');
 define('_TIME_OFFSET_P_13', '(UTC +13:00) Тонга');
 define('_TIME_OFFSET_P_14', '(UTC +14:00) Кирибати');
@@ -1426,7 +1433,6 @@ define('_PLUGIN_NOT_FOUND', 'Плагин не найден');
 define('_JCE_CONTENT_MAMBOT_NOT_INSTALLED', 'Мамбот редактора JCE не установлен');
 define('_ICONS_POSITIONS_SAVED', 'Расположение значков сохранено');
 define('_MAIN_PAGE', 'Главная');
-define('_NEW', 'Новый');
 define('_INSTALLATION', 'Установка');
 define('_PREVIEW', 'Предпросмотр');
 define('_PLUGINS', 'Плагины');
@@ -2249,6 +2255,50 @@ define('_PLEASE_ENABLE_JAVASCRIPT', 'Предупреждение! Javascript должен быть разр
 
 /* includes feedcreator.class.php */
 define('_ERROR_CREATING_NEWSFEED', 'Ошибка создания файла ленты новостей. Пожалуйста, проверьте разрешения на запись');
+
+/* includes class.upload.php */
+define('_file_error', 'Файловая ошибка. Попробуйте еще раз.');
+define('_local_file_missing', 'Локальный файл не существует.');
+define('_local_file_not_readable', 'Локальный файл закрыт для чтения.');
+define('_uploaded_too_big_ini', 'Ошибка загрузки файла (загруженный файл превышает лимит директивы the upload_max_filesize из php.ini).');
+define('_uploaded_too_big_html', 'Ошибка загрузки файла (загруженный файл превышает лимит директивы MAX_FILE_SIZE определенной в HTML-форме).');
+define('_uploaded_partial', 'Ошибка загрузки файла (файл загружен частично).');
+define('_uploaded_missing', 'Ошибка загрузки файла (файл не был загружен).');
+define('_uploaded_unknown', 'Ошибка загрузки файла (неизвестный код ошибки).');
+define('_try_again', 'Ошибка загрузки файла. Попробуйте еще раз.');
+define('_file_too_big', 'Файл очень большой.');
+define('_no_mime', 'Невозможно определить MIME-тип файла.');
+define('_incorrect_file', 'Некорректный тип файла.');
+define('_image_too_wide', 'Изображение очень широкое.');
+define('_image_too_narrow', 'Изображение очень узкое.');
+define('_image_too_high', 'Изображение очень высокое.');
+define('_image_too_short', 'Изображение очень короткое.');
+define('_ratio_too_high', 'Соотношение сторон очень велико (изображение очень широкое).');
+define('_ratio_too_low', 'Соотношение сторон очень мало (изображение очень высокое).');
+define('_too_many_pixels', 'В изображении очень много пикселей.');
+define('_not_enough_pixels', 'В изображении недостаточно пикселей.');
+define('_file_not_uploaded', 'Файл не загружен. Невозможно продолжить процесс.');
+define('_already_exists', '%s существует. Измените имя файла.');
+define('_temp_file_missing', 'Некорректный временый файл. Невозможно продолжить процесс.');
+define('_source_missing', 'Некорректный загруженный файл. Невозможно продолжить процесс.');
+define('_destination_dir', 'Директория назначения не может быть создана. Невозможно продолжить процесс.');
+define('_destination_dir_missing', 'Директория назначения не существует. Невозможно продолжить процесс.');
+define('_destination_path_not_dir', 'Путь назначения не является директорией. Невозможно продолжить процесс.');
+define('_destination_dir_write', 'Директория назначения закрыта для записи. Невозможно продолжить процесс.');
+define('_destination_path_write', 'Путь назначения закрыт для записи. Невозможно продолжить процесс.');
+define('_temp_file', 'Невозможно создать временный файл. Невозможно продолжить процесс.');
+define('_source_not_readable', 'Исходный файл нечитабельный. Невозможно продолжить процесс.');
+define('_no_create_support', 'Создание из %s не поддерживается.');
+define('_create_error', 'Ошибка создания %s изображения из оригинала.');
+define('_source_invalid', 'Невозможно прочитать исходный файл.');
+define('_gd_missing', 'Библиотека GD не обнаружена.');
+define('_watermark_no_create_support', '%s не поддерживается, невозможно прочесть водный знак.');
+define('_watermark_create_error', '%s не поддерживается чтение, невозможно создать водный знак.');
+define('_watermark_invalid', 'Неизвестный формат изображения, невозможно прочесть водный знак.');
+define('_file_create', '%s не поддерживается.');
+define('_no_conversion_type', 'Тип конверсии не указан.');
+define('_copy_failed', 'Ошибка копирования файла на сервер. Команда copy() выполнена с ошибкой.');
+define('_reading_failed', 'Ошибка чтения файла.');
 
 /* includes joomla.php */
 define('_YOU_NEED_TO_AUTH', 'Необходимо авторизоваться');

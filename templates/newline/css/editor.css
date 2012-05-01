@@ -7,6 +7,12 @@ body {
 h1, h2, h3 , h4 {font-family:arial, helvetica, sans-serif;}
 h1, h3, h4 {font-weight:bold;}
 h2, h4 {color:#333;}
-h2 {font-size:14px;font-weight:normal;}
-h3 {font-size:13px;color:#135cae;}
-hr#system-readmore {border:red dashed 1px;color:red;}
+h2 {
+	font-size:14px;
+	font-weight:normal;}
+h3 {
+	font-size:13px;
+	color:#135cae;}
+hr#system-readmore {
+	border:red dashed 1px;
+	color:red;}

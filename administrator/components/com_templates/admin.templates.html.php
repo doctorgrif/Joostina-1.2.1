@@ -36,7 +36,7 @@ class HTML_templates {
 			if (document.adminForm.doPreview.checked) {
 				var src = '<?php echo $mosConfig_live_site.($client == 'admin'?'/' . ADMINISTRATOR_DIRECTORY:''); ?>/templates/'+dir+'/template_thumbnail.png';
 				var html=name;
-				html = '<br /><img border="1" src="'+src+'" name="imagelib" alt="<?php echo _NO_PREVIEW?>" width="206" height="145" />';
+				html = '<p><img border="1" src="'+src+'" name="imagelib" alt="<?php echo _NO_PREVIEW?>" width="206" height="145" /></p>';
 				return overlib(html, CAPTION, name)
 			} else {
 				return false;

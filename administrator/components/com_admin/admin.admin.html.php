@@ -75,11 +75,11 @@ class HTML_admin_misc {
 ?>
 		<table class="adminform">
 			<tr>
-				<td><pre>
+				<td>
 <?php
 		include($mosConfig_absolute_path.'/help/copyright.php');
 ?>
-				</pre></td>
+				</td>
 			</tr>
 		</table>
 <?php
@@ -88,11 +88,11 @@ class HTML_admin_misc {
 ?>
 		<table class="adminform">
 			<tr>
-				<td><pre>
+				<td>
 <?php
 		include($mosConfig_absolute_path.'/help/changeslog.php');
 ?>
-				</pre></td>
+				</td>
 			</tr>
 		</table>
 <?php
@@ -381,7 +381,7 @@ class HTML_admin_misc {
 			<table class="adminform">
 			<tr>
 				<td>
-					<strong><?php echo _DIRS_WITH_RIGHTS?></strong><br /><br />
+					<p><strong><?php echo _DIRS_WITH_RIGHTS?></strong></p>
 					<?php
 		$sp = ini_get('session.save_path');
 
@@ -631,12 +631,10 @@ class HTML_admin_misc {
 	*/
 	function changelog() {
 ?>
-		<pre>
 <?php
 		readfile($GLOBALS['mosConfig_absolute_path'].'/help/changeslog.php');
 ?>
-		</pre>
-		<?php
+<?php
 	}
 }
 

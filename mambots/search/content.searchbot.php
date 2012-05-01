@@ -89,7 +89,7 @@ function botSearchContent($text, $phrase = '', $ordering = '', $category = '') {
 			break;
 	}
 // search content items
-	$query = "SELECT a.title AS title," . "\n a.created AS created," . "\n CONCAT(a.introtext, a.fulltext) AS text," .
+	$query = "SELECT STRAIGHT_JOIN a.title AS title," . "\n a.created AS created," . "\n CONCAT(a.introtext, a.fulltext) AS text," .
 //"\n AND a.catid = ".$category."".
 			"\n CONCAT_WS( '/', u.title, b.title ) AS section," . "\n CONCAT( 'index.php?option=com_content&task=view&id=', a.id ) AS href," .
 			"\n '2' AS browsernav," . "\n 'content' AS type" . "\n, u.id AS sec_id, b.id as cat_id" .
@@ -103,7 +103,7 @@ function botSearchContent($text, $phrase = '', $ordering = '', $category = '') {
 	$database->setQuery($query, 0, $limit);
 	$list = $database->loadObjectList();
 // search static content
-	$query = "SELECT a.title AS title," . "\n a.created AS created," . "\n a.introtext AS text," .
+	$query = "SELECT STRAIGHT_JOIN a.title AS title," . "\n a.created AS created," . "\n a.introtext AS text," .
 			"\n " . $database->Quote(_STATIC_CONTENT) . " AS section," . "\n CONCAT( 'index.php?option=com_content&task=view&id=', a.id, '&Itemid=', m.id ) AS href," .
 			"\n '2' AS browsernav," . "\n a.id" . "\n FROM #__content AS a" . "\n LEFT JOIN #__menu AS m ON m.componentid = a.id" .
 			"\n WHERE ($where)" . "\n AND a.state = 1" . "\n AND a.access <= " . (int) $my->gid . "\n AND m.type = 'content_typed'" .
@@ -114,7 +114,7 @@ function botSearchContent($text, $phrase = '', $ordering = '', $category = '') {
 	$database->setQuery($query, 0, $limit);
 	$list2 = $database->loadObjectList();
 // поиск архивного содержимого
-	$query = "SELECT a.title AS title," . "\n a.created AS created," . "\n a.introtext AS text," .
+	$query = "SELECT STRAIGHT_JOIN a.title AS title," . "\n a.created AS created," . "\n a.introtext AS text," .
 			"\n CONCAT_WS( '/', " . $database->Quote(_SEARCH_ARCHIVED) .
 			", u.title, b.title ) AS section," . "\n CONCAT('index.php?option=com_content&task=view&id=',a.id) AS href," .
 			"\n '2' AS browsernav," . "\n 'content' AS type" . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS b ON b.id=a.catid" .
@@ -138,7 +138,7 @@ function botSearchContent($text, $phrase = '', $ordering = '', $category = '') {
 			$ids = "a.id != " . implode(" OR a.id != ", $ids);
 		}
 // search static content not connected to a menu
-		$query = "SELECT a.title AS title," . "\n a.created AS created," . "\n a.introtext AS text," .
+		$query = "SELECT STRAIGHT_JOIN a.title AS title," . "\n a.created AS created," . "\n a.introtext AS text," .
 				"\n '2' as browsernav, " . $database->Quote(_STATIC_CONTENT) . " AS section," . "\n CONCAT( 'index.php?option=com_content&task=view&id=', a.id ) AS href," .
 				"\n a.id" . "\n FROM #__content AS a" . "\n WHERE ($where)" . (($ids) ? "\n AND ( $ids )" :
 						'') . "\n AND a.state = 1" . "\n AND a.access <= " . (int) $my->gid . "\n AND a.sectionid = 0" .

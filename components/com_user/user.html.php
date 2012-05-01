@@ -107,51 +107,55 @@ class HTML_user {
 		<div id="table_userprofile">
 			<div id="user_avatar">
 				<div>
-					<img id="userav" src="<?php echo $mosConfig_live_site . mosUser::avatar($row->id, 'big'); ?>" alt="" />
+					<figure>
+						<img id="userav" src="<?php echo $mosConfig_live_site . mosUser::avatar($row->id, 'big'); ?>" alt="" />
+					</figure>
 				</div>
 				<div id="fileavatar">
-					<label for="fileavatar"><?php echo _NEW_AVATAR_UPLOAD; ?></label>
-					<div>
-						<input class="inputbox" type="file" name="avatar" id="fileavatar" />
-					</div>
+					<p>
+						<label for="fileavatar"><?php echo _NEW_AVATAR_UPLOAD; ?></label><br />
+						<input class="text-input" type="file" name="avatar" id="fileavatar" />
+					</p>
 				</div>
 				<div>
-					<input type="submit" name="send" value="<?php echo _TASK_UPLOAD; ?>" class="button" onclick="addavatar(); return false;" />
-					<input type="submit" name="send" value="<?php echo _CMN_DELETE; ?>" class="button" onclick="delavatar(); return false;" />
+					<p>
+						<input type="submit" name="send" value="<?php echo _TASK_UPLOAD; ?>" class="button" onclick="addavatar(); return false;" /> <input type="submit" class="button" name="send" value="<?php echo _CMN_DELETE; ?>" class="button" onclick="delavatar(); return false;" />
+					</p>
 				</div>
 			</div>
 			<div id="user_info">
-				<div id="username1">
-					<label for="username1"><?php echo _UNAME; ?></label>
-					<div>
-						<input class="inputbox" type="text" name="username" id="username1" value="<?php echo $row->username; ?>" size="40" placeholder="<?php echo $row->username; ?>" />
-					</div>
+				<div>
+					<p>
+						<label for="username1"><?php echo _UNAME; ?></label><br />
+						<input class="text-input" type="text" name="username" id="username1" value="<?php echo $row->username; ?>" size="40" placeholder="<?php echo $row->username; ?>" />
+					</p>
 				</div>
-				<div id="name">
-					<label for="name"><?php echo _YOUR_NAME; ?></label>
-					<div>
-						<input class="inputbox" type="text" name="name" id="name" value="<?php echo $row->name; ?>" size="40" placeholder="<?php echo $row->name; ?>" />
-					</div>
+				<div>
+					<p>
+						<label for="name"><?php echo _YOUR_NAME; ?></label><br />
+						<input class="text-input" type="text" name="name" id="name" value="<?php echo $row->name; ?>" size="40" placeholder="<?php echo $row->name; ?>" />
+					</p>
 				</div>
-				<div id="email">
-					<label for="email"><?php echo _EMAIL; ?></label>
-					<div>
-						<input class="inputbox" type="email" name="email" id="email" value="<?php echo $row->email; ?>" size="40" placeholder="<?php echo $row->email; ?>" />
-					</div>
+				<div>
+					<p>
+						<label for="email"><?php echo _EMAIL; ?></label><br />
+						<input class="text-input" type="email" name="email" id="email" value="<?php echo $row->email; ?>" size="40" placeholder="<?php echo $row->email; ?>" />
+					</p>
 				</div>
-				<div id="password">
-					<label for="password"><?php echo _PASS; ?></label>
-					<div>
-						<input class="inputbox" type="password" name="password" id="password" value="" size="40" placeholder="<?php echo _PASS_PH; ?>" />
-					</div>
+				<div>
+					<p>
+						<label for="password"><?php echo _PASS; ?></label><br />
+						<input class="text-input" type="password" name="password" id="password" value="" size="40" placeholder="<?php echo _PASS_PH; ?>" />
+					</p>
 				</div>
-				<div id="verifyPass">
-					<label for="verifyPass"><?php echo _VPASS; ?></label>
-					<div>
-						<input class="inputbox" type="password" name="verifyPass" id="verifyPass" size="40" placeholder="<?php echo _VPASS_PH; ?>" />
-					</div>
+				<div>
+					<p>
+						<label for="verifyPass"><?php echo _VPASS; ?></label><br />
+						<input class="text-input" type="password" name="verifyPass" id="verifyPass" size="40" placeholder="<?php echo _VPASS_PH; ?>" />
+					</p>
 				</div>
 			</div>
+			<div class="clearfix"></div>
 		</div>
 		<?php
 			$tabs->endTab();
@@ -159,7 +163,7 @@ class HTML_user {
 				$tabs->startTab('Дополнительно', 'ext-page');
 		?>
 		<div>
-			<p><?php echo $params->render('params'); ?></p>
+			<?php echo $params->render('params'); ?>
 		</div>
 		<?php } $tabs->endTab(); ?>
 	<input type="hidden" name="id" value="<?php echo $row->id; ?>" />

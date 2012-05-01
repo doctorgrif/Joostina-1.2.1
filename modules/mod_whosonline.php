@@ -21,14 +21,14 @@ display_module($params_aray);
 unset($params_aray);
 
 function display_module($params_aray) {
-echo '<div class="mod_who_online' . $moduleclass_sfx . '">';
+echo '<div class="whosonline">';
 	if ($params_aray['all_user']) {
-	$all_user = '<span>' . _REGISTERED_ONLINE . '</span> <span class="counter">' . all_user() . '</span>';
+	$all_user = '<span>'._REGISTERED_ONLINE.'</span> <span class="counter">'.all_user().'</span>';
 	} else {
 	$all_user = '';
 	}
 	if ($params_aray['online_user_count'] !== '2') {
-	$count_online = '<span>' . _NOW_ONLINE . '</span> <span class="counter">' . online_users($params_aray) . '</span>';
+	$count_online = '<span>'._NOW_ONLINE.'</span> <span class="counter">'.online_users($params_aray).'</span>';
 	} else {
 	$count_online = '';
 	}
@@ -38,18 +38,9 @@ echo '<div class="mod_who_online' . $moduleclass_sfx . '">';
 	$online_users = '';
 	}
 	if ($params_aray['module_orientation'] == '0') { // горизонтально
-	echo '<div class="mod_who_online_info' . $moduleclass_sfx . '">';
-	echo $all_user;
-	echo '&nbsp;';
-	echo $count_online;
-	echo '</div>';
-	echo $online_users;
+	echo '<div class="whosonline_info gorizontal"><p>'.$all_user.'&nbsp;'.$count_online.'&nbsp;'.$online_users.'</p></div>';
 	} else { // вертикально
-	echo $all_user;
-	echo '<br />';
-	echo $count_online;
-	echo '<br />';
-	echo $online_users;
+	echo '<div class="whosonline_info vertical"><p>'.$all_user.'</p><p>'.$count_online.'</p><p>'.$online_users.'</p></div>';
 	}
 echo '</div>';
 }
@@ -113,23 +104,23 @@ function who_online($params_aray) {
 	$database->setQuery($query);
 	$rows = $database->loadObjectList();
 	if (count($rows)) {
-		if ($params_aray['module_orientation'] == '1') {
+		if ($params_aray['module_orientation'] == '0') {
 			$dop_class = "gorizontal";
 		} else {
 			$dop_class = "vertical";
 		}
 // вывод
-$output .= '<ul class="users_online' . $moduleclass_sfx . $dop_class . '">';
+$output .= '<ul class="usersonline '.$dop_class.'">';
 	foreach ($rows as $row) {
 		if ($params_aray['online_users'] == '1') {
 			$user_name = $row->username;
 		} else {
 			$user_name = $row->name;
 		}
-		$user_link = 'index.php?option=com_user&amp;task=profile&amp;user=' . $row->userid;
-		$user_seflink = '<a href="' . sefRelToAbs($user_link) . '" title="' . $user_name . '">' . $user_name . '</a>';
-		$avatar = '<img id="user_avatar_img" src="' . $mosConfig_live_site . mosUser::avatar($row->userid, 'mini') . '" alt="' . $user_name . '" />';
-		$avatar_link = '<a href="' . sefRelToAbs($user_link) . '" title="' . $user_name . '">' . $avatar . '</a>';
+		$user_link = 'index.php?option=com_user&amp;task=profile&amp;user='.$row->userid;
+		$user_seflink = '<a href="'.sefRelToAbs($user_link).'" title="'.$user_name.'">'.$user_name.'</a>';
+		$avatar = '<figure><img id="user_avatar_img" src="'.$mosConfig_live_site . mosUser::avatar($row->userid, 'mini').'" alt="'.$user_name.'" /></figure>';
+		$avatar_link = '<a href="'.sefRelToAbs($user_link).'" title="'.$user_name.'">'.$avatar.'</a>';
 		if ($params_aray['user_avatar'] == '1') {
 			$user_item = $avatar_link . $user_seflink;
 		} else
@@ -139,7 +130,7 @@ $output .= '<ul class="users_online' . $moduleclass_sfx . $dop_class . '">';
 			$user_item = $user_seflink;
 		}
 	$output .= '<li>';
-	$output .= $user_item;
+	$output .= '<p>'.$user_item.'</p>';
 	$output .= '</li>';
 		}
 $output .= '</ul>';

@@ -48,7 +48,7 @@ function botSearchCategories($text, $phrase = '', $ordering = '') {
 		default:
 			$order = 'a.name DESC';
 	}
-	$query = "SELECT a.name AS title," . "\n a.description AS text," . "\n '' AS created," .
+	$query = "SELECT STRAIGHT_JOIN a.name AS title," . "\n a.description AS text," . "\n '' AS created," .
 			"\n '2' AS browsernav," . "\n '' AS section," . "\n '' AS href," . "\n s.id AS secid, a.id AS catid," .
 			"\n m.id AS menuid, m.type AS menutype" . "\n FROM #__categories AS a" . "\n INNER JOIN #__sections AS s ON s.id = a.section" .
 			"\n LEFT JOIN #__menu AS m ON m.componentid = a.id" . "\n WHERE ( a.name LIKE '%$text%'" .

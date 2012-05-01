@@ -115,9 +115,9 @@ function xmapCallShowSitemap($view,$sitemapid,$locale='',$sef='') {
 		default:	// Html output
 			global $mainframe;
 			require_once( $mainframe->getPath('front_html') );
-			if (!$xConfig->exclude_css) {
-				$mainframe->addCustomHeadTag( '<link rel="stylesheet" type="text/css" media="all" href="' . $mosConfig_live_site . '/components/com_xmap/css/xmap.css" />' );
-			}
+			/*if (!$xConfig->exclude_css) {
+				$mainframe->addCustomHeadTag( '<link rel="stylesheet" type="text/css" media="all" href="' . $mosConfig_live_site . '/templates/' . $mainframe->getTemplate() . '/css/style.css" />' );
+			}*/
 			$xmap = new XmapHtml( $xConfig, $xSitemap );
 			$xmap->generateSitemap($view,$xConfig,$xmapCache);
 			$xSitemap->count_html = $xmap->count;
@@ -215,7 +215,8 @@ class Xmap {
 			* noauth is false:
 			- Will show only links to content for which the logged in client has access.
 		*/
-		$sql = "SELECT m.id, m.name, m.parent, m.link, m.type, m.browserNav, m.menutype, m.ordering, m.params, m.componentid, c.name AS component"
+		/* add STRAIGHT_JOIN */
+		$sql = "SELECT STRAIGHT_JOIN m.id, m.name, m.parent, m.link, m.type, m.browserNav, m.menutype, m.ordering, m.params, m.componentid, c.name AS component"
 	 		. "\n FROM #__menu AS m"
 	 		. "\n LEFT JOIN #__components AS c ON m.type='components' AND c.id=m.componentid"
 	 		. "\n WHERE m.published='1' AND m.parent=".$menu->id." AND m.menutype = '".$menu->menutype."'"
@@ -254,7 +255,7 @@ class Xmap {
 			$node->changefreq = $item->changefreq;
 			$node->type = $item->type;	// menuentry-type
 			$node->menutype = $item->menutype;	// menuentry-type
-			if ( $isJ15 && substr($item->link,0,9) == 'index.php' ) {
+			if ( $isJ15 && mb_substr($item->link,0,9) == 'index.php' ) {
 				$node->link = 'index.php?Itemid=' . $node->id;	// For Joomla 1.5 SEF compatibility
 			} else {
 				$node->link = isset( $item->link ) ? htmlspecialchars( $item->link ) : '';	// convert link to valid xml
@@ -303,11 +304,11 @@ class Xmap {
 					break;
 			}
 		}
-		if( strcasecmp( substr( $link, 0, 4), 'http' ) ){
-			if (strcasecmp( substr( $link, 0, 9), 'index.php' ) === 0 ){
+		if( strcasecmp( mb_substr( $link, 0, 4), 'http' ) ){
+			if (strcasecmp( mb_substr( $link, 0, 9), 'index.php' ) === 0 ){
 				$link = sefRelToAbs($link);	// apply SEF transformation
-				if( strcasecmp( substr($link,0,4), 'http' ) ) {	// fix broken sefRelToAbs()
-					$link = $mosConfig_live_site. (substr($link,0,1) == '/'? '' : '/').$link;
+				if( strcasecmp( mb_substr($link,0,4), 'http' ) ) {	// fix broken sefRelToAbs()
+					$link = $mosConfig_live_site. (mb_substr($link,0,1) == '/'? '' : '/').$link;
 				}
 			} else { // Case for internal links not starting with index.php
 				$link = $mosConfig_live_site. '/' .$link;

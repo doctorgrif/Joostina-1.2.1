@@ -37,7 +37,6 @@ defined('_VALID_MOS') or die();
 * @author Roger Raymond <epsilon7@users.sourceforge.net>
 */
 class phpSniff {
-
 	/**
 	* @access private
 	* @var string
@@ -91,14 +90,35 @@ class phpSniff {
 	 * @access public
 	 * @var array
 	 */
-	var $_browsers = array('microsoft internet explorer' => 'IE', 'msie' => 'IE',
-		'netscape6' => 'NS', 'netscape' => 'NS', 'galeon' => 'GA', 'phoenix' => 'PX',
-		'mozilla firebird' => 'FB', 'firebird' => 'FB', 'firefox' => 'FX', 'chimera' =>
-		'CH', 'camino' => 'CA', 'epiphany' => 'EP', 'safari' => 'SF', 'k-meleon' => 'KM',
-		'mozilla' => 'MZ', 'opera' => 'OP', 'konqueror' => 'KQ', 'icab' => 'IC', 'lynx' =>
-		'LX', 'links' => 'LI', 'ncsa mosaic' => 'MO', 'amaya' => 'AM', 'omniweb' => 'OW',
-		'hotjava' => 'HJ', 'browsex' => 'BX', 'amigavoyager' => 'AV', 'amiga-aweb' => 'AW',
-		'ibrowse' => 'IB');
+	var $_browsers = array(
+		'microsoft internet explorer'	=> 'IE',
+		'msie'							=> 'IE',
+		'netscape6'						=> 'NS',
+		'netscape'						=> 'NS',
+		'galeon'						=> 'GA',
+		'phoenix'						=> 'PX',
+		'mozilla firebird'				=> 'FB',
+		'firebird'						=> 'FB',
+		'firefox'						=> 'FX',
+		'chimera'						=> 'CH',
+		'camino'						=> 'CA',
+		'epiphany'						=> 'EP',
+		'safari'						=> 'SF',
+		'k-meleon'						=> 'KM',
+		'mozilla'						=> 'MZ',
+		'opera'							=> 'OP',
+		'konqueror'						=> 'KQ',
+		'icab'							=> 'IC',
+		'lynx'							=> 'LX',
+		'links'							=> 'LI',
+		'ncsa mosaic'					=> 'MO',
+		'amaya'							=> 'AM',
+		'omniweb'						=> 'OW',
+		'hotjava'						=> 'HJ',
+		'browsex'						=> 'BX',
+		'amigavoyager'					=> 'AV',
+		'amiga-aweb'					=> 'AW',
+		'ibrowse'						=> 'IB');
 	/**
 	 * $_javascript_versions
 	 * desc: 2D Array of javascript version supported by which browser
@@ -111,11 +131,14 @@ class phpSniff {
 	 * @access public
 	 * @var array
 	 */
-	var $_javascript_versions = array('1.5' =>
-		'NS5+,MZ,PX,FB,FX,GA,CH,CA,SF,KQ3+,KM,EP',
-// browsers that support JavaScript 1.5
-		'1.4' => '', '1.3' => 'NS4.05+,OP5+,IE5+', '1.2' => 'NS4+,IE4+', '1.1' =>
-		'NS3+,OP,KQ', '1.0' => 'NS2+,IE3+', '0' => 'LI,LX,HJ');
+	var $_javascript_versions = array(
+		'1.5'	=> 'NS5+,MZ,PX,FB,FX,GA,CH,CA,SF,KQ3+,KM,EP', // browsers that support JavaScript 1.5
+		'1.4'	=> '',
+		'1.3'	=> 'NS4.05+,OP5+,IE5+',
+		'1.2'	=> 'NS4+,IE4+',
+		'1.1'	=> 'NS3+,OP,KQ',
+		'1.0'	=> 'NS2+,IE3+',
+		'0'		=> 'LI,LX,HJ');
 	/**
 	 * $_browser_features
 	 * desc: 2D Array of browser features supported by which browser
@@ -128,115 +151,127 @@ class phpSniff {
 	 * @access public
 	 * @var string
 	 */
-	var $_browser_features = array(/**
-		 * the following are true by default
-		 * (see phpSniff.core.php $_feature_set array)
-		 * browsers listed here will be set to false
-		 *
-		 */
-		'html' => '',
-		'images' => 'LI,LX',
-		'frames' => 'LX',
-		'tables' => '',
-		'java' => 'OP3,LI,LX,NS1,MO,IE1,IE2',
-		'plugins' => 'IE1,IE2,LI,LX',
+	var $_browser_features = array(
 		/**
-		 * the following are false by default
-		 * (see phpSniff.core.php $_feature_set array)
-		 * browsers listed here will be set to true
-		 *
-		 */
-		'css2' => 'NS5+,IE5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ3+,OP7+,KM,EP',
-		'css1' => 'NS4+,IE4+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
-		'iframes' => 'LI,IE3+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
-		'xml' => 'IE5+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
-		'dom' => 'IE5+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
-		'hdml' => '',
-		'wml' => '');
+		* the following are true by default
+		* (see phpSniff.core.php $_feature_set array)
+		* browsers listed here will be set to false
+		**/
+		'html'		=>	'',
+		'images'	=>	'LI,LX',
+		'frames'	=>	'LX',
+		'tables'	=>	'',
+		'java'		=>	'OP3,LI,LX,NS1,MO,IE1,IE2',
+		'plugins'	=>	'IE1,IE2,LI,LX',
+		/**
+		 *	the following are false by default
+		 *	(see phpSniff.core.php $_feature_set array)
+		 *	browsers listed here will be set to true
+		 **/
+		'css2'		=>	'NS5+,IE5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ3+,OP7+,KM,EP',
+		'css1'		=>	'NS4+,IE4+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
+		'iframes'	=>	'LI,IE3+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
+		'xml'		=>	'IE5+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
+		'dom'		=>	'IE5+,NS5+,MZ,PX,FB,FX,CH,CA,SF,GA,KQ,OP7+,KM,EP',
+		'hdml'		=>	'',
+		'wml'		=>	'');
 	/**
-	 * $_browser_quirks
-	 * desc: 2D Array of browser quirks present in which browser
-	 * : in key => value pairs.
-	 * : key = quirk
-	 * : value = search parameter for browsers that feature the
-	 * : quirk listed in the key (comma delimited)
-	 * : note: the search parameters rely on the values
-	 * : set in the $_browsers array
-	 * @access public
-	 * @var string
-	 */
+	* $_browser_quirks
+	* desc: 2D Array of browser quirks present in which browser
+	* : in key => value pairs.
+	* : key = quirk
+	* : value = search parameter for browsers that feature the
+	* : quirk listed in the key (comma delimited)
+	* : note: the search parameters rely on the values
+	* : set in the $_browsers array
+	* @access public
+	* @var string
+	*/
 	var $_browser_quirks = array(
-		'must_cache_forms' => 'NS,MZ,FB,PX,FX',
-		'avoid_popup_windows' => 'IE3,LI,LX',
-		'cache_ssl_downloads' => 'IE',
-		'break_disposition_header' => 'IE5.5',
-		'empty_file_input_value' => 'KQ',
-		'scrollbar_in_way' => 'IE6');
+		'must_cache_forms'			=>	'NS,MZ,FB,PX,FX',
+		'avoid_popup_windows'		=>	'IE3,LI,LX',
+		'cache_ssl_downloads'		=>	'IE',
+		'break_disposition_header'	=>	'IE5.5',
+		'empty_file_input_value'	=>	'KQ',
+		'scrollbar_in_way'			=>	'IE6');
 	/**
-	 * @access private
-	 * @var array
-	 */
+	* @access private
+	* @var array
+	*/
 	var $_browser_info = array(
-		'ua' => '',
-		'browser' => 'Unknown',
-		'version' => 0,
-		'maj_ver' => 0,
-		'min_ver' => 0,
-		'letter_ver' => '',
-		'javascript' => '0.0',
-		'platform' => 'Unknown',
-		'os' => 'Unknown',
-		'ip' => 'Unknown',
-		'cookies' => 'Unknown', // remains for backwards compatability
-		'ss_cookies' => 'Unknown',
-		'st_cookies' => 'Unknown',
-		'language' => '',
-		'long_name' => '',
-		'gecko' => '',
-		'gecko_ver' => '');
+		'ua'			=> '',
+		'browser'		=> 'Unknown',
+		'version'		=> 0,
+		'maj_ver'		=> 0,
+		'min_ver'		=> 0,
+		'letter_ver'	=> '',
+		'javascript'	=> '0.0',
+		'platform'		=> 'Unknown',
+		'os'			=> 'Unknown',
+		'ip'			=> 'Unknown',
+		'cookies'		=> 'Unknown', // remains for backwards compatability
+		'ss_cookies'	=> 'Unknown',
+		'st_cookies'	=> 'Unknown',
+		'language'		=> '',
+		'long_name'		=> '',
+		'gecko'			=> '',
+		'gecko_ver'		=> '');
 	/**
-	 * @access private
-	 * @var array
-	 */
-	var $_feature_set = array('html' => true, 'images' => true, 'frames' => true,
-		'tables' => true, 'java' => true, 'plugins' => true, 'iframes' => false, 'css2' => false,
-		'css1' => false, 'xml' => false, 'dom' => false, 'wml' => false, 'hdml' => false);
+	* @access private
+	* @var array
+	*/
+	var $_feature_set = array(
+		'html'		=>	true,
+		'images'	=>	true,
+		'frames' 	=>	true,
+		'tables'	=>	true,
+		'java'		=>	true,
+		'plugins'	=> true,
+		'iframes'	=> false,
+		'css2'		=>	false,
+		'css1'		=>	false,
+		'xml'		=>	false,
+		'dom'		=>	false,
+		'wml'		=>	false,
+		'hdml'		=>	false);
 	/**
-	 * @access private
-	 * @var array
-	 */
-	var $_quirks = array('must_cache_forms' => false, 'avoid_popup_windows' => false,
-		'cache_ssl_downloads' => false, 'break_disposition_header' => false,
-		'empty_file_input_value' => false, 'scrollbar_in_way' => false);
+	* @access private
+	* @var array
+	*/
+	var $_quirks = array(
+		'must_cache_forms'			=>	false,
+		'avoid_popup_windows'		=>	false,
+		'cache_ssl_downloads'		=>	false,
+		'break_disposition_header'	=>	false,
+		'empty_file_input_value'	=>	false,
+		'scrollbar_in_way'			=>	false);
 	/**
-	 * @access private
-	 * @var boolean
-	 */
+	* @access private
+	* @var boolean
+	*/
 	var $_get_languages_ran_once = false;
 	/**
-	 * @access private
-	 * @var string
-	 */
+	* @access private
+	* @var string
+	*/
 	var $_browser_search_regex = '([a-z]+)([0-9]*)([0-9.]*)(up|dn|\+|\-)?';
 	/**
-	 * @access private
-	 * @var string
-	 */
+	* @access private
+	* @var string
+	*/
 	var $_language_search_regex = '([a-z-]{2,})';
 	/**
-	 * @access private
-	 * @var string
-	 */
+	* @access private
+	* @var string
+	*/
 	var $_browser_regex;
-
 	/**
-	 * Performs some basic initialization and returns and object
-	 * @param string User Agent to parse
-	 * @param mixed array of settings
-	 * [check_cookies, default_language, allow_masqeurading]
-	 *
-	 * @return object phpSniff object
-	 */
+	* Performs some basic initialization and returns and object
+	* @param string User Agent to parse
+	* @param mixed array of settings
+	* [check_cookies, default_language, allow_masqeurading]
+	* @return object phpSniff object
+	*/
 	function phpSniff($UA = '', $settings = true) { //populate the HTTP_USER_AGENT string
 //20020425 :: rraymond
 //routine for easier configuration of the client at runtime
@@ -266,7 +301,6 @@ class phpSniff {
 		if ($run)
 			$this->init();
 	}
-
 	function init() {
 //collect the ip
 		$this->_get_ip();
@@ -288,36 +322,32 @@ class phpSniff {
 //point out any quirks
 		$this->_get_quirks();
 	}
-
 	/**
-	 * turn the cookie check routine on or off
-	 * @param bool true or false
-	 */
+	* turn the cookie check routine on or off
+	* @param bool true or false
+	*/
 	function check_cookies($yn) {
 		$this->_check_cookies = (bool) $yn;
 	}
-
 	/**
-	 * allow browser masquerading
-	 * @param bool true or false
-	 */
+	* allow browser masquerading
+	* @param bool true or false
+	*/
 	function allow_masquerading($yn) {
 		$this->_allow_masquerading = (bool) $yn;
 	}
-
 	/**
-	 * set the default browser language
-	 * @param string valid language (ex: en-us)
-	 */
+	* set the default browser language
+	* @param string valid language (ex: en-us)
+	*/
 	function default_language($language) {
 		$this->_default_language = $language;
 	}
-
 	/**
-	 * property
-	 * @param string property to return . optional (null returns entire array)
-	 * @return mixed array/string entire array or value of property
-	 * */
+	* property
+	* @param string property to return . optional (null returns entire array)
+	* @return mixed array/string entire array or value of property
+	*/
 	function property($p = null) {
 		if ($p == null) {
 			return $this->_browser_info;
@@ -325,22 +355,20 @@ class phpSniff {
 			return $this->_browser_info[strtolower($p)];
 		}
 	}
-
 	/**
-	 * get_property is an alias for property
-	 * @param string property to return . optional (null returns entire array)
-	 * @return mixed array/string entire array or value of property
-	 * */
+	* get_property is an alias for property
+	* @param string property to return . optional (null returns entire array)
+	* @return mixed array/string entire array or value of property
+	*/
 	function get_property($p) {
 		return $this->property($p);
 	}
-
 	/**
-	 * is
-	 * @param string search phrase format = l:lang;b:browser
-	 * @return bool true on success
-	 * ex: $client->is('b:OP5Up');
-	 * */
+	* is
+	* @param string search phrase format = l:lang;b:browser
+	* @return bool true on success
+	* ex: $client->is('b:OP5Up');
+	*/
 	function is($s) { // perform language search
 		if (preg_match('/l:' . $this->_language_search_regex . '/i', $s, $match)) {
 			if ($match)
@@ -353,82 +381,76 @@ class phpSniff {
 		}
 		return false;
 	}
-
 	/**
-	 * browser_is
-	 * @param string search phrase for browser
-	 * @return bool true on success
-	 * ex: $client->browser_is('OP5Up');
-	 * */
+	* browser_is
+	* @param string search phrase for browser
+	* @return bool true on success
+	* ex: $client->browser_is('OP5Up');
+	*/
 	function browser_is($s) {
 		preg_match('/' . $this->_browser_search_regex . '/i', $s, $match);
 		if ($match)
 			return $this->_perform_browser_search($match);
 		return;
 	}
-
 	/**
-	 * language_is
-	 * @param string search phrase for language
-	 * @return bool true on success
-	 * ex: $client->language_is('en-US');
-	 * */
+	* language_is
+	* @param string search phrase for language
+	* @return bool true on success
+	* ex: $client->language_is('en-US');
+	*/
 	function language_is($s) {
 		preg_match('/' . $this->_language_search_regex . '/i', $s, $match);
 		if ($match)
 			return $this->_perform_language_search($match);
 		return;
 	}
-
 	/**
-	 * checks to see if the browser supports any of the following features:
-	 * <ul>
-	 * <li>html
-	 * <li>images
-	 * <li>frames
-	 * <li>tables
-	 * <li>plugins
-	 * <li>iframes
-	 * <li>css2
-	 * <li>css1
-	 * <li>xml
-	 * <li>dom
-	 * <li>wml
-	 * <li>hdml
-	 * </ul>
-	 * <code>ex: $client->has_feature('html');</code>
-	 * @param string feature we're checking on
-	 * @return bool true on success
-	 *
-	 * */
+	* checks to see if the browser supports any of the following features:
+	* <ul>
+	* <li>html
+	* <li>images
+	* <li>frames
+	* <li>tables
+	* <li>plugins
+	* <li>iframes
+	* <li>css2
+	* <li>css1
+	* <li>xml
+	* <li>dom
+	* <li>wml
+	* <li>hdml
+	* </ul>
+	* <code>ex: $client->has_feature('html');</code>
+	* @param string feature we're checking on
+	* @return bool true on success
+	*/
 	function has_feature($s) {
 		return $this->_feature_set[$s];
 	}
-
 	/**
-	 * checks to see if the browser has any of the following quirks:
-	 * <ul>
-	 * <li>must_cache_forms
-	 * <li>avoid_popup_windows
-	 * <li>cache_ssl_downloads
-	 * <li>break_disposition_header
-	 * <li>empty_file_input_value
-	 * <li>scrollbar_in_way
-	 * </ul>
-	 * <code>ex: $client->has_quirk('avoid_popup_windows');</code>
-	 * @param string quirk we're looking for
-	 * @return bool true on success
-	 * */
+	* checks to see if the browser has any of the following quirks:
+	* <ul>
+	* <li>must_cache_forms
+	* <li>avoid_popup_windows
+	* <li>cache_ssl_downloads
+	* <li>break_disposition_header
+	* <li>empty_file_input_value
+	* <li>scrollbar_in_way
+	* </ul>
+	* <code>ex: $client->has_quirk('avoid_popup_windows');</code>
+	* @param string quirk we're looking for
+	* @return bool true on success
+	*/
 	function has_quirk($s) {
 		return $this->_quirks[$s];
 	}
-
 	/**
-	 * _perform_browser_search
-	 * @param string what we're searching for
-	 * @return bool true on success
-	 * @access private
-	 * */
+	* _perform_browser_search
+	* @param string what we're searching for
+	* @return bool true on success
+	* @access private
+	*/
 	function _perform_browser_search($data) {
 		$search = array();
 		$search['phrase'] = isset($data[0]) ? $data[0] : '';
@@ -460,16 +482,12 @@ class phpSniff {
 		}
 		return false;
 	}
-
-	/*	 * *@access private */
-
+	/** @access private */
 	function _perform_language_search($data) { // if we've not grabbed the languages, then do so.
 		$this->_get_languages();
 		return stristr($this->_browser_info['language'], $data[1]);
 	}
-
-	/*	 * *@access private */
-
+	/** @access private */
 	function _get_languages() { // capture available languages and insert into container
 		if (!$this->_get_languages_ran_once) {
 			if ($languages = getenv('HTTP_ACCEPT_LANGUAGE')) {
@@ -481,23 +499,21 @@ class phpSniff {
 			$this->_get_languages_ran_once = true;
 		}
 	}
-
-	/*	 * *@access private */
-
+	/** @access private */
 	function _get_os_info() { // regexes to use
-		$regex_windows = '/([^dar]win[dows]*)[\s]?([0-9a-z]*)[\w\s]?([a-z0-9.]*)/i';
-		$regex_mac = '/(68[k0]{1,3})|(ppc mac os x)|([p\S]{1,5}pc)|(darwin)/i';
-		$regex_os2 = '/os\/2|ibm-webexplorer/i';
-		$regex_sunos = '/(sun|i86)[os\s]*([0-9]*)/i';
-		$regex_irix = '/(irix)[\s]*([0-9]*)/i';
-		$regex_hpux = '/(hp-ux)[\s]*([0-9]*)/i';
-		$regex_aix = '/aix([0-9]*)/i';
-		$regex_dec = '/dec|osfl|alphaserver|ultrix|alphastation/i';
-		$regex_vms = '/vax|openvms/i';
-		$regex_sco = '/sco|unix_sv/i';
-		$regex_linux = '/x11|inux/i';
-		$regex_bsd = '/(free)?(bsd)/i';
-		$regex_amiga = '/amiga[os]?/i';
+		$regex_windows	= '/([^dar]win[dows]*)[\s]?([0-9a-z]*)[\w\s]?([a-z0-9.]*)/i';
+		$regex_mac		= '/(68[k0]{1,3})|(ppc mac os x)|([p\S]{1,5}pc)|(darwin)/i';
+		$regex_os2		= '/os\/2|ibm-webexplorer/i';
+		$regex_sunos	= '/(sun|i86)[os\s]*([0-9]*)/i';
+		$regex_irix		= '/(irix)[\s]*([0-9]*)/i';
+		$regex_hpux		= '/(hp-ux)[\s]*([0-9]*)/i';
+		$regex_aix		= '/aix([0-9]*)/i';
+		$regex_dec		= '/dec|osfl|alphaserver|ultrix|alphastation/i';
+		$regex_vms		= '/vax|openvms/i';
+		$regex_sco		= '/sco|unix_sv/i';
+		$regex_linux	= '/x11|inux/i';
+		$regex_bsd		= '/(free)?(bsd)/i';
+		$regex_amiga	= '/amiga[os]?/i';
 // look for Windows Box
 		if (preg_match_all($regex_windows, $this->_browser_info['ua'], $match)) {
 			/** Windows has some of the most ridiculous HTTP_USER_AGENT strings */
@@ -631,9 +647,7 @@ class phpSniff {
 			$this->_set_browser('os', 'linux');
 		}
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _get_browser_info() {
 		$this->_build_regex();
 		if (preg_match_all($this->_browser_regex, $this->_browser_info['ua'], $results)) { // get the position of the last browser found
@@ -659,9 +673,7 @@ class phpSniff {
 			$this->_set_browser('version', $this->_browser_info['maj_ver'] . $this->property('min_ver'));
 		}
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _get_ip() {
 		if (getenv('HTTP_CLIENT_IP')) {
 			$ip = getenv('HTTP_CLIENT_IP');
@@ -670,9 +682,7 @@ class phpSniff {
 		}
 		$this->_set_browser('ip', $ip);
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _build_regex() {
 		$browsers = '';
 		while (list($k, ) = each($this->_browsers)) {
@@ -683,15 +693,11 @@ class phpSniff {
 		$version_string = "[\/\sa-z(]*([0-9]+)([\.0-9a-z]+)?";
 		$this->_browser_regex = "/($browsers)$version_string/i";
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _get_short_name($long_name) {
 		return $this->_browsers[strtolower($long_name)];
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 // medianes :: new test cookie routine
 	function _test_cookies() {
 		global $HTTP_COOKIE_VARS;
@@ -733,9 +739,7 @@ class phpSniff {
 			}
 		}
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _get_javascript() {
 		$set = false;
 // see if we have any matches
@@ -752,9 +756,7 @@ class phpSniff {
 				break;
 		}
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _get_features() {
 		while (list($feature, $browser) = each($this->_browser_features)) {
 			$browser = explode(',', $browser);
@@ -766,9 +768,7 @@ class phpSniff {
 			}
 		}
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _get_quirks() {
 		while (list($quirk, $browser) = each($this->_browser_quirks)) {
 			$browser = explode(',', $browser);
@@ -780,9 +780,7 @@ class phpSniff {
 			}
 		}
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _get_gecko() {
 		if (preg_match('/gecko\/([0-9]+)/i', $this->property('ua'), $match)) {
 			$this->_set_browser('gecko', $match[1]);
@@ -808,25 +806,17 @@ class phpSniff {
 			$this->_set_browser('browser', $this->_get_short_name('netscape'));
 		}
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _set_browser($k, $v) {
 		$this->_browser_info[strtolower($k)] = strtolower($v);
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _set_feature($k) {
 		$this->_feature_set[strtolower($k)] = !$this->_feature_set[strtolower($k)];
 	}
-
-	/*	 * @access private */
-
+	/** @access private */
 	function _set_quirk($k) {
 		$this->_quirks[strtolower($k)] = true;
 	}
-
 }
-
 ?>

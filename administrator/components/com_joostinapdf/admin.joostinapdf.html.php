@@ -33,19 +33,17 @@ class HTML_joostinapdf {
 		}
 ?>
 <p class="sectionname">
-<a href="index2.php?option=<?php echo $option?>" title="<?php echo _JOOPDF_PP_ADMIN_BACK?>"<?php echo $alertCode?>><img src="components/com_joostinapdf/images/logo.png" alt="<?php echo _JOOPDF_PP_ADMIN_BACK?>" /></a>
+<a href="index2.php?option=<?php echo $option?>" title="<?php echo _JOOPDF_PP_ADMIN_BACK;?>"<?php echo $alertCode?>><img src="components/com_joostinapdf/images/logo.png" alt="<?php echo _JOOPDF_PP_ADMIN_BACK;?>" /></a>
 <?php echo $title?>
 </p>
 <?php
 	if ($showBackLink) {
 ?>
 <p>
-<img src="images/cpanel.png" alt="<?php echo _JOOPDF_PP_ADMIN_BACK?>" />
-<a href="index2.php?option=com_joostinapdf"><?php echo _JOOPDF_PP_ADMIN_BACK?></a>
+<img src="images/cpanel.png" alt="<?php echo _JOOPDF_PP_ADMIN_BACK;?>" />
+<a href="index2.php?option=com_joostinapdf"><?php echo _JOOPDF_PP_ADMIN_BACK;?></a>
 </p>
 <?php
-
-
 		}
 	}
 
@@ -196,9 +194,8 @@ class HTML_joostinapdf {
 		<!-- Set cursor on name inputfield -->
 		<script type="text/javascript">document.adminForm.cfg_titleHtmlFormat.focus();</script>
 <?php
-
-
 	}
+
 	function showTemplateConfig(& $joopdf_Config, & $lists, $task) {
 		global $cpanel, $mosConfig_live_site;
 
@@ -292,8 +289,6 @@ class HTML_joostinapdf {
 		<!-- Set cursor on name inputfield -->
 		<script type="text/javascript">document.adminForm.cfg_templateFile.focus();</script>
 <?php
-
-
 	}
 
 	function showHeaderFooterConfig(& $joopdf_Config, & $lists, $task) {
@@ -373,8 +368,6 @@ class HTML_joostinapdf {
 		<!-- Set cursor on name inputfield -->
 		<script type="text/javascript">document.adminForm.cfg_headerHtmlFormat.focus();</script>
 <?php
-
-
 	}
 
 	function showPromotionConfig(& $joopdf_Config, & $lists, $task) {
@@ -422,8 +415,6 @@ class HTML_joostinapdf {
 		<!-- Set cursor on name inputfield -->
 		<script type="text/javascript">document.adminForm.cfg_promotionFile.focus();</script>
 <?php
-
-
 	}
 
 	function showReplacementConfig(& $joopdf_Config, & $lists, $task, $message = '') {
@@ -462,8 +453,6 @@ class HTML_joostinapdf {
 		<!-- Set cursor on name inputfield -->
 		<script type="text/javascript">document.adminForm.cfg_customContentReplacements.focus();</script>
 <?php
-
-
 	}
 
 	function showInstall(& $joopdf_Config, & $lists, $task, $message = '') {
@@ -502,7 +491,7 @@ class HTML_joostinapdf {
 		</table>
 		<table width="100%" class="adminlist">
 		<tr>
-			<td align="center"><a href="index2.php?option=<?php echo $joopdf_Config['componentOption']?>&task=do_install"<?php if (!$ok) {echo ' onclick="alert(\''._JOOPDF_PP_PERMS_NOK.'\'); return false;"';}?>><img src="images/backup.png" alt="<?php echo $joopdf_Config['componentOption']?>" /><br /><?php echo _JOOPDF_PP_DOINSTALL?></a>
+			<td align="center"><a href="index2.php?option=<?php echo $joopdf_Config['componentOption']?>&task=do_install"<?php if (!$ok) {echo ' onclick="alert(\''._JOOPDF_PP_PERMS_NOK.'\'); return false;"';}?>><img src="images/backup.png" alt="<?php echo $joopdf_Config['componentOption']?>" /><?php echo _JOOPDF_PP_DOINSTALL?></a>
 			</td>
 		</tr>
 		</table>
@@ -518,8 +507,6 @@ class HTML_joostinapdf {
 		<input type="hidden" name="option" value="<?php echo $joopdf_Config['componentOption']?>" />
 		</form>
 <?php
-
-
 	}
 
 	function showRestore(& $joopdf_Config, & $lists, $task, $message = '') {
@@ -709,9 +696,6 @@ class HTML_joostinapdf {
 		<!-- Set cursor on name inputfield -->
 		<script type="text/javascript">document.adminForm.cfg_cacheDir.focus();</script>
 <?php
-
-
 	}
-
 } //end class
 ?>

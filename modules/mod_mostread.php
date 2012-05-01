@@ -8,7 +8,7 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-global $mosConfig_offset, $mosConfig_live_site, $my, $moduleclass_sfx;
+global $mosConfig_offset, $mosConfig_live_site, $my;
 $type = intval($params->get('type', 1));
 $count = intval($params->get('count', 5));
 $catid = trim($params->get('catid'));
@@ -24,27 +24,27 @@ $nullDate = $database->getNullDate();
 switch ($type) {
 	case 2:
 // Только статичное содержимое
-	$query = "SELECT a.id, a.title, a.hits"
-		. "\n FROM #__content AS a"
-		. "\n WHERE ( a.state = 1 AND a.sectionid = 0 )"
-		. "\n AND ( a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . " )"
-		. "\n AND ( a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . " )"
-		. ( $access ? "\n AND a.access <= " . (int) $my->gid : '' )
-		. "\n ORDER BY a.hits DESC";
+	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.hits"
+	. "\n FROM #__content AS a"
+	. "\n WHERE ( a.state = 1 AND a.sectionid = 0 )"
+	. "\n AND ( a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . " )"
+	. "\n AND ( a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . " )"
+	. ( $access ? "\n AND a.access <= " . (int) $my->gid : '' )
+	. "\n ORDER BY a.hits DESC";
 	$database->setQuery($query, 0, $count);
 	$rows = $database->loadObjectList();
 	break;
 	case 3:
 // Оба типа
-	$query = "SELECT a.id, a.title, a.hits, a.sectionid, a.catid, cc.access AS cat_access, s.access AS sec_access, cc.published AS cat_state, s.published AS sec_state"
-		. "\n FROM #__content AS a"
-		. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
-		. "\n LEFT JOIN #__sections AS s ON s.id = a.sectionid"
-		. "\n WHERE a.state = 1"
-		. "\n AND ( a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . " )"
-		. "\n AND ( a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . " )"
-		. ($access ? "\n AND a.access <= " . (int) $my->gid : '')
-		. "\n ORDER BY a.hits DESC";
+	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.hits, a.sectionid, a.catid, cc.access AS cat_access, s.access AS sec_access, cc.published AS cat_state, s.published AS sec_state"
+	. "\n FROM #__content AS a"
+	. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
+	. "\n LEFT JOIN #__sections AS s ON s.id = a.sectionid"
+	. "\n WHERE a.state = 1"
+	. "\n AND ( a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . " )"
+	. "\n AND ( a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . " )"
+	. ($access ? "\n AND a.access <= " . (int) $my->gid : '')
+	. "\n ORDER BY a.hits DESC";
 	$database->setQuery($query, 0, $count);
 	$temp = $database->loadObjectList();
 	$rows = array();
@@ -72,21 +72,21 @@ switch ($type) {
 			mosArrayToInts($secids);
 			$whereSecid = "\n AND ( a.sectionid=" . implode(" OR a.sectionid=", $secids) . " )";
 		}
-	$query = "SELECT a.id, a.title, a.sectionid, a.catid, a.hits"
-		. "\n FROM #__content AS a"
-		. "\n LEFT JOIN #__content_frontpage AS f ON f.content_id = a.id"
-		. "\n INNER JOIN #__categories AS cc ON cc.id = a.catid"
-		. "\n INNER JOIN #__sections AS s ON s.id = a.sectionid"
-		. "\n WHERE ( a.state = 1 AND a.sectionid > 0 )"
-		. "\n AND ( a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . " )"
-		. "\n AND ( a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . " )"
-		. ( $access ? "\n AND a.access <= " . (int) $my->gid . " AND cc.access <= " . (int) $my->gid . " AND s.access <= " . (int) $my->gid : '' )
-		. $whereCatid
-		. $whereSecid
-		. ( $show_front == "0" ? "\n AND f.content_id IS NULL" : '' )
-		. "\n AND s.published = 1"
-		. "\n AND cc.published = 1"
-		. "\n ORDER BY a.hits DESC";
+	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.sectionid, a.catid, a.hits"
+	. "\n FROM #__content AS a"
+	. "\n LEFT JOIN #__content_frontpage AS f ON f.content_id = a.id"
+	. "\n INNER JOIN #__categories AS cc ON cc.id = a.catid"
+	. "\n INNER JOIN #__sections AS s ON s.id = a.sectionid"
+	. "\n WHERE ( a.state = 1 AND a.sectionid > 0 )"
+	. "\n AND ( a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . " )"
+	. "\n AND ( a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . " )"
+	. ( $access ? "\n AND a.access <= " . (int) $my->gid . " AND cc.access <= " . (int) $my->gid . " AND s.access <= " . (int) $my->gid : '' )
+	. $whereCatid
+	. $whereSecid
+	. ( $show_front == "0" ? "\n AND f.content_id IS NULL" : '' )
+	. "\n AND s.published = 1"
+	. "\n AND cc.published = 1"
+	. "\n ORDER BY a.hits DESC";
 	$database->setQuery($query, 0, $count);
 	$rows = $database->loadObjectList();
 		break;
@@ -101,37 +101,37 @@ if (!$def_itemid > 0) {
 }
 // Вывод
 ?>
-<ul class="mostread<?php echo $moduleclass_sfx; ?>">
-	<?php
-	foreach ($rows as $row) {
-		if (!$def_itemid > 0) {
+<ul class="mostread">
+<?php
+foreach ($rows as $row) {
+	if (!$def_itemid > 0) {
 // получаем Itemid
-		switch ($type) {
-			case 2:
-				$query = "SELECT id"
-					. "\n FROM #__menu"
-					. "\n WHERE type = 'content_typed'"
-					. "\n AND componentid = " . (int) $row->id;
-				$database->setQuery($query);
-				$Itemid = $database->loadResult();
-				break;
-			case 3:
-				if ($row->sectionid) {
-					$Itemid = $mainframe->getItemid($row->id, 0, 0, $bs, $bc, $gbs);
-				} else {
-				$query = "SELECT id"
-					. "\n FROM #__menu"
-					. "\n WHERE type = 'content_typed'"
-					. "\n AND componentid = " . (int) $row->id;
-				$database->setQuery($query);
-				$Itemid = $database->loadResult();
-				}
-				break;
-			case 1:
-			default:
-				$Itemid = $mainframe->getItemid($row->id, 0, 0, $bs, $bc, $gbs);
-				break;
-			}
+	switch ($type) {
+		case 2:
+			$query = "SELECT id"
+			. "\n FROM #__menu"
+			. "\n WHERE type = 'content_typed'"
+			. "\n AND componentid = " . (int) $row->id;
+			$database->setQuery($query);
+			$Itemid = $database->loadResult();
+		break;
+		case 3:
+		if ($row->sectionid) {
+			$Itemid = $mainframe->getItemid($row->id, 0, 0, $bs, $bc, $gbs);
+		} else {
+			$query = "SELECT id"
+			. "\n FROM #__menu"
+			. "\n WHERE type = 'content_typed'"
+			. "\n AND componentid = " . (int) $row->id;
+			$database->setQuery($query);
+			$Itemid = $database->loadResult();
+		}
+		break;
+		case 1:
+		default:
+			$Itemid = $mainframe->getItemid($row->id, 0, 0, $bs, $bc, $gbs);
+			break;
+		}
 		} else {
 			$Itemid = $def_itemid;
 		}
@@ -139,19 +139,14 @@ if (!$def_itemid > 0) {
 		if ($Itemid == NULL) {
 			$Itemid = '';
 		} else {
-			$Itemid = '&amp;Itemid=' . $Itemid;
+			$Itemid = '&amp;Itemid='.$Itemid;
 		}
-		$link = sefRelToAbs('index.php?option=com_content&amp;task=view&amp;id=' . $row->id . $Itemid);
+		$link = sefRelToAbs('index.php?option=com_content&amp;task=view&amp;id='.$row->id . $Itemid);
 	?>
-	<li class="mostread<?php echo $moduleclass_sfx; ?>">
-		<span class="mostread">
-			<a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>" <?php echo $class ?>>
-				<?php echo $row->title; ?>
-			</a>
-		</span><br />
-		<span class="view-bar">
-			<span class="view-count"><?php echo $row->hits; ?></span>
-		</span>
+	<li>
+		<a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>">
+			<?php echo $row->title; ?>
+		</a>
 	</li>
 	<?php } ?>
 </ul>

@@ -15,34 +15,32 @@ global $my, $mosConfig_live_site;
 function quickiconButton($row, $newWindow) {
 	global $mosConfig_live_site;
 	$title = $row->title ? $row->title : $row->text;
-	$cur_file_img_path = $mosConfig_live_site . '/' . ADMINISTRATOR_DIRECTORY . '/templates/joostfree/images';
+	$cur_file_img_path = $mosConfig_live_site.'/'.ADMINISTRATOR_DIRECTORY.'/templates/joostfree/images';
 	?>
-<span>
-	<a href="<?php echo htmlentities($row->target); ?>" title="<?php echo $title; ?>" <?php echo $newWindow; ?>>
+<strong><a href="<?php echo htmlentities($row->target);?>" title="<?php echo $title;?>" <?php echo $newWindow;?>>
 	<?php
-		$icon = '<img src="' . $mosConfig_live_site . $row->icon . '" alt="' . $title . '" />';
+		$icon = '<img src="'.$mosConfig_live_site . $row->icon.'" alt="'.$title.'" />';
 			if ($row->display == 1) {
 	?>
-		<strong><?php echo $row->text; ?></strong>
+		<?php echo $row->text;?>
 	<?php
-			} elseif ($row->display == 2) {
+	} elseif ($row->display == 2) {
 // только значок
-				echo $icon;
-			} else {
+		echo $icon;
+	} else {
 // значок и текст
-				echo $icon . '<strong>' . $row->text . '</strong>';
-		}
-		?>
-	</a>
-</span>
+		echo $icon . $row->text;
+	}
+	?>
+</a></strong>
 	<?php
 }
 ?>
 <div class="cpicons">
 	<?php
 		$query = 'SELECT* FROM #__quickicons'
-			. ' WHERE published = 1'
-			. ' AND gid <= ' . $my->gid . ' ORDER BY ordering';
+		. ' WHERE published = 1'
+		. ' AND gid <= '.$my->gid.' ORDER BY ordering';
 		$database->setQuery($query);
 		$rows = $database->loadObjectList();
 		foreach ($rows as $row) {
@@ -58,11 +56,12 @@ if (!empty($securitycheck)) {
 	josSecurityCheck('100%');
 }
 ?>
-<div style="display:block;clear:both;text-align:left;padding-top:10px;">
+<div class="cpicons_back">
 	<?php if ($my->usertype == 'Super Administrator') { ?>
-	<a href="index2.php?option=com_quickicons" title="<?php echo _CHANGE_QUICK_BUTTONS; ?>">
-		<img src="<?php echo $cur_file_img_path;?>/shortcut.png" alt="<?php echo _CHANGE_QUICK_BUTTONS; ?>" />
-	<?php echo _CHANGE_QUICK_BUTTONS; ?>
-	</a>
+	<p><a href="index2.php?option=com_quickicons" title="<?php echo _CHANGE_QUICK_BUTTONS;?>">
+		<img src="<?php echo $cur_file_img_path;?>/shortcut.png" alt="<?php echo _CHANGE_QUICK_BUTTONS;?>" />
+	<?php echo _CHANGE_QUICK_BUTTONS;?>
+	</a></p>
 <?php } ?>
 </div>
+<div class="clearfix"></div>

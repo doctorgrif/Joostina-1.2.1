@@ -42,11 +42,11 @@ $image_login = '';
 $image_logout = '';
 if ($params->get('image_login') != -1) {
 	$image = $mosConfig_live_site . '/images/stories/' . $params->get('image_login');
-	$image_login = '<img src="' . $image . '" align="' . $params->get('image_login_align') . '" hspace="10" alt="Login" />';
+	$image_login = '<figure><img src="' . $image . '" align="' . $params->get('image_login_align') . '" hspace="10" alt="Login" /></figure>';
 }
 if ($params->get('image_logout') != -1) {
 	$image = $mosConfig_live_site . '/images/stories/' . $params->get('image_logout');
-	$image_logout = '<img src="' . $image . '" align="' . $params->get('image_logout_align') . '" hspace="10" alt="Logout" />';
+	$image_logout = '<figure><img src="' . $image . '" align="' . $params->get('image_logout_align') . '" hspace="10" alt="Logout" /></figure>';
 }
 if ($my->id) {
 	loginHTML::logoutpage($params, $image_logout);

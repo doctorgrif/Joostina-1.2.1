@@ -41,7 +41,7 @@ if (strpos($folder, $mosConfig_absolute_path) === 0) {
 }
 // если путь до папки не содержит слэш в начале, добавляем
 if (strpos($folder, '/') !== 0) {
-	$folder = '/' . $folder;
+	$folder = '/'.$folder;
 }
 // создаем абсолютный путь до директории
 $abspath_folder = $mosConfig_absolute_path . $folder;
@@ -56,7 +56,7 @@ if (is_dir($abspath_folder)) {
 	}
 	closedir($handle);
 	foreach ($the_array as $img) {
-		if (!is_dir($abspath_folder . '/' . $img)) {
+		if (!is_dir($abspath_folder.'/'.$img)) {
 			if (eregi($type, $img)) {
 				$the_image[] = $img;
 			}
@@ -75,7 +75,7 @@ if (is_dir($abspath_folder)) {
 				$v = $the_image[$random];
 				$image_name = $v;
 			}
-			$abspath_image = $abspath_folder . '/' . $v;
+			$abspath_image = $abspath_folder.'/'.$v;
 			$size = getimagesize($abspath_image);
 			if ($width == '') {
 				($size[0] > 100 ? $width = 100 : $width = $size[0]);
@@ -84,17 +84,17 @@ if (is_dir($abspath_folder)) {
 				$coeff = $size[0] / $size[1];
 				$height = (int) ($width / $coeff);
 			}
-			$image = $mosConfig_live_site . $folder . '/' . $v;
+			$image = $mosConfig_live_site . $folder.'/'.$v;
 			if (!$rotate_type) {
 				break;
 			} else {
 				if ($img_pref) {
 					if (strpos($v, $img_pref) !== false) {
-						$pics[$i] = '["' . $image . '", "' . $link . '", "_self"]';
+						$pics[$i] = '["'.$image.'", "'.$link.'", "_self"]';
 						++$i;
 					}
 				} else {
-					$pics[$i] = '["' . $image . '", "' . $link . '", "_self"]';
+					$pics[$i] = '["'.$image.'", "'.$link.'", "_self"]';
 					++$i;
 				}
 			}
@@ -105,9 +105,11 @@ if (is_dir($abspath_folder)) {
 				?>
 <div class="random_image">
 	<?php if ($link) { ?>
-	<a href="<?php echo $link; ?>" target="_self" title="<?php echo $image_name; ?>">
+	<a href="<?php echo $link; ?>" title="<?php echo $image_name; ?>">
 	<?php } ?>
-		<img src="<?php echo $image; ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" alt="<?php echo $image_name; ?>" />
+		<figure>
+			<img src="<?php echo $image; ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" alt="<?php echo $image_name; ?>" />
+		</figure>
 	<?php if ($link) { ?>
 	</a>
 	<?php } ?>
@@ -123,9 +125,9 @@ if (is_dir($abspath_folder)) {
 	<?php
 		} else {
 			$pics_str = implode(',', $pics);
-			/* подлючаем jQuery plugin simplegallery с выводом скрипта в текущую позицию */
-			mosCommonHTML::loadJqueryPlugins('simplegallery', 1);
-			include ($mosConfig_absolute_path . '/modules/mod_random_image/jstSlideShow.php');
+			/* подлючаем jQuery plugin jquery.simplegallery с выводом скрипта в текущую позицию */
+			mosCommonHTML::loadJqueryPlugins('jquery.simplegallery', 1);
+			include ($mosConfig_absolute_path.'/modules/mod_random_image/jstSlideShow.php');
 	?>
 <div id="<?php echo $slideshow_name; ?>"></div>
 	<?php

@@ -53,6 +53,7 @@ if (version_compare(phpversion(), '5.0') < 0) {
 	require_once (dirname(__file__) . '/compat.php50x.php');
 }
 @set_magic_quotes_runtime(0);
+//ini_set("magic_quotes_runtime", 0);
 if (@$mosConfig_error_reporting === 0 || @$mosConfig_error_reporting === '0') {
 	error_reporting(0);
 } else
@@ -604,12 +605,14 @@ class mosMainFrame {
 
 	/** добавление js файлов в шапку страницы */
 	function addJS($patch) {
-		$this->_head['custom'][] = '<script type="text/javascript" src="' . $patch . '"></script>';
+		global $ver;
+		$this->_head['custom'][] = '<script type="text/javascript" src="' . $patch . $ver . '"></script>';
 	}
 
 	/** добавление css файлов в шапку страницы */
 	function addCSS($patch) {
-		$this->_head['custom'][] = '<link type="text/css" rel="stylesheet" href="' . $patch . '" />';
+		global $ver;
+		$this->_head['custom'][] = '<link type="text/css" rel="stylesheet" href="' . $patch . $ver . '" />';
 	}
 
 	/** @return string */
@@ -1197,7 +1200,8 @@ class mosMainFrame {
 			}
 		} else {
 			$assigned = (!empty($Itemid) ? " OR menuid = " . (int) $Itemid : '');
-			$query = "SELECT template"
+			/* add STRAIGHT_JOIN */
+			$query = "SELECT STRAIGHT_JOIN template"
 					. "\n FROM #__templates_menu"
 					. "\n WHERE client_id = 0"
 					. "\n AND (menuid = 0 $assigned)"
@@ -1510,7 +1514,8 @@ class mosMainFrame {
 			}
 // if id hasnt been checked before initaite query
 			if (!$exists) {
-				$query = "SELECT ms.id AS sid, ms.type AS stype, mc.id AS cid, mc.type AS ctype, i.id as sectionid, i.id As catid, ms.published AS spub, mc.published AS cpub"
+			/* add STRAIGHT_JOIN */
+				$query = "SELECT STRAIGHT_JOIN ms.id AS sid, ms.type AS stype, mc.id AS cid, mc.type AS ctype, i.id as sectionid, i.id As catid, ms.published AS spub, mc.published AS cpub"
 						. "\n FROM #__content AS i"
 						. "\n LEFT JOIN #__sections AS s ON i.sectionid = s.id"
 						. "\n LEFT JOIN #__menu AS ms ON ms.componentid = s.id "
@@ -2078,10 +2083,12 @@ class mosHTML {
 // Back Button
 		if ($params->get('back_button') && !$params->get('popup') && !$hide_js) {
 ?>
-			<div class="back_but">
-				<a href="javascript:history.go(-1)">
-					<input type="button" name="back_button" value="<?php echo _BACK; ?>" class="button" />
-				</a>
+			<div class="back_but_div">
+				<p>
+					<a class="back_but" href="javascript:history.go(-1)">
+						<input type="button" name="back_button" value="<?php echo _BACK; ?>" class="button" />
+					</a>
+				</p>
 			</div>
 <?php
 		}
@@ -2113,7 +2120,7 @@ class mosHTML {
 			}
 // checks template image directory for image, if non found default are loaded
 			if ($params->get('icons')) {
-				$image = mosAdminMenus::ImageCheck('printButton.png', '/images/M_images/', null, null, _CMN_PRINT, 'print' . $cpr_i);
+				$image = mosAdminMenus::ImageCheck('printBtn.png', '/images/M_images/', null, null, _CMN_PRINT, 'print' . $cpr_i);
 				$cpr_i++;
 			} else {
 				$image = _ICON_SEP . '&nbsp;' . _CMN_PRINT . '&nbsp;' . _ICON_SEP;
@@ -2121,24 +2128,22 @@ class mosHTML {
 			if ($params->get('popup') && !$hide_js) {
 ?>
 <script type="text/javascript">
-	document.write('<ul>');
-	document.write('<li>');
-	document.write('<a href="#" class="print_button" onclick="javascript:window.print(); return false;" title="<?php echo _CMN_PRINT; ?>">');
+	document.write('<span class="buttonheading">');
+	document.write('<a href="#" id="print" onclick="javascript:window.print();return false;" title="<?php echo _CMN_PRINT; ?>">');
 	document.write('<?php echo $image; ?>');
 	document.write('</a>');
-	document.write('</li>');
-	document.write('</ul>');
+	document.write('</span>');
 </script>
 <?php } else { ?>
-<?php if (!$mosConfig_index_print) {  ?>
-<li>
-	<a href="#" target="_blank" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>'); return false;" title="<?php echo _CMN_PRINT; ?>"><?php echo $image; ?></a>
-</li>
+<?php if (!$mosConfig_index_print) { ?>
+<a href="#" target="_blank" id="print" onclick="window.open('<?php echo $link; ?>','win2','<?php echo $status; ?>');return false;" title="<?php echo _CMN_PRINT; ?>">
+	<?php echo $image; ?>
+</a>
 <?php } else {
  ?>
-<li>
-	<a href="<?php echo $link; ?>" target="_blank" title="<?php echo _CMN_PRINT; ?>" rel="nofollow"><?php echo $image; ?></a>
-</li>
+<a href="<?php echo $link; ?>" target="_blank" id="print" title="<?php echo _CMN_PRINT; ?>" rel="nofollow">
+	<?php echo $image; ?>
+</a>
 <?php }; ?>
 <?php
 			}
@@ -2436,7 +2441,7 @@ class mosContent extends mosDBTable {
 	/** Validation and filtering */
 	function check() {
 // filter malicious code
-		$ignoreList = array('introtext', 'fulltext');
+		$ignoreList = array('introtext', 'fulltext', 'notetext');
 		$this->filter($ignoreList);
 		/*
 		 * TODO: This filter is too rigorous, need to implement more configurable solution specific filters
@@ -2700,7 +2705,8 @@ class mosUser extends mosDBTable {
 		if (isset($objects['users'])) {
 			mosArrayToInts($objects['users']);
 			$gWhere = '(id =' . implode(' OR id =', $objects['users']) . ')';
-			$query = "SELECT id AS value, name AS text FROM #__users WHERE block = '0' AND " . $gWhere . "\n ORDER BY " . $order;
+			/* add STRAIGHT_JOIN */
+			$query = "SELECT STRAIGHT_JOIN id AS value, name AS text FROM #__users WHERE block = '0' AND " . $gWhere . "\n ORDER BY " . $order;
 			$this->_db->setQuery($query);
 			$options = $this->_db->loadObjectList();
 			return $options;
@@ -3858,7 +3864,8 @@ class mosMambotHandler {
 				if (!defined('_JOS_CONTENT_MAMBOTS')) {
 					/** ensure that query is only called once */
 					define('_JOS_CONTENT_MAMBOTS', 1);
-					$query = 'SELECT folder, element, published, params FROM #__mambots WHERE folder = \'content\'' . $where_ac . ' ORDER BY ordering';
+					/* add STRAIGHT_JOIN */
+					$query = 'SELECT STRAIGHT_JOIN folder, element, published, params FROM #__mambots WHERE folder = \'content\'' . $where_ac . ' ORDER BY ordering';
 					$database->setQuery($query);
 // load query into class variable _content_mambots
 					if (!($this->_content_mambots = $database->loadObjectList())) {
@@ -3873,7 +3880,8 @@ class mosMambotHandler {
 				$bots = $this->_content_mambots;
 				break;
 			default:
-				$query = 'SELECT folder, element, published, params FROM #__mambots WHERE published >= 1' . $where_ac . ' AND folder = ' . $database->Quote($group) . ' ORDER BY ordering';
+			/* add STRAIGHT_JOIN */
+				$query = 'SELECT STRAIGHT_JOIN folder, element, published, params FROM #__mambots WHERE published >= 1' . $where_ac . ' AND folder = ' . $database->Quote($group) . ' ORDER BY ordering';
 				$database->setQuery($query);
 				if (!($bots = $database->loadObjectList())) {
 //echo 'Ошибка загрузки Мамбота: ' .$database->getErrorMsg();
@@ -4082,7 +4090,8 @@ class mosAdminMenus {
 	function Ordering(&$row, $id) {
 		global $database;
 		if ($id) {
-			$query = "SELECT ordering AS value, name AS text"
+		/* add STRAIGHT_JOIN */
+			$query = "SELECT STRAIGHT_JOIN ordering AS value, name AS text"
 					. " FROM #__menu"
 					. "\n WHERE menutype = " . $database->Quote($row->menutype)
 					. "\n AND parent = " . (int) $row->parent . "\n AND published != -2"
@@ -4098,7 +4107,8 @@ class mosAdminMenus {
 	/** build the select list for access level */
 	function Access(&$row) {
 		global $database;
-		$query = "SELECT id AS value, name AS text FROM #__groups ORDER BY id";
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN id AS value, name AS text FROM #__groups ORDER BY id";
 		$database->setQuery($query);
 		$groups = $database->loadObjectList();
 		$access = mosHTML::selectList($groups, 'access', 'class="inputbox" size="3"', 'value', 'text', intval($row->access));
@@ -4113,7 +4123,8 @@ class mosAdminMenus {
 			$id = "\n AND id != " . (int) $row->id;
 // get a list of the menu items
 // excluding the current menu item and its child elements
-		$query = "SELECT m.* FROM #__menu m WHERE menutype = " . $database->Quote($row->menutype) . " AND published != -2" . $id . " ORDER BY parent, ordering";
+/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN m.* FROM #__menu m WHERE menutype = " . $database->Quote($row->menutype) . " AND published != -2" . $id . " ORDER BY parent, ordering";
 		$database->setQuery($query);
 		$mitems = $database->loadObjectList();
 // establish the hierarchy of the menu
@@ -4189,7 +4200,8 @@ class mosAdminMenus {
 	function MenuLinks(&$lookup, $all = null, $none = null, $unassigned = 1) {
 		global $database;
 // get a list of the menu items
-		$query = "SELECT m.* FROM #__menu AS m WHERE m.published = 1 ORDER BY m.menutype, m.parent, m.ordering";
+/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN m.* FROM #__menu AS m WHERE m.published = 1 ORDER BY m.menutype, m.parent, m.ordering";
 		$database->setQuery($query);
 		$mitems = $database->loadObjectList();
 		$mitems_temp = $mitems;
@@ -4258,7 +4270,8 @@ class mosAdminMenus {
 	/** build the select list to choose a category */
 	function Category(&$menu, $id, $javascript = '') {
 		global $database;
-		$query = "SELECT c.id AS `value`, c.section AS `id`, CONCAT_WS(' / ', s.title, c.title) AS `text`"
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN c.id AS `value`, c.section AS `id`, CONCAT_WS(' / ', s.title, c.title) AS `text`"
 				. "\n FROM #__sections AS s INNER JOIN #__categories AS c ON c.section = s.id"
 				. "\n WHERE s.scope = 'content' ORDER BY s.name, c.name";
 		$database->setQuery($query);
@@ -4282,7 +4295,8 @@ class mosAdminMenus {
 	/** build the select list to choose a section */
 	function Section(&$menu, $id, $all = 0) {
 		global $database;
-		$query = "SELECT s.id AS `value`, s.id AS `id`, s.title AS `text` FROM #__sections AS s WHERE s.scope = 'content' ORDER BY s.name";
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN s.id AS `value`, s.id AS `id`, s.title AS `text` FROM #__sections AS s WHERE s.scope = 'content' ORDER BY s.name";
 		$database->setQuery($query);
 		if ($all) {
 			$rows[] = mosHTML::makeOption(0, '- Все разделы -');
@@ -4308,7 +4322,8 @@ class mosAdminMenus {
 	/** build the select list to choose a component */
 	function Component(&$menu, $id) {
 		global $database;
-		$query = "SELECT c.id AS value, c.name AS text, c.link FROM #__components AS c WHERE c.link != '' ORDER BY c.name";
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN c.id AS value, c.name AS text, c.link FROM #__components AS c WHERE c.link != '' ORDER BY c.name";
 		$database->setQuery($query);
 		$rows = $database->loadObjectList();
 		if ($id) {
@@ -4330,7 +4345,8 @@ class mosAdminMenus {
 	/** build the select list to choose a component */
 	function ComponentName(&$menu) {
 		global $database;
-		$query = "SELECT c.id AS value, c.name AS text, c.link"
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN c.id AS value, c.name AS text, c.link"
 				. "\n FROM #__components AS c"
 				. "\n WHERE c.link != ''"
 				. "\n ORDER BY c.name";
@@ -4389,7 +4405,8 @@ class mosAdminMenus {
 // does not include registered users in the list
 			$and = "\n AND gid > 18";
 		}
-		$query = "SELECT id AS value, name AS text"
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN id AS value, name AS text"
 				. "\n FROM #__users"
 				. "\n WHERE block = 0"
 				. $and
@@ -4426,7 +4443,8 @@ class mosAdminMenus {
 	/** Select list of active categories for components */
 	function ComponentCategory($name, $section, $active = null, $javascript = null, $order ='ordering', $size = 1, $sel_cat = 1) {
 		global $database;
-		$query = "SELECT id AS value, name AS text"
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN id AS value, name AS text"
 				. "\n FROM #__categories"
 				. "\n WHERE section = " . $database->Quote($section)
 				. "\n AND published = 1"
@@ -4449,7 +4467,8 @@ class mosAdminMenus {
 	function SelectSection($name, $active = null, $javascript = null, $order ='ordering') {
 		global $database;
 		$categories[] = mosHTML::makeOption('0', _SEL_SECTION);
-		$query = "SELECT id AS value, title AS text"
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN id AS value, title AS text"
 				. "\n FROM #__sections"
 				. "\n WHERE published = 1"
 				. "\n ORDER BY $order";
@@ -4661,11 +4680,12 @@ class mosAdminMenus {
 
 	function menutypes() {
 		global $database;
-		$query = "SELECT params FROM #__modules WHERE module = 'mod_mainmenu' OR module = 'mod_mljoostinamenu' ORDER BY title";
+		/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN params FROM #__modules WHERE module = 'mod_mainmenu' OR module = 'mod_mljoostinamenu' ORDER BY title";
 		$database->setQuery($query);
 		$modMenus = $database->loadObjectList();
-
-		$query = "SELECT menutype FROM #__menu GROUP BY menutype ORDER BY menutype";
+/* add STRAIGHT_JOIN */
+		$query = "SELECT STRAIGHT_JOIN menutype FROM #__menu GROUP BY menutype ORDER BY menutype";
 		$database->setQuery($query);
 		$menuMenus = $database->loadObjectList();
 		$menuTypes = '';
@@ -4726,14 +4746,14 @@ class mosCommonHTML {
 	function ContentLegend() {
 ?>
 		<table cellspacing="0" cellpadding="4" border="0" align="center">
-			<tr align="center">
-				<td><img src="images/publish_y.png" /></td>
+			<tr class="publ_state">
+				<td><img src="images/publish_y.png" alt="<?php echo _PUBLISHED_VUT_NOT_ACTIVE ?>" /></td>
 				<td><?php echo _PUBLISHED_VUT_NOT_ACTIVE ?> |</td>
-				<td><img src="images/publish_g.png" /></td>
+				<td><img src="images/publish_g.png" alt="<?php echo _PUBLISHED_AND_ACTIVE ?>" /></td>
 				<td><?php echo _PUBLISHED_AND_ACTIVE ?> |</td>
-				<td><img src="images/publish_r.png" /></td>
+				<td><img src="images/publish_r.png" alt="<?php echo _PUBLISHED_BUT_DATE_EXPIRED ?>" /></td>
 				<td><?php echo _PUBLISHED_BUT_DATE_EXPIRED ?> |</td>
-				<td><img src="images/publish_x.png" /></td>
+				<td><img src="images/publish_x.png" alt="<?php echo _NOT_PUBLISHED ?>" /></td>
 				<td><?php echo _NOT_PUBLISHED ?></td>
 			</tr>
 		</table>
@@ -5053,7 +5073,7 @@ $mainframe->addJS($mosConfig_live_site . '/includes/js/jquery/ui.js');
 			}
 		}
 
-		/* подключение jwondow */
+		/* подключение jwindow */
 
 		function loadJWin() {
 			global $mosConfig_live_site, $mainframe;

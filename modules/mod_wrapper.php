@@ -18,11 +18,11 @@ $params->def('add', '1');
 $url = $params->get('url');
 if ($params->get('add')) {
 // Добавить 'http://', если отсутствует
-	if (substr($url, 0, 1) == '/') {
+	if (mb_substr($url, 0, 1) == '/') {
 // relative url in component. use server http_host.
-		$url = 'http://' . $_SERVER['HTTP_HOST'] . $url;
+		$url = 'http://'.$_SERVER['HTTP_HOST'] . $url;
 	} else if (!strstr($url, 'http') && !strstr($url, 'https')) {
-		$url = 'http://' . $url;
+		$url = 'http://'.$url;
 	} else {
 		$url = $url;
 	}
@@ -32,28 +32,28 @@ if (!isset($mod_wrapper_count)) {
 	$mod_wrapper_count = 0;
 	?>
 <script type="text/javascript">
-	function iFrameHeightX(iFrameId) {
-		var h = 0;
-		if (!document.all) {
-			h = document.getElementById(iFrameId).contentDocument.height;
-			document.getElementById(iFrameId).style.height = h + 60 + 'px';
-		} else if(document.all) {
-			h = document.frames(iFrameId).document.body.scrollHeight;
-			document.all[iFrameId].style.height = h + 20 + 'px';
-		}
+function iFrameHeightX(iFrameId) {
+	var h = 0;
+	if (!document.all) {
+		h = document.getElementById(iFrameId).contentDocument.height;
+		document.getElementById(iFrameId).style.height = h + 60 + 'px';
+	} else if(document.all) {
+		h = document.frames(iFrameId).document.body.scrollHeight;
+		document.all[iFrameId].style.height = h + 20 + 'px';
 	}
+}
 </script>
 	<?php
 }
 // автоматический контроль высоты
 if ($params->def('height_auto')) {
-	$load = 'onload="iFrameHeightX(\'blockrandom' . $mod_wrapper_count . '\')" ';
+	$load = 'onload="iFrameHeightX(\'blockrandom'.$mod_wrapper_count.'\')" ';
 } else {
 	$load = '';
 }
 ?>
 <iframe 
-	<?php echo $load; ?>
+<?php echo $load; ?>
 	id="blockrandom<?php echo $mod_wrapper_count++; ?>"
 	src="<?php echo $url; ?>"
 	width="<?php echo $params->get('width'); ?>"

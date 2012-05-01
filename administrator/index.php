@@ -20,20 +20,20 @@ $mosConfig_db_cache_handler = 'none';
 // SSL check - $http_host returns <live site url>:<port number if it is 443>
 $http_host = explode(':', $_SERVER['HTTP_HOST']);
 if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isset($http_host[1]) && $http_host[1] == 443) && substr($mosConfig_live_site, 0, 8) != 'https://') {
-	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
+	$mosConfig_live_site = 'https://'.substr($mosConfig_live_site, 7);
 }
 require_once ('../includes/joomla.php');
 // загрузка файла русского €зыка по умолчанию
 if ($mosConfig_lang == '') {
 	$mosConfig_lang = 'russian';
 }
-include_once ($mosConfig_absolute_path . '/language/' . $mosConfig_lang . '.php');
+include_once ($mosConfig_absolute_path.'/language/'.$mosConfig_lang.'.php');
 // отключаем кэширование запросов базы данных дл€ панели управлени€
 $database->dbcache->test = 0;
 //Installation sub folder check, removed for work with SVN
 if (file_exists('../installation/index.php') && $_VERSION->SVN == 0) {
 	define('_INSTALL_CHECK', 1);
-	include ($mosConfig_absolute_path . '/offline.php');
+	include ($mosConfig_absolute_path.'/offline.php');
 	exit();
 }
 $option = strtolower(strval(mosGetParam($_REQUEST, 'option', null)));
@@ -60,10 +60,10 @@ if (isset($_POST['submit'])) {
 		session_write_close();
 	}
 	$query = "SELECT COUNT(*)"
-			. "\n FROM #__users"
-			. "\n WHERE (" // јдминистраторы
-			. "\n gid = 24" // —уперјдминистраторы
-			. "\n OR gid = 25 )";
+	. "\n FROM #__users"
+	. "\n WHERE (" // јдминистраторы
+	. "\n gid = 24" // —уперјдминистраторы
+	. "\n OR gid = 25 )";
 	$database->setQuery($query);
 	$count = intval($database->loadResult());
 	if ($count < 1) {
@@ -71,10 +71,10 @@ if (isset($_POST['submit'])) {
 	}
 	$my = null;
 	$query = "SELECT u.*, m.*"
-			. "\n FROM #__users AS u"
-			. "\n LEFT JOIN #__messages_cfg AS m ON u.id = m.user_id AND m.cfg_name = 'auto_purge'"
-			. "\n WHERE u.username = " . $database->Quote($usrname)
-			. "\n AND u.block = 0";
+	. "\n FROM #__users AS u"
+	. "\n LEFT JOIN #__messages_cfg AS m ON u.id = m.user_id AND m.cfg_name = 'auto_purge'"
+	. "\n WHERE u.username = " . $database->Quote($usrname)
+	. "\n AND u.block = 0";
 	$database->setQuery($query);
 	$database->loadObject($my);
 	/** find the user group (or groups in the future) */
@@ -87,9 +87,9 @@ if (isset($_POST['submit'])) {
 // Old password hash storage but authentic ... lets convert it
 			$salt = mosMakePassword(16);
 			$crypt = md5($pass . $salt);
-			$my->password = $crypt . ':' . $salt;
+			$my->password = $crypt.':'.$salt;
 // Now lets store it in the database
-			$query = 'UPDATE #__users SET password = ' . $database->Quote($my->password) . 'WHERE id = ' . (int) $my->id;
+			$query = 'UPDATE #__users SET password = '.$database->Quote($my->password).'WHERE id = '.(int) $my->id;
 			$database->setQuery($query);
 			if (!$database->query()) {
 // This is an error but not sure what to do with it ... we'll still work for now
@@ -179,8 +179,8 @@ if (isset($_POST['submit'])) {
 		if ($purge != 0) {
 // purge old messages at day set in message configuration
 			$query = "DELETE FROM #__messages"
-					. "\n WHERE date_time < " . $database->Quote($past)
-					. "\n AND user_id_to = " . (int) $my->id;
+			. "\n WHERE date_time < " . $database->Quote($past)
+			. "\n AND user_id_to = " . (int) $my->id;
 			$database->setQuery($query);
 			if (!$database->query()) {
 				echo $database->stderr();
@@ -195,7 +195,7 @@ if (isset($_POST['submit'])) {
 	}
 } else {
 	initGzip();
-	$path = $mosConfig_absolute_path . '/' . ADMINISTRATOR_DIRECTORY . '/templates/' . $mainframe->getTemplate() . '/login.php';
+	$path = $mosConfig_absolute_path.'/'.ADMINISTRATOR_DIRECTORY.'/templates/'.$mainframe->getTemplate().'/login.php';
 	require_once ($path);
 	doGzip();
 }

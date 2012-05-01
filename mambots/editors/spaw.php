@@ -1,17 +1,19 @@
 <?php
 /**
-* @package Joostina
-* @copyright Авторские права (C) 2008 Joostina team. Все права защищены.
-* @license Лицензия http://www.gnu.org/licenses/gpl-2.0.htm GNU/GPL, или help/license.php
-* Joostina! - свободное программное обеспечение распространяемое по условиям лицензии GNU/GPL
-* Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
+* @version $Id: Spaw.php,v 1.8 2004/09/27 10:52:56 stingrey Exp $
+* @package Mambo_4.5.1
+* @copyright (C) 2000 - 2004 Miro International Pty Ltd
+* @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+* Mambo is Free Software
 */
-// запрет прямого доступа
-defined('_VALID_MOS') or die();
-$_MAMBOTS->registerFunction('onInitEditor', 'botSpawEditorInit');
-$_MAMBOTS->registerFunction('onGetEditorContents', 'botSpawEditorGetContents');
-$_MAMBOTS->registerFunction('onEditorArea', 'botSpawEditorArea');
-/* Spaw WYSIWYG Editor - javascript initialisation */
+/** ensure this file is being included by a parent file */
+defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.' );
+$_MAMBOTS->registerFunction( 'onInitEditor', 'botSpawEditorInit' );
+$_MAMBOTS->registerFunction( 'onGetEditorContents', 'botSpawEditorGetContents' );
+$_MAMBOTS->registerFunction( 'onEditorArea', 'botSpawEditorArea' );
+/**
+* Spaw WYSIWYG Editor - javascript initialisation
+*/
 function botSpawEditorInit() {
 }
 /**
@@ -19,7 +21,7 @@ function botSpawEditorInit() {
 * @param string The name of the editor area
 * @param string The name of the form field
 */
-function botSpawEditorGetContents($editorArea, $hiddenField) {
+function botSpawEditorGetContents( $editorArea, $hiddenField ) {
 }
 /**
 * Spaw WYSIWYG Editor - display the editor
@@ -31,9 +33,9 @@ function botSpawEditorGetContents($editorArea, $hiddenField) {
 * @param int The number of columns for the editor area
 * @param int The number of rows for the editor area
 */
-function botSpawEditorArea($name, $content, $hiddenField, $width, $height, $col, $row) {
-	require_once(dirname(__FILE__) . "/spaw/spaw.inc.php");
-	$sw = new SpawEditor($hiddenField, html_entity_decode($content, ENT_QUOTES));
+function botSpawEditorArea( $name, $content, $hiddenField, $width, $height, $col, $row ) {
+	require_once(dirname(__FILE__).'/spaw/spaw.inc.php');
+	$sw = new SpawEditor( $hiddenField, html_entity_decode($content,ENT_QUOTES));
 	$sw->show();
 }
 ?>

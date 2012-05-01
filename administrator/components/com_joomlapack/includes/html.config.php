@@ -18,52 +18,52 @@ $act	= mosGetParam($_REQUEST,'act','default');
 ?>
 <table class="adminheading">
 	<tr>
-		<th class="config" nowrap rowspan="2"><?php echo _JP_BACKUP_CONFIG?></th>
+		<th class="config" nowrap rowspan="2"><?php echo _JP_BACKUP_CONFIG;?></th>
 	</tr>
 </table>
-<div class="message"><?php echo _JP_CONFIG_SAVING?>: <?php echo colorizeWriteStatus($JPConfiguration->isConfigurationWriteable());?></div>
+<div class="message"><?php echo _JP_CONFIG_SAVING;?>: <?php echo colorizeWriteStatus($JPConfiguration->isConfigurationWriteable());?></div>
 <form action="index2.php" method="post" name="adminForm">
 	<table class="adminform">
 		<tr align="center" valign="middle">
-			<th colspan="2"><?php echo _JP_MAIN_CONFIG?></th>
+			<th colspan="2"><?php echo _JP_MAIN_CONFIG;?></th>
 		</tr>
 		<tr class="row0">
-			<td width="30%"><?php echo _JP_CONFIG_DIRECTORY?></td>
+			<td width="30%"><?php echo _JP_CONFIG_DIRECTORY;?></td>
 			<td><input class="inputbox" type="text" name="outdir" size="60" value="<?php echo $JPConfiguration->OutputDirectory; ?>" /></td>
 		</tr>
 		<tr class="row0">
-			<td><?php echo _JP_ARCHIVE_NAME?></td>
+			<td><?php echo _JP_ARCHIVE_NAME;?></td>
 			<td><input class="inputbox" type="text" name="tarname" size="60" value="<?php echo $JPConfiguration->TarNameTemplate; ?>" /></td>
 		</tr>
 		<tr class="row1">
-			<td><?php echo _JP_LOG_LEVEL?></td>
+			<td><?php echo _JP_LOG_LEVEL;?></td>
 			<td><?php outputLogLevel($JPConfiguration->logLevel); ?></td>
 		</tr>
 		<tr>
-			<th colspan="2"><?php echo _JP_ADDITIONAL_CONFIG?></th>
+			<th colspan="2"><?php echo _JP_ADDITIONAL_CONFIG;?></th>
 		</tr>
 		<tr class="row1">
-			<td><?php echo _JP_DELETE_PREFIX?></td>
+			<td><?php echo _JP_DELETE_PREFIX;?></td>
 			<td><?php echo mosHTML::yesnoRadioList('sql_pref','class="inputbox"',$JPConfiguration->sql_pref); ?></td>
 		</tr>
 		<tr class="row0">
-			<td><?php echo _JP_EXPORT_TYPE?></td>
+			<td><?php echo _JP_EXPORT_TYPE;?></td>
 			<td><?php outputSQLCompat($JPConfiguration->MySQLCompat); ?></td>
 		</tr>
 		<tr class="row1">
-			<td><?php echo _JP_FILELIST_ALGORITHM?></td>
+			<td><?php echo _JP_FILELIST_ALGORITHM;?></td>
 			<td><?php AlgorithmChooser($JPConfiguration->fileListAlgorithm,"fileListAlgorithm"); ?></td>
 		</tr>
 		<tr class="row0">
-			<td><?php echo _JP_CONFIG_DB_BACKUP?></td>
+			<td><?php echo _JP_CONFIG_DB_BACKUP;?></td>
 			<td><?php AlgorithmChooser($JPConfiguration->dbAlgorithm,"dbAlgorithm"); ?></td>
 		</tr>
 		<tr class="row1">
-			<td><?php echo _JP_CONFIG_GZIP?></td>
+			<td><?php echo _JP_CONFIG_GZIP;?></td>
 			<td><?php AlgorithmChooser($JPConfiguration->packAlgorithm,"packAlgorithm"); ?></td>
 		</tr>
 		<tr class="row0">
-			<td><?php echo _JP_CONFIG_DUMP_GZIP?></td>
+			<td><?php echo _JP_CONFIG_DUMP_GZIP;?></td>
 			<td><?php outputBoolChooser($JPConfiguration->sql_pack); ?></td>
 		</tr>
 	</table>

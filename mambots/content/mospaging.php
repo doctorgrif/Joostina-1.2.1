@@ -11,8 +11,11 @@ defined('_VALID_MOS') or die();
 $_MAMBOTS->registerFunction('onPrepareContent', 'botMosPaging');
 /**
 * Мамбот разрыва страницы. Использование:
-* {mospagebreak} или {mospagebreak title=Заголовок страницы} или {mospagebreak heading=Первая страница} или
-* {mospagebreak title=Заголовок страницы&heading=Первая страница} или {mospagebreak heading=Первая страница&title=Заголовок страницы}
+* {mospagebreak}
+* или {mospagebreak title=Заголовок страницы}
+* или {mospagebreak heading=Первая страница}
+* или {mospagebreak title=Заголовок страницы&heading=Первая страница}
+* или {mospagebreak heading=Первая страница&title=Заголовок страницы}
 */
 function botMosPaging($published, &$row, &$params, $page = 0) {
 	global $mainframe, $Itemid, $database, $_MAMBOTS;
@@ -83,12 +86,11 @@ function botMosPaging($published, &$row, &$params, $page = 0) {
 		require_once ($GLOBALS['mosConfig_absolute_path'] . '/includes/pageNavigation.php');
 		$pageNav = new mosPageNav($n, $page, 1);
 // счетчик страниц
-		$row->text .= '<div class="pagenavcounter">';
+		$row->text .= '<div class="pagenavcounter" style="display:none;">';
 		$row->text .= $pageNav->writeLeafsCounter();
 		$row->text .= '</div>';
 // текст страницы
 		$row->text .= $text[$page];
-		$row->text .= '<br />';
 		$row->text .= '<div class="pagenavbar">';
 // добавление навигации между страницами в конце текста
 		if ($hasToc) {
@@ -98,7 +100,7 @@ function botMosPaging($published, &$row, &$params, $page = 0) {
 		if (!$hasToc) {
 			$row->text .= $pageNav->writePagesLinks('index.php?option=com_content&amp;task=view&amp;id=' . $row->id . '&amp;Itemid=' . $Itemid);
 		}
-		$row->text .= '</div><br />';
+		$row->text .= '</div>';
 	}
 	return true;
 }
@@ -118,10 +120,11 @@ function createTOC(&$row, &$matches) {
 		}
 	}
 // Заголовок содержания
-	$row->toc = '<table class="contenttoc" align="right">
-	<tr><th>' . _TOC_JUMPTO . '</th></tr>';
+	$row->toc = '<div class="innercontents">
+	<p class="strong">' . _TOC_JUMPTO . '</p>';
 // Содержание связи первой страницы
-	$row->toc .= '<tr><td><a href="' . $link . '" class="toclink" title="' . $heading . '">' . $heading . '</a></td></tr>';
+	$row->toc .= '<ol>';
+	$row->toc .= '<li><a href="' . $link . '" title="' . $heading . '">' . $heading . '</a></li>';
 	$i = 2;
 	$args2 = array();
 	foreach ($matches as $bot) {
@@ -130,17 +133,18 @@ function createTOC(&$row, &$matches) {
 		if (@$bot[2]) {
 			parse_str(html_entity_decode($bot[2]), $args2);
 			if (@$args2['title']) {
-				$row->toc .= '<tr><td><a href="' . $link . '" class="toclink" title="' . stripslashes($args2['title']) . '">' . stripslashes($args2['title']) . '</a></td></tr>
+				$row->toc .= '<li><a href="' . $link . '" title="' . stripslashes($args2['title']) . '">' . stripslashes($args2['title']) . '</a></li>
 ';
 			} else {
-				$row->toc .= '<tr><td><a href="' . $link . '" class="toclink" title="' . _PN_PAGE . '">' . _PN_PAGE . ' ' . $i . '</a></td></tr>';
+				$row->toc .= '<li><a href="' . $link . '" title="' . _PN_PAGE . '">' . _PN_PAGE . ' ' . $i . '</a></li>';
 			}
 		} else {
-			$row->toc .= '<tr><td><a href="' . $link . '" class="toclink" title="' . _PN_PAGE . '">' . _PN_PAGE . ' ' . $i . '</a></td></tr>';
+			$row->toc .= '<li><a href="' . $link . '" title="' . _PN_PAGE . '">' . _PN_PAGE . ' ' . $i . '</a></li>';
 		}
 		++$i;
 	}
-	$row->toc .= '</table>';
+	$row->toc .= '</ol>';
+	$row->toc .= '</div>';
 }
 function createNavigation(&$row, $page, $n) {
 	global $Itemid;
@@ -148,14 +152,14 @@ function createNavigation(&$row, $page, $n) {
 	if ($page < $n - 1) {
 		$link_next = $link . '&amp;limit=1&amp;limitstart=' . ($page + 1);
 		$link_next = sefRelToAbs($link_next);
-		$next = '<li class="pagenav_next"><a href="' . $link_next . '">' . _CMN_NEXT . '</a></li>';
+		$next = '<li class="pagenav_next"><a href="' . $link_next . '" title="' . _CMN_NEXT . '">' . _CMN_NEXT . '</a></li>';
 	} else {
 		$next = '<li class="pagenav_next">' . _CMN_NEXT . '</li>';
 	}
 	if ($page > 0) {
 		$link_prev = $link . '&amp;limit=1&amp;limitstart=' . ($page - 1);
 		$link_prev = sefRelToAbs($link_prev);
-		$prev = '<li class="pagenav_prev"><a href="' . $link_prev . '">' . _CMN_PREV . '</a></li>';
+		$prev = '<li class="pagenav_prev"><a href="' . $link_prev . '" title="' . _CMN_PREV . '">' . _CMN_PREV . '</a></li>';
 	} else {
 		$prev = '<li class="pagenav_prev">' . _CMN_PREV . '</li>';
 	}

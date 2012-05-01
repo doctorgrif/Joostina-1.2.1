@@ -49,14 +49,14 @@ function x_delavatar() {
 	return 0;
 }
 
-function img_resize($src, $dest, $width=250, $height=250, $quality = 100) {
+function img_resize($src, $dest, $width = 250, $height = 250, $quality = 100) {
 	if (!file_exists($src))
 		return false;
 	$size = getimagesize($src);
 	list($width_orig, $height_orig) = $size;
 	if ($size === false)
 		return false;
-	$format = strtolower(substr($size['mime'], strpos($size['mime'], '/') + 1));
+	$format = strtolower(mb_substr($size['mime'], strpos($size['mime'], '/') + 1));
 	$icfunc = 'imagecreatefrom' . $format;
 	if (!function_exists($icfunc))
 		return false;

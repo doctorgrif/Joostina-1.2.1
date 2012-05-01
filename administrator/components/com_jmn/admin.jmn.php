@@ -16,15 +16,23 @@ mosRedirect('index2.php',_NOT_AUTH);
 }
 $thisComponent = 'jmn';
 //Get right Language file
-$file = $mosConfig_absolute_path . '/administrator/components/com_' . $thisComponent . '/language/';
+/*$file = $mosConfig_absolute_path . '/administrator/components/com_' . $thisComponent . '/language/';
 if (file_exists($file . $mosConfig_lang . '.php')) {
 	include ($file . $mosConfig_lang . '.php');
 } else {
 	// Fallback to english
 	include ($file . 'english.php');
+}*/
+// load language file
+$file = $mosConfig_absolute_path .'/language/';
+if( file_exists( $file . $mosConfig_lang . '.php') ) {
+	require_once( $file . $mosConfig_lang . '.php' );
+} else {
+	$mosConfig_lang = 'english';
+	require_once( $file . 'english.php' );
 }
 
-require_once( $mosConfig_absolute_path."/administrator/components/com_jmn/functions_jmn.php");
+require_once( $mosConfig_absolute_path.'/administrator/components/com_jmn/functions_jmn.php');
 require_once( $mainframe->getPath( 'admin_html' ) );
 $sectionid = mosGetParam( $_REQUEST, 'sectionid', 0 );
 $id = mosGetParam( $_REQUEST, 'id', '' );
@@ -34,33 +42,33 @@ $cid = array(0);
 }
 else{
 switch ($task) {
-case "save_manager":
+case 'save_manager':
 save_manager($_POST,$_GET);
 viewContent( $sectionid, $option );
 break;
-case "settings":
-echo "<h2>"._MG_NAME.": "._MG_EXWORDEDIT."</h2>";
+case 'settings':
+echo '<h2>'._MG_NAME.': '._MG_EXWORDEDIT.'</h2>';
 settings($_POST,$_GET);
 break;
-case "config":
-echo "<h2>"._MG_NAME.": "._MG_SETTINGS."</h2>";
+case 'config':
+echo '<h2>'._MG_NAME.': '._MG_SETTINGS.'</h2>';
 config($_POST,$_GET);
 break;
-case "save_config":
-echo "<h2>"._MG_NAME.": "._MG_SETTINGS."</h2>";
+case 'save_config':
+echo '<h2>'._MG_NAME.': '._MG_SETTINGS.'</h2>';
 config($_POST,$_GET);
 break;
-case "gen_metakey":
-echo "<h2>"._MG_NAME.": "._MG_KWORDS."</h2>";
+case 'gen_metakey':
+echo '<h2>'._MG_NAME.': '._MG_KWORDS.'</h2>';
 meta_gen($_POST,$_GET,'metakey');
 viewContent( $sectionid, $option );
 break;
-case "gen_metadesc":
-echo "<h2>"._MG_NAME.": "._MG_DESC."</h2>";
+case 'gen_metadesc':
+echo '<h2>'._MG_NAME.': '._MG_DESC.'</h2>';
 meta_gen($_POST,$_GET,'metadesc');
 viewContent( $sectionid, $option );
 break;
-case "about":
+case 'about':
 about( );
 break;
 case 'new':

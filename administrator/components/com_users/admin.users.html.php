@@ -35,18 +35,19 @@ class HTML_users {
 		</table>
 		<table class="adminlist">
 		<tr>
-			<th width="1%" class="title">#</th>
-			<th width="1%" class="title">
+			<th width="5%" class="title">#</th>
+			<th width="5%" class="title">
 				<input type="checkbox" name="toggle" value="" onClick="checkAll(<?php echo count($rows); ?>);" />
 			</th>
-			<th class="title" colspan="2"><?php echo _CMN_NAME?></th>
-			<th width="22%"><?php echo _USER_LOGIN_TXT?></th>
+			<th width="5%">Аватар</th>
+			<th width="20%" class="title"><?php echo _CMN_NAME?></th>
+			<th width="20%"><?php echo _USER_LOGIN_TXT?></th>
 			<th width="5%"><?php echo _LOGGED_IN?></th>
 			<th width="5%"><?php echo _ALLOWED?></th>
 			<th width="10%"><?php echo _O_GROUP?></th>
 			<th width="10%">E-Mail</th>
-			<th width="13%"><?php echo _LAST_LOGIN?></th>
-			<th width="1%">ID</th>
+			<th width="10%"><?php echo _LAST_LOGIN?></th>
+			<th width="5%">ID</th>
 		</tr>
 		<?php
 		$k = 0;
@@ -58,22 +59,22 @@ class HTML_users {
 			$link	= 'index2.php?option=com_users&amp;task=editA&amp;id='.$row->id.'&amp;hidemainmenu=1';
 ?>
 		<tr class="<?php echo "row$k"; ?>">
-			<td><?php echo $i + 1 + $pageNav->limitstart; ?></td>
-			<td><?php echo mosHTML::idBox($i,$row->id); ?></td>
-			<td width="1%">
+			<td width="5%"><?php echo $i + 1 + $pageNav->limitstart; ?></td>
+			<td width="5%"><?php echo mosHTML::idBox($i,$row->id); ?></td>
+			<td width="5%">
 				<img class="miniavatar" id="userav" src="<?php echo $mosConfig_live_site.mosUser::miniavatar($row->id);?>" alt="" />
 			</td>
-			<td align="left"><a href="<?php echo $link; ?>">
+			<td width="20%"><a href="<?php echo $link; ?>">
 			<?php echo $row->name; ?></a></td>
-			<td align="left"><?php echo $row->username; ?></td>
-			<td align="center"><?php echo $row->loggedin ? '<img src="images/tick.png" alt="" />':''; ?></td>
+			<td width="20%"><?php echo $row->username; ?></td>
+			<td width="5%"><?php echo $row->loggedin ? '<img src="images/tick.png" alt="" />':''; ?></td>
 			<td width="5%" align="center" <?php if($row->id!=$my->id){ ?> class="td-state" onclick="ch_publ(<?php echo $row->id;?>,'com_users');" <?php };?>>
 				<img id="img-pub-<?php echo $row->id;?>" class="img-mini-state" alt="<?php echo _USER_BLOCK?>" src="images/<?php echo $img;?>"/>
 			</td>
-			<td><?php echo $row->groupname; ?></td>
-			<td><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a></td>
-			<td class="jtd_nowrap"><?php echo mosFormatDate($row->lastvisitDate,_CURRENT_SERVER_TIME_FORMAT); ?></td>
-			<td><?php echo $row->id; ?></td>
+			<td width="10%"><?php echo $row->groupname; ?></td>
+			<td width="10%"><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a></td>
+			<td width="10%" class="jtd_nowrap"><?php echo mosFormatDate($row->lastvisitDate,_CURRENT_SERVER_TIME_FORMAT); ?></td>
+			<td width="5%"><?php echo $row->id; ?></td>
 		</tr>
 		<?php
 		$k = 1 - $k;

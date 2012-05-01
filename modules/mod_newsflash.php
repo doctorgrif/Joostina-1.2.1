@@ -48,7 +48,7 @@ $params->set('hide_createdate', 0);
 $params->set('hide_modifydate', 1);
 $params->set('link_titles', $link_titles);
 // запрос определения количества статей
-$query = "SELECT a.id, a.introtext, a.fulltext , a.images, a.attribs, a.title, a.state"
+$query = "SELECT STRAIGHT_JOIN a.id, a.introtext, a.fulltext , a.images, a.attribs, a.title, a.state"
 	. "\n FROM #__content AS a"
 	. "\n INNER JOIN #__categories AS cc ON cc.id = a.catid"
 	. "\n INNER JOIN #__sections AS s ON s.id = a.sectionid"
@@ -66,26 +66,28 @@ $rows = $database->loadObjectList();
 $numrows = count($rows);
 // check if any results returned
 if ($numrows) {
-	switch ($style) {
-		case 'horiz':
-			echo '<div class="moduletable' . $moduleclass_sfx . '">';
-			foreach ($rows as $row) {
-				output_newsflash($row, $params, $access);
-			}
-			echo '</div>';
-			break;
-		case 'vert':
-			foreach ($rows as $row) {
-				output_newsflash($row, $params, $access);
-			}
-			break;
-		case 'flash':
-		default:
-			srand((double) microtime() * 1000000);
-			$flashnum = rand(0, $numrows - 1);
-			$row = $rows[$flashnum];
+switch ($style) {
+	case 'horiz':
+		echo '<div class="newsflash-horiz'.$moduleclass_sfx.'">';
+		foreach ($rows as $row) {
 			output_newsflash($row, $params, $access);
-			break;
+		}
+		echo '</div>';
+		break;
+	case 'vert':
+		echo '<div class="newsflash-vert'.$moduleclass_sfx.'">';
+		foreach ($rows as $row) {
+			output_newsflash($row, $params, $access);
+		}
+		echo '</div>';
+		break;
+	case 'flash':
+	default:
+		srand((double) microtime() * 1000000);
+		$flashnum = rand(0, $numrows - 1);
+		$row = $rows[$flashnum];
+		output_newsflash($row, $params, $access);
+		break;
 	}
 }
 ?>

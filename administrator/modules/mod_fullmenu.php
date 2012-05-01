@@ -53,10 +53,10 @@ if (!defined('_JOS_FULLMENU_MODULE')) {
 			$canManageUsers = $acl->acl_check('administration', 'manage', 'users', $usertype, 'components', 'com_users');
 			$menuTypes = mosAdminMenus::menutypes();
 			$query = "SELECT a.id, a.title, a.name"
-					. "\n FROM #__sections AS a"
-					. "\n WHERE a.scope = 'content'"
-					. "\n GROUP BY a.id"
-					. "\n ORDER BY a.ordering";
+			. "\n FROM #__sections AS a"
+			. "\n WHERE a.scope = 'content'"
+			. "\n GROUP BY a.id"
+			. "\n ORDER BY a.ordering";
 			$database->setQuery($query);
 			$sections = $database->loadObjectList();
 			ob_start(); // складываем всё выдаваемое меню в буфер
@@ -92,10 +92,8 @@ if (!defined('_JOS_FULLMENU_MODULE')) {
 			if ($manageTemplates) {
 				?>['<img src="../includes/js/ThemeOffice/template.png" alt="" />','<?php echo _TEMPLATES; ?>',null,null,'<?php echo _MENU_TEMPLATES_TIP; ?>',
 					['<img src="../includes/js/ThemeOffice/template.png" alt="" />','<?php echo _MENU_SITE_TEMPLATES; ?>','index2.php?option=com_templates',null,'<?php echo _MENU_SITE_TEMPLATES; ?>'],
-					['<img src="../includes/js/ThemeOffice/install.png" alt="" />','<?php echo _MENU_NEW_SITE_TEMPLATE; ?>','index2.php?option=com_installer&element=template&client=',null,'<?php echo _MENU_NEW_SITE_TEMPLATE; ?>'],
-					_cmSplit,
 					['<img src="../includes/js/ThemeOffice/template.png" alt="" />','<?php echo _MENU_ADMIN_TEMPLATES; ?>','index2.php?option=com_templates&client=admin',null,'<?php echo _MENU_ADMIN_TEMPLATES; ?>'],
-					['<img src="../includes/js/ThemeOffice/install.png" alt="" />','<?php echo _MENU_NEW_ADMIN_TEMPLATE; ?>','index2.php?option=com_installer&element=template&client=admin',null,'<?php echo _MENU_NEW_ADMIN_TEMPLATE; ?>'],
+					['<img src="../includes/js/ThemeOffice/install.png" alt="" />','<?php echo _MENU_NEW_SITE_TEMPLATE; ?>','index2.php?option=com_installer&element=template&client=',null,'<?php echo _MENU_NEW_SITE_TEMPLATE; ?>'],
 					_cmSplit,
 					['<img src="../includes/js/ThemeOffice/template.png" alt="" />','<?php echo _MODULES_POSITION; ?>','index2.php?option=com_templates&task=positions',null,'<?php echo _MODULES_POSITION; ?>']
 					],
@@ -156,7 +154,6 @@ if (!defined('_JOS_FULLMENU_MODULE')) {
 			_cmSplit,
 			['<img src="../includes/js/ThemeOffice/home.png" alt="" />','<?php echo _CONTENT_ON_FRONTPAGE; ?>','index2.php?option=com_frontpage',null,'<?php echo _CONTENT_ON_FRONTPAGE; ?>'],
 			['<img src="../includes/js/ThemeOffice/edit.png" alt="" />','<?php echo _ARCHIVE; ?>','index2.php?option=com_content&task=showarchive&sectionid=0',null,'<?php echo _ARCHIVE; ?>'],
-			['<img src="../includes/js/ThemeOffice/globe3.png" alt="" />', '<?php echo _PAGES_HITS; ?>', 'index2.php?option=com_statistics&task=pageimp', null, '<?php echo _PAGES_HITS; ?>'],
 			['<img src="../includes/js/ThemeOffice/trash.png" alt="" />','<?php echo _CONTENT_TRASH; ?>','index2.php?option=com_trash&catid=content',null,'<?php echo _CONTENT_TRASH; ?>'],
 			],
 			<?php
@@ -209,9 +206,9 @@ if (!defined('_JOS_FULLMENU_MODULE')) {
 				}
 				if ($installModules) {
 					?> _cmSplit,
-										['<img src="../includes/js/ThemeOffice/install.png" alt="" />', '<?php echo _EDIT_COMPONENTS_MENU; ?>','index2.php?option=com_linkeditor ',null,'<?php echo _EDIT_COMPONENTS_MENU; ?>'],
-										['<img src="../includes/js/ThemeOffice/install.png" alt="" />', '<?php echo _COMPONENTS_INSTALL_UNINSTALL; ?>','index2.php?option=com_installer&element=component',null,'<?php echo _COMPONENTS_INSTALL_UNINSTALL; ?>'],
-										],
+						['<img src="../includes/js/ThemeOffice/install.png" alt="" />', '<?php echo _EDIT_COMPONENTS_MENU; ?>','index2.php?option=com_linkeditor ',null,'<?php echo _EDIT_COMPONENTS_MENU; ?>'],
+						['<img src="../includes/js/ThemeOffice/install.png" alt="" />', '<?php echo _COMPONENTS_INSTALL_UNINSTALL; ?>','index2.php?option=com_installer&element=component',null,'<?php echo _COMPONENTS_INSTALL_UNINSTALL; ?>'],
+					],
 					<?php
 				}
 				// Modules Sub-Menu

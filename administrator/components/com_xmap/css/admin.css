@@ -1,291 +1,241 @@
 .adminForm label {white-space:nowrap;}
 .adminForm {
-table-layout:auto;
-text-align:left;
-}
+	table-layout:auto;
+	text-align:left;}
 .adminForm td, .adminForm tr {vertical-align:middle;}
 .adminlist th {white-space:nowrap;}
 .sitemaps{
-width:620px;
-text-align:left;
-z-index:1;
-float:left;
-}
+	width:850px;
+	text-align:left;
+	z-index:1;
+	float:left;}
 #sitemapsouter {
-width:100%;
-text-align:left;
-z-index:1;
-float:left;
-}
+	width:100%;
+	text-align:left;
+	z-index:1;
+	float:left;}
 .plugin {
-width:500px;
-margin:5px;
-}
-.plugin div.pluginname {
-width:auto;
-float:left;
-padding:0 5px 0 5;
-}
-.plugin div.pluginversion {
-width:auto;
-float:left;
-margin-right:5px;
-}
+	width:850px;
+	margin:5px;}
+.plugin .pluginname {
+	width:auto;
+	float:left;
+	padding:0 5px 0 5;}
+.plugin .pluginversion {
+	width:auto;
+	float:left;
+	margin-right:5px;}
 .titlebar {text-align:center;}
-div.published .titlebar div.tl {
-background-color:#0060bf;
-color:#fff;
-margin:0 auto;
-}
-div.unpublished .titlebar div.tl {
-background-color:#ccc;
-color:#000;
-margin:0 auto;
-}
+.published .titlebar .tl {
+	background-color:#0060bf;
+	color:#fff;
+	margin:0 auto;}
+.unpublished .titlebar .tl {
+	background-color:#ccc;
+	color:#000;
+	margin:0 auto;}
 .titlebar .tl1 {
-height:1px;
-width:494px;
-}
+	height:1px;
+	width:850ppx;}
 .titlebar .tl2 {
-height:1px;
-width:496px;
-}
+	height:1px;
+	width:850px;}
 .titlebar .tl3 {
-height:1px;
-width:498px;
-}
+	height:1px;
+	width:850px;}
 .published .insidebox {
-border:1px solid #0060bf;
-padding:3px;
-}
+	border:1px solid #0060bf;
+	padding:3px;}
 .unpublished .insidebox {
-border:1px solid #ccc;
-padding:3px;
-} 
+	border:1px solid #ccc;
+	padding:3px;} 
 .plugin .plugintaskbar {
-padding:3px;
-border-top:1px solid #ccc;
-}
+	padding:3px;
+	border-top:1px solid #ccc;}
 .plugin .plugintaskbar a {
-display:inline;
-margin:5px;
-}
+	display:inline;
+	margin:5px;}
 .sitemap {
-background:url(../images/bor_top.gif) top repeat-x;
-margin-top:5px;
-width:530px;
-height:auto;
-text-align:left;
-z-index:5;
-}
-.sitemap div.tr {
-background:url(../images/bor_tr.gif) top right no-repeat;
-width:100%;
-height:25px;
-}
-.sitemap div.tm {
-width:100%;
-height:25px;
-}
-.sitemap div.smname {
-width:auto;
-float:left;
-padding:5px 0 0 10px;
-font-size:14px;
-color:#53a0df;
-font-weight:bold;
-}
-.sitemap div.mr {
-background:url(../images/bor_right.gif) right repeat-y;
-width:100%;
-}
-.sitemap div.mm {
-background:url(../images/bor_left.gif) top left repeat-y;
-padding:0 10px;
-width:auto;
-}
-.sitemap div.tl {
-background:url(../images/bor_tl.gif) top left no-repeat;
-width:100%;
-height:25px;
-}
-.sitemap div.br {
-background:url(../images/bor_br.gif) bottom right no-repeat;
-width:100%;
-height:25px;
-}
-.sitemap div.bm {
-background:url(../images/bor_bot.gif) bottom repeat-x;
-width:100%;
-height:25px;
-}
-.sitemap div.bl {
-background:url(../images/bor_bl.gif) bottom left no-repeat;
-width:100%;
-height:25px;
-}
-.sitemap div.optionsbut {
-background:url(../images/options.gif) top right no-repeat;
-height:23px;
-float:right;
-cursor:pointer;
-padding:0 25px 0 0;
-}
-.sitemap div.optionsbut span {
-display:block;
-float:left;
-height:20px;
-margin:4px 0 0 0;
-padding:3px 5px 0 10px;
-vertical-align:middle;
-color:#53a0df;
-}
-.sitemap div.divimgdefault {
-width:auto;
-height:auto;
-float:left;
-margin-left:20px;
-}
-div#optionsmenu {
-position:absolute;
-background-color:#eee;
-border:1px solid #ccc;
-width:auto;
-z-index:10;
-}
-div#optionsmenu div {
-margin:0;
-padding:3px 10px 3px 10px;
-cursor:pointer;
-}
-div#optionsmenu div:hover {background-color:#ccc;}
-.sitemap div.menulistouter {float:left;}
-.sitemap div.menulist span {
-padding:5px;
-display:block;
-}
-.sitemap div.menulist {
-width:200px;
-padding:0px;
-border:1px solid #ccc;
-}
-.sitemap div.menulist:hover {border:1px solid #ccc;}
-.sitemap div.menulist div {
-width:200px;
-padding:0;
-overflow:hidden;
-cursor:pointer;
-}
-.sitemap div.menulist div.menuoptionhover {background-color:#eee;}
-div .spacer {
-width:100%;
-clear:both;
-height:1px;
-}
-div#divoptions {
-position:absolute;
-background-color:#eee;
-cursor:pointer;
-z-index:10;
-}
-div#divoptions .menuoption {
-width:auto;
-float:left;
-padding:0;
-margin-left:5px;
-font-size:10px;
-}
-div#divoptions .menuoption:hover {
-text-decoration:underline;
-color:#53a0df;
-}
-div.settings {
-position:absolute;
-z-index:200;
-background-color:#fff;
-border:2px solid #fff;
-width:650px;
-height:auto;
-margin:auto;
-text-align:left;
-}
-div.settingssitemap {
-width:650px;
-height:auto;
-max-height:500px;
-overflow:auto;
-}
-div.settingsplugin {
-width:500px;
-height:auto;
-}
-div.settingsmenu {
-width:400px;
-height:auto;
-}
-div#divbg {
-text-align:center;
-position:absolute;
-z-index:150;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background-color:#000;
-}
-div.settingstop {
-background-color:#ccc;
-color:#fff;
-font-weight:bold;
-}
-div.settingstop div.settingstoptool {float:right;}
-div.add_menu_link {
-cursor:pointer;
-width:auto;
-float:left;
-padding:5px;
-}
-div.add_menu_link:hover{text-decoration:underline;}
+	background:url(../images/bor_top.gif) top repeat-x;
+	margin-top:5px;
+	width:850ppx;
+	height:auto;
+	text-align:left;
+	z-index:5;}
+.sitemap .tr {
+	background:url(../images/bor_tr.gif) top right no-repeat;
+	width:100%;
+	height:25px;}
+.sitemap .tm {
+	width:100%;
+	height:25px;}
+.sitemap .smname {
+	width:auto;
+	float:left;
+	padding:5px 0 0 10px;
+	font-size:1.1em;
+	color:#53a0df;
+	font-weight:bold;}
+.sitemap .mr {
+	background:url(../images/bor_right.gif) right repeat-y;
+	width:100%;}
+.sitemap .mm {
+	background:url(../images/bor_left.gif) top left repeat-y;
+	padding:0 10px;
+	width:auto;}
+.sitemap .tl {
+	background:url(../images/bor_tl.gif) top left no-repeat;
+	width:100%;
+	height:25px;}
+.sitemap .br {
+	background:url(../images/bor_br.gif) bottom right no-repeat;
+	width:100%;
+	height:25px;}
+.sitemap .bm {
+	background:url(../images/bor_bot.gif) bottom repeat-x;
+	width:100%;
+	height:25px;}
+.sitemap .bl {
+	background:url(../images/bor_bl.gif) bottom left no-repeat;
+	width:100%;
+	height:25px;}
+.sitemap .optionsbut {
+	background:url(../images/options.gif) top right no-repeat;
+	height:23px;
+	float:right;
+	cursor:pointer;
+	padding:0 25px 0 0;}
+.sitemap .optionsbut span {
+	display:block;
+	float:left;
+	height:20px;
+	margin:4px 0 0 0;
+	padding:3px 5px 0 10px;
+	vertical-align:middle;
+	color:#53a0df;}
+.sitemap .divimgdefault {
+	width:auto;
+	height:auto;
+	float:left;
+	margin-left:20px;}
+#optionsmenu {
+	position:absolute;
+	background-color:#eee;
+	border:1px solid #ccc;
+	width:auto;
+	z-index:10;}
+#optionsmenu div {
+	margin:0;
+	padding:3px 10px 3px 10px;
+	cursor:pointer;}
+#optionsmenu div:hover {background-color:#ccc;}
+.sitemap .menulistouter {float:left;}
+.sitemap .menulist span {
+	padding:5px;
+	display:block;}
+.sitemap .menulist {
+	width:200px;
+	padding:0px;
+	border:1px solid #ccc;}
+.sitemap .menulist:hover {border:1px solid #ccc;}
+.sitemap .menulist div {
+	width:200px;
+	padding:0;
+	overflow:hidden;
+	cursor:pointer;}
+.sitemap .menulist .menuoptionhover {background-color:#eee;}
+.spacer {
+	width:100%;
+	clear:both;
+	height:1px;}
+#divoptions {
+	position:absolute;
+	background-color:#eee;
+	cursor:pointer;
+	z-index:10;}
+#divoptions .menuoption {
+	width:auto;
+	float:left;
+	padding:0;
+	margin-left:5px;
+	font-size:10px;}
+#divoptions .menuoption:hover {
+	text-decoration:underline;
+	color:#53a0df;}
+.settings {
+	position:absolute;
+	z-index:200;
+	background-color:#fff;
+	border:2px solid #fff;
+	width:850px;
+	height:auto;
+	margin:auto;
+	text-align:left;}
+.settingssitemap {
+	width:850px;
+	height:auto;
+	max-height:500px;
+	overflow:auto;}
+.settingsplugin {
+	width:850px;
+	height:auto;}
+.settingsmenu {
+	width:850px;
+	height:auto;}
+#divbg {
+	text-align:center;
+	position:absolute;
+	z-index:150;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:#000;}
+.settingstop {
+	background-color:#ccc;
+	color:#fff;
+	font-weight:bold;}
+.settingstop .settingstoptool {float:right;}
+.add_menu_link {
+	cursor:pointer;
+	width:auto;
+	float:left;
+	padding:5px;}
+.add_menu_link:hover{text-decoration:underline;}
 span.plussign{
-display:block;
-border:1px solid #000;
-color:#000;
-width:10px;
-height:13px;
-float:left;
-padding-left:2px;
-margin-right:2px;
-}
-div.sitemapinfo {
-float:left;
-width:auto;
-margin-left:30px;
-}
-div.sitemapinfo div {
-border:1px solid #ccc;
-margin-bottom:3px;
-}
-div.sitemapinfo div {text-align:center;}
-div.menulistdrop {
-background-color:#eee;
-border:1px solid #ccc;
-position:absolute;
-z-index:10;
-}
-div.menulistoption {
-cursor:pointer;
-text-decoration:underline;
-width:auto;
-float:left;
-margin-right:10px;
-}
-div#divloading {
-background-color:#9f0909;
-color:#fff;
-width:auto;
-position:absolute;
-font-weight:bold;
-padding:5px;
-right:5px;
-z-index:300;
-}
+	display:block;
+	border:1px solid #000;
+	color:#000;
+	width:10px;
+	height:13px;
+	float:left;
+	padding-left:2px;
+	margin-right:2px;}
+.sitemapinfo {
+	float:left;
+	width:auto;
+	margin-left:30px;}
+.sitemapinfo div {
+	border:1px solid #ccc;
+	margin-bottom:3px;
+	text-align:center;}
+.menulistdrop {
+	background-color:#eee;
+	border:1px solid #ccc;
+	position:absolute;
+	z-index:10;}
+.menulistoption {
+	cursor:pointer;
+	text-decoration:underline;
+	width:auto;
+	float:left;
+	margin-right:10px;}
+#divloading {
+	background-color:#9f0909;
+	color:#fff;
+	width:auto;
+	position:absolute;
+	font-weight:bold;
+	padding:5px;
+	right:5px;
+	z-index:300;}

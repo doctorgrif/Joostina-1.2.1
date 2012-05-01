@@ -194,9 +194,9 @@ sajax_show_javascript();
 		StopTimer();
 		StopGUITimer();
 		SRAX.get('Timeout').style.display		= 'none';
-		SRAX.get('startInfo').style.display	= 'none';
-		SRAX.get('down_link').style.display	= 'block';
-		SRAX.get('done').style.display		= 'block';
+		SRAX.get('startInfo').style.display		= 'none';
+		SRAX.get('down_link').style.display		= 'block';
+		SRAX.get('done').style.display			= 'block';
 	}
 </script>
 </body>

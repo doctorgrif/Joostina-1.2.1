@@ -1,0 +1,115 @@
+/* Created by Andrew Marcus and Love Media. Some hacks are borrowed from Nick Fetchak's ie-css3.htc */
+
+<PUBLIC:COMPONENT>
+<PUBLIC:ATTACH EVENT="oncontentready" FOR="element" ONEVENT="BorderRadius()" />
+<SCRIPT TYPE="text/javascript">
+function BorderRadius() {
+	var ieTester = [1,2,3,].length;  
+	if (ieTester == 3) return;
+	
+	if (!document.namespaces.v) document.namespaces.add('v', 'urn:schemas-microsoft-com:vml');
+	if (!this.currentStyle['border-radius']) return false;
+
+	var wrapper = document.createElement('div');
+	var node = this.cloneNode(true);
+	var roundrect = document.createElement('v:roundrect');
+	var fill = document.createElement('v:fill');
+	
+	var arcSize = Math.min(parseInt(this.currentStyle['border-radius']) / Math.min(this.offsetWidth, this.offsetHeight), 1);
+	var fillColor = this.currentStyle.backgroundColor;
+	var fillSrc = this.currentStyle.backgroundImage.replace(/^url\("(.+)"\)$/, '$1');
+	var strokeColor = this.currentStyle.borderColor;
+	var strokeWeight = parseInt(this.currentStyle.borderWidth);
+	var filter = this.currentStyle.filter.toString();
+	var stroked;
+
+	isNaN(strokeWeight) ? stroked = 'false' : stroked = 'true';
+	
+	var opacity = filter.match(/alpha\(opacity=([0-9]{1,3})\)/i);
+	if (opacity) roundrect.style.filter = 'alpha(opacity=' + opacity[1] + ')';
+	
+	roundrect.arcsize = arcSize + 'px';
+	roundrect.style.width = this.offsetWidth + 'px';
+	roundrect.style.height = this.offsetHeight + 'px';
+	roundrect.style.position = 'absolute';
+	roundrect.style.top = '0';
+	roundrect.style.left = '0';
+	roundrect.fillcolor = fillColor;
+	roundrect.style.antialias = true;
+	roundrect.strokeColor = strokeColor;
+	roundrect.strokeWeight = strokeWeight + 'px';
+	roundrect.stroked = stroked;
+	
+	fill.color = fillColor;
+	fill.src = fillSrc;
+	fill.type = 'tile';
+	
+	wrapper.style.width = this.offsetWidth + 'px';
+	wrapper.style.height = this.offsetHeight + 'px';
+	wrapper.style.margin = this.currentStyle.margin;
+	wrapper.style.position = 'relative';
+	if (this.currentStyle.position == 'absolute' || 'fixed') {
+		wrapper.style.left = this.currentStyle.left;
+		wrapper.style.top = this.currentStyle.top;
+		wrapper.style.right = this.currentStyle.right;
+		wrapper.style.bottom = this.currentStyle.bottom;
+	}
+	if (this.currentStyle.position == 'absolute') {
+		wrapper.style.position = 'absolute';
+	}
+	if (this.currentStyle.position == 'fixed') {
+		wrapper.style.position = 'fixed';
+	}
+	if (this.currentStyle.styleFloat != 'none' ) {
+		wrapper.style.styleFloat = this.currentStyle.styleFloat;
+	}
+	
+	node.style.border = 'none';
+	node.style.background = 'none';
+	node.style.behavior = 'none';
+	node.style.position = 'relative';
+	node.style.left = 'auto';
+	node.style.top = 'auto';
+	node.style.right = 'auto';
+	node.style.bottom = 'auto';
+	node.style.margin = '0 important';
+		
+	roundrect.appendChild(fill);
+	wrapper.appendChild(roundrect);
+	wrapper.appendChild(node);
+	this.replaceNode(wrapper);
+	
+	if (typeof(window.roundrects) == 'undefined') {
+		window.roundrects = new Array();
+		
+		if (typeof(window.onresize) == 'function') window.previous_onresize = window.onresize;
+		window.onresize = Recalc;
+	}
+	window.roundrects.push(wrapper);
+}
+
+function Recalc() {
+	if (typeof(window.roundrects) != 'undefined') {
+		for (var i in window.roundrects) {
+			var wrapper = window.roundrects[i];
+			var roundrect = GetChild(wrapper, 'roundrect');
+			var fill = GetChild(wrapper, 'fill');
+			
+			roundrect.style.width = wrapper.offsetWidth + 'px';
+			roundrect.style.height = wrapper.offsetHeight + 'px';
+		}
+	}
+	else {
+		if (typeof(window.previous_onresize) == 'function') window.previous_onresize();
+	}
+	
+}
+
+function GetChild(node, tagName) {
+var children = node.childNodes;
+	for (var i = 0; i < children.length; i++) {
+		if (children[i].tagName == tagName) return children[i];
+	}
+}
+</SCRIPT>
+</PUBLIC:COMPONENT>

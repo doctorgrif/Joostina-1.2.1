@@ -79,7 +79,7 @@ function botSearchWeblinks($text, $phrase = '', $ordering = '') {
 		default:
 			$order = 'a.date DESC';
 	}
-	$query = "SELECT a.title AS title," . "\n a.description AS text," . "\n a.date AS created,"
+	$query = "SELECT STRAIGHT_JOIN a.title AS title," . "\n a.description AS text," . "\n a.date AS created,"
 		."\n CONCAT_WS( ' / ', " . $database->Quote($section) . ", b.title ) AS section," . "\n '1' AS browsernav,"
 		."\n a.url AS href" . "\n FROM #__weblinks AS a" . "\n INNER JOIN #__categories AS b ON b.id = a.catid"
 		."\n WHERE ($where)" . "\n AND a.published = 1" . "\n AND b.published = 1" . "\n AND b.access <= " . (int)

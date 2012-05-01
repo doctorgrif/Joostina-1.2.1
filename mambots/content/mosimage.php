@@ -128,24 +128,24 @@ function processImages(&$row, &$params, &$introCount) {
 // если есть заголовок, то выравнивание не меняем
 			if (!$attrib[4]) {
 				if ($attrib[1] == 'left' or $attrib[1] == 'right') {
-					$image .= ' style="float:' . $attrib[1] . ';"';
-					$div_style = ' style="float:' . $attrib[1] . ';"';
+					$image .= 'style="float:' . $attrib[1] . ';"';
+					$div_style = 'style="float:' . $attrib[1] . ';"';
 				} else {
-					$image .= $attrib[1] ? ' align="middle"' : '';
+					$image .= $attrib[1] ? 'align="middle"' : '';
 				}
 			}
 			$image .= ' alt="' . $attrib[2] . '" title="' . $attrib[2] . '" border="' . $border . '" />';
 // создание заголовка если есть
 			$caption = '';
 			if ($attrib[4]) {
-	$caption = '<div class="caption"';
+	$caption = '<figcaption><p class="caption"';
 		if ($attrib[6]) {
 			$caption .= ' style="text-align:' . $attrib[6] . ';"';
 			$caption .= ' align="' . $attrib[6] . '"';
 		}
-	$caption .= '><span>';
+	$caption .= '>';
 	$caption .= $attrib[4];
-	$caption .= '</span></div>';
+	$caption .= '</p></figcaption>';
 			}
 // заключительный вывод
 			if ($attrib[4]) {
@@ -156,21 +156,21 @@ function processImages(&$row, &$params, &$introCount) {
 				$border_width = '';
 				$style = '';
 				if ($params->def('margin')) {
-					$margin = ' margin:' . $params->def('margin') . 'px;';
+					$margin = 'margin:' . $params->def('margin') . 'px;';
 				}
 				if ($params->def('padding')) {
-					$padding = ' padding:' . $params->def('padding') . 'px;';
+					$padding = 'padding:' . $params->def('padding') . 'px;';
 				}
 				if ($attrib[1]) {
-					$float = ' float:' . $attrib[1] . ';';
+					$float = 'float:' . $attrib[1] . ';';
 				}
 				if ($attrib[3]) {
-					$border_width = ' border-width:' . $attrib[3] . 'px;';
+					$border_width = 'border-width:' . $attrib[3] . 'px;';
 				}
 				if ($params->def('margin') || $params->def('padding') || $attrib[1] || $attrib[3]) {
 					$style = ' style="' . $border_width . $float . $margin . $padding . $width . ';"';
 				}
-	$img = '<div class="mosimage ' . $attrib[1] . '" ' . $style . '>';
+	$img = '<div class="mosimage" ' . $style . '><figure>';
 // display caption in top position
 				if ($attrib[5] == 'top' && $caption) {
 					$img .= $caption;
@@ -180,9 +180,9 @@ function processImages(&$row, &$params, &$introCount) {
 				if ($attrib[5] == 'bottom' && $caption) {
 					$img .= $caption;
 				}
-	$img .= '</div>';
+	$img .= '</figure></div>';
 			} else {
-	$img = '<div class="mosimage ' . $attrib[1] . '"' . $div_style . ' >' . $image . '</div>';
+	$img = '<div class="mosimage"' . $div_style . ' ><figure>' . $image . '</figure></div>';
 			}
 			$images[] = $img;
 		}
@@ -191,7 +191,7 @@ function processImages(&$row, &$params, &$introCount) {
 }
 /**
 * Замена совпадающих тэгов an image
-* @param array - Массив соответствий (см. - preg_match_all)
+* @param array - Массив соответствий (см. preg_match_all)
 * @return string
 */
 function botMosImage_replacer(&$matches) {

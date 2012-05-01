@@ -16,7 +16,7 @@
 <head>
 <title>Img</title>
 <link rel="stylesheet" type="text/css" href="lib/style.css">
-<script type="text/javascript">
+<script language="JavaScript">
 function resizeOuterTo(w,h) {
  if (parseInt(navigator.appVersion)>3) {
    if (navigator.appName=="Netscape") {

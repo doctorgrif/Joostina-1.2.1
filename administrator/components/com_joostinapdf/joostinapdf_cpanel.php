@@ -52,9 +52,7 @@ $comp = $joopdf_pp_Config['componentOption'];
 			?>
 		<td class="thisform2" onClick="<?php echo $onClick;?>">
 			<img src="<?php echo $cpanel[$i]['IMG'];?>" alt="<?php echo $cpanel[$i]['TEXT'];?>" />
-				<a href="<?php echo $url;?>" title="<?php echo $cpanel[$i]['DESCR'];?>">
-					<?php echo $cpanel[$i]['TEXT'];?>
-				</a>
+			<a href="<?php echo $url;?>" title="<?php echo $cpanel[$i]['DESCR'];?>"><?php echo $cpanel[$i]['TEXT'];?></a>
 		</td>
 			<?php
 				}

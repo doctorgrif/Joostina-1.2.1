@@ -31,42 +31,43 @@ submitform(pressbutton);
 <form action="index2.php" method="post" name="adminForm">
 <table class="adminheading">
 <tr>
-<th class="edit">
+<th class="edit" colspan="4">
 <?php if ( $all ) { ?>
-<?php echo _MG_MGRMETA;?><br /><small>[<?php echo _MG_SECT;?>: <?php echo _MG_ALL;?>]</small>
+<p><?php echo _MG_MGRMETA;?> [<?php echo _MG_SECT;?>: <?php echo _MG_ALL;?>]</p>
 <?php } else { ?>
-<?php echo _MG_MGRMETA;?><br /><small>[<?php echo _MG_SECT;?>: <?php echo $section->title; ?>]</small>
+<p><?php echo _MG_MGRMETA;?> [<?php echo _MG_SECT;?>: <?php echo $section->title; ?>]</p>
 <?php } ?>
 </th>
+</tr>
+<tr>
 <?php if ( $all ) { ?>
-<td valign="top"><?php echo $lists['sectionid'];?></td>
+<td><p><?php echo $lists['sectionid'];?></p></td>
 <?php } ?>
-<td valign="top"><?php echo $lists['catid'];?></td>
-<td valign="top"><?php echo $lists['authorid'];?></td>
-<td valign="top">
-<label for="filtr"><?php echo _MG_FILTR;?>:</label><input type="text" name="search" id="filtr" value="<?php echo $search;?>" class="textarea" onChange="document.adminForm.submit();" />
+<td><p><?php echo $lists['catid'];?></p></td>
+<td><p><?php echo $lists['authorid'];?></p></td>
+<td><p>
+<label for="filtr"><?php echo _MG_FILTR;?>:</label><input type="text" name="search" id="filtr" value="<?php echo $search;?>" class="textarea" onChange="document.adminForm.submit();" /></p>
 </td>
 </tr>
-</table>
-<table width="100%">
 <tr>
-<td align="left"><font><?php echo _MG_DESCCOMMON;?></font></td></tr>
+<td colspan="4"><p><?php echo _MG_DESCCOMMON;?></p></td>
+</tr>
 </table>
 <table class="adminlist" width="100%">
 <tr>
-<th width="10px">#</th>
-<th width="10px">
-<input type="checkbox" name="toggle" value="" onClick="checkAll(<?php echo count( $rows ); ?>);" />
+<th width="2%"><p>#</p></th>
+<th width="2%">
+	<p><input type="checkbox" name="toggle" value="" onClick="checkAll(<?php echo count( $rows ); ?>);" /></p>
 </th>
-<th width="10%"><?php echo _MG_PREV;?></th>
-<th width="10%" class="title"><?php echo _MG_TITLE;?></th>
-<th width="10px"><?php echo _MG_ID;?></th>
+<th width="11%"><p><?php echo _MG_PREV;?></p></th>
+<th width="20%" class="title"><p><?php echo _MG_TITLE;?></p></th>
+<th width="5%"><p><?php echo _MG_ID;?></p></th>
 <?php if ( $all ) { ?>
-<th width="10%" align="left"><?php echo _MG_SECT;?></th>
+<th width="10%"><p><?php echo _MG_SECT;?></p></th>
 <?php } ?>
-<th width="10%" align="left"><?php echo _MG_CAT;?></th>
-<th width="25%" align="left"><?php echo _MG_KWORDS;?></th>
-<th width="25%" align="center"><?php echo _MG_DESC;?></th>
+<th width="10%"><p><?php echo _MG_CAT;?></p></th>
+<th width="20%"><p><?php echo _MG_KWORDS;?></p></th>
+<th width="20%"><p><?php echo _MG_DESC;?></p></th>
 </tr>
 <?php
 $k = 0;
@@ -110,7 +111,7 @@ if ( $row->created_by_alias ) {
 $author = $row->created_by_alias;
 } else {
 $linkA = 'index2.php?option=com_users&task=editA&hidemainmenu=1&id='. $row->created_by;
-$author = '<a href="'. $linkA .'" title="<?php echo _MG_USEREDITE;?>">'. $row->author .'</a>';
+$author = '<a href="'. $linkA .'" title="'._MG_USEREDITE.'">'. $row->author .'</a>';
 }
 } else {
 if ( $row->created_by_alias ) {
@@ -123,33 +124,40 @@ $date = mosFormatDate( $row->created, '%x' );
 $access = mosCommonHTML::AccessProcessing( $row, $i );
 $checked = mosCommonHTML::CheckedOutProcessing( $row, $i );
 ?>
-<tr class="<?php echo "row$k"; ?>">
-<td><?php echo $pageNav->rowNumber( $i ); ?></td>
-<td align="center">
-<input type="hidden" name="c_id[]" value='<?=$row->id?>'/><?php echo $checked ?>
+<tr class="<?php echo $row->k; ?>">
+<td width="2%">
+	<p><?php echo $pageNav->rowNumber($i); ?></p>
 </td>
-<td >
-<a href="#" onclick="window.open('<?php echo $mosConfig_live_site;?>/index2.php?option=com_content&amp;task=view&amp;id=<?php echo $row->id;?>&amp;Itemid=99999&amp;pop=1&amp;page=0','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no');" alt='<?php echo _MG_VIEWPAGE;?>'><?php echo _MG_VIEWPAGE;?></a>
+<td width="2%">
+	<p><input type="hidden" name="c_id[]" value="<?php echo $row->id;?>" /><?php echo $checked;?></p>
 </td>
-<td>
-<?php if ( $row->checked_out && ( $row->checked_out != $my->id ) ) { echo $row->title; } else { ?>
-<a target='' href="<?php echo $link; ?>" title="<?php echo _MG_CONTEDITE;?>"><?php echo htmlspecialchars($row->title, ENT_QUOTES); ?></a>
+<td width="11%">
+	<p>
+		<a href="#" onclick="window.open('<?php echo $mosConfig_live_site;?>/index2.php?option=com_content&amp;task=view&amp;id=<?php echo $row->id;?>&amp;Itemid=99999&amp;pop=1&amp;page=0','win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no');" alt='<?php echo _MG_VIEWPAGE;?>'><?php echo _MG_VIEWPAGE;?></a>
+	</p>
+</td>
+<td width="20%">
+	<p><?php if ( $row->checked_out && ( $row->checked_out != $my->id ) ) { echo $row->title; } else { ?>
+		<a target='' href="<?php echo $link; ?>" title="<?php echo _MG_CONTEDITE;?>"><?php echo htmlspecialchars($row->title, ENT_QUOTES); ?></a>
+	</p>
 <?php } ?>
 </td>
-<td align="left"><?php echo $row->id; ?></td>
+<td width="5%">
+	<p><?php echo $row->id; ?></p>
+</td>
 <?php if ( $all ) { ?>
-<td align="left">
-<a href="<?php echo $row->sect_link; ?>" title="<?php echo _MG_SECTEDITE;?>"><?php echo $row->section_name; ?></a>
+<td width="10%">
+	<p><a href="<?php echo $row->sect_link; ?>" title="<?php echo _MG_SECTEDITE;?>"><?php echo $row->section_name; ?></a></p>
 </td>
 <?php } ?>
-<td align="left">
-<a href="<?php echo $row->cat_link; ?>" title="<?php echo _MG_CATEDITE;?>"><?php echo $row->name; ?></a>
+<td width="10%">
+	<p><a href="<?php echo $row->cat_link; ?>" title="<?php echo _MG_CATEDITE;?>"><?php echo $row->name; ?></a></p>
 </td>
-<td align="left">
-<textarea name="metakey[<?=$row->id;?>]" cols="40" rows="5"><?php echo $row->metakey; ?></textarea>
+<td width="20%">
+	<p><textarea name="metakey[<?php echo $row->id;?>]" cols="25" rows="5"><?php echo $row->metakey; ?></textarea></p>
 </td>
-<td align="left">
-<textarea name="metadesc[<?=$row->id?>]" cols="40" rows="5"><?php echo $row->metadesc; ?></textarea>
+<td width="20%">
+	<p><textarea name="metadesc[<?php echo $row->id; ?>]" cols="25" rows="5"><?php echo $row->metadesc; ?></textarea></p>
 </td>
 </tr>
 <?php $k = 1 - $k; } ?>
@@ -187,32 +195,32 @@ submitform(pressbutton);
 <tr>
 <th class="edit" rowspan="2">
 <?php if ( $all ) { ?>
-<?php echo _MG_MGRARH;?> <small>[ <?php echo _MG_SECT;?>: <?php echo _MG_ALL;?> ]</small>
+<p><?php echo _MG_MGRARH;?> <small>[ <?php echo _MG_SECT;?>: <?php echo _MG_ALL;?> ]</small></p>
 <?php } else { ?>
-<?php echo _MG_MGRARH;?> <small>[ <?php echo _MG_SECT;?>: <?php echo $section->title; ?> ]</small>
+<p><?php echo _MG_MGRARH;?> <small>[ <?php echo _MG_SECT;?>: <?php echo $section->title; ?> ]</small></p>
 <?php } ?>
 </th>
 <?php if ( $all ) { ?>
-<td width="right" rowspan="2" valign="top"><?php echo $lists['sectionid'];?></td>
+<td rowspan="2" valign="top"><p><?php echo $lists['sectionid'];?></p></td>
 <?php } ?>
-<td width="right"><?php echo $lists['catid'];?></td>
-<td width="right"><?php echo $lists['authorid'];?></td>
+<td><p><?php echo $lists['catid'];?></p></td>
+<td><p><?php echo $lists['authorid'];?></p></td>
 </tr>
 <tr>
-<td align="right"><?php echo _MG_FILTR;?>:</td>
-<td><input type="text" name="search" value="<?php echo $search;?>" class="textarea" onChange="document.adminForm.submit();" /></td>
+<td><p><?php echo _MG_FILTR;?>:</p></td>
+<td><p><input type="text" name="search" value="<?php echo $search;?>" class="textarea" onChange="document.adminForm.submit();" /></p></td>
 </tr>
 </table>
 <table class="adminlist">
 <tr>
-<th width="5">#</th>
-<th width="20"><input type="checkbox" name="toggle" value="" onClick="checkAll(<?php echo count( $rows ); ?>);" /></th>
-<th class="title"><?php echo _MG_TITLE;?></th>
-<th width="2%"><?php echo _MG_ORDER;?></th>
-<th width="1%"><a href="javascript: saveorder( <?php echo count( $rows )-1; ?> )"><img src="images/filesave.png" width="16" height="16" alt="��������� �������" /></a></th>
-<th width="15%" align="left"><?php echo _MG_CAT;?></th>
-<th width="15%" align="left"><?php echo _MG_AUTH;?></th>
-<th align="center" width="10"><?php echo _MG_DATE;?></th>
+<th width="5%"><p>#</p></th>
+<th width="5%"><p><input type="checkbox" name="toggle" value="" onClick="checkAll(<?php echo count( $rows ); ?>);" /></p></th>
+<th width="30%" class="title"><p><?php echo _MG_TITLE;?></p></th>
+<th width="5%"><p><?php echo _MG_ORDER;?></p></th>
+<th width="5%"><p><a href="javascript: saveorder( <?php echo count( $rows )-1; ?> )"><img src="images/filesave.png" width="16" height="16" alt="��������� �������" /></a></p></th>
+<th width="20%" align="left"><p><?php echo _MG_CAT;?></p></th>
+<th width="20%" align="left"><p><?php echo _MG_AUTH;?></p></th>
+<th width="10%"><p><?php echo _MG_DATE;?></p></th>
 </tr>
 <?php
 $k = 0;
@@ -235,14 +243,14 @@ $author = $row->author;
 }
 $date = mosFormatDate( $row->created, '%x' );
 ?>
-<tr class="<?php echo "row$k"; ?>">
-<td><?php echo $pageNav->rowNumber( $i ); ?></td>
-<td width="20"><?php echo mosHTML::idBox( $i, $row->id ); ?></td>
-<td><?php echo $row->title; ?></td>
-<td align="center" colspan="2"><input type="text" name="order[]" size="5" value="<?php echo $row->ordering; ?>" class="textarea" style="text-align: center;" /></td>
-<td><a href="<?php echo $row->cat_link; ?>" title="<?php echo _MG_CATEDITE;?>"><?php echo $row->name; ?></a></td>
-<td><?php echo $author; ?></td>
-<td><?php echo $date; ?></td>
+<tr class="<?php echo $row->k; ?>">
+<td width="5%"><p><?php echo $pageNav->rowNumber( $i ); ?></p></td>
+<td width="5%"><p><?php echo mosHTML::idBox( $i, $row->id ); ?></p></td>
+<td width="30%"><p><?php echo $row->title; ?></p></td>
+<td width="10%" colspan="2"><p><input type="text" name="order[]" size="5" value="<?php echo $row->ordering; ?>" class="textarea" /></p></td>
+<td width="20%"><p><a href="<?php echo $row->cat_link; ?>" title="<?php echo _MG_CATEDITE;?>"><?php echo $row->name; ?></a></p></td>
+<td width="20%"><p><?php echo $author; ?></p></td>
+<td width="10%"><p><?php echo $date; ?></p></td>
 </tr>
 <?php $k = 1 - $k; } ?>
 </table>
@@ -340,50 +348,50 @@ submitform( pressbutton );
 <form action="index2.php" method="post" name="adminForm">
 <table class="adminheading">
 <tr>
-<th class="edit"><?php echo _MG_CONTITEM;?> : <small><?php echo $row->id ? '<?php echo _MG_EDITE;?>' : '<?php echo _MG_NEW;?>';?></small>
+<th class="edit"><p><?php echo _MG_CONTITEM;?>: <small><?php echo $row->id ? '<?php echo _MG_EDITE;?>': '<?php echo _MG_NEW;?>';?></small></p>
 <?php if ( $row->id ) { ?>
-<small>[ <?php echo _MG_SECT;?> : <?php echo $section?> ]</small>
+<p><small>[ <?php echo _MG_SECT;?>: <?php echo $section?> ]</small></p>
 <?php } ?>
 </th>
 </tr>
 </table>
-<table cellspacing="0" cellpadding="0" width="100%">
+<table width="100%">
 <tr>
 <td width="60%" valign="top">
 <table width="100%" class="adminform">
 <tr>
 <td width="100%">
-<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<table width="100%">
 <tr>
-<th colspan="4"><?php echo _MG_ITEMDETLS;?></th>
+<th colspan="4"><p><?php echo _MG_ITEMDETLS;?></p></th>
 <tr>
 <tr>
-<td><?php echo _MG_TITLE;?>:</td>
-<td><input class="textarea" type="text" name="title" size="30" maxlength="100" value="<?php echo $row->title; ?>" /></td>
-<td><?php echo _MG_SECT;?>:</td>
-<td><?php echo $lists['sectionid']; ?></td>
+<td><p><?php echo _MG_TITLE;?>:</p></td>
+<td><p><input class="textarea" type="text" name="title" size="30" maxlength="100" value="<?php echo $row->title; ?>" /></p></td>
+<td><p><?php echo _MG_SECT;?>:</p></td>
+<td><p><?php echo $lists['sectionid']; ?></p></td>
 </tr>
 <tr>
-<td><?php echo _MG_TITLEALIAS;?>:</td>
-<td><input name="title_alias" type="text" class="textarea" id="title_alias" value="<?php echo $row->title_alias; ?>" size="30" maxlength="100" /></td>
-<td><?php echo _MG_CAT;?>:</td>
-<td><?php echo $lists['catid']; ?></td>
+<td><p><?php echo _MG_TITLEALIAS;?>:</p></td>
+<td><p><input name="title_alias" type="text" class="textarea" id="title_alias" value="<?php echo $row->title_alias; ?>" size="30" maxlength="100" /></p></td>
+<td><p><?php echo _MG_CAT;?>:</p></td>
+<td><p><?php echo $lists['catid']; ?></p></td>
 </tr>
 </table>
 </td>
 </tr>
 <tr>
-<td width="100%"><?php echo _MG_INTROTXT;?><br />
-<?php
+<td width="100%"><p><?php echo _MG_INTROTXT;?></p>
+<p><?php
 // parameters: areaname, content, hidden field, width, height, rows, cols
-editorArea( 'editor1',$row->introtext , 'introtext', '100%;', '350', '75', '20' ) ; ?>
+editorArea( 'editor1',$row->introtext , 'introtext', '100%;', '350', '75', '20' ) ; ?></p>
 </td>
 </tr>
 <tr>
-<td width="100%"><?php echo _MG_MAINTXT;?><br />
-<?php
+<td width="100%"><p><?php echo _MG_MAINTXT;?></p>
+<p><?php
 // parameters: areaname, content, hidden field, width, height, rows, cols
-editorArea( 'editor2',$row->fulltext , 'fulltext', '100%;', '400', '75', '30' ) ; ?>
+editorArea( 'editor2',$row->fulltext , 'fulltext', '100%;', '400', '75', '30' ) ; ?></p>
 </td>
 </tr>
 </table>
@@ -392,90 +400,91 @@ editorArea( 'editor2',$row->fulltext , 'fulltext', '100%;', '400', '75', '30' ) 
 <table>
 <tr>
 <td>
-<?php
+<p><?php
 $tabs->startPane("content-pane");
 $tabs->startTab("Publishing","publish-page");
-?>
+?></p>
 <table class="adminform">
 <tr>
-<th colspan="2"><?php echo _MG_PUBLINFO;?></th>
+<th colspan="2"><p><?php echo _MG_PUBLINFO;?></p></th>
 <tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_FRONTSHOW;?>:</td>
-<td><input type="checkbox" name="frontpage" value="1" <?php echo $row->frontpage ? 'checked="checked"' : ''; ?> /></td>
+<td valign="top"><p><?php echo _MG_FRONTSHOW;?>:</p></td>
+<td><p><input type="checkbox" name="frontpage" value="1" <?php echo $row->frontpage ? 'checked="checked"' : ''; ?> /></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_PUBLISH;?>:</td>
-<td><input type="checkbox" name="published" value="1" <?php echo $row->state ? 'checked="checked"' : ''; ?> /></td>
+<td valign="top"><p><?php echo _MG_PUBLISH;?>:</p></td>
+<td><p><input type="checkbox" name="published" value="1" <?php echo $row->state ? 'checked="checked"' : ''; ?> /></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_ACCLAYER;?>:</td>
-<td><?php echo $lists['access']; ?></td>
+<td valign="top"><p><?php echo _MG_ACCLAYER;?>:</p></td>
+<td><p><?php echo $lists['access']; ?></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_AUTHALIAS;?>:</td>
-<td><input type="text" name="created_by_alias" size="30" maxlength="100" value="<?php echo $row->created_by_alias; ?>" class="textarea" /></td>
+<td valign="top"><p><?php echo _MG_AUTHALIAS;?>:</p></td>
+<td><p><input type="text" name="created_by_alias" size="30" maxlength="100" value="<?php echo $row->created_by_alias; ?>" class="textarea" /></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_CREATBY;?>:</td>
-<td><?php echo $lists['created_by']; ?></td>
+<td valign="top"><p><?php echo _MG_CREATBY;?>:</p></td>
+<td><p><?php echo $lists['created_by']; ?></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_ORDERING;?>:</td>
-<td><?php echo $lists['ordering']; ?></td>
+<td valign="top"><p><?php echo _MG_ORDERING;?>:</p></td>
+<td><p><?php echo $lists['ordering']; ?></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_RECREATBY;?></td>
+<td valign="top"><p><?php echo _MG_RECREATBY;?></p></td>
 <td>
-<input class="textarea" type="text" name="created" id="created" size="25" maxlength="19" value="<?php echo $row->created; ?>" />
-<input name="reset" type="reset" class="button" onClick="return showCalendar('created', 'y-mm-dd');" value="...">
+<p><input class="textarea" type="text" name="created" id="created" size="25" maxlength="19" value="<?php echo $row->created; ?>" />
+<input name="reset" type="reset" class="button" onClick="return showCalendar('created', 'y-mm-dd');" value="..."></p>
 </td>
 </tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_PUBLSTART;?>:</td>
+<td valign="top"><p><?php echo _MG_PUBLSTART;?>:</p></td>
 <td>
-<input class="textarea" type="text" name="publish_up" id="publish_up" size="25" maxlength="19" value="<?php echo $row->publish_up; ?>" />
-<input type="reset" class="button" value="..." onClick="return showCalendar('publish_up', 'y-mm-dd');">
+<p><input class="textarea" type="text" name="publish_up" id="publish_up" size="25" maxlength="19" value="<?php echo $row->publish_up; ?>" />
+<input type="reset" class="button" value="..." onClick="return showCalendar('publish_up', 'y-mm-dd');"></p>
 </td>
 </tr>
 <tr>
-<td valign="top" align="right"><?php echo _MG_PUBLFINISH;?>:</td>
+<td valign="top"><p><?php echo _MG_PUBLFINISH;?>:</p></td>
 <td>
-<input class="textarea" type="text" name="publish_down" id="publish_down" size="25" maxlength="19" value="<?php echo $row->publish_down; ?>" />
-<input type="reset" class="button" value="..." onClick="return showCalendar('publish_down', 'y-mm-dd');">
+<p><input class="textarea" type="text" name="publish_down" id="publish_down" size="25" maxlength="19" value="<?php echo $row->publish_down; ?>" />
+<input type="reset" class="button" value="..." onClick="return showCalendar('publish_down', 'y-mm-dd');"></p>
 </td>
 </tr>
 </table>
-<br />
 <table class="adminform">
 <?php if ( $row->id ) { ?>
 <tr>
-<td><strong><?php echo _MG_IDITEM;?>:</strong></td>
-<td><?php echo $row->id; ?></td>
+<td><p><?php echo _MG_IDITEM;?>:</p></td>
+<td><p><?php echo $row->id; ?></p></td>
 </tr>
 <?php } ?>
 <tr>
-<td width="90px" valign="top" align="right"><strong><?php echo _MG_STATE;?>:</strong></td>
-<td><?php echo $row->state > 0 ? '<?php echo _MG_PUBLISH;?>' : ($row->state < 0 ? '<?php echo _MG_ARH;?>' : '<?php echo _MG_DRAFT;?>');?></td>
+<td width="90px" valign="top"><p><?php echo _MG_STATE;?>:</p></td>
+<td><p><?php echo $row->state > 0 ? '<?php echo _MG_PUBLISH;?>' : ($row->state < 0 ? '<?php echo _MG_ARH;?>' : '<?php echo _MG_DRAFT;?>');?></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><strong><?php echo _MG_HITS;?></strong>:</td>
+<td valign="top"><p><?php echo _MG_HITS;?>:</p></td>
 <td>
-<?php echo $row->hits;?>
-<div <?php echo $visibility; ?>><input name="reset_hits" type="button" class="button" value="<?php echo _MG_RESETHITS;?>" onClick="submitbutton('resethits');"></div>
+<p><?php echo $row->hits;?></p>
+<div <?php echo $visibility; ?>>
+<p><input name="reset_hits" type="button" class="button" value="<?php echo _MG_RESETHITS;?>" onClick="submitbutton('resethits');"></p>
+</div>
 </td>
 </tr>
 <tr>
-<td valign="top" align="right"><strong><?php echo _MG_REVISED;?></strong>:</td>
-<td><?php echo $row->version;?> <?php echo _MG_TIMES;?></td>
+<td valign="top"><p><?php echo _MG_REVISED;?>:</p></td>
+<td><p><?php echo $row->version;?> <?php echo _MG_TIMES;?></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><strong><?php echo _MG_CREATED;?></strong></td>
-<td><?php echo $row->created ? "$create_date</td></tr><tr><td>$row->creator" : "<?php echo _MG_NEWDOC;?>"; ?></td>
+<td valign="top"><p><?php echo _MG_CREATED;?></p></td>
+<td><p><?php echo $row->created ? "$create_date</td></tr><tr><td>$row->creator" : "<?php echo _MG_NEWDOC;?>"; ?></p></td>
 </tr>
 <tr>
-<td valign="top" align="right"><strong><?php echo _MG_LASTMOD;?></strong></td>
-<td><?php echo $row->modified ? "$mod_date</td></tr><tr><td valign='top' align='right'></td><td>$row->modifier" : "<?php echo _MG_UNMOD;?>";?></td>
+<td valign="top"><p><?php echo _MG_LASTMOD;?></p></td>
+<td><p><?php echo $row->modified ? "$mod_date</td></tr><tr><td valign='top' align='right'></td><td>$row->modifier" : "<?php echo _MG_UNMOD;?>";?></p></td>
 </tr>
 </table>
 <?php
@@ -491,21 +500,21 @@ $tabs->startTab("Images","images-page");
 <table width="100%">
 <tr>
 <td width="48%">
-<div align="center">
-<?php echo _MG_IMGGAL;?>:<br />
-<?php echo $lists['imagefiles'];?><br />
-<?php echo _MG_SUBFLDRS;?>: <?php echo $lists['folders'];?>
+<div>
+<p><?php echo _MG_IMGGAL;?>:</p>
+<p><?php echo $lists['imagefiles'];?></p>
+<p><?php echo _MG_SUBFLDRS;?>: <?php echo $lists['folders'];?></p>
 </div>
 </td>
 <td width="2%">
-<input class="button" type="button" value=">>" onclick="addSelectedToList('adminForm','imagefiles','imagelist')" title="Add"/><br/>
-<input class="button" type="button" value="<<" onclick="delSelectedFromList('adminForm','imagelist')" title="Remove"/>
+<p><input class="button" type="button" value=">>" onclick="addSelectedToList('adminForm','imagefiles','imagelist')" title="Add"/><br/>
+<input class="button" type="button" value="<<" onclick="delSelectedFromList('adminForm','imagelist')" title="Remove"/></p>
 </td>
 <td width="48%">
-<div align="center"><?php echo _MG_CONTIMG;?>:<br />
-<?php echo $lists['imagelist'];?><br />
-<input class="button" type="button" value="Up" onclick="moveInList('adminForm','imagelist',adminForm.imagelist.selectedIndex,-1)" />
-<input class="button" type="button" value="Down" onclick="moveInList('adminForm','imagelist',adminForm.imagelist.selectedIndex,+1)" />
+<div><p><?php echo _MG_CONTIMG;?>:</p>
+<p><?php echo $lists['imagelist'];?></p>
+</p><input class="button" type="button" value="Up" onclick="moveInList('adminForm','imagelist',adminForm.imagelist.selectedIndex,-1)" />
+<input class="button" type="button" value="Down" onclick="moveInList('adminForm','imagelist',adminForm.imagelist.selectedIndex,+1)" /></p>
 </div>
 </td>
 </tr>
@@ -514,48 +523,48 @@ $tabs->startTab("Images","images-page");
 </tr>
 <tr valign="top">
 <td>
-<div align="center"><?php echo _MG_SAMPLEIMG;?>:<br/><img name="view_imagefiles" src="../images/M_images/blank.png" width="100" /></div>
+<div><p><?php echo _MG_SAMPLEIMG;?>:</p><p><img name="view_imagefiles" src="../images/M_images/blank.png" width="100" /></p></div>
 </td>
 <td valign="top">
-<div align="center"><?php echo _MG_ACTIVEIMG;?>:<br/><img name="view_imagelist" src="../images/M_images/blank.png" width="100" /></div>
+<div><p><?php echo _MG_ACTIVEIMG;?>:</p><p><img name="view_imagelist" src="../images/M_images/blank.png" width="100" /></p></div>
 </td>
 </tr>
 <tr>
-<td colspan="2"><?php echo _MG_SELIMGEDITE;?>:<table>
+<td colspan="2"></p><?php echo _MG_SELIMGEDITE;?>:</p><table>
 <tr>
-<td align="right"><?php echo _MG_CODE;?>:</td>
-<td><input class="textarea" type="text" name= "_source" value="" /></td>
+<td><p><?php echo _MG_CODE;?>:</p></td>
+<td><p><input class="textarea" type="text" name= "_source" value="" /></p></td>
 </tr>
 <tr>
-<td align="right"><?php echo _MG_IMGALIGN;?>:</td>
-<td><?php echo $lists['_align']; ?></td>
+<td><p><?php echo _MG_IMGALIGN;?>:</p></td>
+<td><p><?php echo $lists['_align']; ?></p></td>
 </tr>
 <tr>
-<td align="right"><?php echo _MG_ALTTXT;?>:</td>
-<td><input class="textarea" type="text" name="_alt" value="" /></td>
+<td><p><?php echo _MG_ALTTXT;?>:</p></td>
+<td><p><input class="textarea" type="text" name="_alt" value="" /></p></td>
 </tr>
 <tr>
-<td align="right"><?php echo _MG_BORD;?>:</td>
-<td><input class="textarea" type="text" name="_border" value="" size="3" maxlength="1" /></td>
+<td><p><?php echo _MG_BORD;?>:</p></td>
+<td><p><input class="textarea" type="text" name="_border" value="" size="3" maxlength="1" /></p></td>
 </tr>
 <tr>
-<td align="right"><?php echo _MG_CAPTION;?>:</td>
-<td><input class="textarea" type="text" name="_caption" value="" size="30" /></td>
+<td><p><?php echo _MG_CAPTION;?>:</p></td>
+<td><p><input class="textarea" type="text" name="_caption" value="" size="30" /></p></td>
 </tr>
 <tr>
-<td align="right"><?php echo _MG_CAPTIONPOS;?>:</td>
-<td><?php echo $lists['_caption_position']; ?></td>
+<td><p><?php echo _MG_CAPTIONPOS;?>:</p></td>
+<td><p><?php echo $lists['_caption_position']; ?></p></td>
 </tr>
 <tr>
-<td align="right"><?php echo _MG_CAPTIONALIGN;?>:</td>
-<td><?php echo $lists['_caption_align']; ?></td>
+<td><p><?php echo _MG_CAPTIONALIGN;?>:</p></td>
+<td><p><?php echo $lists['_caption_align']; ?></p></td>
 </tr>
 <tr>
-<td align="right"><?php echo _MG_CAPTIONWIDTH;?>:</td>
-<td><input class="textarea" type="text" name="_width" value="" size="5" maxlength="5" /></td>
+<td><p><?php echo _MG_CAPTIONWIDTH;?>:</p></td>
+<td><p><input class="textarea" type="text" name="_width" value="" size="5" maxlength="5" /></p></td>
 </tr>
 <tr>
-<td colspan="2"><input class="button" type="button" value="Применить" onClick="applyImageProps()" /></td>
+<td colspan="2"><p><input class="button" type="button" value="Применить" onClick="applyImageProps()" /></p></td>
 </tr>
 </table>
 </td>
@@ -567,13 +576,13 @@ $tabs->startTab("Parameters","params-page");
 ?>
 <table class="adminform">
 <tr>
-<th colspan="2"><?php echo _MG_PARAMCTRL;?></th>
+<th colspan="2"><p><?php echo _MG_PARAMCTRL;?></p></th>
 <tr>
 <tr>
-<td><?php echo _MG_PARAMDESC;?><br /></td>
+<td><p><?php echo _MG_PARAMDESC;?></p></td>
 </tr>
 <tr>
-<td><?php echo $params->render();?></td>
+<td><p><?php echo $params->render();?></p></td>
 </tr>
 </table>
 <?php
@@ -582,20 +591,20 @@ $tabs->startTab("Meta Info","metadata-page");
 ?>
 <table class="adminform">
 <tr>
-<th colspan="2"><?php echo _MG_METEDATE;?></th>
+<th colspan="2"><p><?php echo _MG_METEDATE;?></p></th>
 <tr>
 <tr>
-<td><?php echo _MG_DESC;?>:<br />
-<textarea class="textarea" cols="30" rows="3" style="width:300px; height:50px;" name="metadesc" width="500"><?php echo str_replace('&','&amp;',$row->metadesc); ?></textarea>
+<td><p><?php echo _MG_DESC;?>:</p>
+<p><textarea class="textarea" cols="30" rows="3" style="width:300px; height:50px;" name="metadesc" width="500"><?php echo str_replace('&','&amp;',$row->metadesc); ?></textarea></p>
 </td>
 </tr>
 <tr>
-<td><?php echo _MG_KWORDS;?>:<br />
-<textarea class="textarea" cols="30" rows="3" style="width:300px; height:50px;" name="metakey" width="500"><?php echo str_replace('&','&amp;',$row->metakey); ?></textarea>
+<td><p><?php echo _MG_KWORDS;?>:</p>
+<p><textarea class="textarea" cols="30" rows="3" style="width:300px; height:50px;" name="metakey" width="500"><?php echo str_replace('&','&amp;',$row->metakey); ?></textarea></p>
 </td>
 </tr>
 <tr>
-<td><input type="button" class="button" value="Добавить Раздел/Категорию/Заголовок" onClick="f=document.adminForm;f.metakey.value=document.adminForm.sectionid.options[document.adminForm.sectionid.selectedIndex].text+', '+getSelectedText('adminForm','catid')+', '+f.title.value+f.metakey.value;" /></td>
+<td><p><input type="button" class="button" value="Добавить Раздел/Категорию/Заголовок" onClick="f=document.adminForm;f.metakey.value=document.adminForm.sectionid.options[document.adminForm.sectionid.selectedIndex].text+', '+getSelectedText('adminForm','catid')+', '+f.title.value+f.metakey.value;" /></p></td>
 </tr>
 </table>
 <?php
@@ -604,35 +613,34 @@ $tabs->startTab("Link to Menu","link-page");
 ?>
 <table class="adminform">
 <tr>
-<th colspan="2"><?php echo _MG_LINKTOMENU;?></th>
+<th colspan="2"><p><?php echo _MG_LINKTOMENU;?></p></th>
 <tr>
 <tr>
-<td colspan="2"><?php echo _MG_MENUINFO;?></td>
+<td colspan="2"><p><?php echo _MG_MENUINFO;?></p></td>
 <tr>
 <tr>
-<td valign="top" width="90px"><?php echo _MG_MENUSEL;?></td>
-<td><?php echo $lists['menuselect']; ?></td>
+<td valign="top" width="90px"><p><?php echo _MG_MENUSEL;?></p></td>
+<td><p><?php echo $lists['menuselect']; ?></p></td>
 <tr>
 <tr>
-<td valign="top" width="90px"><?php echo _MG_ITEMMENUNAME;?></td>
-<td><input type="text" name="link_name" class="inputbox" value="" size="30" /></td>
+<td valign="top" width="90px"><p><?php echo _MG_ITEMMENUNAME;?></p></td>
+<td><p><input type="text" name="link_name" class="inputbox" value="" size="30" /></p></td>
 <tr>
 <tr>
 <td>
 </td>
-<td><input name="menu_link" type="button" class="button" value="Link to Menu" onClick="submitbutton('menulink');" /></td>
+<td><p><input name="menu_link" type="button" class="button" value="Link to Menu" onClick="submitbutton('menulink');" /></p></td>
 <tr>
 <tr>
-<th colspan="2"><?php echo _MG_EXISTLINKMENU;?></th>
+<th colspan="2"><p><?php echo _MG_EXISTLINKMENU;?></p></th>
 </tr>
 <?php if ( $menus == NULL ) { ?>
 <tr>
-<td colspan="2"><?php echo _MG_NO;?></td>
+<td colspan="2"><p><?php echo _MG_NO;?></p></td>
 </tr>
 <?php } else { mosCommonHTML::menuLinksContent( $menus ); } ?>
 <tr>
-<td colspan="2">
-</td>
+<td colspan="2"></td>
 </tr>
 </table>
 <?php
@@ -675,29 +683,26 @@ submitform( pressbutton );
 }
 </script>
 <form action="index2.php" method="post" name="adminForm">
-<br />
 <table class="adminheading">
 <tr>
-<th class="edit"><?php echo _MG_NO;?><?php echo _MG_MOVEITEM;?></th>
+<th class="edit"><p><?php echo _MG_NO;?> <?php echo _MG_MOVEITEM;?></p></th>
 </tr>
 </table>
-<br />
 <table class="adminform">
 <tr>
-<td align="left" valign="top" width="40%"><strong><?php echo _MG_MOVESECTCAT;?>:</strong><br />
-<?php echo $sectCatList; ?><br /></td>
-<td align="left" valign="top"><strong><?php echo _MG_ITEMMOVED;?>:</strong><br />
+<td valign="top" width="40%"><p><?php echo _MG_MOVESECTCAT;?>:</p>
+<p><?php echo $sectCatList; ?></p></td>
+<td valign="top"><p><?php echo _MG_ITEMMOVED;?>:</p>
 <?php
-echo "<ol>";
+echo '<ol>';
 foreach ( $items as $item ) {
-echo "<li>". $item->title ."</li>";
+echo '<li>'. $item->title .'</li>';
 }
-echo "</ol>";
+echo '</ol>';
 ?>
 </td>
 </tr>
 </table>
-<br /><br />
 <input type="hidden" name="option" value="<?php echo $option;?>" />
 <input type="hidden" name="sectionid" value="<?php echo $sectionid; ?>" />
 <input type="hidden" name="task" value="" />
@@ -727,26 +732,25 @@ submitform( pressbutton );
 }
 }
 </script>
-<form action="index2.php" method="post" name="adminForm"><br />
+<form action="index2.php" method="post" name="adminForm">
 <table class="adminheading">
-<tr><th class="edit"><?php echo _MG_COPYITEM;?></th></tr>
-</table><br />
+<tr><th class="edit"><p><?php echo _MG_COPYITEM;?></p></th></tr>
+</table>
 <table class="adminform">
 <tr>
-<td align="left" valign="top" width="40%"><strong><?php echo _MG_COPYSECTCAT;?>:</strong><br />
-<?php echo $sectCatList; ?><br /><br /></td>
-<td align="left" valign="top"><strong><?php echo _MG_ITEMMCOPY;?>:</strong><br />
+<td valign="top" width="40%"><p><?php echo _MG_COPYSECTCAT;?>:</p>
+<p><?php echo $sectCatList; ?></p></td>
+<td valign="top"><p><?php echo _MG_ITEMMCOPY;?>:</p>
 <?php
-echo "<ol>";
+echo '<ol>';
 foreach ( $items as $item ) {
-echo "<li>". $item->title ."</li>";
+echo '<li>'. $item->title .'</li>';
 }
-echo "</ol>";
+echo '</ol>';
 ?>
 </td>
 </tr>
 </table>
-<br /><br />
 <input type="hidden" name="option" value="<?php echo $option;?>" />
 <input type="hidden" name="sectionid" value="<?php echo $sectionid; ?>" />
 <input type="hidden" name="task" value="" />

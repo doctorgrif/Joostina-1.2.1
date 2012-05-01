@@ -83,25 +83,25 @@ class HTML_typedcontent {
 
 		$times = '';
 		if($row->publish_up == $nullDate) {
-		$times .= "<tr><td>"._START.": "._ALWAYS."</td></tr>";
+		$times .= '<tr><td>'._START.': '._ALWAYS.'</td></tr>';
 		} else {
-		$times .= "<tr><td>"._START.": $row->publish_up</td></tr>";
+		$times .= '<tr><td>'._START.': '.$row->publish_up.'</td></tr>';
 		}
 		if($row->publish_down == $nullDate || $row->publish_down == _NEVER) {
-		$times .= "<tr><td>"._END.": "._WITHOUT_END."</td></tr>";
+		$times .= '<tr><td>'._END.': '._WITHOUT_END.'</td></tr>';
 		} else {
-		$times .= "<tr><td>"._END.": $row->publish_down</td></tr>";
+		$times .= '<tr><td>'._END.': '.$row->publish_down.'</td></tr>';
 		}
 
 		if(!$row->access) {
-		$color_access = 'style="color: green;"';
+		$color_access = 'style="color:green;"';
 		$task_access = 'accessregistered';
 		} else
 		if($row->access == 1) {
-			$color_access = 'style="color: red;"';
+			$color_access = 'style="color:red;"';
 			$task_access = 'accessspecial';
 		} else {
-			$color_access = 'style="color: black;"';
+			$color_access = 'style="color:black;"';
 			$task_access = 'accesspublic';
 		}
 		$link = 'index2.php?option=com_typedcontent&task=edit&hidemainmenu=1&id='.$row->id;
@@ -123,7 +123,7 @@ class HTML_typedcontent {
 		}
 
 ?>
-	<tr class="<?php echo "row$k"; ?>">
+	<tr class="<?php echo $row->k; ?>">
 		<td><?php echo $pageNav->rowNumber($i); ?></td>
 		<td><?php echo $checked; ?></td>
 		<td align="left">
@@ -131,7 +131,7 @@ class HTML_typedcontent {
 		if($row->checked_out && ($row->checked_out != $my->id)) {
 			echo $row->title;
 		if($row->title_alias) {
-			echo ' (<i>'.$row->title_alias.'</i>)';
+			echo ' (<em>'.$row->title_alias.'</em>)';
 		}
 		} else {
 ?>
@@ -139,11 +139,11 @@ class HTML_typedcontent {
 <?php
 		echo $row->title;
 		if($row->title_alias) {
-			echo ' (<i>'.$row->title_alias.'</i>)';
+			echo ' (<em>'.$row->title_alias.'</em>)';
 		}
 ?></a>
 <?php
-		echo '<br />'.$row->created.' : '.$author;
+		echo '<p>'.$row->created.' : '.$author.'</p>';
 		}
 ?>
 		</td>
@@ -263,7 +263,7 @@ class HTML_typedcontent {
 	</tr>
 	</table>
 	<form action="index2.php" method="post" name="adminForm">
-	<table cellspacing="0" cellpadding="0" border="0" width="100%">
+	<table border="0" width="100%">
 	<tr>
 		<td width="100%" valign="top">
 			<table class="adminform">
@@ -549,7 +549,6 @@ class HTML_typedcontent {
 		<input type="hidden" name="hits" value="<?php echo $row->hits; ?>" />
 		<input type="hidden" name="task" value="" />
 	<input type="hidden" name="<?php echo josSpoofValue(); ?>" value="1" />
-
 		</form>
 		<?php
 	}

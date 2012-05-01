@@ -15,12 +15,15 @@ require ('../globals.php');
 /** подключаем common.php*/
 include_once ('common.php');
 $sp = ini_get('session.save_path');
-echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+echo '<!DOCTYPE html>';
+echo "\n";
+echo '<?xml version="1.0" encoding="utf-8"?>';
+echo "\n";
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Joostina - Web-установка. Проверка системы</title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="shortcut icon" href="../images/favicon.ico" />
 <link rel="stylesheet" href="install.css" type="text/css" />
 </head>
@@ -29,7 +32,7 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 		<div class="install">
 			<div id="header">
 				<p class="ver"><?php echo $version; ?></p>
-				<p class="jst"><a href="http://www.joostina.ru">Joostina</a> - свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
+				<p class="jst"><a href="http://www.joostina.ru">Joostina</a> &ndash; свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
 			</div>
 			<div id="navigator">
 				<span style="font-size:larger;">Установка Joostina CMS</span>
@@ -54,67 +57,67 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 			<div id="wrap">
 				<h1>Проверка настроек сервера: </h1>
 				<div class="install-text">
-					Если на сервере имеются настройки, способные привести к ошибкам во время установки или работы Joostina, то на этой странице они будут отмечены <strong class="red">красным цветом</strong>.
-					Для полноценной и беспроблемной работы системы рекомендуем исправить все необходимые настройки.
+					<p>Если на сервере имеются настройки, способные привести к ошибкам во время установки или работы Joostina, то на этой странице они будут отмечены <span class="strong red">красным цветом</span>.</p>
+					<p>Для полноценной и беспроблемной работы системы рекомендуем исправить все необходимые настройки.</p>
 					<div class="ctr"></div>
 				</div>
 				<div class="install-form">
 					<div class="form-block">
 						<table class="content">
 							<tr>
-								<td class="item">Версия PHP >= 5.0.0</td>
+								<td class="item"><p>Версия PHP >= 5.0.0</p></td>
 								<td align="left">
-									<?php echo phpversion() < '5.0'?'<strong class="red">Нет</strong>':'<strong class="green">Да</strong>'; ?>
+									<?php echo phpversion() < '5.0'?'<p class="strong red">Нет</p>':'<p class="strong green">Да</p>'; ?>
 								</td>
 							</tr>
 							<tr>
-								<td class="item">&nbsp; - поддержка zlib-сжатия</td>
+								<td class="item"><p>&nbsp; - поддержка zlib-сжатия</p></td>
 								<td align="left">
-									<?php echo extension_loaded('zlib')?'<strong class="green">Доступна</strong>':'<strong class="red">Недоступна</strong>'; ?>
+									<?php echo extension_loaded('zlib')?'<p class="strong green">Доступна</p>':'<p class="strong red">Недоступна</p>'; ?>
 								</td>
 							</tr>
 							<tr>
-								<td class="item">&nbsp; - поддержка XML</td>
+								<td class="item"><p>&nbsp; - поддержка XML</p></td>
 								<td align="left">
-									<?php echo extension_loaded('xml')?'<strong class="green">Доступна</strong>':'<strong class="red">Недоступна</strong>'; ?>
+									<?php echo extension_loaded('xml')?'<p class="strong green">Доступна</p>':'<p class="strong red">Недоступна</p>'; ?>
 								</td>
 							</tr>
 							<tr>
-								<td class="item">&nbsp; - поддержка MySQL</td>
+								<td class="item"><p>&nbsp; - поддержка MySQL</p></td>
 								<td align="left">
-									<?php echo function_exists('mysql_connect')?'<strong class="green">Доступна</strong>':'<strong class="red">Недоступна</strong>'; ?>
+									<?php echo function_exists('mysql_connect')?'<p class="strong green">Доступна</p>':'<p class="strong red">Недоступна</p>'; ?>
 								</td>
 							</tr>
 							<tr>
-								<td valign="top" class="item">Файл <strong>configuration.php</strong></td>
+								<td valign="top" class="item"><p>Файл <span class="strong">configuration.php</span></p></td>
 								<td align="left">
 									<?php
 										if(@file_exists('../configuration.php') && @is_writable('../configuration.php')) {
-											echo '<strong class="green">Доступен для записи</strong>';
+											echo '<p class="strong green">Доступен для записи</p>';
 										} else
 										if(is_writable('..')) {
-											echo '<strong class="green">Доступен для записи</strong>';
+											echo '<p class="strong green">Доступен для записи</p>';
 										} else {
-											echo '<strong class="red">Недоступен для записи</strong><br /><span class="small">Вы можете продолжать установку, значения файла конфигурации будут показаны в конце. ОБЯЗАТЕЛЬНО СОХРАНИТЕ ЕГО: скопируйте/вставьте содержимое в созданный вами файл configuration.php и загрузите на сервер!</span>';
+											echo '<p class="strong red">Недоступен для записи</p><p class="small">Вы можете продолжать установку, значения файла конфигурации будут показаны в конце. Обязательно сохраните его: скопируйте/вставьте содержимое в созданный вами файл configuration.php и загрузите на сервер!</p>';
 										}
 									?>
 								</td>
 							</tr>
 							<tr>
-								<td class="item">Каталог для записи сессий</td>
+								<td class="item"><p>Каталог для записи сессий</p></td>
 								<td align="left" valign="top">
-									<?php echo is_writable($sp)?'<strong class="green">Доступен для записи</strong>':'<strong class="red">Недоступен для записи</strong>'; ?>
+									<?php echo is_writable($sp)?'<p class="strong green">Доступен для записи</p>':'<p class="strong red">Недоступен для записи</p>'; ?>
 								</td>
 							</tr>
 							<tr>
 								<td class="item" colspan="2">
-									<strong><?php echo $sp?$sp:'Не установлен'; ?></strong>
+									<p class="strong"><?php echo $sp?$sp:'Не установлен'; ?></p>
 								</td>
 							</tr>
 						</table>
 					</div>
 				</div>
-				<div class="clr"></div>
+				<div class="clearfix"></div>
 				<?php
 					$wrongSettingsTexts = array();
 					if(ini_get('magic_quotes_gpc') != '1') {
@@ -127,7 +130,7 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 				?>
 				<h1>Проверка безопасности:</h1>
 				<div class="install-text">
-					<p>Следующие параметры PHP являются неоптимальными для <strong>Безопасности</strong> и их рекомендуется изменить:</p>
+					<p>Следующие параметры PHP являются неоптимальными для <span class="strong">безопасности</span> и их рекомендуется изменить:</p>
 					<p>Пожалуйста, за дополнительной информацией обращайтесь на <a href="http://www.joostina.ru" target="_blank">официальный сайт Joostina</a>.</p>
 					<div class="ctr"></div>
 				</div>
@@ -154,20 +157,20 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 						</table>
 					</div>
 				</div>
-				<div class="clr"></div>
+				<div class="clearfix"></div>
 				<?php
 					}
 				?>
 				<h1>Рекомендуемые параметры PHP:</h1>
-				<div class="install-text">&nbsp;&nbsp;Эти параметры PHP рекомендуются для полной совместимости с Joostina.<br />Однако, Joostina будет работать, если эти параметры не в полной мере соответствуют рекомендуемым.</div>
+				<div class="install-text"><p>Эти параметры PHP рекомендуются для полной совместимости с Joostina.</p><p>Однако, Joostina будет работать, если эти параметры не в полной мере соответствуют рекомендуемым.</p></div>
 				<div class="ctr"></div>
 				<div class="install-form">
 					<div class="form-block">
 						<table class="content">
 							<tr>
-								<td class="toggle">Директива</td>
-								<td class="toggle">Рекомендовано</td>
-								<td class="toggle">Установлено</td>
+								<td class="toggle"><p>Директива</p></td>
+								<td class="toggle"><p>Рекомендовано</p></td>
+								<td class="toggle"><p>Установлено</p></td>
 							</tr>
 							<?php
 								$php_recommended_settings = array(
@@ -183,78 +186,78 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 								foreach($php_recommended_settings as $phprec) {
 							?>
 							<tr>
-								<td class="item"><?php echo $phprec[0]; ?></td>
-								<td class="toggle"><?php echo $phprec[2]; ?></td>
+								<td class="item"><p><?php echo $phprec[0]; ?></p></td>
+								<td class="toggle"><p><?php echo $phprec[2]; ?></p></td>
 								<td>
 									<?php
 										if(get_php_setting($phprec[1]) == $phprec[2]) {
 									?>
-									<strong class="green">
+									<p class="strong green">
 										<?php
 											} else {
 										?>
-									<strong class="red">
+									<p class="strong red">
 										<?php
 											}
 											echo get_php_setting($phprec[1]);
 										?>
-									</strong>
+									</p>
 								</td>
 							</tr>
 							<?php }?>
 							<tr>
-								<td class="item">PCRE UTF-8</td>
-								<td class="toggle">ON</td>
+								<td class="item"><p>PCRE UTF-8</p></td>
+								<td class="toggle"><p>ON</p></td>
 								<?php if ( ! @preg_match('/^.$/u', 'n')): $failed = TRUE ?>
-								<td colspan="2"><strong class="red"><a href="http://php.net/pcre">PCRE</a> не поддерживает работу с UTF-8.</strong></td>
+								<td colspan="2"><p class="strong red"><a href="http://php.net/pcre">PCRE</a> не поддерживает работу с UTF-8.</p></td>
 								<?php elseif ( ! @preg_match('/^\pL$/u', 'n')): $failed = TRUE ?>
-								<td colspan="2"><strong class="red"><a href="http://php.net/pcre">PCRE</a> не поддерживает работу с Юникодом.</strong></td>
+								<td colspan="2"><p class="strong red"><a href="http://php.net/pcre">PCRE</a> не поддерживает работу с Юникодом.</p></td>
 								<?php else: ?>
-								<td><strong class="green">ON</strong></td>
+								<td><p class="strong green">ON</p></td>
 								<?php endif ?>
 							</tr>
 							<tr>
-								<td class="item">mbstring</td>
-								<td class="toggle">установлено</td>
+								<td class="item"><p>mbstring</p></td>
+								<td class="toggle"><p>установлено</p></td>
 								<?php if ( !extension_loaded('mbstring') ): ?>
-								<td colspan="2"><strong class="red"><a href="http://php.net/mbstring" target="_blank">mbstring</a> не установлено</strong></td>
+								<td colspan="2"><p class="strong red"><a href="http://php.net/mbstring" target="_blank">mbstring</a> не установлено</p></td>
 								<?php else: ?>
-								<td><strong class="green">установлено</strong></td>
+								<td><p class="strong green">установлено</p></td>
 								<?php endif ?>
 							</tr>
 							<tr>
-								<td class="item">iconv</td>
-								<td class="toggle">установлено</td>
+								<td class="item"><p>iconv</p></td>
+								<td class="toggle"><p>установлено</p></td>
 								<?php if ( !extension_loaded('iconv') ): ?>
-								<td colspan="2"><strong class="red"><a href="http://php.net/iconv" target="_blank">iconv</a> не установлено</strong></td>
+								<td colspan="2"><p class="strong red"><a href="http://php.net/iconv" target="_blank">iconv</a> не установлено</p></td>
 								<?php else: ?>
-								<td><strong class="green">установлено</strong></td>
+								<td><p class="strong green">установлено</p></td>
 								<?php endif ?>
 							</tr>
 						</table>
 					</div>
 				</div>
-				<div class="clr"></div>
+				<div class="clearfix"></div>
 				<!-- первая рекламная позиция // -->
 				<h1>Помощь в установке:</h1>
-				<div class="install-text">Бывает так, что при установке Joostina возникают разного рода ошибки. Ошибки бывают как системные - например красные пункты выше и ниже этого текста, так и человеческие - отсутствие опыта или просто лень. Ссылки ниже могут помочь справиться с любыми возникшими пробелами.
+				<div class="install-text"><p>Бывает так, что при установке Joostina возникают разного рода ошибки. Ошибки бывают как системные &ndash; например красные пункты выше и ниже этого текста, так и человеческие &ndash; отсутствие опыта или просто лень. Ссылки ниже могут помочь справиться с любыми возникшими пробелами.</p>
 					<ul>
-						<li><a href="http://www.joostina.ru/" target="_blank"><strong>Официльный сайт проекта Joostina</strong></a></li>
-						<li><a href="http://www.joomlaforum.ru/" target="_blank"><strong>Поддержка на дружественном Joomla - форуме</strong></a></li>
+						<li><p class="strong"><a href="http://www.joostina.ru/" target="_blank">Официльный сайт проекта Joostina</a></p></li>
+						<li><p class="strong"><a href="http://www.joomlaforum.ru/" target="_blank">Поддержка на дружественном Joomla &ndash; форуме</a></p></li>
 						<li>Служба поддержки вашего хостера</li>
 					</ul>
 				</div>
 				<!-- // первая рекламная позиция -->
-				<div class="clr"></div>
+				<div class="clearfix"></div>
 				<h1>Расширенные характеристики сервера</h1>
-				<div class="install-text">Указанные параметры сервера не являются критичными для работы, но соответствие указанным значениям придадут работе с Joostina максимальное удобство и безопасность.</div>
+				<div class="install-text"><p>Указанные параметры сервера не являются критичными для работы, но соответствие указанным значениям придадут работе с Joostina максимальное удобство и безопасность.</p></div>
 				<div class="install-form">
 					<div class="form-block">
 						<table class="content">
 							<tr>
-								<td class="toggle">Директива</td>
-								<td class="toggle">Рекомендовано</td>
-								<td class="toggle">Установлено</td>
+								<td class="toggle"><p>Директива</p></td>
+								<td class="toggle"><p>Рекомендовано</p></td>
+								<td class="toggle"><p>Установлено</p></td>
 							</tr>
 							<?php
 								$php_recommended_settings = array(
@@ -268,26 +271,27 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 								foreach($php_recommended_settings as $phprec) {
 							?>
 							<tr>
-								<td class="item"><?php echo $phprec[0]; ?></td>
-								<td class="toggle"><?php echo $phprec[2]; ?></td>
+								<td class="item"><p><?php echo $phprec[0]; ?></p></td>
+								<td class="toggle"><p><?php echo $phprec[2]; ?></p></td>
 								<td>
 									<?php
 										$act_val = ini_get($phprec[1]);
 										if($act_val == '1' || $act_val == '2' || $act_val == '') {
 										if(get_php_setting($phprec[1]) == $phprec[2]) { ?>
-									<strong class="green">
+									<p class="strong green">
 										<?php } else { ?>
-									<strong class="red">
+									<p class="strong red">
 										<?php
 											}
-												}
-												if($act_val == '1') {
-													echo 'ON';
-												} elseif($act_val == '2' || $act_val == '') {
-													echo 'OFF';
-												} else echo '<strong class="green">'.$act_val.'</strong>';
+										}
+										if($act_val == '1') {
+											echo 'ON';
+										} elseif($act_val == '2' || $act_val == '') {
+											echo 'OFF';
+										} else
+											echo '<span class="strong green">'.$act_val.'</span>';
 										?>
-									</strong>
+									</p>
 								</td>
 							</tr>
 							<?php
@@ -295,18 +299,18 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 							?>
 						</table>
 					</div>
-					<div class="clr"></div>
+					<div class="clearfix"></div>
 				</div>
 				<div id="dir_info" style="display:none;">
 					<h1>Права доступа к файлам и каталогам:</h1>
-					<div class="install-text">Для нормальной работы Joostina необходимо, чтобы на определенные файлы и каталоги были установлены права записи. Если вы видите <strong class="red">Недоступен для записи</strong> для некоторых файлов и каталогов, то необходимо установить на них права доступа, позволяющие перезаписывать их.</div>
+					<div class="install-text"><p>Для нормальной работы Joostina необходимо, чтобы на определенные файлы и каталоги были установлены права записи. Если вы видите <span class="strong red">Недоступен для записи</span> для некоторых файлов и каталогов, то необходимо установить на них права доступа, позволяющие перезаписывать их.</p></div>
 				</div>
 				<div class="install-form">
 					<div class="form-block">
 					<div class="button2" id="cr" style="width: 98%;" onclick="document.getElementById('cool_dirs').style.display=''; document.getElementById('dir_info').style.display=''; document.getElementById('cr').style.display='none';">
 						Проверить права доступа к системным каталогам
 					</div>
-					<div class="clr">&nbsp;</div>
+					<div class="clearfix">&nbsp;</div>
 						<?php
 								// список каталогов которые необхоимо проверять на возможность записи в них
 							$dirs = array(
@@ -333,23 +337,23 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 								foreach($dirs as $dir) {
 									if(writableCell($dir)) {
 									// каталоги в которые запись разрешена
-										$cool_dirs .= '<tr><td class="item">'.$dir.'/</td><td align="right"><strong class="green">Доступен для записи</strong></tr>';
+										$cool_dirs .= '<tr><td class="item"><p>'.$dir.'/</p></td><td align="right"><p class="strong green">Доступен для записи</p></tr>';
 									}else {
 									// каталоги в которые запись запрещена
-										$bad_dirs .= '<tr><td class="item">'.$dir.'/</td><td align="right"><strong class="red">Недоступен для записи</strong></tr>';
+										$bad_dirs .= '<tr><td class="item"><p>'.$dir.'/</p></td><td align="right"><p class="strong red">Недоступен для записи</p></tr>';
 									}
 								}
 									if($bad_dirs!='') {
-										echo '<table class="content">' . $bad_dirs . '</table>';
+										echo '<table class="content">'.$bad_dirs.'</table>';
 									};
-										echo '<table id="cool_dirs" class="content" style="display:none;">' . $cool_dirs . '</table>';
+										echo '<table id="cool_dirs" class="content" style="display:none;">'.$cool_dirs.'</table>';
 							?>
 					</div>
-					<div class="clr"></div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="clr"></div>
+				<div class="clearfix"></div>
 			</div>
-			<div class="clr"></div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 </body>
@@ -363,14 +367,14 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 		if($relative) {
 			return is_writable("../$folder") ? 1:0;
 		} else {
-			return is_writable("$folder")    ? 1:0;
+			return is_writable("$folder") ? 1:0;
 		}
 	}
 	function writableCell_old($folder,$relative = 1,$text = '') {
-		$writeable = '<strong class="green">Доступен для записи</strong>';
-		$unwriteable = '<strong class="red">Недоступен для записи</strong>';
+		$writeable = '<p class="strong green">Доступен для записи</p>';
+		$unwriteable = '<p class="strong red">Недоступен для записи</p>';
 			echo '<tr>';
-			echo '<td class="item">' . $folder . '/</td>';
+			echo '<td class="item"><p>'.$folder.'/</p></td>';
 			echo '<td align="right">';
 				if($relative) {
 					echo is_writable("../$folder") ? $writeable:$unwriteable;

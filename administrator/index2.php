@@ -8,6 +8,11 @@
 */
 // Установка флага, что этот файл - родительский
 define('_VALID_MOS', 1);
+if (function_exists('memory_get_usage')) {
+	define('_MEM_USAGE_START', memory_get_usage());
+} else {
+	define('_MEM_USAGE_START', null);
+}
 if (!file_exists('../configuration.php')) {
 	header('Location: ../installation/index.php');
 	exit();
@@ -21,11 +26,11 @@ $mosConfig_db_cache_handler = 'none';
 // SSL проверка  - $http_host returns <live site url>:<port number if it is 443>
 $http_host = explode(':', $_SERVER['HTTP_HOST']);
 if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isset($http_host[1]) && $http_host[1] == 443) && substr($mosConfig_live_site, 0, 8) != 'https://') {
-	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
+	$mosConfig_live_site = 'https://'.substr($mosConfig_live_site, 7);
 }
-require_once ($mosConfig_absolute_path . '/includes/joomla.php');
-include_once ($mosConfig_absolute_path . '/language/' . $mosConfig_lang . '.php');
-require_once ($mosConfig_absolute_path . '/' . ADMINISTRATOR_DIRECTORY . '/includes/admin.php');
+require_once ($mosConfig_absolute_path.'/includes/joomla.php');
+include_once ($mosConfig_absolute_path.'/language/'.$mosConfig_lang.'.php');
+require_once ($mosConfig_absolute_path.'/'.ADMINISTRATOR_DIRECTORY.'/includes/admin.php');
 // (c) boston считаем время за которое сгенерирована страница
 global $database;
 // работа с сессиями начинается до создания главного объекта взаимодействия с ядром
@@ -50,7 +55,7 @@ if ($option == '') {
 // установка параметра overlib
 $mainframe->set('loadOverlib', false);
 // инициализация редактора
-require_once ($mosConfig_absolute_path . '/editor/editor.php');
+require_once ($mosConfig_absolute_path.'/editor/editor.php');
 ob_start();
 if ($path = $mainframe->getPath('admin')) {
 	require_once ($path);
@@ -70,10 +75,10 @@ if ($mosConfig_time_gen) {
 }
 if ($no_html == 0) {
 // загрузка файла шаблона
-	if (!file_exists($mosConfig_absolute_path . '/' . ADMINISTRATOR_DIRECTORY . '/templates/' . $cur_template . '/index.php')) {
-		echo _TEMPLATE_NOT_FOUND . ': ', $cur_template;
+	if (!file_exists($mosConfig_absolute_path.'/'.ADMINISTRATOR_DIRECTORY.'/templates/'.$cur_template.'/index.php')) {
+		echo _TEMPLATE_NOT_FOUND.': ', $cur_template;
 	} else {
-		require_once ($mosConfig_absolute_path . '/' . ADMINISTRATOR_DIRECTORY . '/templates/' . $cur_template . '/index.php');
+		require_once ($mosConfig_absolute_path.'/'.ADMINISTRATOR_DIRECTORY.'/templates/'.$cur_template.'/index.php');
 	}
 } else {
 	mosMainBody_Admin();
@@ -81,15 +86,15 @@ if ($no_html == 0) {
 // информация отладки, число запросов в БД
 if ($mosConfig_debug) {
 	$mem_usage = (memory_get_usage() - _MEM_USAGE_START);
-	echo '<noindex><div id="jdebug">';
-	echo '<p><strong>' . _SCRIPT_MEMORY_USING . ':</strong> ' . sprintf('%0.2f', $mem_usage / 1048576) . ' MB</p>';
-	echo '<p><strong>'. _SQL_QUERIES_COUNT . ':</strong> ' . $database->_ticker.'</p>';
-	echo '<pre>';
+	echo '<div id="jdebug">';
+	echo '<p id="memory_using"><span class="strong">'._SCRIPT_MEMORY_USING.':</span> '.sprintf('%0.2f', $mem_usage / 1048576).' MB</p>';
+	echo '<p id="memory_using"><span class="strong">'. _SQL_QUERIES_COUNT.':</span> '.$database->_ticker.'</p>';
+	echo '<pre id="database_log"><code>';
 	foreach ($database->_log as $k => $sql) {
-		echo $k + 1 . ":&nbsp;" . $sql . '<hr />';
+		echo $k + 1 . ":&nbsp;" . $sql.'<hr />';
 	}
-	echo '</pre></div>';
-	echo '</div></noindex>';
+	echo '</code></pre>';
+	echo '</div>';
 }
 // восстановление сессий
 if ($task == 'save' || $task == 'apply') {

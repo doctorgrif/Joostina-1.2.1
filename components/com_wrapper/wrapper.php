@@ -30,7 +30,7 @@ function showWrap() {
 	$row = new stdClass();
 	if ($params->get('add')) {
 // adds 'http://' if none is set
-		if (substr($url, 0, 1) == '/') {
+		if (mb_substr($url, 0, 1) == '/') {
 // relative url in component. use server http_host.
 			$row->url = 'http://' . $_SERVER['HTTP_HOST'] . $url;
 		} elseif (!strstr($url, 'http') && !strstr($url, 'https')) {

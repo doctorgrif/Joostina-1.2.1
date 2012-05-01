@@ -188,7 +188,8 @@ function feedFrontpage($showFeed) {
 			break;
 	}
 // query of frontpage content items
-	$query = "SELECT a.*, u.name AS author, u.usertype, UNIX_TIMESTAMP( a.created ) AS created_ts, cat.title AS cat_title, sec.title AS section_title" .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.*, u.name AS author, u.usertype, UNIX_TIMESTAMP( a.created ) AS created_ts, cat.title AS cat_title, sec.title AS section_title" .
 			"\n FROM #__content AS a" . "\n INNER JOIN #__content_frontpage AS f ON f.content_id = a.id" .
 			"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__categories AS cat ON cat.id = a.catid" .
 			"\n LEFT JOIN #__sections AS sec ON sec.id = a.sectionid" . "\n WHERE a.state = 1" .

@@ -97,7 +97,7 @@ switch ($task) {
 		recordVote();
 		break;
 	default:
-		header("HTTP/1.0 404 Not Found");
+		header('HTTP/1.0 404 Not Found');
 		echo _NOT_EXIST;
 		break;
 }
@@ -180,7 +180,8 @@ function showMyItems(&$access, $limit, $selected, $limitstart) {
 	require_once($GLOBALS['mosConfig_absolute_path'] . '/includes/pageNavigation.php');
 	$pageNav = new mosPageNav($total, $limitstart, $limit);
 // get the list of items for this category
-	$query = "SELECT a.sectionid, a.checked_out, a.id, a.state AS published, a.title, a.hits, a.created_by, a.created_by_alias, a.created AS created, a.access, u.name AS author, a.state, g.name AS groups,"
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.sectionid, a.checked_out, a.id, a.state AS published, a.title, a.hits, a.created_by, a.created_by_alias, a.created AS created, a.access, u.name AS author, a.state, g.name AS groups,"
 			. "\n c.name AS category, s.name AS section"
 			. "\n FROM #__content AS a"
 			. "\n LEFT JOIN #__users AS u ON u.id = a.created_by"
@@ -289,7 +290,8 @@ function frontpage($gid, &$access, $pop, $now, $limit, $limitstart) {
 		$limitstart = 0;
 	}
 // query records
-	$query = "SELECT a.attribs, a.notetext, a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.attribs, a.notetext, a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
 			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access, a.hits," .
 			"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
 			"\n, s.id AS sec_id, cc.id as cat_id" . $voting['select'] . "\n FROM #__content AS a" .
@@ -411,7 +413,8 @@ function showSection($id, $gid, &$access, $now) {
 				" OR b.access is null)";
 	}
 // Query of categories within section
-	$query = "SELECT a.*, COUNT(b.id) AS numitems" . "\n FROM #__categories AS a" . "\n LEFT JOIN #__content AS b ON b.catid = a.id" .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.*, COUNT(b.id) AS numitems" . "\n FROM #__categories AS a" . "\n LEFT JOIN #__content AS b ON b.catid = a.id" .
 			$xwhere2 . "\n WHERE a.section = '" . (int) $section->id . "'" . $xwhere . $access_check . $access_check_content .
 			"\n GROUP BY a.id" . $empty . $empty_sec . "\n ORDER BY $orderby";
 	$database->setQuery($query);
@@ -553,7 +556,8 @@ function showCategory($id, $gid, &$access, $sectionid, $limit, $selected, $limit
 	if (!$params->get('empty_cat'))
 		$empty = "\n HAVING COUNT(b.id) > 0";
 // get the list of other categories
-	$query = "SELECT c.*, COUNT(b.id) AS numitems" . "\n FROM #__categories AS c" . "\n LEFT JOIN #__content AS b ON b.catid = c.id " .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN c.*, COUNT(b.id) AS numitems" . "\n FROM #__categories AS c" . "\n LEFT JOIN #__content AS b ON b.catid = c.id " .
 			$xwhere2 . ($noauth ? "\n AND b.access <= " . (int) $gid : '') . "\n WHERE c.section = '" . (int)
 			$category->section . "'" . $xwhere . ($noauth ? "\n AND c.access <= " . (int) $gid : '') . "\n GROUP BY c.id" .
 			$empty . "\n ORDER BY c.ordering";
@@ -594,7 +598,8 @@ function showCategory($id, $gid, &$access, $sectionid, $limit, $selected, $limit
 				" OR publish_down >= " . $database->Quote($now) . ")";
 	}
 // query to determine total number of records
-	$query = "SELECT COUNT(a.id) as numitems" . "\n FROM #__content AS a" . "\n LEFT JOIN #__users AS u ON u.id = a.created_by" .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN COUNT(a.id) as numitems" . "\n FROM #__content AS a" . "\n LEFT JOIN #__users AS u ON u.id = a.created_by" .
 			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . "\n WHERE a.catid = " . (int) $category->id .
 			$xwhere . ($noauth ? "\n AND a.access <= " . (int) $gid : '') . "\n AND " . (int) $category->access .
 			" <= " . (int) $gid . $and . "\n ORDER BY $orderby";
@@ -608,7 +613,8 @@ function showCategory($id, $gid, &$access, $sectionid, $limit, $selected, $limit
 	require_once ($GLOBALS['mosConfig_absolute_path'] . '/includes/pageNavigation.php');
 	$pageNav = new mosPageNav($total, $limitstart, $limit);
 // get the list of items for this category
-	$query = "SELECT a.id, a.title, a.hits, a.created_by, a.created_by_alias, a.created AS created, a.access, u.name AS author, a.state, g.name AS groups" .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.hits, a.created_by, a.created_by_alias, a.created AS created, a.access, u.name AS author, a.state, g.name AS groups" .
 			"\n FROM #__content AS a" . "\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__groups AS g ON a.access = g.id" .
 			"\n WHERE a.catid = " . (int) $category->id . $xwhere . ($noauth ? "\n AND a.access <= " .
 					(int) $gid : '') . "\n AND " . (int) $category->access . " <= " . (int) $gid . $and . "\n ORDER BY $orderby";
@@ -711,7 +717,8 @@ function showBlogSection($id = 0, $gid, &$access, $pop, $now = null, $limit, $li
 		$limitstart = 0;
 	}
 // Main data query
-	$query = "SELECT a.id, a.attribs , a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.id, a.attribs , a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
 			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access,"
 			. "\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups"
 			. $voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid"
@@ -806,7 +813,8 @@ function showBlogCategory($id = 0, $gid, &$access, $pop, $now, $limit, $limitsta
 		$limitstart = 0;
 	}
 // Main data query
-	$query = "SELECT a.id, a.notetext,a.attribs, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.id, a.notetext,a.attribs, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
 			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
 			"\n CHAR_LENGTH(a.fulltext) AS readmore, s.published AS sec_pub,cc.published AS sec_pub, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
 			$voting['select'] . "\n FROM #__content AS a" . "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
@@ -916,7 +924,8 @@ function showArchiveSection($id = null, $gid, &$access, $pop, $option, $year, $m
 		$limitstart = 0;
 	}
 // Main Query
-	$query = "SELECT a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
 			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
 			"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
 			$voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
@@ -1027,7 +1036,8 @@ function showArchiveCategory($id = 0, $gid, &$access, $pop, $option, $year, $mon
 		$limitstart = 0;
 	}
 // main query
-	$query = "SELECT a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
 			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
 			"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
 			$voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
@@ -1169,7 +1179,7 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 			$msg = sprintf(_ARCHIVE_SEARCH_SUCCESS, $params->get('month'), $params->get('year'));
 			echo '<br /><br /><div align="center">' . $msg . '</div><br /><br />';
 		}
-		echo '<table class="blog' . $params->get('pageclass_sfx') . '" cellpadding="0" cellspacing="0">';
+		echo '<table class="blog' . $params->get('pageclass_sfx') . '">';
 // Secrion/Category Description & Image
 		if ($menu && $menu->componentid && ($descrip || $descrip_image)) {
 			$link = $mosConfig_live_site . '/images/stories/' . $description->image;
@@ -1205,7 +1215,7 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 		if ($intro && ($i < $total)) {
 			echo '<tr>';
 			echo '<td valign="top">';
-			echo '<table width="100%" cellpadding="0" cellspacing="0">';
+			echo '<table width="100%">';
 // intro story output
 			for ($z = 0; $z < $intro; $z++) {
 				if ($i >= ($total - $limitstart)) {
@@ -1307,11 +1317,12 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 			}
 		}
 		echo '</table>';
+		echo '<div class="clearfix"></div>';
 	} else
 	if ($archive && !$total) {
 // Search Failure message for Archives
 		$msg = sprintf(_ARCHIVE_SEARCH_FAILURE, $params->get('month'), $params->get('year'));
-		echo '<br /><br /><div align="center">' . $msg . '</div><br />';
+		echo '<div align="center">' . $msg . '</div><br />';
 	} else {
 // Generic blog empty display
 		echo _EMPTY_BLOG;
@@ -1410,7 +1421,8 @@ function showItem($uid, $gid, &$access, $pop) {
 				$ufrom = ', #__users AS u ';
 			}
 // array of content items in same category correctly ordered
-			$query = "SELECT a.id, a.title $uname FROM #__content AS a $ufrom WHERE a.catid = "
+/* add STRAIGHT_JOIN */
+			$query = "SELECT STRAIGHT_JOIN a.id, a.title $uname FROM #__content AS a $ufrom WHERE a.catid = "
 					. (int) $row->catid
 					. "\n AND a.state = " . (int) $row->state . ($access->canEdit ? '' : $where_ac)
 					. $xwhere . "\n ORDER BY $orderby";
@@ -1556,7 +1568,8 @@ function show($row, $params, $gid, &$access, $pop) {
 			$secLinkURL = $mainframe->get('secURL_' . $row->sectionid);
 // check if values have already been placed into mainframe memory
 			if ($secLinkID == -1) {
-				$query = "SELECT id, link FROM #__menu WHERE published = 1 AND type IN ('content_section', 'content_blog_section') AND componentid = " . (int) $row->sectionid . "\n ORDER BY type DESC, ordering";
+			/* add STRAIGHT_JOIN */
+				$query = "SELECT STRAIGHT_JOIN id, link FROM #__menu WHERE published = 1 AND type IN ('content_section', 'content_blog_section') AND componentid = " . (int) $row->sectionid . "\n ORDER BY type DESC, ordering";
 				$database->setQuery($query);
 //$secLinkID = $database->loadResult();
 				$result = $database->loadRow();
@@ -1592,7 +1605,8 @@ function show($row, $params, $gid, &$access, $pop) {
 			$catLinkURL = $mainframe->get('catURL_' . $row->catid);
 // check if values have already been placed into mainframe memory
 			if ($catLinkID == -1) {
-				$query = "SELECT id, link FROM #__menu WHERE published = 1 AND type IN ('content_category', 'content_blog_category') AND componentid = " . (int) $row->catid . "\n ORDER BY type DESC, ordering";
+			/* add STRAIGHT_JOIN */
+				$query = "SELECT STRAIGHT_JOIN id, link FROM #__menu WHERE published = 1 AND type IN ('content_category', 'content_blog_category') AND componentid = " . (int) $row->catid . "\n ORDER BY type DESC, ordering";
 				$database->setQuery($query);
 //$catLinkID = $database->loadResult();
 				$result = $database->loadRow();
@@ -1833,11 +1847,14 @@ function editItem($uid, $gid, &$access, $sectionid = 0, $task, $Itemid) {
 	$states[] = mosHTML::makeOption(1, _CMN_PUBLISHED);
 	$lists['state'] = mosHTML::selectList($states, 'state', 'class="inputbox" size="1"', 'value', 'text', intval($row->state));
 // build the html select list for ordering
-	$query = "SELECT ordering AS value, title AS text FROM #__content WHERE catid = " . (int) $row->catid . "\n ORDER BY ordering";
+/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN ordering AS value, title AS text FROM #__content WHERE catid = " . (int) $row->catid . "\n ORDER BY ordering";
 	$lists['ordering'] = mosAdminMenus::SpecificOrdering($row, $uid, $query, 1);
-	$database->setQuery(" SELECT c.id AS cid , c.name AS c_name, c.section FROM #__categories AS c WHERE c.published=1 $where_c AND section NOT LIKE '%com_%' ORDER BY title ASC ");
+	/* add STRAIGHT_JOIN */
+	$database->setQuery(" SELECT STRAIGHT_JOIN c.id AS cid , c.name AS c_name, c.section FROM #__categories AS c WHERE c.published=1 $where_c AND section NOT LIKE '%com_%' ORDER BY title ASC ");
 	$cids = $database->loadObjectList();
-	$database->setQuery(" SELECT s.id, s.name FROM #__sections AS s WHERE s.published=1 $where_s ORDER BY title ASC");
+	/* add STRAIGHT_JOIN */
+	$database->setQuery(" SELECT STRAIGHT_JOIN s.id, s.name FROM #__sections AS s WHERE s.published=1 $where_s ORDER BY title ASC");
 	$sids = $database->loadObjectList();
 	$return = '<select name="catid" id="new_content_catid" class="inputbox" size="1">';
 	$cids_arr = array();
@@ -1849,12 +1866,13 @@ function editItem($uid, $gid, &$access, $sectionid = 0, $task, $Itemid) {
 		$i2++;
 	}
 	foreach ($sids as $row3) {
+		if (isset($sids->name))
 		echo $sids->name;
 		foreach ($cids_arr as $v) {
 			if ($v['parent'] == $row3->id) {
 				$s_name = '_' . $row3->name . '_';
-				if ($$s_name != 1) {
-					$$s_name = 1;
+				if ($s_name != 1) {
+					$s_name = 1;
 					$return .= '<option value="" disabled="disabled">' . $row3->name . '</option>';
 				}
 				if ($v['cid'] == $row->catid) {
@@ -1932,7 +1950,6 @@ function saveContent(&$access, $task) {
 // code cleaner for xhtml transitional compliance
 	$row->introtext = str_replace('<br>', '<br />', $row->introtext);
 	$row->fulltext = str_replace('<br>', '<br />', $row->fulltext);
-//test start
 	$row->notetext = str_replace('<br>', '<br />', $row->notetext);
 //test end
 	$length = strlen($row->introtext) < 9;
@@ -1940,15 +1957,12 @@ function saveContent(&$access, $task) {
 // remove <br /> take being automatically added to empty fulltext
 	$length = strlen($row->fulltext) < 9;
 	$search = strstr($row->fulltext, '<br />');
-//test start
 	$length = strlen($row->notetext) < 9;
 	$search = strstr($row->notetext, '<br />');
 //test end
 	if ($length && $search) {
 		$row->fulltext = null;
-//test start
 		$row->notetext = null;
-//test end
 	}
 	$row->title = ampReplace($row->title);
 	if (isset($_POST['catid'])) {
@@ -2014,7 +2028,8 @@ function saveContent(&$access, $task) {
 		$users = $database->loadResultArray();
 		foreach ($users as $user_id) {
 			$msg = new mosMessage($database);
-			$msg->send($my->id, $user_id, "Новый объект", sprintf(_ON_NEW_CONTENT, $my->username, $row->title, $section, $category));
+			// $msg->send($my->id, $user_id, "Новый объект", sprintf(_ON_NEW_CONTENT, $my->username, $row->title, $section, $category));
+			$msg->send( $my->id, $user_id, "Новый объект", sprintf( _ON_NEW_CONTENT, $my->username, $row->title, $section, $category ) . '<a href="' . $GLOBALS['mosConfig_live_site'] . '/administrator/index2.php?option=com_content&sectionid=0&task=edit&hidemainmenu=1&id=' . $row->id . '">' . $row->title . '</a>');
 		}
 	}
 	$msg = $isNew ? _THANK_SUB : _E_ITEM_SAVED;

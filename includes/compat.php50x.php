@@ -79,7 +79,6 @@ if (!function_exists('file_put_contents')) {
 * @requirePHP 4.0.0 (user_error)
 */
 if (!function_exists('stripos')) {
-
 	function stripos($haystack, $needle, $offset = null) {
 		if (!is_scalar($haystack)) {
 			user_error('stripos() expects parameter 1 to be string, ' . gettype($haystack) .
@@ -111,7 +110,6 @@ if (!function_exists('stripos')) {
 		$position = strlen($segments[0]) + $fix;
 		return $position;
 	}
-
 }
 /** Ported PHP5 function to PHP4 for forward compatibility */
 function clone($object) {

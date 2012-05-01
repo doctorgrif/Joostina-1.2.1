@@ -40,7 +40,8 @@ function listContacts($option, $catid) {
 	global $Itemid, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
 	;
 	/* Query to retrieve all categories that belong under the contacts section and that are published. */
-	$query = "SELECT*, COUNT(a.id) AS numlinks" . "\n FROM #__categories AS cc" . "\n LEFT JOIN #__contact_details AS a ON a.catid = cc.id" .
+	/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN *, COUNT(a.id) AS numlinks" . "\n FROM #__categories AS cc" . "\n LEFT JOIN #__contact_details AS a ON a.catid = cc.id" .
 			"\n WHERE a.published = 1" . "\n AND cc.section = 'com_contact_details'" . "\n AND cc.published = 1" .
 			"\n AND a.access <= " . (int) $my->gid . "\n AND cc.access <= " . (int) $my->gid . "\n GROUP BY cc.id" .
 			"\n ORDER BY cc.ordering";
@@ -117,7 +118,8 @@ function listContacts($option, $catid) {
 		}
 		if ($catid) {
 // url links info for category
-			$query = "SELECT*" . "\n FROM #__contact_details" . "\n WHERE catid = " . (int) $catid .
+/* add STRAIGHT_JOIN */
+			$query = "SELECT *" . "\n FROM #__contact_details" . "\n WHERE catid = " . (int) $catid .
 					"\n AND published =1" . "\n AND access <= " . (int) $my->gid . "\n ORDER BY ordering";
 			$database->setQuery($query);
 			$rows = $database->loadObjectList();
@@ -171,7 +173,8 @@ function listContacts($option, $catid) {
 
 function contactpage($contact_id) {
 	global $mainframe, $database, $my, $Itemid;
-	$query = "SELECT a.id AS value, CONCAT_WS(' - ', a.name, a.con_position) AS text, a.catid, cc.access AS cat_access" .
+	/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN a.id AS value, CONCAT_WS(' - ', a.name, a.con_position) AS text, a.catid, cc.access AS cat_access" .
 			"\n FROM #__contact_details AS a" . "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
 			"\n WHERE a.published = 1" . "\n AND cc.published = 1" . "\n AND a.access <= " . (int)
 			$my->gid . "\n ORDER BY a.default_con DESC, a.ordering ASC";
@@ -182,7 +185,7 @@ function contactpage($contact_id) {
 		if ($contact_id < 1) {
 			$contact_id = $checks[0]->value;
 		}
-		$query = "SELECT a.*, cc.access AS cat_access" . "\n FROM #__contact_details AS a" .
+		$query = "SELECT STRAIGHT_JOIN a.*, cc.access AS cat_access" . "\n FROM #__contact_details AS a" .
 				"\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" . "\n WHERE a.published = 1" .
 				"\n AND a.id = " . (int) $contact_id . "\n AND a.access <= " . (int) $my->gid;
 		$database->SetQuery($query);
@@ -252,7 +255,7 @@ function contactpage($contact_id) {
 		$params->def('state', 1);
 		$params->def('country', 1);
 		$params->def('postcode', 1);
-		$params->def('telephone', 1);
+		$params->def('phone', 1);
 		$params->def('fax', 1);
 		$params->def('misc', 1);
 		$params->def('vcard', 1);
@@ -267,7 +270,7 @@ function contactpage($contact_id) {
 		$params->def('contact_icons', 0);
 		$params->def('icon_address', '');
 		$params->def('icon_email', '');
-		$params->def('icon_telephone', '');
+		$params->def('icon_phone', '');
 		$params->def('icon_fax', '');
 		$params->def('icon_misc', '');
 		$params->def('drop_down', 0);
@@ -295,6 +298,7 @@ function contactpage($contact_id) {
 		switch ($params->get('contact_icons')) {
 			case 1:
 // text
+				$params->set('marker_position', _CONTACT_POSITION);
 				$params->set('marker_address', _CONTACT_ADDRESS);
 				$params->set('marker_email', _CONTACT_EMAIL);
 				$params->set('marker_telephone', _CONTACT_TELEPHONE);
@@ -305,6 +309,7 @@ function contactpage($contact_id) {
 				break;
 			case 2:
 // none
+				$params->set('marker_position', '');
 				$params->set('marker_address', '');
 				$params->set('marker_email', '');
 				$params->set('marker_telephone', '');
@@ -315,13 +320,13 @@ function contactpage($contact_id) {
 				break;
 			default:
 // icons
-				$image1 = mosAdminMenus::ImageCheck('con_address.png', '/images/M_images/', $params->get('icon_address'), '/images/M_images/', _CONTACT_ADDRESS, 'adress');
-				$image2 = mosAdminMenus::ImageCheck('con_email.png', '/images/M_images/', $params->get('icon_email'), '/images/M_images/', _CONTACT_EMAIL, 'email');
-				$image3 = mosAdminMenus::ImageCheck('con_tel.png', '/images/M_images/', $params->get('icon_telephone'), '/images/M_images/', _CONTACT_TELEPHONE, 'phone');
-				$image4 = mosAdminMenus::ImageCheck('con_fax.png', '/images/M_images/', $params->get('icon_fax'), '/images/M_images/', _CONTACT_FAX, 'fax');
-				$image5 = mosAdminMenus::ImageCheck('con_info.png', '/images/M_images/', $params->get('icon_misc'), '/images/M_images/', _CONTACT_MISC, 'more');
-				$image6 = mosAdminMenus::ImageCheck('con_vcard.png', '/images/M_images/', $params->get('icon_vcard'), '/images/M_images/', 'VCard', 'vcard');
-				$image7 = mosAdminMenus::ImageCheck('con_user.png', '/images/M_images/', $params->get('icon_position'), '/images/M_images/', _CONTACT_POSITION, 'position');
+				$image1 = mosAdminMenus::ImageCheck('icon_address.png', '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', $params->get('icon_address'), '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', _CONTACT_ADDRESS, 'adress');
+				$image2 = mosAdminMenus::ImageCheck('icon_email.png', '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', $params->get('icon_email'), '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', _CONTACT_EMAIL, 'email');
+				$image3 = mosAdminMenus::ImageCheck('icon_phone.png', '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', $params->get('icon_phone'), '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', _CONTACT_TELEPHONE, 'phone');
+				$image4 = mosAdminMenus::ImageCheck('icon_fax.png', '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', $params->get('icon_fax'), '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', _CONTACT_FAX, 'fax');
+				$image5 = mosAdminMenus::ImageCheck('icon_info.png', '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', $params->get('icon_misc'), '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', _CONTACT_MISC, 'more');
+				$image6 = mosAdminMenus::ImageCheck('icon_vcard.png', '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', $params->get('icon_vcard'), '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', 'VCard', 'vcard');
+				$image7 = mosAdminMenus::ImageCheck('icon_position.png', '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', $params->get('icon_position'), '/templates/' . $mainframe->getTemplate() . '/i/c/contact/', _CONTACT_POSITION, 'con_position');
 				$params->set('marker_address', $image1);
 				$params->set('marker_email', $image2);
 				$params->set('marker_telephone', $image3);
@@ -468,10 +473,10 @@ function sendmail($con_id, $option) {
 // check whether email copy function activated
 		if ($email_copy && $emailcopyCheck) {
 			$copy_text = sprintf(_COPY_TEXT, $contact[0]->name, $mosConfig_sitename);
-			/* Начало - отображение в письме IP-адрес автора сообщения */
+			/* Начало - Модификация для отображения в письме IP-адрес автора сообщения */
 			$text = $prefix . "\n" . $name . ' <' . $email . '>' . "\n\n" . stripslashes($text);
 			$copy_text = $copy_text . "\n\n" . $text . '';
-			/* Конец */
+			/* Конец - Модификация для отображения в письме IP-адрес автора сообщения */
 			$copy_subject = _COPY_SUBJECT . $subject;
 			$success = mosMail($mosConfig_mailfrom, $mosConfig_fromname, $email, $copy_subject, $copy_text);
 			if (!$success) {

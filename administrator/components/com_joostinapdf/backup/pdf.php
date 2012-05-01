@@ -71,7 +71,7 @@ function dofreePDF() {
 			return;
 		}
 	
-	include( 'includes/class.ezpdf.php' );
+	include( 'includes/ezpdf.class.php' );
 
 	$params = new mosParameters( $row->attribs );	
 	$params->def( 'author', !$mainframe->getCfg( 'hideAuthor' ) );

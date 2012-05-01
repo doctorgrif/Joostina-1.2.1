@@ -105,13 +105,13 @@ $cnt = count($tokens);
 $i = 1;
 
 while($i < $cnt) {
-$fullTag = $tokens[++$i];
-$closing = $tokens[++$i];
-$namespace = strtolower($tokens[++$i]);
-$tagname = strtolower($tokens[++$i]);
-$attString = $tokens[++$i];
+$fullTag = $tokens[$i++];
+$closing = $tokens[$i++];
+$namespace = strtolower($tokens[$i++]);
+$tagname = strtolower($tokens[$i++]);
+$attString = $tokens[$i++];
 $empty = substr($attString,-1);
-$data = $tokens[++$i];
+$data = $tokens[$i++];
 if(!in_array($namespace,$patNamespace)) {
 $this->_characterData($fullTag);
 $this->_characterData($data);
@@ -155,7 +155,7 @@ static $entities = array('&lt;' => '<','&gt;' => '>','&amp;' => '&','&quot;' => 
 $attributes = array();
 $match = array();
 preg_match_all('/([a-zA-Z_0-9]+)="((?:\\\.|[^"\\\])*)"/U',$string,$match);
-for($i = 0; $i < count($match[1]); ++$i) {
+for($i = 0; $i < count($match[1]); $i++) {
 $attributes[strtolower($match[1][$i])] = strtr((string )$match[2][$i],$entities);
 }
 return $attributes;

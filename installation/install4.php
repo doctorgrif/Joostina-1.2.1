@@ -14,21 +14,21 @@ require_once ('common.php');
 // используем оригинальный класс работы с базой данных - без кэширования
 require_once ('../includes/database/database/database.php');
 
-$DBhostname		= mosGetParam($_POST,'DBhostname','');
-$DBuserName		= mosGetParam($_POST,'DBuserName','');
-$DBpassword		= mosGetParam($_POST,'DBpassword','');
-$DBname			= mosGetParam($_POST,'DBname','');
-$DBPrefix		= mosGetParam($_POST,'DBPrefix','');
-$DBold			= intval(mosGetParam($_POST,'DBold',0));
-$sitename		= mosGetParam($_POST,'sitename','');
-$adminEmail		= mosGetParam($_POST,'adminEmail','');
-$siteUrl		= mosGetParam($_POST,'siteUrl','');
-$absolutePath	= mosGetParam($_POST,'absolutePath','');
-$adminPassword	= mosGetParam($_POST,'adminPassword','');
-$adminLogin		= mosGetParam($_POST,'adminLogin','');
+$DBhostname		= mosGetParam($_POST, 'DBhostname', '');
+$DBuserName		= mosGetParam($_POST, 'DBuserName', '');
+$DBpassword		= mosGetParam($_POST, 'DBpassword', '');
+$DBname			= mosGetParam($_POST, 'DBname', '');
+$DBPrefix		= mosGetParam($_POST, 'DBPrefix', '');
+$DBold			= intval(mosGetParam($_POST, 'DBold', 0));
+$sitename		= mosGetParam($_POST, 'sitename', '');
+$adminEmail		= mosGetParam($_POST, 'adminEmail', '');
+$siteUrl		= mosGetParam($_POST, 'siteUrl', '');
+$absolutePath	= mosGetParam($_POST, 'absolutePath', '');
+$adminPassword	= mosGetParam($_POST, 'adminPassword', '');
+$adminLogin		= mosGetParam($_POST, 'adminLogin', '');
 $filePerms		= '';
 
-if(mosGetParam($_POST,'filePermsMode',0))
+if(mosGetParam($_POST, 'filePermsMode', 0))
 		$filePerms = '0'.(
 		mosGetParam($_POST,'filePermsUserRead',0)* 4
 		+ mosGetParam($_POST,'filePermsUserWrite',0)* 2
@@ -41,36 +41,36 @@ if(mosGetParam($_POST,'filePermsMode',0))
 		+ mosGetParam($_POST,'filePermsWorldExecute',0));
 
 $dirPerms = '';
-if(mosGetParam($_POST,'dirPermsMode',0))
+if(mosGetParam($_POST, 'dirPermsMode', 0))
 		$dirPerms = '0'.(
-		mosGetParam($_POST,'dirPermsUserRead',0)* 4
-		+ mosGetParam($_POST,'dirPermsUserWrite',0)* 2
-		+ mosGetParam($_POST,'dirPermsUserSearch',0)).
-		(mosGetParam($_POST,'dirPermsGroupRead',0)* 4
-		+ mosGetParam($_POST,'dirPermsGroupWrite',0)* 2
-		+ mosGetParam($_POST,'dirPermsGroupSearch',0)).
-		(mosGetParam($_POST,'dirPermsWorldRead',0)* 4
-		+ mosGetParam($_POST,'dirPermsWorldWrite',0)* 2
-		+ mosGetParam($_POST,'dirPermsWorldSearch',0));
+		mosGetParam($_POST, 'dirPermsUserRead', 0)* 4
+		+ mosGetParam($_POST, 'dirPermsUserWrite', 0)* 2
+		+ mosGetParam($_POST, 'dirPermsUserSearch', 0)).
+		(mosGetParam($_POST, 'dirPermsGroupRead', 0)* 4
+		+ mosGetParam($_POST, 'dirPermsGroupWrite', 0)* 2
+		+ mosGetParam($_POST, 'dirPermsGroupSearch', 0)).
+		(mosGetParam($_POST, 'dirPermsWorldRead', 0)* 4
+		+ mosGetParam($_POST, 'dirPermsWorldWrite', 0)* 2
+		+ mosGetParam($_POST, 'dirPermsWorldSearch', 0));
 
 if((trim($adminEmail == "")) || (preg_match("/[\w\.\-]+@\w+[\w\.\-]*?\.\w{1,4}/",$adminEmail) == false)) {
-	echo "<head></head><body><form name=\"stepBack\" method=\"post\" action=\"install3.php\" id=\"stepBack\">
-		<input type=\"hidden\" name=\"DBhostname\" value=\"$DBhostname\" />
-		<input type=\"hidden\" name=\"DBuserName\" value=\"$DBuserName\" />
-		<input type=\"hidden\" name=\"DBpassword\" value=\"$DBpassword\" />
-		<input type=\"hidden\" name=\"DBname\" value=\"$DBname\" />
-		<input type=\"hidden\" name=\"DBPrefix\" value=\"$DBPrefix\" />
-		<input type=\"hidden\" name=\"DBold\" value=\"$DBold\" />
-		<input type=\"hidden\" name=\"DBcreated\" value=\"1\" />
-		<input type=\"hidden\" name=\"sitename\" value=\"$sitename\" />
-		<input type=\"hidden\" name=\"adminEmail\" value=\"$adminEmail\" />
-		<input type=\"hidden\" name=\"siteUrl\" value=\"$siteUrl\" />
-		<input type=\"hidden\" name=\"absolutePath\" value=\"$absolutePath\" />
-		<input type=\"hidden\" name=\"filePerms\" value=\"$filePerms\" />
-		<input type=\"hidden\" name=\"dirPerms\" value=\"$dirPerms\" />
-		<input type=\"hidden\" name=\"adminPassword\" value=\"$adminPassword\" />
-		<input type=\"hidden\" name=\"adminLogin\" value=\"$adminLogin\" />
-	</form>";
+	echo '<head></head><body><form name="stepBack" method="post" action="install3.php" id="stepBack">
+		<input type="hidden" name="DBhostname" value="'.$DBhostname.'" />
+		<input type="hidden" name="DBuserName" value="'.$DBuserName.'" />
+		<input type="hidden" name="DBpassword" value="'.$DBpassword.'" />
+		<input type="hidden" name="DBname" value="'.$DBname.'" />
+		<input type="hidden" name="DBPrefix" value="'.$DBPrefix.'" />
+		<input type="hidden" name="DBold" value="'.$DBold.'" />
+		<input type="hidden" name="DBcreated" value="1" />
+		<input type="hidden" name="sitename" value="'.$sitename.'" />
+		<input type="hidden" name="adminEmail" value="'.$adminEmail.'" />
+		<input type="hidden" name="siteUrl" value="'.$siteUrl.'" />
+		<input type="hidden" name="absolutePath" value="'.$absolutePath.'" />
+		<input type="hidden" name="filePerms" value="'.$filePerms.'" />
+		<input type="hidden" name="dirPerms" value="'.$dirPerms.'" />
+		<input type="hidden" name="adminPassword" value="'.$adminPassword.'" />
+		<input type="hidden" name="adminLogin" value="'.$adminLogin.'" />
+	</form>';
 	echo "<script>alert('Вы должны указать правильный адрес e-mail Администратора!.'); document.stepBack.submit(); </script></body>";
 	exit();
 	return;
@@ -84,23 +84,23 @@ if($DBhostname && $DBuserName && $DBname) {
 	$configArray['DBPrefix'] = $DBPrefix;
 	$configArray['DBold'] = $DBold;
 } else {
-	echo "<form name=\"stepBack\" method=\"post\" action=\"install3.php\">
-		<input type=\"hidden\" name=\"DBhostname\" value=\"$DBhostname\" />
-		<input type=\"hidden\" name=\"DBuserName\" value=\"$DBuserName\" />
-		<input type=\"hidden\" name=\"DBpassword\" value=\"$DBpassword\" />
-		<input type=\"hidden\" name=\"DBname\" value=\"$DBname\" />
-		<input type=\"hidden\" name=\"DBPrefix\" value=\"$DBPrefix\" />
-		<input type=\"hidden\" name=\"DBold\" value=\"$DBold\" />
-		<input type=\"hidden\" name=\"DBcreated\" value=\"1\" />
-		<input type=\"hidden\" name=\"sitename\" value=\"$sitename\" />
-		<input type=\"hidden\" name=\"adminEmail\" value=\"$adminEmail\" />
-		<input type=\"hidden\" name=\"siteUrl\" value=\"$siteUrl\" />
-		<input type=\"hidden\" name=\"absolutePath\" value=\"$absolutePath\" />
-		<input type=\"hidden\" name=\"filePerms\" value=\"$filePerms\" />
-		<input type=\"hidden\" name=\"dirPerms\" value=\"$dirPerms\" />
-		<input type=\"hidden\" name=\"adminPassword\" value=\"$adminPassword\" />
-		<input type=\"hidden\" name=\"adminLogin\" value=\"$adminLogin\" />
-	</form>";
+	echo '<form name="stepBack" method="post" action="install3.php">
+		<input type="hidden" name="DBhostname" value="'.$DBhostname.'" />
+		<input type="hidden" name="DBuserName" value="'.$DBuserName.'" />
+		<input type="hidden" name="DBpassword" value="'.$DBpassword.'" />
+		<input type="hidden" name="DBname" value="'.$DBname.'" />
+		<input type="hidden" name="DBPrefix" value="'.$DBPrefix.'" />
+		<input type="hidden" name="DBold" value="'.$DBold.'" />
+		<input type="hidden" name="DBcreated" value="1" />
+		<input type="hidden" name="sitename" value="'.$sitename.'" />
+		<input type="hidden" name="adminEmail" value="'.$adminEmail.'" />
+		<input type="hidden" name="siteUrl" value="'.$siteUrl.'" />
+		<input type="hidden" name="absolutePath" value="'.$absolutePath.'" />
+		<input type="hidden" name="filePerms" value="'.$filePerms.'" />
+		<input type="hidden" name="dirPerms" value="'.$dirPerms.'" />
+		<input type="hidden" name="adminPassword" value="'.$adminPassword.'" />
+		<input type="hidden" name="adminLogin" value="'.$adminLogin.'" />
+	</form>';
 
 	echo "<script>alert('Указанные значения для БД неверны и/или пусты'); document.stepBack.submit(); </script>";
 	return;
@@ -113,23 +113,23 @@ if($sitename) {
 		$configArray['sitename'] = $sitename;
 	}
 } else {
-	echo "<form name=\"stepBack\" method=\"post\" action=\"install3.php\">
-		<input type=\"hidden\" name=\"DBhostname\" value=\"$DBhostname\" />
-		<input type=\"hidden\" name=\"DBuserName\" value=\"$DBuserName\" />
-		<input type=\"hidden\" name=\"DBpassword\" value=\"$DBpassword\" />
-		<input type=\"hidden\" name=\"DBname\" value=\"$DBname\" />
-		<input type=\"hidden\" name=\"DBPrefix\" value=\"$DBPrefix\" />
-		<input type=\"hidden\" name=\"DBold\" value=\"$DBold\" />
-		<input type=\"hidden\" name=\"DBcreated\" value=\"1\" />
-		<input type=\"hidden\" name=\"sitename\" value=\"$sitename\" />
-		<input type=\"hidden\" name=\"adminEmail\" value=\"$adminEmail\" />
-		<input type=\"hidden\" name=\"siteUrl\" value=\"$siteUrl\" />
-		<input type=\"hidden\" name=\"absolutePath\" value=\"$absolutePath\" />
-		<input type=\"hidden\" name=\"filePerms\" value=\"$filePerms\" />
-		<input type=\"hidden\" name=\"dirPerms\" value=\"$dirPerms\" />
-		<input type=\"hidden\" name=\"adminPassword\" value=\"$adminPassword\" />
-		<input type=\"hidden\" name=\"adminLogin\" value=\"$adminLogin\" />
-	</form>";
+	echo '<form name="stepBack" method="post" action="install3.php">
+		<input type="hidden" name="DBhostname" value="'.$DBhostname.'" />
+		<input type="hidden" name="DBuserName" value="'.$DBuserName.'" />
+		<input type="hidden" name="DBpassword" value="'.$DBpassword.'" />
+		<input type="hidden" name="DBname" value="'.$DBname.'" />
+		<input type="hidden" name="DBPrefix" value="'.$DBPrefix.'" />
+		<input type="hidden" name="DBold" value="'.$DBold.'" />
+		<input type="hidden" name="DBcreated" value="1" />
+		<input type="hidden" name="sitename" value="'.$sitename.'" />
+		<input type="hidden" name="adminEmail" value="'.$adminEmail.'" />
+		<input type="hidden" name="siteUrl" value="'.$siteUrl.'" />
+		<input type="hidden" name="absolutePath" value="'.$absolutePath.'" />
+		<input type="hidden" name="filePerms" value="'.$filePerms.'" />
+		<input type="hidden" name="dirPerms" value="'.$dirPerms.'" />
+		<input type="hidden" name="adminPassword" value="'.$adminPassword.'" />
+		<input type="hidden" name="adminLogin" value="'.$adminLogin.'" />
+	</form>';
 
 	echo "<script>alert('Вами не указано название сайта! '); document.stepBack2.submit();</script>";
 	return;
@@ -164,13 +164,13 @@ if($siteUrl) {
 	$config .= "\$mosConfig_shownoauth = '0';\n";
 	$config .= "\$mosConfig_useractivation = '1';\n";
 	$config .= "\$mosConfig_uniquemail = '1';\n";
-	$config .= "\$mosConfig_offline_message = '<p>Сайт временно закрыт.</p><p>Приносим свои извинения! Пожалуйста, зайдите позже.</p>';\n";
+	$config .= "\$mosConfig_offline_message = '<p>Сайт временно закрыт.</p><p>Приносим свои извинения!</p><p>Пожалуйста, зайдите позже.</p>';\n";
 	$config .= "\$mosConfig_error_message = '<p>Сайт недоступен.</p><p>Пожалуйста, сообщите об этом Администратору!</p>';\n";
 	$config .= "\$mosConfig_debug = '0';\n";
 	$config .= "\$mosConfig_lifetime = '900';\n";
 	$config .= "\$mosConfig_session_life_admin = '1800';\n";
 	$config .= "\$mosConfig_session_type = '0';\n";
-	$config .= "\$mosConfig_MetaDesc = 'Joostina - современная система управления содержимым динамичных сайтов и мощная система управления порталами';\n";
+	$config .= "\$mosConfig_MetaDesc = ' Joostina CMS - современная система управления содержимым динамичных сайтов и мощная система управления порталами';\n";
 	$config .= "\$mosConfig_MetaKeys = 'Joostina, joostina';\n";
 	$config .= "\$mosConfig_MetaTitle = '1';\n";
 	$config .= "\$mosConfig_MetaAuthor = '1';\n";
@@ -319,9 +319,6 @@ if($siteUrl) {
 	// отключить кэш запросов БД
 	$config .= "\$mosConfig_db_cache_handler = 'none';\n";
 
-
-
-
 	$config .= "\$mosConfig_smtppass = '';\n";
 	$config .= "\$mosConfig_smtphost = 'localhost';\n";
 	$config .= "\$mosConfig_back_button = '1';\n";
@@ -373,7 +370,7 @@ if($siteUrl) {
 	$database->query();
 
 	// chmod files and directories if desired
-	$chmod_report = "Права доступа к файлам и каталогам не изменены.";
+	$chmod_report = '<p>Права доступа к файлам и каталогам Joostina CMS не изменены.</p>';
 	if($filePerms != '' || $dirPerms != '') {
 		$mosrootfiles = array('administrator','cache','components','images','language','mambots','media','modules','templates','configuration.php');
 		$filemode = null;
@@ -382,14 +379,14 @@ if($siteUrl) {
 		if($dirPerms != '') $dirmode = octdec($dirPerms);
 		$chmodOk = true;
 		foreach($mosrootfiles as $file) {
-			if(!mosChmodRecursive($absolutePath.'/'.$file,$filemode,$dirmode)) {
+			if(!mosChmodRecursive($absolutePath.'/'.$file, $filemode, $dirmode)) {
 				$chmodOk = false;
 			}
 		}
 		if($chmodOk) {
-			$chmod_report = 'Права доступа к файлам и каталогам успешно изменены.';
+			$chmod_report = '<p>Права доступа к файлам и каталогам Joostina CMS успешно изменены.</p>';
 		} else {
-			$chmod_report = 'Права доступа к файлам и каталогам не могут быть изменены.<br />Пожалуйста, установите CHMOD каталогов и файлов Joostina вручную.';
+			$chmod_report = '<p>Права доступа к файлам и каталогам Joostina CMS не могут быть изменены.</p><p>Пожалуйста, установите CHMOD каталогов и файлов Joostina CMS вручную.</p>';
 		}
 	} // if chmod wanted
 } else {
@@ -409,11 +406,14 @@ if($siteUrl) {
 			<input type="hidden" name="filePerms" value="$filePerms" />
 			<input type="hidden" name="dirPerms" value="$dirPerms" />
 		</form>
-		<script>alert('URL сайта не введен'); document.stepBack3.submit();</script>
+		<script>alert('URI сайта не введен'); document.stepBack3.submit();</script>
 <?php
 }
-echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+echo '<!DOCTYPE html>';
+echo "\n";
+echo '<?xml version="1.0" encoding="utf-8"?>';
+echo "\n";
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Joostina - Web-установка. Шаг 4 - установка завершена</title>
@@ -428,7 +428,7 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 <div class="install">
 	<div id="header">
 		<p><?php echo $version; ?></p>
-		<p class="jst"><a href="http://www.joostina.ru">Joostina</a> - свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
+		<p class="jst"><a href="http://www.joostina.ru">Joostina</a> &ndash; свободное программное обеспечение, распространяемое по лицензии GNU/GPL.</p>
 	</div>
 	<div id="navigator">
 		<span style="font-size:larger;">Установка Joostina CMS</span>
@@ -449,23 +449,25 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 <div id="wrap">
 	<div class="install-form">
 		<div class="form-block">
-			<div class="install-text">ПОЖАЛУЙСТА, <strong> УДАЛИТЕ КАТАЛОГ 'INSTALLATION'</strong>, ИНАЧЕ ВАШ САЙТ НЕ ЗАГРУЗИТСЯ</div>
+			<div class="install-text">
+			<p>Пожалуйста, <span class="strong">удалите каталог '/installation'</span>, иначе ваш сайт не загрузится</p>
+			</div>
 				<input class="button small" type="button" name="runSite" value="Просмотр сайта"
 				<?php
 					if($siteUrl) {
 						echo "onClick=\"window.location.href='$siteUrl/' \"";
 					} else {
-						echo "onClick=\"window.location.href='".$configArray['siteURL']."/index.php' \"";
+						echo "onClick=\"window.location.href='" . $configArray['siteURL'] . "/index.php' \"";
 					}
-				?>/>
+				?> />
 				&nbsp;<input class="button small" type="button" name="Admin" value="Панель управления"
 				<?php
 					if($siteUrl) {
 						echo "onClick=\"window.location.href='$siteUrl/administrator/index.php' \"";
 					} else {
-						echo "onClick=\"window.location.href='".$configArray['siteURL']."/administrator/index.php' \"";
+						echo "onClick=\"window.location.href='" . $configArray['siteURL'] . "/administrator/index.php' \"";
 					}
-				?>/>
+				?> />
 				<?php
 					$url = $siteUrl.'/installation/install.ajax.php?task=rminstalldir';
 					$clk = 'onclick=\'$.ajax({url: "'.$url.'", beforeSend: function(response){$("#status").show("normal")}, success: function(response){$("#delbutton").val(response); $("#delbutton").click(function(){if(response == "www.joostina.ru") window.location.href="http://www.joostina.ru"}); $("#alert_mess").hide("fast")}, dataType: "html"}); return false;\'';
@@ -474,26 +476,26 @@ echo '<?xml version="1.0" encoding="windows-1251"?' . '>';?>
 				?>
 			<div id="status" style="display:none;"></div>
 				<h2>Данные для авторизации Главного Администратора сайта:</h2>
-				Логин: <strong><?php echo $adminLogin;?></strong> Пароль: <strong><?php echo $adminPassword; ?></strong>
+				<p>Логин: <span class="strong"><?php echo $adminLogin;?></span></p>
+				<p>Пароль: <span class="strong"><?php echo $adminPassword; ?></span></p>
 				<?php if(!$canWrite) { ?>
 				<div class="install-text">
-					Ваш конфигурационный файл или нужный каталог недоступны для записи, или есть какая-то проблема с созданием основного конфигурационного файла. Вам придется загрузить этот код вручную.<br />ОБЯЗАТЕЛЬНО выделите и скопируйте весь следующий код:
+					<p>Ваш конфигурационный файл или нужный каталог недоступны для записи, или есть какая-то проблема с созданием основного конфигурационного файла. Вам придется загрузить этот код вручную.</p>
+					<p><span class="strong">Обязательно</span> выделите и скопируйте весь следующий код:</p>
 				</div>
 				<textarea rows="5" cols="60" name="configcode" onclick="javascript:this.form.configcode.focus();this.form.configcode.select();" >
 					<?php echo htmlspecialchars($config); ?>
 				</textarea>
 				<?php } ?>
-				<div>
-					<?php echo $chmod_report; ?>
-				</div>
+				<div><?php echo $chmod_report; ?></div>
 		</div>
 	</div>
 	<div id="break"></div>
 </div>
-<div class="clr"></div>
+<div class="clearfix"></div>
 </div>
 </form>
 </div>
-<div class="clr"></div>
+<div class="clearfix"></div>
 </body>
 </html>

@@ -36,8 +36,9 @@ function showBanners(&$params) {
 		$where = '(' . implode(' OR ', $where) . ') AND';
 	else
 		$where = '';
+	/* add STRAIGHT_JOIN */
 	/*
-	$query = "SELECT #__banners.* FROM #__banners,#__banners_categories,#__banners_clients
+	$query = "SELECT STRAIGHT_JOIN #__banners.* FROM #__banners,#__banners_categories,#__banners_clients
 	WHERE 1 AND $where
 	(('$date' <= publish_down_date OR publish_down_date = '0000-00-00')
 	AND '$date' >= publish_up_date
@@ -52,7 +53,8 @@ function showBanners(&$params) {
 	AND #__banners.cid = #__banners_clients.cid
 	AND #__banners_clients.published = 1) ORDER BY last_show ASC, msec ASC";
 	*/
-	$query = "SELECT b.* FROM #__banners AS b
+	/* add STRAIGHT_JOIN */
+	$query = "SELECT STRAIGHT_JOIN b.* FROM #__banners AS b
 	INNER JOIN #__banners_categories AS cat ON b.tid = cat.id
 	INNER JOIN #__banners_clients AS cl ON b.cid = cl.cid
 	WHERE cat.published =1 AND cl.published =1 AND b.access <= '$my->gid' AND b.state = '1'
@@ -136,7 +138,7 @@ function showSingleBanner(&$banner) {
 			$alt = $banner->alt;
 		$title = $banner->title;
 
-$result = '<a href="index.php?option=com_banners&amp;task=clk&amp;id=' . $banner->id . '" target="_' . $target . '"  title="' . $title . '"><img src="' . $image_url . '" style="border:"' . $border_value . $border_style . $border_color . '" vspace="0" class="banner" alt=' . $alt . '" width="' . $imginfo[0] . '" height="' . $imginfo[1] . '" /></a>';
+$result = '<a href="index.php?option=com_banners&amp;task=clk&amp;id=' . $banner->id . '" target="_' . $target . '"  title="' . $title . '"><img src="' . $image_url . '" style="border:"' . $border_value . ' ' . $border_style . ' ' . $border_color . '" vspace="0" class="banner" alt=' . $alt . '" width="' . $imginfo[0] . '" height="' . $imginfo[1] . '" /></a>';
 	} else
 	if (eregi('.swf', $banner->image_url)) {
 		$image_url = $mosConfig_live_site . '/images/banners/' . $banner->image_url;

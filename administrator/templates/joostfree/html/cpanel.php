@@ -13,20 +13,20 @@ defined('_VALID_MOS') or die();
 mosLoadAdminModules('icon', 0);
 ?>
 <form action="index2.php" method="post" name="adminForm" id="adminForm">
-	<table class="cpanel">
-		<tr>
-			<td class="cpanel1">
-				<?php
+<table class="cpanel">
+	<tr>
+		<td class="cpanel1">
+		<?php
 // загрузка модулей панели управления позиции advert1 c использованием деления модулей по вкладкам
-				mosLoadAdminModules('advert1', 0);
-				?>
-			</td>
-			<td class="cpanel2">
-				<?php
+		mosLoadAdminModules('advert1',0);
+		?>
+		</td>
+		<td class="cpanel2">
+		<?php
 // загрузка модулей панели управления позиции advert1 c использованием деления модулей по вкладкам
-				mosLoadAdminModules('advert2', 0);
-				?>
-			</td>
-		</tr>
-	</table>
+		mosLoadAdminModules('advert2',0);
+		?>
+		</td>
+	</tr>
+</table>
 </form>

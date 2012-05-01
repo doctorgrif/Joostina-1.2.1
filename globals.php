@@ -9,19 +9,18 @@
 // запрет пр€мого доступа
 defined('_VALID_MOS') or die();
 /**
-* Ёмул€ци€ регистрации глобальных переменных (Register Globals Emulation) больше не настраиваетс€ в этом файле.
-* —ейчас этот параметр настраиваетс€ в глобальной конфигурации сайта, в админцентре.
+* Ёмул€ци€ регистрации глобальных переменных (Register Globals Emulation) больше не настраиваетс€
+* в этом файле. —ейчас этот параметр настраиваетс€ в глобальной конфигурации сайта, в админцентре.
 */
 if (defined('RG_EMULATION') === false) {
-	if (file_exists(dirname(__file__) . '/configuration.php')) {
-		require (dirname(__file__) . '/configuration.php');
+	if (file_exists(dirname(__file__).'/configuration.php')) {
+		require (dirname(__file__).'/configuration.php');
 	}
 	if (defined('RG_EMULATION') === false) {
 // The configuration file is old so default to on
 		define('RG_EMULATION', 0);
 	}
 }
-
 /**
 * Adds an array to the GLOBALS array and checks that the GLOBALS variable is not being attacked
 * @param array
@@ -35,14 +34,13 @@ function checkInputArray(&$array, $globalise = false) {
 // PHP Zend_Hash_Del_Key_Or_Index bug
 		$failed |= is_numeric($key);
 		if ($failed) {
-			die(_FAILED_ITEM . ' <strong>' . implode('</strong> ' . _OR . ' <strong>', $banned) . '</strong> ' . _IN_SCRIPT);
+			die(_FAILED_ITEM.' <strong>'.implode('</strong> '._OR.' <strong>', $banned).'</strong> '._IN_SCRIPT);
 		}
 		if ($globalise) {
 			$GLOBALS[$key] = $value;
 		}
 	}
 }
-
 // Ёмул€ци€ register globals = off
 function unregisterGlobals() {
 	checkInputArray($_FILES);
@@ -80,7 +78,6 @@ function unregisterGlobals() {
 	$_ENV = $ENV;
 	$_SERVER = $SERVER;
 }
-
 // Ёмул€ци€ register globals = on
 function registerGlobals() {
 	checkInputArray($_FILES, true);
@@ -95,17 +92,16 @@ function registerGlobals() {
 	foreach ($_FILES as $key => $value) {
 		$GLOBALS[$key] = $_FILES[$key]['tmp_name'];
 		foreach ($value as $ext => $value2) {
-			$key2 = $key . '_' . $ext;
+			$key2 = $key.'_'.$ext;
 			$GLOBALS[$key2] = $value2;
 		}
 	}
 }
-
 if (RG_EMULATION == 0) {
 // force register_globals = off
 	unregisterGlobals();
-	if (file_exists(dirname(__file__) . '/configuration.php')) {
-		require (dirname(__file__) . '/configuration.php');
+	if (file_exists(dirname(__file__).'/configuration.php')) {
+		require (dirname(__file__).'/configuration.php');
 	}
 } else
 if (ini_get('register_globals') == 0) {

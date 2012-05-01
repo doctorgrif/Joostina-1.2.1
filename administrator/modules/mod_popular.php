@@ -9,7 +9,7 @@
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
 
-$query = "SELECT a.hits, a.id, a.sectionid, a.title, a.created, u.name" . "\n FROM #__content AS a" .
+$query = "SELECT STRAIGHT_JOIN a.hits, a.id, a.sectionid, a.title, a.created, u.name" . "\n FROM #__content AS a" .
 		"\n LEFT JOIN #__users AS u ON u.id=a.created_by" . "\n WHERE a.state != -2" . "\n ORDER BY hits DESC";
 $database->setQuery($query, 0, 10);
 $rows = $database->loadObjectList();
@@ -17,9 +17,9 @@ $rows = $database->loadObjectList();
 
 <table class="adminlist">
 	<tr>
-		<th class="title"><?php echo _POPULAR_CONTENT; ?></th>
-		<th class="title"><?php echo _CREATED_CONTENT; ?></th>
-		<th class="title"><?php echo _CONTENT_HITS; ?></th>
+		<th class="title"><p><?php echo _POPULAR_CONTENT; ?></p></th>
+		<th class="title"><p><?php echo _CREATED_CONTENT; ?></p></th>
+		<th class="title"><p><?php echo _CONTENT_HITS; ?></p></th>
 	</tr>
 	<?php
 	foreach ($rows as $row) {
@@ -32,9 +32,9 @@ $rows = $database->loadObjectList();
 		}
 		?>
 	<tr>
-		<td><a href="<?php echo $link; ?>"><?php echo htmlspecialchars($row->title, ENT_QUOTES); ?></a></td>
-		<td><?php echo $row->created; ?></td>
-		<td style="text-align:center;"><?php echo $row->hits; ?></td>
+		<td><p><a href="<?php echo $link; ?>" title="<?php echo htmlspecialchars($row->title, ENT_QUOTES); ?>"><?php echo htmlspecialchars($row->title, ENT_QUOTES); ?></a></p></td>
+		<td><p><?php echo $row->created; ?></p></td>
+		<td><p><?php echo $row->hits; ?></p></td>
 	</tr>
 		<?php
 	}

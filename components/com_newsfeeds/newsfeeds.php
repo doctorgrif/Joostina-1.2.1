@@ -26,7 +26,7 @@ function listFeeds($catid) {
 	global $mosConfig_live_site;
 	global $Itemid;
 	/* Query to retrieve all categories that belong under the contacts section and that are published. */
-	$query = "SELECT cc.*, a.catid, COUNT(a.id) AS numlinks FROM #__categories AS cc" .
+	$query = "SELECT STRAIGHT_JOIN cc.*, a.catid, COUNT(a.id) AS numlinks FROM #__categories AS cc" .
 			"\n LEFT JOIN #__newsfeeds AS a ON a.catid = cc.id WHERE a.published = 1" .
 			"\n AND cc.section = 'com_newsfeeds'AND cc.published = 1 AND cc.access <= " . (int) $my->gid . "\n GROUP BY cc.id ORDER BY cc.ordering";
 	$database->setQuery($query);

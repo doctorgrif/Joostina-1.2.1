@@ -33,7 +33,7 @@ class HTML_weblinks {
 					<?php } echo $currentcat->descrip; ?>
 				</div>
 			</div>
-			<div class="cf"></div>
+			<div class="clearfix"></div>
 			<div>
 				<div>
 					<?php

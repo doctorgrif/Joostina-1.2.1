@@ -41,7 +41,7 @@ sajax_show_javascript();
 <div id="DEFScreen">
 	<table class="adminheading">
 		<tr>
-			<th class="cpanel" nowrap rowspan="2"><?php echo _JP_DONT_SAVE_DIRECTORIES_IN_BACKUP?></th>
+			<th class="cpanel" nowrap rowspan="2"><?php echo _JP_DONT_SAVE_DIRECTORIES_IN_BACKUP;?></th>
 		</tr>
 	</table>
 	<div id="DEFOperationList">

@@ -2,15 +2,39 @@
 * dTree 2.05 | www.destroydrop.com/javascript/tree/
 * Copyright (c) 2002-2003 Geir Landr|
 */
-.dtree{
-	font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
-	font-size:11px;
-	color:#666;
+.dtree {
 	white-space:nowrap;
-	text-align:left;}
-.dtree img{border:0px;vertical-align:middle;}
-.dtree a{color:#333;text-decoration:none;}
-.dtree a.node, .dtree a.nodeSel{padding:1px 2px 1px 2px;}
-.dtree a.node:hover, .dtree a.nodeSel:hover{color:#333;text-decoration:underline;}
-.dtree a.nodeSel{background-color:#c0d2ec;display:block;}
-.dtree .clip{overflow:hidden;}
+	margin:0;
+	padding:0;}
+.dtree p{
+	font-size:.9em;
+	color:#666;
+	text-align:left;
+	margin:0;
+	padding:0;}
+.dTreeNode {}
+.dTreeNode ul {
+	margin:0;
+	padding:0;}
+.dTreeNode li {
+	list-style:none;
+	margin:0;
+	padding:0;}
+.clip {}
+.clip ul {
+	margin:0;
+	padding:0;}
+.clip  li {
+	list-style:none;
+	margin:0;
+	padding:0;}
+.dtree img {
+	border:0;
+	vertical-align:middle;}
+.dtree a {}
+.dtree a.node, .dtree a.nodeSel {padding:1px 2px;}
+.dtree a.node:hover, .dtree a.nodeSel:hover {}
+.dtree a.nodeSel {
+	background-color:#c0d2ec;
+	display:block;}
+.dtree .clip {overflow:hidden;}

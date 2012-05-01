@@ -31,7 +31,7 @@ function botMosCode($published, &$row) {
 }
 /**
 * Замена совпадающих тэгов an image
-* @param array - Массив соответствий (см. - preg_match_all)
+* @param array - Массив соответствий (см. preg_match_all)
 * @return string
 */
 function botMosCode_replacer(&$matches) {
@@ -39,11 +39,11 @@ function botMosCode_replacer(&$matches) {
 	$html_entities_replace = array('&lt;', '&gt;');
 	$text = $matches[1];
 	$text = preg_replace($html_entities_match, $html_entities_replace, $text);
-// Замена 2 пробелов "&nbsp; " так,  чтобы выравнивался нетабулированный код, при этом не создавая огромных длинных строк.
+// Замена 2 "&nbsp;" так, чтобы выравнивался нетабулированный код, при этом не создавая длинных строк.
 	$text = str_replace('  ', '&nbsp; ', $text);
 // немедленная замена 2 пробелами "&nbsp;" выявленным нечетным количеством пробелов.
 	$text = str_replace('  ', ' &nbsp;', $text);
-// Замена табуляций "&nbsp;&nbsp;" так, чтобы код с символами табуляции выравнивается по правому краю, не создавая слишком длинных строк.
+// замена табуляций, чтобы код с табуляциями выравнивался по правому краю, не создавая длинных строк.
 	$text = str_replace('\t', '&nbsp; &nbsp;', $text);
 	$text = str_replace('&lt;', '<', $text);
 	$text = str_replace('&gt;', '>', $text);

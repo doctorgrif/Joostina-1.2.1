@@ -1,0 +1,50 @@
+#shadow {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	background-image: url(../i/thumb-trans.png);
+	text-align: center;}
+* html #shadow {
+	/* hack for IE < 7 opacity */
+	background-color: #333;
+	back\ground-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/i/thumb-trans.png", sizingMethod="scale");
+}
+#shadow.on {display: block;}
+#loading {
+	background: url(../i/thumb-preload.gif) no-repeat;
+	position: absolute;
+	left: 48%;
+	top: 50px;
+	width: 55px;
+	height: 55px;
+	margin: 0 auto;
+	cursor: pointer;}
+#litebox {
+	background: #fff;
+	padding: 5px 0;
+	margin: 0 auto;}
+#litebox img {cursor: pointer;}
+#litebox p {
+	margin: 0;
+	padding: 10px 0;
+	color: #333;}
+#litebox em {
+	color: #999;
+	display: block;
+  font-size: 85%;}
+#litebox a {
+	border: none;
+	width: 21px;
+	height: 21px;}
+#litebox a.prev {
+	float: left;
+	background: url(../i/thumb-prev.gif) no-repeat 0 50%}
+#litebox a.next {
+	float: right;
+	background: url(../i/thumb-next.gif) no-repeat 0 50%;}

@@ -214,7 +214,7 @@ function CheckIn($userid, $access) {
 			if ($res == 1) {
 				if ($num > 0) {
 					echo '<tr class="row' . $k . '">';
-					echo '<td width="250px">';
+					echo '<td width="250px;">';
 					echo _CHECK_TABLE;
 					echo ' - ' . $tn . '</td>';
 					echo '<td>';
@@ -231,7 +231,7 @@ function CheckIn($userid, $access) {
 	?>
 	<tr>
 		<td colspan="2">
-			<span class="strong"><?php echo _CONF_CHECKED_IN; ?></span>
+			<p class="strong"><?php echo _CONF_CHECKED_IN; ?></p>
 		</td>
 	</tr>
 	</table>

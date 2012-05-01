@@ -138,7 +138,7 @@ class HTML_content {
 				}
 			}
 ?>
-			<tr class="<?php echo "row$k"; ?>" id="tr-el-<?php echo $row->id;?>">
+			<tr class="<?php echo $row->k; ?>" id="tr-el-<?php echo $row->id;?>">
 				<td><?php echo $pageNav->rowNumber($i); ?></td>
 				<td><?php echo $checked; ?></td>
 				<td align="left">

@@ -7,7 +7,7 @@
 * Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
 */
 // no direct access
-defined('_VALID_MOS') or die('Restricted access');
+defined('_VALID_MOS') or die();
 $search_ignore[] = "and";
 $search_ignore[] = "in";
 $search_ignore[] = "on";

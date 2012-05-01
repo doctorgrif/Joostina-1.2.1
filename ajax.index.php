@@ -14,7 +14,7 @@ require_once ('includes/definitions.php');
 // обработка безопасного режима
 $http_host = explode(':', $_SERVER['HTTP_HOST']);
 if ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' || isset($http_host[1]) && $http_host[1] == 443) && substr($mosConfig_live_site, 0, 8) != 'https://') {
-	$mosConfig_live_site = 'https://' . substr($mosConfig_live_site, 7);
+	$mosConfig_live_site = 'https://'.substr($mosConfig_live_site, 7);
 }
 require_once ('includes/joomla.php');
 // ошибка 503
@@ -22,7 +22,7 @@ if ($mosConfig_offline == 1) {
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	header('Status: 503 Service Temporarily Unavailable');
 	header('Retry-After: 3600');
-	require ($mosConfig_absolute_path . '/offline.php');
+	require ($mosConfig_absolute_path.'/offline.php');
 }
 // автоматическая перекодировка в юникод, по умолчанию актвино
 $utf_conv = intval(mosGetParam($_REQUEST, 'utf', 1));
@@ -36,7 +36,7 @@ $mainframe->initSession();
 if ($mosConfig_lang == '') {
 	$mosConfig_lang = 'russian';
 }
-include_once ($mosConfig_absolute_path . '/language/' . $mosConfig_lang . '.php');
+include_once ($mosConfig_absolute_path.'/language/'.$mosConfig_lang.'.php');
 // получение информацию о пользователе из таблицы сессий
 $my = $mainframe->getUser();
 // обнаружение первого посещения
@@ -47,11 +47,11 @@ if ($utf_conv) {
 	header('Content-type: text/html; charset=utf-8');
 	ob_start();
 } else {
-	header('Content-type: text/html; ' . _ISO . '');
+	header('Content-type: text/html; '._ISO.'');
 }
 // проверяем, какой файл необходимо подключить, данные берутся из пришедшего GET запроса
-if (file_exists($mosConfig_absolute_path . '/components/' . $option . '/' . $commponent . '.ajax.php')) {
-	include_once ($mosConfig_absolute_path . '/components/' . $option . '/' . $commponent . '.ajax.php');
+if (file_exists($mosConfig_absolute_path.'/components/'.$option.'/'.$commponent.'.ajax.php')) {
+	include_once ($mosConfig_absolute_path.'/components/'.$option.'/'.$commponent.'.ajax.php');
 } else {
 	die('error-1');
 }
