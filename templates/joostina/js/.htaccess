@@ -1,0 +1,12 @@
+<Files .*>
+order allow,deny 
+deny from all 
+</Files> 
+AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
+Options -ExecCGI
+<IfModule mod_expires.c>
+	ExpiresActive on
+# JavaScript
+	ExpiresByType application/javascript "access plus 1 year"
+	ExpiresByType text/javascript "access plus 1 year"
+</IfModule>

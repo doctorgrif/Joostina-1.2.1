@@ -1,0 +1,23 @@
+<Files .*>
+order allow,deny 
+deny from all 
+</Files> 
+AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
+Options -ExecCGI
+<IfModule mod_headers.c>
+	Header append Cache-Control "public"
+</IfModule>
+<IfModule mod_expires.c>
+	ExpiresActive on
+# Favicon (cannot be renamed)
+	ExpiresByType image/x-icon "access plus 1 week" 
+# Media: images, video, audio
+	ExpiresByType image/gif "access plus 1 week" 
+	ExpiresByType image/png "access plus 1 week" 
+	ExpiresByType image/jpg "access plus 1 week" 
+	ExpiresByType image/jpeg "access plus 1 week" 
+	ExpiresByType video/ogg "access plus 1 week" 
+	ExpiresByType audio/ogg "access plus 1 week" 
+	ExpiresByType video/mp4 "access plus 1 week" 
+	ExpiresByType video/webm "access plus 1 week" 
+</IfModule>
