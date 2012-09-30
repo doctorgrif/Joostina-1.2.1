@@ -86,7 +86,7 @@ function &initModules() {
 	return $GLOBALS['_MOS_MODULES'];
 }
 
-/** @param string THe template position */
+/** @param string The template position */
 function mosCountModules($position = 'left') {
 	global $database, $my, $Itemid;
 	$tp = intval(mosGetParam($_GET, 'tp', 0));
@@ -109,8 +109,8 @@ function mosLoadModules($position = 'left', $style = 0, $noindex = 0) {
 	global $mosConfig_gzip, $mosConfig_absolute_path, $database, $my, $Itemid, $mosConfig_caching, $mainframe;
 	$tp = intval(mosGetParam($_GET, 'tp', 0));
 	if ($tp) {
-echo '<div style="height:50px;background-color:#eee;margin:2px;padding:10px;border:1px solid #f00;color:#700;">';
-		echo $position;
+echo '<div>';
+	echo $position;
 echo '</div>';
 		return;
 	}
@@ -259,15 +259,38 @@ $mainframe->appendMetaTag('keywords', $mosConfig_MetaKeys);
 $iso = _ISO;
 $mainframe->addMetaTag('Content-Type', 'text/html; ' . $iso . '');
 $mainframe->addMetaTag('Content-Language', 'ru');
+$mainframe->addCustomHeadTag('<meta charset="windows-1251" />');
 if (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE'))
 $mainframe->addCustomHeadTag('<meta http-equiv="imagetoolbar" content="no" />');
 $device_width = 'width=device-width, initial-scale=1.0';
 $mainframe->addMetaTag('viewport', $device_width);
+// HACK
+global $mosConfig_hideAuthor;
+	if ($mosConfig_hideAuthor == 0) {
+$mainframe->addMetaTag('author', $mosConfig_live_site . '/humans.txt');
+	}
+// HACK
+/*global $option;
+if ($option == 'com_content') {
+	echo '<link rel="prev" title="" href="">' . "\n";
+	echo '<link rel="next" title="" href="">' . "\n";
+	echo '<link rel="canonical" href="">' . "\n";
+	}*/
 // boston, отключение тега Generator
 	global $mosConfig_generator_off, $mosConfig_lang;
 	if ($mosConfig_generator_off == 0)
 //$mainframe->addMetaTag('Generator', $_VERSION->CMS . ' - ' . $_VERSION->COPYRIGHT);
 $mainframe->addMetaTag('Generator', $mosConfig_sitename);
+// HACK
+/*Facebook Metadata*/
+$mainframe->addCustomHeadTag('<meta property="fb:page_id" content="" />
+<meta property="og:image" content="" />
+<meta property="og:description" content="' . $mosConfig_MetaDesc . '" />
+<meta property="og:title" content="' . $mainframe->getPageTitle() . '" />');
+/*Google+ Metadata*/
+$mainframe->addCustomHeadTag('<meta itemprop="name" content="' . $mainframe->getPageTitle() . '">
+<meta itemprop="description" content="' . $mosConfig_MetaDesc . '">
+<meta itemprop="image" content="">');
 //boston, дополнительные теги индексации
 	global $mosConfig_index_tag, $mosConfig_mtage_base, $mosConfig_mtage_revisit;
 	if ($mosConfig_index_tag == 1) {
@@ -281,64 +304,34 @@ $mainframe->addMetaTag('revisit-after', $mosConfig_mtage_revisit . ' days');
 $mainframe->addMetaTag('allow-search', 'yes');
 $mainframe->addMetaTag('language', $mosConfig_lang);
 	}
+// активируем кэширование
+	if (isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING'])) {
+		$cache = &mosCache::getCache('com_content');
+		echo $cache->call('mainframe->getHead', @$_SERVER['QUERY_STRING'], $id);
+	} else {
+		echo $mainframe->getHead();
+	}
+// очистка ссылки на главную страницу даже при отключенном sef
+	if ($mosConfig_mtage_base == 1) {
+echo '<base href="' . $mosConfig_live_site . '" />' . "\n";
+	}
+// HACK
 // Dublin Core
-	global $mosConfig_dcore, $mosConfig_dcore_title, $mosConfig_dcore_creator, $mosConfig_dcore_subject, $mosConfig_dcore_description, $mosConfig_dcore_publisher, $mosConfig_dcore_contributor, $mosConfig_dcore_date, $mosConfig_dcore_type, $mosConfig_dcore_format, $mosConfig_dcore_identifier, $mosConfig_dcore_source, $mosConfig_dcore_language, $mosConfig_dcore_relation, $mosConfig_dcore_coverage, $mosConfig_dcore_rights;
-	$pagetitle = $mainframe->getPageTitle();
-	$mosConfig_dcore_title = $pagetitle;
-	//$mosConfig_dcore_creator = '';
-	//$mosConfig_dcore_subject = '';
-	$mosConfig_dcore_description = $mosConfig_MetaDesc;
-	//$mosConfig_dcore_publisher = '';
-	//$mosConfig_dcore_contributor = '';
-	$mosConfig_dcore_date = strftime('%Y-%m-%d');
-	$mosConfig_dcore_type = 'Text';
-	//$mosConfig_dcore_format = '';
-	//$mosConfig_dcore_identifier = '';
-	//$mosConfig_dcore_source = '';
-	//$mosConfig_dcore_relation = '';
-	//$mosConfig_dcore_coverage = '';
-	$mosConfig_dcore_rights = '© ' . $mosConfig_sitename . ', ' . date('Y') . '. Все права защищены.';
+global $mosConfig_dcore;
 	if ($mosConfig_dcore == 1) {
-$mainframe->addCustomHeadTag('<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />');
-$mainframe->addMetaTag('DC.Title', $mosConfig_dcore_title);
-//$mainframe->addMetaTag('DC.Creator', $mosConfig_dcore_creator);
-//$mainframe->addMetaTag('DC.Subject', $mosConfig_dcore_subjec);
-$mainframe->addMetaTag('DC.Description', $mosConfig_dcore_description);
-//$mainframe->addMetaTag('DC.Publisher', $mosConfig_dcore_publisher);
-//$mainframe->addMetaTag('DC.Contributor', $mosConfig_dcore_contributor);
-$mainframe->addMetaTag('DC.Date', $mosConfig_dcore_date);
-$mainframe->addMetaTag('DC.Type', $mosConfig_dcore_type);
-//$mainframe->addMetaTag('DC.Format', $mosConfig_dcore_format);
-//$mainframe->addMetaTag('DC.Identifier', $mosConfig_dcore_identifier);
-//$mainframe->addMetaTag('DC.Source', $mosConfig_dcore_source);
-//$mainframe->addMetaTag('DC.Language', $mosConfig_dcore_language);
-//$mainframe->addMetaTag('DC.Relation', $mosConfig_dcore_relation);
-//$mainframe->addMetaTag('DC.Coverage', $mosConfig_dcore_coverage);
-$mainframe->addMetaTag('DC.Rights', $mosConfig_dcore_rights);
+		include_once ($mosConfig_absolute_path.'/includes/dc.core.php');
 	}
 // Geotagging
-	global $mosConfig_gtag, $mosConfig_gtag_lat, $mosConfig_gtag_long, $mosConfig_gtag_place, $mosConfig_gtag_reg;
+global $mosConfig_gtag, $mosConfig_gtag_lat, $mosConfig_gtag_long, $mosConfig_gtag_place, $mosConfig_gtag_reg;
 	if ($mosConfig_gtag == 1) {
 $mainframe->addMetaTag('ICBM', '' . $mosConfig_gtag_lat . ',' . $mosConfig_gtag_long . '');
 $mainframe->addMetaTag('geo.position', '' . $mosConfig_gtag_lat . ';' . $mosConfig_gtag_long . '');
 $mainframe->addMetaTag('geo.placename', $mosConfig_gtag_place);
 $mainframe->addMetaTag('geo.region', $mosConfig_gtag_reg);
-}
-// активируем кэширование
-	if (isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING'])) {
-		$cache = &mosCache::getCache('com_content');
-echo $cache->call('mainframe->getHead', @$_SERVER['QUERY_STRING'], $id);
-	} else {
-echo $mainframe->getHead();
-	}
-// очистка ссылки на главную страницу даже при отключенном sef
-	if ($mosConfig_mtage_base == 1) {
-echo '<base href="' . $mosConfig_live_site . '" />
-';
 	}
 	if ($my->id || $mainframe->get('joomlaJavascript')) {
 		?>
-<script src="<?php echo $mosConfig_live_site; ?>/includes/js/joomla.javascript.full.js" type="text/javascript"></script>
+<script src="<?php echo $mosConfig_live_site; ?>/includes/js/joomla.javascript.full.js"></script>
 		<?php
 	}
 // boston, отключение RSS
@@ -422,48 +415,33 @@ echo '<base href="' . $mosConfig_live_site . '" />
 // favourites icon
 	if (!$mosConfig_disable_favicon) {
 			global $mosConfig_favicon_ie, $mosConfig_disable_favicon_ie, $mosConfig_favicon_ipad, $mosConfig_disable_favicon_ipad;
-		if (!$mosConfig_favicon) {
-			$mosConfig_favicon = 'favicon.png';
+		if ($mosConfig_favicon) {
+			$icon = 'favicon.png';
 		}
-		$icon = $mosConfig_absolute_path . '/' . $mosConfig_favicon;
-		if (!file_exists($icon)) {
-			$icon = $mosConfig_live_site . '/favicon.png';
-		} else {
-			$icon = $mosConfig_live_site . '/' . $mosConfig_favicon;
-		}
-echo '<link rel="icon" href="' . $icon . '" />
-';
+echo '<link rel="icon" href="' . $icon . '" type="image/png" />' . "\n";
 	}
 	if (!$mosConfig_disable_favicon_ie) {
-		if (!$mosConfig_favicon_ie) {
-			$mosConfig_favicon_ie = 'favicon.ico';
+		if ($mosConfig_favicon_ie) {
+			$icon_ie = 'favicon.ico';
 		}
-		$icon_ie = $mosConfig_absolute_path . '/' . $mosConfig_favicon_ie;
-		if (!file_exists($icon_ie)) {
-			$icon_ie = $mosConfig_live_site . '/favicon.ico';
-		} else {
-			$icon_ie = $mosConfig_live_site . '/' . $mosConfig_favicon_ie;
-		}
-		if (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
-echo '<link rel="shortcut icon" href="' . $icon_ie . '" />
-';
-}
+echo '<link rel="shortcut icon" href="' . $icon_ie . '" type="image/x-icon" />' . "\n";
 	}
 	if (!$mosConfig_disable_favicon_ipad) {
-		if (!$mosConfig_favicon_ipad) {
+		if ($mosConfig_favicon_ipad) {
 			$mosConfig_favicon_ipad = 'apple-touch-icon.png';
+			$icon_ipad = 'apple-touch-icon.png';
+			$icon_ipad_57 = 'apple-touch-icon-57x57.png';
+			$icon_ipad_72 = 'apple-touch-icon-72x72.png';
+			$icon_ipad_114 = 'apple-touch-icon-114x114.png';
+			$icon_ipad_144 = 'apple-touch-icon-144x144.png';
 		}
-		$icon_ipad = $mosConfig_absolute_path . '/' . $mosConfig_favicon_ipad;
-		if (!file_exists($icon_ipad)) {
-			$icon_ipad = $mosConfig_live_site . '/apple-touch-icon.png';
-		} else {
-			$icon_ipad = $mosConfig_live_site . '/' . $mosConfig_favicon_ipad;
-		}
-echo '<link rel="apple-touch-icon" href="' . $mosConfig_live_site . '/apple-touch-icon.png" />
-';
+echo '<link rel="apple-touch-icon" href="'.$icon_ipad.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="57x57" href="'.$icon_ipad_57.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="72x72" href="'.$icon_ipad_72.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="114x114" href="'.$icon_ipad_114.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="144x144" href="'.$icon_ipad_144.'" />' . "\n";
 	}
 }
-
 function set_robot_metatag($robots) {
 	global $mainframe;
 	if ($robots == 0) {

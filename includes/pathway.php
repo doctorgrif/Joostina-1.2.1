@@ -88,7 +88,7 @@ function showPathway($Itemid) {
 				$mitem2 = pathwayMakeLink($Itemid, $row->title, '', 1);
 				$mitems[$id] = $mitem2;
 				$Itemid = $id;
-				$home = '<a href="' . sefRelToAbs($mosConfig_live_site) . '" class="pathway" title="' . $home . '">' . $home . '</a>';
+				$home = '<a href="' . sefRelToAbs($mosConfig_live_site) . '" class="pathway" title="' . $home . '" rel="v:url" property="v:title">' . $home . '</a>';
 				break;
 		}
 	}
@@ -200,13 +200,15 @@ function showPathway($Itemid) {
 	}
 	$i = count($mitems);
 	$mid = $Itemid;
-	$imgPath = 'templates/' . $mainframe->getTemplate() . '/i/pagenav/arrow.png';
+	$imgPath = 'templates/' . $mainframe->getTemplate() . '/i/tg/arrow.png';
 	if (file_exists("$mosConfig_absolute_path/$imgPath")) {
-		$img = '<img src="' . $mosConfig_live_site . '/' . $imgPath . '" alt=">>" />';
+		//$img = '<img src="' . $mosConfig_live_site . '/' . $imgPath . '" alt=">>" />';
+		$img = '&rarr;';
 	} else {
 		$imgPath = '/images/M_images/arrow.png';
 		if (file_exists($mosConfig_absolute_path . $imgPath)) {
-			$img = '<img src="' . $mosConfig_live_site . '/images/M_images/arrow.png" alt=">>" />';
+			//$img = '<img src="' . $mosConfig_live_site . '/images/M_images/arrow.png" alt=">>" />';
+			$img = '&rarr;';
 		} else {
 			$img = '&rarr;';
 		}
@@ -225,12 +227,12 @@ function showPathway($Itemid) {
 		if (isset($item->type) && $item->type == 'url') {
 			$correctLink = eregi('http://', $item->link);
 			if ($correctLink == 1) {
-				$newlink = '<a href="' . $item->link . '" target="_window" class="pathway" title="' . $itemname . '">' . $itemname . '</a>';
+				$newlink = '<a href="' . $item->link . '" target="_window" class="pathway" title="' . $itemname . '" rel="v:url" property="v:title">' . $itemname . '</a>';
 			} else {
 				$newlink = $itemname;
 			}
 		} else {
-			$newlink = '<a href="' . sefRelToAbs($item->link . '&amp;Itemid=' . $item->id) . '" class="pathway" title="' . $itemname . '">' . $itemname . '</a>';
+			$newlink = '<a href="' . sefRelToAbs($item->link . '&amp;Itemid=' . $item->id) . '" class="pathway" title="' . $itemname . '" rel="v:url" property="v:title">' . $itemname . '</a>';
 		}
 // converts & to &amp; for xtml compliance
 		$newlink = ampReplace($newlink);
@@ -242,14 +244,14 @@ function showPathway($Itemid) {
 		$mid = $item->parent;
 	}
 	if (eregi('option', $optionstring) && trim($path)) {
-		$home = '<a href="' . sefRelToAbs($mosConfig_live_site) . '" class="pathway" title="' . $home . '">' . $home . '</a>';
+		$home = '<a href="' . sefRelToAbs($mosConfig_live_site) . '" class="pathway" title="' . $home . '" rel="v:url" property="v:title">' . $home . '</a>';
 	}
 	if ($mainframe->getCustomPathWay()) {
 		$path .= $img . '';
 		$path .= implode("$img ", $mainframe->getCustomPathWay());
 	}
 	if ($Itemid && $Itemid != 99999999 && $path != '') {
-		echo '<span class="pathway">' . $home . ' ' . $path . '</span>';
+		echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" id="pathway"><span class="pathway" typeof="v:Breadcrumb">' . $home . ' ' . $path . '</span></div>';
 	} else
 		echo '&nbsp;';
 }

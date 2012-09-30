@@ -18,7 +18,9 @@ Disallow: /index2.php
 Disallow: /?option=
 Disallow: /?replyto=
 Disallow: /?mosmsg=
-Disallow: /?
+Disallow: /index2.php?*
+Disallow: *?limitstart
+Disallow: *?limit
 Sitemap: 
 
 User-agent: Google
@@ -41,7 +43,9 @@ Disallow: /index2.php
 Disallow: /?option=
 Disallow: /?replyto=
 Disallow: /?mosmsg=
-Disallow: /?
+Disallow: /index2.php?*
+Disallow: *?limitstart
+Disallow: *?limit
 Request-rate: 3/10
 
 User-agent: Yandex
@@ -64,6 +68,8 @@ Disallow: /index2.php
 Disallow: /?option=
 Disallow: /?replyto=
 Disallow: /?mosmsg=
-Disallow: /?
+Disallow: /index2.php?*
+Disallow: *?limitstart
+Disallow: *?limit
 Host: 
 Crawl-delay: 5

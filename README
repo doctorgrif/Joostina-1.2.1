@@ -21,24 +21,24 @@ Joostina 1.2.1 - доработанная и оптимизированная в
 	1. Распакуйте архив с системой в папку сайта
 	2. Создайте базу данных
 	3. Запустите скрипт http://yoursite.ru/installation
-	4. После установки удалите папку "installation"
+	4. После установки удалите папку "/installation"
 ----------------------------------------------------------------------------------------------------------------------
 ВНИМАНИЕ: 
 	При установке на реальный хостинг установите права (chmod) 777 на следующие папки:
-	cache
-	images 
-	images/banners
-	images/stories
-	media 
-	components 
-	language 
-	modules 
-	mambots 
-	templates 
-	administrator
-	administrator/backups 
-	administrator/components
-	administrator/modules 
+	/cache
+	/images 
+	/images/banners
+	/images/stories
+	/media 
+	/components 
+	/language 
+	/modules 
+	/mambots 
+	/templates 
+	/administrator
+	/administrator/backups 
+	/administrator/components
+	/administrator/modules 
 ----------------------------------------------------------------------------------------------------------------------
 РЕПОЗИТОРИИ:
 [ code.google.com: ] http://code.google.com/p/joostina121/downloads/list

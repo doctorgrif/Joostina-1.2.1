@@ -9,7 +9,7 @@
 // запрет прямого доступа
 //session_start();
 defined('_VALID_MOS') or die();
-global $mainframe, $params, $database, $Itemid, $target, $new, $moduleclass_sfx, $content;
+global $mainframe, $params, $database, $Itemid, $target, $new, $content;
 	$wlcategory = $params->get('wlcategory', 0);
 	$wlshownew = $params->get('wlshownew', 0);
 	$wldaysnew = $params->get('wldaysnew', 3);
@@ -20,7 +20,6 @@ global $mainframe, $params, $database, $Itemid, $target, $new, $moduleclass_sfx,
 	$wllengthoftitle = $params->get('wllengthoftitle', 23);
 	$wldotaddlenght = $params->get('wldotaddlenght', 20);
 	$wlreadmore = $params->get('wlreadmore', 0);
-	$moduleclass_sfx = $params->get('moduleclass_sfx', '');
 	$and = "";
 if ($wlcategory > 0) {
 	$and = 'AND a.catid = '.$wlcategory;
@@ -39,7 +38,7 @@ if ($wlpopuplinks == 1) {
 $today = getdate();
 $newitem1 = mktime(0, 0, 0, date('m'), date('d') - $wldaysnew, date('Y'));
 $newitem = date('Y-m-d', $newitem1);
-$content .= '<ul class="weblinkspercat'.$moduleclass_sfx.'">';
+$content .= '<ul class="weblinkspercat">';
 foreach ($rows as $row) {
 	if (strlen($row->title) > $wllengthoftitle) {
 		$row->title = mb_substr($row->title, 0, $wldotaddlenght);
@@ -54,7 +53,9 @@ foreach ($rows as $row) {
 		$new = '';
 	}
 	$content .= '<li>';
-	$content .= '<a href="'.sefRelToAbs('index.php?option=com_weblinks&amp;task=view&amp;Itemid='.$Itemid.'&amp;catid='.$row->catid.'&amp;id='.$row->id).'" title="'.$row->title.'" '.$target.' >'.$row->title.'</a>';
+	$link = 'index.php?option=com_weblinks&amp;task=view&amp;Itemid='.$Itemid.'&amp;catid='.$row->catid.'&amp;id='.$row->id;
+	$link = sefRelToAbs($link);
+	$content .= '<a href="'.$link.'" title="'.$row->title.'" '.$target.' >'.$row->title.'</a>';
 	if ($wlshowhits)
 		$content .= ' ('.$row->hits.' '._HEADER_HITS.' )';
 	if ($wlshownew)
@@ -67,6 +68,8 @@ if ($wlreadmore) {
 	if ($wlcategory > 0) {
 		$catid = '&amp;catid='.$wlcategory;
 	}
-	$content .= '<a href="index.php?option=com_weblinks'.$catid.'" class="readon">'._MORE.'</a>';
+	$link = 'index.php?option=com_weblinks'.$catid;
+	$link = sefRelToAbs($link);
+	$content .= '<a href="'.$link.'" class="readon">'._MORE.'</a>';
 }
 ?>

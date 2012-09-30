@@ -14,12 +14,11 @@ defined('_VALID_MOS') or die();
 * @subpackage Weblinks
 */
 class HTML_weblinks {
-
 	function displaylist(&$categories, &$rows, $catid, $currentcat = null, &$params, $tabclass) {
 		global $hide_js;
 		if ($params->get('page_title')) {
 			?>
-<div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>"><?php echo $currentcat->header; ?></div>
+<div class="componentheading"><?php echo $currentcat->header; ?></div>
 <?php } ?>
 	<form action="index.php" method="post" name="adminForm">
 		<div class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
@@ -29,7 +28,9 @@ class HTML_weblinks {
 // show image
 					if ($currentcat->img) {
 				?>
-					<img src="<?php echo $currentcat->img; ?>" align="<?php echo $currentcat->align; ?>" hspace="6" alt="<?php echo _WEBLINKS_TITLE; ?>" />
+					<figure>
+						<img src="<?php echo $currentcat->img; ?>" align="<?php echo $currentcat->align; ?>" hspace="6" alt="<?php echo _WEBLINKS_TITLE; ?>" />
+					</figure>
 					<?php } echo $currentcat->descrip; ?>
 				</div>
 			</div>
@@ -65,7 +66,6 @@ class HTML_weblinks {
 // displays back button
 		mosHTML::BackButton($params, $hide_js);
 	}
-
 	/** Display Table of items */
 	function showTable(&$params, &$rows, $catid, $tabclass) {
 		global $cwl_i;
@@ -116,7 +116,7 @@ class HTML_weblinks {
 				?>
 	<tr class="<?php echo $tabclass[$k]; ?>">
 		<?php if ($img) { ?>
-		<td width="100" height="20" align="center">&nbsp;&nbsp;<?php echo $img; ?>&nbsp;&nbsp;</td>
+		<td width="100" height="20" align="center"><figure><?php echo $img; ?></figure></td>
 		<?php } ?>
 		<td height="20"><?php
 			echo $txt;
@@ -145,15 +145,14 @@ class HTML_weblinks {
 	if ($catid == $cat->catid) {
 	?>
 	<li>
-		<?php echo stripslashes($cat->name); ?> <span>(<?php echo $cat->numlinks; ?>)</span>
+		<p><?php echo stripslashes($cat->name); ?> <span>(<?php echo $cat->numlinks; ?>)</span></p>
 	</li>
 	<?php
 		} else {
 			$link = 'index.php?option=com_weblinks&amp;catid=' . $cat->catid . '&amp;Itemid=' . $Itemid;
 	?>
 	<li>
-		<a href="<?php echo sefRelToAbs($link); ?>" class="category<?php echo $params->get('pageclass_sfx'); ?>" title="<?php echo stripslashes($cat->name); ?>"><?php echo stripslashes($cat->name); ?></a>&nbsp;
-		<span>(<?php echo $cat->numlinks; ?>)</span>
+		<p><a href="<?php echo sefRelToAbs($link); ?>" class="category<?php echo $params->get('pageclass_sfx'); ?>" title="<?php echo stripslashes($cat->name); ?>"><?php echo stripslashes($cat->name); ?></a> <span>(<?php echo $cat->numlinks; ?>)</span></p>
 	</li>
 	<?php
 		}

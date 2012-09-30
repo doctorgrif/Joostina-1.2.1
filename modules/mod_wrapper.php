@@ -52,8 +52,7 @@ if ($params->def('height_auto')) {
 	$load = '';
 }
 ?>
-<iframe 
-<?php echo $load; ?>
+<iframe <?php echo $load; ?> 
 	id="blockrandom<?php echo $mod_wrapper_count++; ?>"
 	src="<?php echo $url; ?>"
 	width="<?php echo $params->get('width'); ?>"
@@ -61,6 +60,6 @@ if ($params->def('height_auto')) {
 	scrolling="<?php echo $params->get('scrolling'); ?>"
 	align="top"
 	frameborder="0"
-	class="wrapper<?php echo $params->get('moduleclass_sfx'); ?>">
+	class="wrapper">
 	<?php echo _CMN_IFRAMES; ?>
 </iframe>

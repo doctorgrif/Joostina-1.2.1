@@ -57,16 +57,14 @@ function pollAddVote($uid) {
 		return;
 	}
 	setcookie($cookiename, '1', time() + $poll->lag);
-	$query = "UPDATE #__poll_data" . "\n SET hits = hits + 1" . "\n WHERE pollid = " . (int)
-			$poll->id . "\n AND id = " . (int) $voteid;
+	$query = "UPDATE #__poll_data SET hits = hits + 1 WHERE pollid = " . (int) $poll->id . " AND id = " . (int) $voteid;
 	$database->setQuery($query);
 	$database->query();
-	$query = "UPDATE #__polls" . "\n SET voters = voters + 1" . "\n WHERE id = " . (int) $poll->id;
+	$query = "UPDATE #__polls SET voters = voters + 1 WHERE id = " . (int) $poll->id;
 	$database->setQuery($query);
 	$database->query();
 	$now = _CURRENT_SERVER_TIME;
-	$query = "INSERT INTO #__poll_date" . "\n SET date = " . $database->Quote($now) .
-			", vote_id = " . (int) $voteid . ", poll_id = " . (int) $poll->id;
+	$query = "INSERT INTO #__poll_date SET date = " . $database->Quote($now) . ", vote_id = " . (int) $voteid . ", poll_id = " . (int) $poll->id;
 	$database->setQuery($query);
 	$database->query();
 	if ($redirect) {
@@ -98,22 +96,25 @@ function pollresult($uid) {
 			$poll->id = '';
 			$poll->title = _SELECT_POLL;
 		}
-		$query = "SELECT MIN( date ) AS mindate, MAX( date ) AS maxdate" . "\n FROM #__poll_date" .
-				"\n WHERE poll_id = " . (int) $poll->id;
+		$query = "SELECT MIN( date ) AS mindate, MAX( date ) AS maxdate" . " FROM #__poll_date WHERE poll_id = " . (int) $poll->id;
 		$database->setQuery($query);
 		$dates = $database->loadObjectList();
 		if (isset($dates[0]->mindate)) {
 			$first_vote = mosFormatDate($dates[0]->mindate, _DATE_FORMAT_LC2);
 			$last_vote = mosFormatDate($dates[0]->maxdate, _DATE_FORMAT_LC2);
 		}
-		$query = "SELECT a.id, a.text, a.hits, b.voters" . "\n FROM #__poll_data AS a" . "\n INNER JOIN #__polls AS b ON b.id = a.pollid" .
-				"\n WHERE a.pollid = " . (int) $poll->id . "\n AND a.text != ''" . "\n AND b.published = 1";
+		$query = "SELECT a.id, a.text, a.hits, b.voters"
+		. "\n FROM #__poll_data AS a"
+		. "\n INNER JOIN #__polls AS b ON b.id = a.pollid"
+		. "\n WHERE a.pollid = " . (int) $poll->id
+		. "\n AND a.text != ''"
+		. "\n AND b.published = 1";
 		$database->setQuery($query);
 		$votes = $database->loadObjectList();
 	}
 // list of polls for dropdown selection
 /* add STRAIGHT_JOIN */
-	$query = "SELECT id, title" . "\n FROM #__polls" . "\n WHERE published = 1" . "\n ORDER BY id";
+	$query = "SELECT STRAIGHT_JOIN id, title FROM #__polls WHERE published = 1 ORDER BY id";
 	$database->setQuery($query);
 	$polls = $database->loadObjectList();
 // Itemid for dropdown
@@ -130,8 +131,8 @@ function pollresult($uid) {
 	for ($i = 0, $n = count($polls); $i < $n; ++$i) {
 		$k = $polls[$i]->id;
 		$t = $polls[$i]->title;
-		$sel = ($k == intval($poll->id) ? " selected=\"selected\"" : '');
-		$pollist .= "\n\t<option value=\"" . $k . "\"$sel>" . $t . "</option>";
+		$sel = ($k == intval($poll->id) ? ' selected="selected"' : '');
+		$pollist .= '"\n\t<option value="' . $k . '" '.$sel.'>' . $t . '</option>';
 	}
 	$pollist .= '</select>';
 // Adds parameter handling

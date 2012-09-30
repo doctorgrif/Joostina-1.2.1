@@ -29,10 +29,9 @@ function jtContent($published, &$row, &$params, $page=0) {
 	// Если ключевые слова разделены запятыми, раскомментируйте следующую строку и закомментируйте строку под ней.
 	 $tags=explode(', ',$row->metakey);
 	//$tags = explode(' ', $row->metakey);
-	$text .= '<div class="clearfix"></div>';
-	$text .= '<ul class="tag">';
+	$text .= '<p class="tag">';
 		foreach ($tags as $tag) {
-			$text .= '<li><a href="';
+			$text .= '<span><a href="';
 		if ($jt) {
 			$text .= $mosConfig_live_site;
 		} else {
@@ -47,10 +46,9 @@ function jtContent($published, &$row, &$params, $page=0) {
 			$text .= '/index.php?searchword=' . trim($tag) . '&amp;option=com_search&amp;submit=Search&amp;searchphrase=exact&amp;ordering=newest"';
 		}
 		}
-			$text .= ' title="' . trim($tag) . '" rel="category tag">' . trim($tag) . '</a></li>';
+			$text .= ' title="' . trim($tag) . '" rel="tag">' . trim($tag) . '</a></span>';
 		}
-	$text .= '</ul>';
-	$text .= '<div class="clearfix"></div>';
+	$text .= '</p>';
 	if (count($tags) > 1 || $tags[0] != '')
 		$row->text .= $text;
 	return true;

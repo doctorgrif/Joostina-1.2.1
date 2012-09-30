@@ -93,7 +93,7 @@ class HTML_user {
 			//]]>
 		</script>
 <form action="<?php echo sefRelToAbs('index.php'); ?>" method="post" name="mosUserForm" id="mosUserForm" enctype="multipart/form-data">
-	<div style="float:right;height:100%;">
+	<div style="float:right;">
 				<?php
 				mosToolBar::save();
 				mosToolBar::cancel();
@@ -126,31 +126,31 @@ class HTML_user {
 			<div id="user_info">
 				<div>
 					<p>
-						<label for="username1"><?php echo _UNAME; ?></label><br />
+						<label for="username1" data-icon="u"><?php echo _UNAME; ?></label><br />
 						<input class="text-input" type="text" name="username" id="username1" value="<?php echo $row->username; ?>" size="40" placeholder="<?php echo $row->username; ?>" />
 					</p>
 				</div>
 				<div>
 					<p>
-						<label for="name"><?php echo _YOUR_NAME; ?></label><br />
+						<label for="name" data-icon="u"><?php echo _YOUR_NAME; ?></label><br />
 						<input class="text-input" type="text" name="name" id="name" value="<?php echo $row->name; ?>" size="40" placeholder="<?php echo $row->name; ?>" />
 					</p>
 				</div>
 				<div>
 					<p>
-						<label for="email"><?php echo _EMAIL; ?></label><br />
+						<label for="email" data-icon="e"><?php echo _EMAIL; ?></label><br />
 						<input class="text-input" type="email" name="email" id="email" value="<?php echo $row->email; ?>" size="40" placeholder="<?php echo $row->email; ?>" />
 					</p>
 				</div>
 				<div>
 					<p>
-						<label for="password"><?php echo _PASS; ?></label><br />
+						<label for="password" data-icon="p"><?php echo _PASS; ?></label><br />
 						<input class="text-input" type="password" name="password" id="password" value="" size="40" placeholder="<?php echo _PASS_PH; ?>" />
 					</p>
 				</div>
 				<div>
 					<p>
-						<label for="verifyPass"><?php echo _VPASS; ?></label><br />
+						<label for="verifyPass" data-icon="p"><?php echo _VPASS; ?></label><br />
 						<input class="text-input" type="password" name="verifyPass" id="verifyPass" size="40" placeholder="<?php echo _VPASS_PH; ?>" />
 					</p>
 				</div>

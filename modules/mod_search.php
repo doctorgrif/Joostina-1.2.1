@@ -8,9 +8,8 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-$moduleclass_sfx = $params->get('moduleclass_sfx');
 $button_vis = $params->get('button', 1);
-$button_pos = $params->get('button_pos', 'left');
+$button_pos = $params->get('button_pos', 'right');
 $button_text = $params->get('button_text', _SEARCH_TITLE);
 $width = intval($params->get('width', 20));
 $text = $params->get('text', _SEARCH_BOX);

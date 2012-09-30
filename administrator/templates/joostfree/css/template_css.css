@@ -567,10 +567,51 @@ code{
 	display:block;
 	text-align:left;
 	padding-top:1em;}
-
 .cpanel {width:100%;}
 .cpanel .cpanel1 {width:50%;}
 .cpanel .cpanel2 {width:50%;}
+/*misc*/
+.notification {
+	font-size:14px !important;
+	line-height:30px;
+	cursor:pointer;
+	clear:both;
+	height:30px;
+	margin:8px 0px 8px 0px;
+	padding:20px 25px 10px 60px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;}
+.notification strong {margin-right:5px;}
+.notification p {
+	font-size:1em;
+	padding:0px;
+	margin:0px;
+	color:#333;}
+.message p {font-size:1em;}
+.warning {
+	border:2px solid #ffc237;
+	background-color:#ffeaa8;
+	color:#826200;}
+.success {
+	border:2px solid #99c600;
+	background-color:#efffb9;
+	color:#3c5a01;}
+.failure {
+	border:2px solid #eb5339;
+	background-color:#fccac2;
+	color:#ac260f;}
+.information {
+	border:2px solid #418acc;
+	background-color:#d0e4f4;
+	color:#235685;}
+.lightbulb {
+	border:2px solid #d3a350;
+	background-color:#fef0cb;
+	color:#835f21;}
+.messages {
+	border:2px solid #42b4ff;
+	background-color:#9ddfff;
+	color:#835f21;}
 /*changelog/copyright*/
 .sysinfo {
 	margin:0 auto;

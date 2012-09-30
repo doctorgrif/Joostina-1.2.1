@@ -82,7 +82,7 @@ class mosContact extends mosDBTable {
  * @package Joostina
  * class needed to extend vcard class and to correct minor errors
  */
-class MambovCard extends vCard {
+class JoostinavCard extends vCard {
 
 // needed to fix bug in vcard class
 	function setName($family = '', $first = '', $additional = '', $prefix = '', $suffix =

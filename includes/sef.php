@@ -10,6 +10,39 @@
 defined('_VALID_MOS') or die();
 global $mosConfig_sef, $mosConfig_absolute_path, $mosConfig_live_site;
 if ($mosConfig_sef) {
+//Если включен режим SEF, следим чтобы все адреса были SEF
+//Перенаправление на SEF URL
+	//Проверка SEF ли урл, т.е. вначале стоит index.php
+	if ((ltrim(strpos($_SERVER['REQUEST_URI'], 'index.php'),'/') == 1) && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
+	$bSefGoto = true; //Флаг перехода
+	//Проверка компонентов
+	$sSef_option 	= mosGetParam($_GET,'option',''); // Получение опции (компонента)
+	$sSef_task 		= mosGetParam($_GET,'task',''); // Получение задачи
+	$sSef_tp 		= mosGetParam($_GET,'tp',''); // Предпросмотр
+
+	//Режим предпросмотра
+	if ($sSef_tp == 1) {
+		$bSefGoto = false;
+		}
+	//Компонент поиска
+	if ($sSef_option == 'com_search') { 
+		$bSefGoto = false;
+	}
+	//Компонент контекста (статьи, новости)
+	if ($sSef_option == 'com_content') { 
+		$aConTask = array('edit','new','mycontent'); //Задачи компонента, если надо добавить свою задачу, добавьте в массив
+			if(in_array($sSef_task,$aConTask)) { //Если текущая задача в списке запрещенных, то пропускаем ее
+				$bSefGoto = false;
+			}
+	}
+	if ($bSefGoto) { //Переход
+		$url  = sefRelToAbs('index.php?'.$_SERVER['QUERY_STRING']); //Преобразование урл
+		header('HTTP/1.1 301 Moved Permanently');
+		header("Location: ".$url,TRUE,301); //Формирование заголовка с перенаправлением
+		exit(301); //Завершение работы, с отдачей кода завершения
+	}
+	}
+//Конец правки
 	/* Обработка GET-параметра - start */
 // $url_array = explode('/',$_SERVER['REQUEST_URI']);
 	$url4parse = $_SERVER['REQUEST_URI'];
@@ -37,8 +70,7 @@ if ($mosConfig_sef) {
 				unset($url_array[$key]);
 			}
 		}
-		if (isset($url_array[$pos + 8]) && $url_array[$pos + 8] != '' && in_array('category', $url_array) && (strpos($url_array[$pos + 5], 'order,') !== false) && (strpos($url_array[$pos +
-						6], 'filter,') !== false)) {
+		if (isset($url_array[$pos + 8]) && $url_array[$pos + 8] != '' && in_array('category', $url_array) && (strpos($url_array[$pos + 5], 'order,') !== false) && (strpos($url_array[$pos + 6], 'filter,') !== false)) {
 // $option/$task/$sectionid/$id/$Itemid/$order/$filter/$limit/$limitstart
 			$task = $url_array[$pos + 1];
 			$sectionid = $url_array[$pos + 2];
@@ -67,8 +99,7 @@ if ($mosConfig_sef) {
 			$_REQUEST['limitstart'] = $limitstart;
 			$QUERY_STRING = "option=com_content&amp;task=$task&amp;sectionid=$sectionid&amp;id=$id&amp;Itemid=$Itemid&amp;order=$order&amp;filter=$filter&amp;limit=$limit&amp;limitstart=$limitstart";
 		} else
-		if (isset($url_array[$pos + 7]) && $url_array[$pos + 7] != '' && $url_array[$pos +
-				5] > 1000 && (in_array('archivecategory', $url_array) || in_array('archivesection', $url_array))) {
+		if (isset($url_array[$pos + 7]) && $url_array[$pos + 7] != '' && $url_array[$pos + 5] > 1000 && (in_array('archivecategory', $url_array) || in_array('archivesection', $url_array))) {
 // $option/$task/$id/$limit/$limitstart/$year/$month/$module
 			$task = $url_array[$pos + 1];
 			$id = $url_array[$pos + 2];
@@ -94,8 +125,7 @@ if ($mosConfig_sef) {
 			$_REQUEST['module'] = $module;
 			$QUERY_STRING = "option=com_content&amp;task=$task&amp;id=$id&amp;limit=$limit&amp;limitstart=$limitstart&amp;year=$year&amp;month=$month&amp;module=$module";
 		} else
-		if (isset($url_array[$pos + 7]) && $url_array[$pos + 7] != '' && $url_array[$pos +
-				6] > 1000 && (in_array('archivecategory', $url_array) || in_array('archivesection', $url_array))) {
+		if (isset($url_array[$pos + 7]) && $url_array[$pos + 7] != '' && $url_array[$pos + 6] > 1000 && (in_array('archivecategory', $url_array) || in_array('archivesection', $url_array))) {
 // $option/$task/$id/$Itemid/$limit/$limitstart/$year/$month
 			$task = $url_array[$pos + 1];
 			$id = $url_array[$pos + 2];
@@ -207,8 +237,7 @@ if ($mosConfig_sef) {
 			$_REQUEST['module'] = $module;
 			$QUERY_STRING = "option=com_content&amp;task=$task&amp;year=$year&amp;month=$month&amp;module=$module";
 		} else
-		if (!(isset($url_array[$pos + 5]) && $url_array[$pos + 5] != '') && isset($url_array[$pos +
-						4]) && $url_array[$pos + 4] != '') {
+		if (!(isset($url_array[$pos + 5]) && $url_array[$pos + 5] != '') && isset($url_array[$pos + 4]) && $url_array[$pos + 4] != '') {
 // $option/$task/$sectionid/$id/$Itemid
 			$task = $url_array[$pos + 1];
 			$sectionid = $url_array[$pos + 2];
@@ -225,8 +254,7 @@ if ($mosConfig_sef) {
 			$_REQUEST['Itemid'] = $Itemid;
 			$QUERY_STRING = "option=com_content&amp;task=$task&amp;sectionid=$sectionid&amp;id=$id&amp;Itemid=$Itemid";
 		} else
-		if (!(isset($url_array[$pos + 4]) && $url_array[$pos + 4] != '') && (isset($url_array[$pos +
-						3]) && $url_array[$pos + 3] != '')) {
+		if (!(isset($url_array[$pos + 4]) && $url_array[$pos + 4] != '') && (isset($url_array[$pos + 3]) && $url_array[$pos + 3] != '')) {
 // $option/$task/$id/$Itemid
 			$task = $url_array[$pos + 1];
 			$id = $url_array[$pos + 2];
@@ -240,8 +268,7 @@ if ($mosConfig_sef) {
 			$_REQUEST['Itemid'] = $Itemid;
 			$QUERY_STRING = "option=com_content&amp;task=$task&amp;id=$id&amp;Itemid=$Itemid";
 		} else
-		if (!(isset($url_array[$pos + 3]) && $url_array[$pos + 3] != '') && (isset($url_array[$pos +
-						2]) && $url_array[$pos + 2] != '')) {
+		if (!(isset($url_array[$pos + 3]) && $url_array[$pos + 3] != '') && (isset($url_array[$pos + 2]) && $url_array[$pos + 2] != '')) {
 // $option/$task/$id
 			$task = $url_array[$pos + 1];
 			$id = $url_array[$pos + 2];
@@ -252,8 +279,7 @@ if ($mosConfig_sef) {
 			$_REQUEST['id'] = $id;
 			$QUERY_STRING = "option=com_content&amp;task=$task&amp;id=$id";
 		} else
-		if (!(isset($url_array[$pos + 2]) && $url_array[$pos + 2] != '') && (isset($url_array[$pos +
-						1]) && $url_array[$pos + 1] != '')) {
+		if (!(isset($url_array[$pos + 2]) && $url_array[$pos + 2] != '') && (isset($url_array[$pos + 1]) && $url_array[$pos + 1] != '')) {
 // $option/$task
 			$task = $url_array[$pos + 1];
 			$_GET['task'] = $task;
@@ -281,7 +307,7 @@ if ($mosConfig_sef) {
 				if ($temp[0] == 'option') {
 					if (!is_dir($mosConfig_absolute_path . '/components/' . $temp[1])) {
 						header('HTTP/1.0 404 Not Found');
-						header('HTTP/1.1 404 Not Found');
+						//header('HTTP/1.1 404 Not Found');
 						header('Status: 404 Not Found');
 						require_once ($mosConfig_absolute_path . '/templates/404.php');
 						exit(404);
@@ -318,7 +344,7 @@ if ($mosConfig_sef) {
 		$juri = str_replace($jdir, '', $_SERVER['REQUEST_URI']);
 		if ($juri != '' && $juri != '/' && !eregi("index\.php", $_SERVER['REQUEST_URI']) && !eregi("index2\.php", $_SERVER['REQUEST_URI']) && !eregi("/\?", $_SERVER['REQUEST_URI']) && $_SERVER['QUERY_STRING'] == '') {
 				header('HTTP/1.0 404 Not Found');
-				header('HTTP/1.1 404 Not Found');
+				//header('HTTP/1.1 404 Not Found');
 				header('Status: 404 Not Found');
 			require_once ($mosConfig_absolute_path . '/templates/404.php');
 			exit(404);

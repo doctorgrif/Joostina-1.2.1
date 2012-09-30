@@ -38,7 +38,8 @@ if(!class_exists('patBBCode')) {
 if(!@include_once 'pat/patBBCode.php')
 return false;
 }
-$this->BBCode = &new patBBCode();
+//$this->BBCode = &new patBBCode(); //php 5.2
+$this->BBCode = new patBBCode(); //php 5.3
 if(isset($this->_params['skinDir']))
 $this->BBCode->setSkinDir($this->_params['skinDir']);
 $reader = &$this->BBCode->createConfigReader($this->_params['reader']);

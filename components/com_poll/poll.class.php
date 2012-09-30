@@ -8,14 +8,12 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-
 /**
 * @package Joostina
 * @subpackage Polls
 */
 class mosPoll extends mosDBTable {
 	/** @var int Primary key */
-
 	var $id = null;
 	/** @var string */
 	var $title = null;
@@ -29,12 +27,10 @@ class mosPoll extends mosDBTable {
 	var $access = null;
 	/** @var int */
 	var $lag = null;
-
 	/** @param database A database connector object */
 	function mosPoll(&$db) {
 		$this->mosDBTable('#__polls', 'id', $db);
 	}
-
 // overloaded check function
 	function check() {
 // check for valid name
@@ -49,7 +45,7 @@ class mosPoll extends mosDBTable {
 			return false;
 		}
 // check for existing title
-		$query = "SELECT id" . "\n FROM #__polls" . "\n WHERE title = " . $this->_db->Quote($this->title);
+		$query = "SELECT id FROM #__polls WHERE title = " . $this->_db->Quote($this->title);
 		$this->_db->setQuery($query);
 		$xid = intval($this->_db->loadResult());
 		if ($xid && $xid != intval($this->id)) {
@@ -58,7 +54,6 @@ class mosPoll extends mosDBTable {
 		}
 		return true;
 	}
-
 // overloaded delete function
 	function delete($oid = null) {
 		$k = $this->_tbl_key;
@@ -66,17 +61,17 @@ class mosPoll extends mosDBTable {
 			$this->$k = intval($oid);
 		}
 		if (mosDBTable::delete($oid)) {
-			$query = "DELETE FROM #__poll_data" . "\n WHERE pollid = " . (int) $this->$k;
+			$query = "DELETE FROM #__poll_data WHERE pollid = " . (int) $this->$k;
 			$this->_db->setQuery($query);
 			if (!$this->_db->query()) {
 				$this->_error .= $this->_db->getErrorMsg() . "\n";
 			}
-			$query = "DELETE FROM #__poll_date" . "\n WHERE poll_id = " . (int) $this->$k;
+			$query = "DELETE FROM #__poll_date WHERE poll_id = " . (int) $this->$k;
 			$this->_db->setQuery($query);
 			if (!$this->_db->query()) {
 				$this->_error .= $this->_db->getErrorMsg() . "\n";
 			}
-			$query = "DELETE from #__poll_menu" . "\n WHERE pollid = " . (int) $this->$k;
+			$query = "DELETE from #__poll_menu WHERE pollid = " . (int) $this->$k;
 			$this->_db->setQuery($query);
 			if (!$this->_db->query()) {
 				$this->_error .= $this->_db->getErrorMsg() . "\n";

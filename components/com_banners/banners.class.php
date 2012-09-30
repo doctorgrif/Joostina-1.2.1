@@ -8,10 +8,8 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-
 // Classes and helper functions to the banner system
 class mosArtBannerClient extends mosDBTable {
-
 	var $cid = null;
 	var $name = '';
 	var $contact = '';
@@ -20,11 +18,9 @@ class mosArtBannerClient extends mosDBTable {
 	var $published = 0;
 	var $checked_out = 0;
 	var $checked_out_time = 0;
-
 	function mosArtBannerClient(&$db) {
 		$this->mosDBTable('#__banners_clients', 'cid', $db);
 	}
-
 	function check() {
 // check for valid client name
 		if (trim($this->name == "")) {
@@ -43,11 +39,8 @@ class mosArtBannerClient extends mosDBTable {
 		}
 		return true;
 	}
-
 }
-
 class mosArtBanner extends mosDBTable {
-
 	var $id = null; // int(11) NOT NULL PRIMARY auto_increment,
 	var $cid = null; // int(11) NOT NULL default '0',
 	var $tid = null; // int(11) NOT NULL default '0',
@@ -82,20 +75,16 @@ class mosArtBanner extends mosDBTable {
 	var $publish_down_time = '00:00:00';
 	var $alt = '';
 	var $title = '';
-
 	function mosArtBanner(&$db) {
 		$this->mosDBTable('#__banners', 'id', $db);
 	}
-
 	function setDate() {
 		$this->set('last_show', mosCurrentDate('%Y-%m-%d %H:%M:%S'));
 	}
-
 	function clicks() {
 		$this->_db->setQuery("UPDATE #__banners SET clicks=(clicks+1), complete_clicks=complete_clicks+1 WHERE id='$this->id'");
 		$this->_db->query();
 	}
-
 	function check() {
 // check for valid client id
 		//if (is_null($this->cid) || $this->cid == 0) {
@@ -133,12 +122,9 @@ class mosArtBanner extends mosDBTable {
 		}
 		return true;
 	}
-
 }
-
 /** Category database table class */
 class mosArtCategory extends mosDBTable {
-
 	/** @var int Primary key */
 	var $id = null;
 	/** @var string The full name for the Category */
@@ -151,12 +137,10 @@ class mosArtCategory extends mosDBTable {
 	var $checked_out = null;
 	/** @var time */
 	var $checked_out_time = null;
-
 	/** @param database A database connector object */
 	function mosArtCategory(&$db) {
 		$this->mosDBTable('#__banners_categories', 'id', $db);
 	}
-
 // overloaded check function
 	function check() {
 // check for valid name
@@ -173,15 +157,11 @@ class mosArtCategory extends mosDBTable {
 		}
 		return true;
 	}
-
 }
-
 class mosArtBannersTime {
-
 	var $hour = null;
 	var $minute = null;
 	var $second = null;
-
 	function mosArtBannersTime($time = null) {
 		if ($time == null) {
 			$time = mosCurrentDate('%H:%M:%S');

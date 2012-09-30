@@ -19,9 +19,7 @@ function displaylist(&$categories, &$rows, $catid, $currentcat = null, &$params,
 	global $Itemid, $mosConfig_live_site, $hide_js;
 		if ($params->get('page_title')) {
 ?>
-<div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>">
-	<?php echo $currentcat->header; ?>
-</div>
+<div class="componentheading"><?php echo $currentcat->header; ?></div>
 	<?php
 	}
 	?>
@@ -29,12 +27,14 @@ function displaylist(&$categories, &$rows, $catid, $currentcat = null, &$params,
 	<div class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
 		<?php if ($currentcat->descrip) { ?>
 		<div>
-			<div class="contentdescription<?php echo $params->get('pageclass_sfx'); ?>">
+			<div class="contentdescription">
 		<?php
 // show image
 		if ($currentcat->img) {
 		?>
-		<img src="<?php echo $currentcat->img; ?>" align="<?php echo $currentcat->align; ?>" hspace="6" alt="<?php echo _WEBLINKS_TITLE; ?>" />
+		<figure>
+			<img src="<?php echo $currentcat->img; ?>" style="float:<?php echo $currentcat->align; ?>;" hspace="6" alt="<?php echo _WEBLINKS_TITLE; ?>" />
+		</figure>
 		<?php
 		}
 		echo $currentcat->descrip;
@@ -79,13 +79,13 @@ function displaylist(&$categories, &$rows, $catid, $currentcat = null, &$params,
 	<?php if ($params->get('headings')) { ?>
 	<tr>
 	<?php if ($params->get('name')) { ?>
-		<td height="20" class="sectiontableheader<?php echo $params->get('pageclass_sfx'); ?>"><?php echo _FEED_NAME; ?></td>
+		<td height="20" class="sectiontableheader"><?php echo _FEED_NAME; ?></td>
 	<?php } ?>
 	<?php if ($params->get('articles')) { ?>
-		<td height="20" class="sectiontableheader<?php echo $params->get('pageclass_sfx'); ?>" align="center"><?php echo _FEED_ARTICLES; ?></td>
+		<td height="20" class="sectiontableheader"><?php echo _FEED_ARTICLES; ?></td>
 	<?php } ?>
 	<?php if ($params->get('link')) { ?>
-		<td height="20" class="sectiontableheader<?php echo $params->get('pageclass_sfx'); ?>"><?php echo _FEED_LINK; ?></td>
+		<td height="20" class="sectiontableheader"><?php echo _FEED_LINK; ?></td>
 	<?php } ?>
 	</tr>
 		<?php
@@ -98,7 +98,7 @@ function displaylist(&$categories, &$rows, $catid, $currentcat = null, &$params,
 			<?php if ($params->get('name')) { ?>
 		<td class="<?php echo $tabclass[$k]; ?>">
 			<p>
-		<a href="<?php echo sefRelToAbs($link); ?>" class="category<?php echo $params->get('pageclass_sfx'); ?>" title="<?php echo $row->name; ?>">
+		<a href="<?php echo sefRelToAbs($link); ?>" class="category" title="<?php echo $row->name; ?>">
 			<?php echo $row->name; ?>
 		</a>
 			</p>
@@ -136,7 +136,7 @@ function displaylist(&$categories, &$rows, $catid, $currentcat = null, &$params,
 				$link = 'index.php?option=com_newsfeeds&amp;catid=' . $cat->catid . '&amp;Itemid=' . $Itemid;
 				?>
 	<li>
-		<a href="<?php echo sefRelToAbs($link); ?>" class="category<?php echo $params->get('pageclass_sfx'); ?>" title="<?php echo $cat->title; ?>"><?php echo $cat->title; ?></a>
+		<a href="<?php echo sefRelToAbs($link); ?>" class="category" title="<?php echo $cat->title; ?>"><?php echo $cat->title; ?></a>
 				<?php if ($params->get('cat_items')) { ?>
 		<span>(<?php echo $cat->numlinks; ?>)</span>
 					<?php } ?>
@@ -159,10 +159,10 @@ function displaylist(&$categories, &$rows, $catid, $currentcat = null, &$params,
 
 		function showNewsfeeds(&$newsfeed, $LitePath, $cacheDir, &$params) {
 			?>
-<table width="100%" class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
+<table width="100%" class="contentpane">
 			<?php if ($params->get('header')) { ?>
 	<tr>
-		<td class="componentheading<?php echo $params->get('pageclass_sfx'); ?>" colspan="2"><?php echo $params->get('header'); ?></td>
+		<td class="componentheading" colspan="2"><?php echo $params->get('header'); ?></td>
 	</tr>
 		<?php
 			}

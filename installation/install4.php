@@ -227,21 +227,6 @@ if($siteUrl) {
 	$config .= "\$mosConfig_gtag_reg = '';\n";
 	//doctorgrif: Dublin Core
 	$config .= "\$mosConfig_dcore = '0';\n";
-	/*$config .= "\$mosConfig_dcore_title = '';\n";
-	$config .= "\$mosConfig_dcore_creator = '';\n";
-	$config .= "\$mosConfig_dcore_subject = '';\n";
-	$config .= "\$mosConfig_dcore_description = '';\n";
-	$config .= "\$mosConfig_dcore_publisher = '';\n";
-	$config .= "\$mosConfig_dcore_contributor = '';\n";
-	$config .= "\$mosConfig_dcore_date = '';\n";
-	$config .= "\$mosConfig_dcore_type = '';\n";
-	$config .= "\$mosConfig_dcore_format = '';\n";
-	$config .= "\$mosConfig_dcore_identifier = '';\n";
-	$config .= "\$mosConfig_dcore_source = '';\n";
-	$config .= "\$mosConfig_dcore_language = '';\n";
-	$config .= "\$mosConfig_dcore_relation = '';\n";
-	$config .= "\$mosConfig_dcore_coverage = '';\n";
-	$config .= "\$mosConfig_dcore_rights = '';\n";*/
 	//doctorgrif: GA
 	$config .= "\$mosConfig_ga = '0';\n";
 	$config .= "\$mosConfig_ga_id = '';\n";

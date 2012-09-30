@@ -26,50 +26,48 @@ echo "\n";
 echo '<?xml version="1.0" encoding="'.$iso[1].'"?>';
 echo "\n";
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!--[if lt IE 7 ]><html dir="ltr" class="no-js ie6" lang="ru-RU"><![endif]-->
+<!--[if IE 7 ]><html dir="ltr" class="no-js ie7" lang="ru-RU"><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" class="no-js ie8" lang="ru-RU"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html dir="ltr" class="no-js" lang="ru-RU"><!--<![endif]-->
 <head>
-<?php
-/* favicon */
-	if (!$mosConfig_favicon) {
-		$mosConfig_favicon = 'favicon.png';
-	}
-		$icon = $mosConfig_absolute_path.'/'.$mosConfig_favicon;
-	if (!file_exists($icon)) {
-		$icon = $mosConfig_live_site.'/favicon.png';
-	} else {
-		$icon = $mosConfig_live_site.'/'.$mosConfig_favicon;
-	}
-/* IE */
-	if (!$mosConfig_favicon_ie) {
-		$mosConfig_favicon_ie = 'favicon.ico';
-	}
-		$icon_ie = $mosConfig_absolute_path.'/'.$mosConfig_favicon_ie;
-	if (!file_exists($icon_ie)) {
-		$icon_ie = $mosConfig_live_site.'/favicon.ico';
-	} else {
-		$icon_ie = $mosConfig_live_site.'/'.$mosConfig_favicon_ie;
-	}
-/* iДевайс */
-	if (!$mosConfig_favicon_ipad) {
-		$mosConfig_favicon_ipad = 'apple-touch-icon.png';
-	}
-		$icon_ipad = $mosConfig_absolute_path.'/'.$mosConfig_favicon_ipad;
-	if (!file_exists($icon_ipad)) {
-		$icon_ipad = $mosConfig_live_site.'/apple-touch-icon.png';
-	} else {
-		$icon_ipad = $mosConfig_live_site.'/'.$mosConfig_favicon_ipad;
-	}
-?>
-<link rel="icon" type="image/png" href="<?php echo $icon;?>" />
-<?php
-if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE')) {
-echo '<link rel="shortcut icon" type="image/x-icon" href="'.$icon_ie.'" />';
-}
-?>
-<link rel="apple-touch-icon" href="<?php echo $icon_ipad;?>" />
+<link type="text/css" rel="stylesheet" href="<?php echo $mosConfig_live_site;?>/templates/<?php echo $cur_template;?>/css/style.css" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link title="RSS кафедра госпитальной хирургии" type="application/rss+xml" rel="alternate" href="http://feeds.feedburner.com/hospsurg/DTON/" />
 <meta http-equiv="Content-Type" content="text/html; <?php echo _ISO;?>" />
 <title><?php echo $mosConfig_sitename;?> - <?php echo _SITE_OFFLINE;?></title>
-<link type="text/css" rel="stylesheet" href="<?php echo $mosConfig_live_site;?>/templates/<?php echo $cur_template;?>/css/style.css" />
+<?php
+// favourites icon
+	if (!$mosConfig_disable_favicon) {
+			global $mosConfig_favicon_ie, $mosConfig_disable_favicon_ie, $mosConfig_favicon_ipad, $mosConfig_disable_favicon_ipad;
+		if ($mosConfig_favicon) {
+			$icon = 'favicon.png';
+		}
+echo '<link rel="icon" href="' . $icon . '" />' . "\n";
+	}
+	if (!$mosConfig_disable_favicon_ie) {
+		if ($mosConfig_favicon_ie) {
+			$icon_ie = 'favicon.ico';
+		}
+echo '<link rel="shortcut icon" href="' . $icon_ie . '" />' . "\n";
+	}
+	if (!$mosConfig_disable_favicon_ipad) {
+		if ($mosConfig_favicon_ipad) {
+			$mosConfig_favicon_ipad = 'apple-touch-icon.png';
+			$icon_ipad = 'apple-touch-icon.png';
+			$icon_ipad_72 = 'apple-touch-icon-72x72.png';
+			$icon_ipad_114 = 'apple-touch-icon-114x114.png';
+		}
+echo '<link rel="apple-touch-icon" href="'.$icon_ipad.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="72x72" href="'.$icon_ipad_72.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="114x114" href="'.$icon_ipad_114.'" />' . "\n";
+	}
+?>
+<?php
+if ($_SERVER['HTTP_USER_AGENT']=='MSIE') {
+echo '<script type="text/javascript" src="'.$mosConfig_live_site.'/templates/'.$mainframe->getTemplate().'/js/modernizr.js"></script>';
+}
+?>
 </head>
 <body id="warning">
 	<div class="moswarning">

@@ -19,9 +19,7 @@ class search_html {
 function openhtml($params) {
 	if ($params->get('page_title')) {
 ?>
-<div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>">
-	<?php echo $params->get('header'); ?>
-</div>
+<div class="componentheading"><?php echo $params->get('header'); ?></div>
 		<?php
 	}
 }
@@ -34,24 +32,18 @@ function searchbox($searchword, &$lists, $params) {
 	<input type="hidden" name="Itemid" value="<?php echo $Itemid; ?>" />
 	<div class="col_100" id="search_searchword">
 		<label for="search"><?php echo _PROMPT_KEYWORD; ?></label>
-		<div class="col_100">
-			<input type="text" name="searchword" id="search" maxlength="100" value="<?php echo stripslashes($searchword); ?>" placeholder="<?php echo _PROMPT_KEYWORD; ?>" /> 
-			<input type="submit" name="submit" value="<?php echo _SEARCH_TITLE; ?>" id="submit" class="button" />
-		</div>
+		<input type="text" name="searchword" id="search" maxlength="100" value="<?php echo stripslashes($searchword); ?>" placeholder="<?php echo _PROMPT_KEYWORD; ?>" /> 
+		<input type="submit" name="submit" value="<?php echo _SEARCH_TITLE; ?>" id="submit" class="button" />
 	</div>
 	<div class="col_50" id="search-searchphrase">
-		<p>
-			<label for="search-searchphrase"><?php echo _CMN_SEARCHPHRASE; ?></label><br />
-			<?php echo $lists['searchphrase']; ?>
-		</p>
+		<label for="search-searchphrase"><?php echo _CMN_SEARCHPHRASE; ?></label><br />
+		<?php echo $lists['searchphrase']; ?>
 	</div>
 	<div class="col_50" id="search-ordering">
-		<p>
-			<label for="search-ordering"><?php echo _SEARCH_ORDERING; ?></label><br />
-			<?php echo $lists['ordering']; ?>
-		</p>
+		<label for="search-ordering"><?php echo _SEARCH_ORDERING; ?></label><br />
+		<?php echo $lists['ordering']; ?>
 		<?php } function searchintro($searchword, $params) { ?>
-		<div class="searchintro<?php echo $params->get('pageclass_sfx'); ?>">
+		<div class="searchintro">
 		<?php }
 		function message($message) {
 			echo $message;
@@ -62,15 +54,15 @@ function searchbox($searchword, &$lists, $params) {
 		global $mosConfig_hideCreateDate;
 		global $mosConfig_live_site, $option, $Itemid, $mainframe;
 		$cur_template = $mainframe->getTemplate();
-		$image = mosAdminMenus::ImageCheck('aport.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'Aport', 'Aport', 1);
-		$image1 = mosAdminMenus::ImageCheck('bing.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'Bing', 'Bing', 1);
-		$image2 = mosAdminMenus::ImageCheck('gogo.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'GoGo', 'GoGo', 1);
-		$image3 = mosAdminMenus::ImageCheck('google.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'Google', 'Google', 1);
-		$image4 = mosAdminMenus::ImageCheck('mail.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'Mail', 'Mail', 1);
-		$image5 = mosAdminMenus::ImageCheck('nigma.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'Nigma', 'Nigma', 1);
-		$image6 = mosAdminMenus::ImageCheck('rambler.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'Rambler', 'Rambler', 1);
-		$image7 = mosAdminMenus::ImageCheck('yahoo.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'Yahoo', 'Yahoo', 1);
-		$image8 = mosAdminMenus::ImageCheck('yandex.png', '/templates/' . $cur_template . '/i/c/search/', null, null, 'Yandex', 'Yandex', 1);
+		$image = mosAdminMenus::ImageCheck('aport.png','/templates/'.$cur_template.'/i/c/search/',null,null,'Aport','Aport',1);
+		$image1 = mosAdminMenus::ImageCheck('bing.png','/templates/'.$cur_template.'/i/c/search/',null,null,'Bing','Bing',1);
+		$image2 = mosAdminMenus::ImageCheck('gogo.png','/templates/'.$cur_template.'/i/c/search/',null,null,'GoGo','GoGo',1);
+		$image3 = mosAdminMenus::ImageCheck('google.png','/templates/'.$cur_template.'/i/c/search/',null,null,'Google','Google',1);
+		$image4 = mosAdminMenus::ImageCheck('mail.png','/templates/'.$cur_template.'/i/c/search/',null,null,'Mail','Mail',1);
+		$image5 = mosAdminMenus::ImageCheck('nigma.png','/templates/'.$cur_template.'/i/c/search/',null,null,'Nigma','Nigma',1);
+		$image6 = mosAdminMenus::ImageCheck('rambler.png','/templates/'.$cur_template.'/i/c/search/',null,null,'Rambler','Rambler',1);
+		$image7 = mosAdminMenus::ImageCheck('yahoo.png','/templates/'.$cur_template.'/i/c/search/',null,null,'Yahoo','Yahoo',1);
+		$image8 = mosAdminMenus::ImageCheck('yandex.png','/templates/'.$cur_template.'/i/c/search/',null,null,'Yandex','Yandex',1);
 		$searchword = urldecode($searchword);
 		$searchword = htmlspecialchars($searchword, ENT_QUOTES);
 		?>
@@ -83,10 +75,10 @@ function searchbox($searchword, &$lists, $params) {
 		$link = $mosConfig_live_site . '/index.php?option=' . $option . '&amp;Itemid=' . $Itemid . '&amp;searchword=' . $cleanWord . '&amp;searchphrase=' . $searchphrase . '&amp;ordering=' . $ordering;
 		$link = sefRelToAbs($link);
 		// if($total>0){
-			echo '<p>';
-			echo '<label>' . _SEARCH_LIMITSTART . '</label><br />';
+			//echo '<div>';
+			echo '<label>' . _SEARCH_LIMITSTART . '</label>';
 			echo $pageNav->getLimitBox($link);
-			echo '</p>';
+			//echo '</div>';
 		//}
 		?>
 	</div>
@@ -96,8 +88,7 @@ function searchbox($searchword, &$lists, $params) {
 <div class="col_100 contentpaneopen<?php echo $params->get('pageclass_sfx'); ?>">
 	<div class="searchresult<?php echo $params->get('pageclass_sfx'); ?>">
 		<p><span class="strong"><?php echo _SEARCH_RESULT; ?>:</span></p>
-		<p><?php echo _PROMPT_KEYWORD, ' <span class="highlight">', stripslashes($searchword), '</span>'; ?>. <?php eval('echo "' . _CONCLUSION . '";'); ?>
-		</p>
+		<p><?php echo _PROMPT_KEYWORD, ' <span class="highlight">', stripslashes($searchword), '</span>'; ?>. <?php eval('echo "' . _CONCLUSION . '";'); ?></p>
 		<?php
 			$z = $limitstart + 1;
 			$end = $limit + $z;
@@ -130,16 +121,16 @@ function searchbox($searchword, &$lists, $params) {
 				</a>
 			</h6>
 			<?php } if ($row->section) { ?> 
-			<p class="section<?php echo $params->get('pageclass_sfx'); ?>">[<?php echo $row->section; ?>]</p>
+			<p class="section">[<?php echo $row->section; ?>]</p>
 			<?php } ?>
 			</dt>
 			<dd>
 			<p>
-				<span class="number<?php echo $params->get('pageclass_sfx'); ?>"><?php echo $i . '.'; ?></span>
+				<span class="number"><?php echo $i . '.'; ?></span>
 				<?php echo ampReplace($row->text); ?>
 			</p>
 			<?php if (!$mosConfig_hideCreateDate) { ?>
-			<p class="created<?php echo $params->get('pageclass_sfx'); ?>"><?php echo $created; ?></p>
+			<p class="created"><?php echo $created; ?></p>
 			<?php } ?>
 			</dd>
 			</dl>
@@ -147,7 +138,6 @@ function searchbox($searchword, &$lists, $params) {
 		<?php } ?>
 	</div>
 </div>
-<div class="clearfix"></div>
 <div class="searchsystems">
 	<p>Если не нашли - поищем глобально...</p>
 	<ul class="ps">

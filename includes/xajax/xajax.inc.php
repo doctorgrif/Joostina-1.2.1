@@ -187,20 +187,10 @@ class xajax {
 			if(!empty($_POST["xajaxargs"]))
 				$aArgs = $_POST["xajaxargs"];
 		} else {
-				// get the last-modified-date of this very file
-				$lastModified = filemtime($_SERVER['REQUEST_URI']);
-				// get a unique hash of this file (etag)
-				$etagFile = md5($_SERVER['REQUEST_URI']);
-				// get the HTTP_IF_MODIFIED_SINCE header if set
-				$ifModifiedSince = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : false);
-				// get the HTTP_IF_NONE_MATCH header if set (etag: unique file hash)
-				$etagHeader = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? trim($_SERVER['HTTP_IF_NONE_MATCH']) : false);
-				// set last-modified header
-				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $lastModified) . ' GMT');
-				// set etag-header
-				header('Etag: ' . $etagFile);
-				// make sure caching is turned on
-				header('Cache-Control: public');
+			header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+			header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+			header("Cache-Control: no-cache, must-revalidate");
+			header("Pragma: no-cache");
 			$sFunctionName = $_GET["xajax"];
 			if(!empty($_GET["xajaxargs"]))
 				$aArgs = $_GET["xajaxargs"];

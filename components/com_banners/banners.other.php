@@ -8,7 +8,6 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-
 // function that selecting one or more banner/s
 function showBanners(&$params) {
 	global $database, $my;
@@ -37,35 +36,18 @@ function showBanners(&$params) {
 	else
 		$where = '';
 	/* add STRAIGHT_JOIN */
-	/*
-	$query = "SELECT STRAIGHT_JOIN #__banners.* FROM #__banners,#__banners_categories,#__banners_clients
-	WHERE 1 AND $where
-	(('$date' <= publish_down_date OR publish_down_date = '0000-00-00')
-	AND '$date' >= publish_up_date
-	AND ((reccurtype = 0)
-	OR (reccurtype = 1 AND reccurweekdays LIKE '%$weekday%'))
-	AND '$time' >= publish_up_time
-	AND ('$time' <= publish_down_time OR publish_down_time = '00:00:00')
-	AND access <= '$my->gid'
-	AND state = '1'
-	AND #__banners.tid = #__banners_categories.id
-	AND #__banners_categories.published = 1
-	AND #__banners.cid = #__banners_clients.cid
-	AND #__banners_clients.published = 1) ORDER BY last_show ASC, msec ASC";
-	*/
-	/* add STRAIGHT_JOIN */
-	$query = "SELECT STRAIGHT_JOIN b.* FROM #__banners AS b
-	INNER JOIN #__banners_categories AS cat ON b.tid = cat.id
-	INNER JOIN #__banners_clients AS cl ON b.cid = cl.cid
-	WHERE cat.published =1 AND cl.published =1 AND b.access <= '$my->gid' AND b.state = '1'
-	AND $where (
-	('$date' <= b.publish_down_date OR b.publish_down_date = '0000-00-00')
-	AND '$date' >= b.publish_up_date
-	AND ((b.reccurtype =0) OR (b.reccurtype =1 AND b.reccurweekdays LIKE '%$weekday%'))
-	AND '$time' >= b.publish_up_time
-	AND ('$time' <= b.publish_down_time OR b.publish_down_time = '00:00:00')
-	)
-	ORDER BY b.last_show ASC , b.msec ASC";
+	$query = "SELECT STRAIGHT_JOIN b.* FROM #__banners AS b"
+	. "\n INNER JOIN #__banners_categories AS cat ON b.tid = cat.id"
+	. "\n INNER JOIN #__banners_clients AS cl ON b.cid = cl.cid"
+	. "\n WHERE cat.published = 1 AND cl.published = 1 AND b.access <= '$my->gid' AND b.state = 1"
+	. "\n AND $where ("
+	. "\n ('$date' <= b.publish_down_date OR b.publish_down_date = '0000-00-00')"
+	. "\n AND '$date' >= b.publish_up_date"
+	. "\n AND ((b.reccurtype =0) OR (b.reccurtype =1 AND b.reccurweekdays LIKE '%$weekday%'))"
+	. "\n AND '$time' >= b.publish_up_time"
+	. "\n AND ('$time' <= b.publish_down_time OR b.publish_down_time = '00:00:00')"
+	. "\n )"
+	. "\n ORDER BY b.last_show ASC, b.msec ASC";
 	$database->setQuery($query);
 	$rows = $database->loadObjectList();
 	$numrows = count($rows);
@@ -110,7 +92,6 @@ $result = '<div class="banners' . $moduleclass_sfx . '">';
 $result .= '</div>';
 	return $result;
 }
-
 // function that showing one banner
 function showSingleBanner(&$banner) {
 	global $mosConfig_live_site, $database, $mosConfig_absolute_path;
@@ -137,7 +118,6 @@ function showSingleBanner(&$banner) {
 		if ($banner->alt != '')
 			$alt = $banner->alt;
 		$title = $banner->title;
-
 $result = '<a href="index.php?option=com_banners&amp;task=clk&amp;id=' . $banner->id . '" target="_' . $target . '"  title="' . $title . '"><img src="' . $image_url . '" style="border:"' . $border_value . ' ' . $border_style . ' ' . $border_color . '" vspace="0" class="banner" alt=' . $alt . '" width="' . $imginfo[0] . '" height="' . $imginfo[1] . '" /></a>';
 	} else
 	if (eregi('.swf', $banner->image_url)) {
@@ -156,5 +136,4 @@ $result = '<a href="index.php?option=com_banners&amp;task=clk&amp;id=' . $banner
 	}
 	return $result;
 }
-
 ?>

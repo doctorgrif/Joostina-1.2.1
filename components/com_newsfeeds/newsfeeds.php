@@ -26,20 +26,29 @@ function listFeeds($catid) {
 	global $mosConfig_live_site;
 	global $Itemid;
 	/* Query to retrieve all categories that belong under the contacts section and that are published. */
-	$query = "SELECT STRAIGHT_JOIN cc.*, a.catid, COUNT(a.id) AS numlinks FROM #__categories AS cc" .
-			"\n LEFT JOIN #__newsfeeds AS a ON a.catid = cc.id WHERE a.published = 1" .
-			"\n AND cc.section = 'com_newsfeeds'AND cc.published = 1 AND cc.access <= " . (int) $my->gid . "\n GROUP BY cc.id ORDER BY cc.ordering";
+	$query = "SELECT STRAIGHT_JOIN cc.*, a.catid, COUNT(a.id) AS numlinks FROM #__categories AS cc"
+	. "\n LEFT JOIN #__newsfeeds AS a ON a.catid = cc.id"
+	. "\n WHERE a.published = 1"
+	. "\n AND cc.section = 'com_newsfeeds'"
+	. "\n AND cc.published = 1"
+	. "\n AND cc.access <= " . (int) $my->gid
+	. "\n GROUP BY cc.id"
+	. "\n ORDER BY cc.ordering";
 	$database->setQuery($query);
 	$categories = $database->loadObjectList();
 	$rows = array();
 	$currentcat = null;
 	if ($catid) {
 // url links info for category
-		$query = "SELECT* FROM #__newsfeeds WHERE catid = " . (int) $catid . "\n AND published = 1 ORDER BY ordering";
+		$query = "SELECT * FROM #__newsfeeds WHERE catid = " . (int) $catid . " AND published = 1 ORDER BY ordering";
 		$database->setQuery($query);
 		$rows = $database->loadObjectList();
 // current category info
-		$query = "SELECT id, name, description, image, image_position FROM #__categories WHERE id = " . (int) $catid . "\n AND published = 1 AND access <= " . (int) $my->gid;
+		$query = "SELECT id, name, description, image, image_position"
+		. "\n FROM #__categories"
+		. "\n WHERE id = " . (int) $catid
+		. "\n AND published = 1"
+		. "\n AND access <= " . (int) $my->gid;
 		$database->setQuery($query);
 		$database->loadObject($currentcat);
 		/** Check if the category is published or if access level allows access */

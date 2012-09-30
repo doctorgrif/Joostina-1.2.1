@@ -104,7 +104,8 @@ return $this->_templates[$name];
 function displayFooter() {
 if($_GET['mode'] == 'debug') {
 require_once 'XML/Beautifier.php';
-$fmt = &new XML_Beautifier(array('indent' => '  '));
+//$fmt = &new XML_Beautifier(array('indent' => '  ')); //php 5.2
+$fmt = new XML_Beautifier(array('indent' => '  ')); //php 5.3
 echo '<pre>';
 echo htmlspecialchars($fmt->formatString($this->_doc->serialize()));
 echo '</pre>';

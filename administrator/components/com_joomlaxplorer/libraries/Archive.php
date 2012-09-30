@@ -112,7 +112,8 @@ class File_Archive {
 				if($symbolic === null) {
 					$realSymbolic = '';
 				}
-				$tmp = &new File_Archive_Reader_AddBaseName($realSymbolic,$result);
+				//$tmp = &new File_Archive_Reader_AddBaseName($realSymbolic,$result); //php 5.2
+				$tmp = new File_Archive_Reader_AddBaseName($realSymbolic,$result); //php 5.3
 				unset($result);
 				$result = &$tmp;
 			}

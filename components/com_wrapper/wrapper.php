@@ -11,7 +11,6 @@ defined('_VALID_MOS') or die();
 /* load the html drawing class */
 require_once ($mainframe->getPath('front_html'));
 showWrap();
-
 function showWrap() {
 	global $mainframe;
 	$menu = $mainframe->get('menu');

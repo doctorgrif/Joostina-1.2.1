@@ -42,12 +42,17 @@ class joomlaVersion {
 	* @var int
 	* Подверсия
 	*/
-	var $DEV_LEVEL	 = '19';
+	var $DEV_LEVEL	 = '15';
 	/**
 	* @var int
 	* Номер сборки
 	*/
-	var $BUILD		 = '5';
+	var $BUILD		 = '6';
+	/**
+	* @var int
+	* SVN checkout
+	*/
+	//var $SVN_R		 = 'r:19';
 	/**
 	* @var string
 	* Кодовое имя
@@ -69,6 +74,11 @@ class joomlaVersion {
 	* Временная зона
 	*/
 	var $RELTZ		 = '[+5 GMT]';
+	/**
+	* @var string
+	* Ваш браузер
+	*/
+	//var $BROUSER	 = 'Ваш браузер: <span id="browser-info"></span>';
 	/**
 	* @var string
 	* Текст оформление знака охраны авторского права
@@ -93,7 +103,7 @@ class joomlaVersion {
 	* Режим разработки сайта.
 	* Для реального использования сайта = 0 (1 отключена проверка /installation): 0 по умолчанию
 	*/
-	var $SVN		 = 0;
+	var $SVN		 = 1;
 	/**
 	* @var string
 	* Ссылки на сайты поддержки

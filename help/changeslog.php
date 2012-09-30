@@ -11,7 +11,32 @@ defined('_VALID_MOS') or die();
 ?>
 <div class="sysinfo">
 <img src="<?php echo $mosConfig_live_site; ?>/help/i/joostina.png" alt="Joostina Changelog" style="float:right;" />
-<p class="strong">upd. 01.01.12 &ndash; 01.05.12</p><ol>
+<p class="strong">upd. 01.08.12 &ndash; 15.09.12</p><ol>
+<li>Попытка добиться физического создания файла sitemap.xml из ссылки компонента Xmap.</li>
+<li>Попытка добиться адаптивного дизайна шаблона по умолчанию &ndash; более или менее желаемый результат достигнут.</li>
+<li>Попытка добиться работоспособности и адекватного функционирования в условиях использования PHP Version 5.3.5 &ndash; более или менее желаемый результат достигнут. Для полноценной работоспособности пришлось заменить в modules/mod_name.xml кодировку (строка 1) с<pre><code>&lt;?xml version="1.0" encoding="windows-1251"?&gt;</code></pre>на<pre><code>&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;</code></pre>
+Напоминаю: работоспособность более или менее гарантирована для установки cms Joostina (ядро и расширения в сборке по-умолчанию), а не сторонних расширений (возможность их работы &laquo;из коробки&raquo; присутствует как вариант, но не факт)!</li>
+<li>Обновлена библиотека jQuery до версии <del>1.8.0</del> 1.8.1.</li>
+<li>Обновлена библиотека Modernizr до версии 2.6.1 (Custom Build).</li>
+<li>Небольшая модификация выводимых ссылок в модулях &ndash; полноценная поддержка sef.</li>
+<li>Небольшая модификация отдачи элементов head сайта.</li>
+</ol>
+<p class="strong">upd. 01.07.12 &ndash; 01.08.12</p><ol>
+<li>Не помню... Вспомню &ndash; допишу.</li>
+</ol>
+<p class="strong">upd. 02.06.12 &ndash; 30.06.12</p><ol>
+<li>Добавлен вывод microformat для &laquo;хлебных крошек&raquo; (в файле /includes/pathway.php), контактной информации (в файле /components/com_contact/contact.html.php), тегов (в файле /mambots/content/joostinatags.php), рейтинга статей (в файле /mambots/content/plugin_jw_ajaxvote.php).</li>
+<li>Изменен вывод формы контактов (файл /components/com_contact/contact.html.php) &ndash; с table переверстан на div, уменьшен объем кода.</li>
+<li>Загрузка и настройка Dublin Core вынесена в отдельный файл &ndash; /includes/dc.core.php.</li>
+<li>В вывод модуля &laquo;Популярное&raquo; добавлено отображение числа просмотров объекта (файл /modules/vod_mostread.php).</li>
+<li>Изменен код ссылки &laquo;Подробнее&raquo; с input на обычную ссылку &ndash; борьба с багами верстки в Opera.</li>
+</ol>
+<p class="strong">upd. 02.05.12 &ndash; 01.06.12</p><ol>
+<li>Исправлена ошибка синтаксиса в стилевом файле шаблона back-end-а &ndash; дублирование символа &laquo;:&raquo; в /administrator/templates/joostfree/css/admin_login.css (line 3).</li>
+<li>Новая трактовка отдачи header() и кэширования.</li>
+<li>Переменная <pre><code>$moduleclass_sfx</code></pre> удалена из modules/mod_modulename.php &ndash; суффикс задается в includex/frontend.html.php при выборе типа отображения модуля.</li>
+<li>Добавлен плагин jQuery Tabs &ndash; вкладки/табы. Стиль для плагина добавлен в стилевой файл. Объем функционала оправдывает размер скрипта &ndash;  755 байт (он только выводит вкладки и все).</li>
+</ol><p class="strong">upd. 01.01.12 &ndash; 01.05.12</p><ol>
 <li>Изменен код скриптов установки скрипта (/installation/*.php, /installation/*.css).</li>
 <li>Добавлена информация в *.sql файлы инсталятора.</li>
 <li>Обновлен jQuery до версии 1.7.1.</li>
@@ -21,7 +46,7 @@ defined('_VALID_MOS') or die();
 <li>Исправлено добавление пустой строки в /mambots/mosimage.php при выборе изображения из списка.</li>
 <li>Расширен файл русской локализации &ndash; /language/russian.php.</li>
 <li>Заменена функция работы со строками substr на mb_substr &ndash; небольшое ускорение работы.</li>
-<li>в уведомления о добавлении материала указывается ссылка на сам материал</li>
+<li>В уведомления о добавлении материала указывается ссылка на сам материал</li>
 <li>Исправлено отсутствие пробела в атрибутах ссылки, формируемой модулем mod_mainmenu</li>
 <li>Исправлены неопределенные индексы $j_spaw_config['user_dir'] и $j_spaw_config['template'] в WISWIG редакторе Spaw </li>
 <li>Исправлены ошибки, отображающиеся при php_flag display_errors On и php_flag display_startup_errors On<pre><code>Warning: Call-time pass-by-reference has been deprecated in \htdocs\sitepath\includes\Cache\Lite\Function.php on line n

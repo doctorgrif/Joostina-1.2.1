@@ -113,11 +113,11 @@ class mosPageNav {
 				$mainframe->addCustomHeadTag('<link rel="prev" href="' . sefRelToAbs($link) . '" />');
 				$this->prev_exist = 1;
 			}
-			$txt .= '<li class="pagenav_prev"><a href="' . sefRelToAbs($link) . '&amp;limitstart=0" title="' . _PN_L_LLAST . '">' . _PN_LLAST . '</a></li>';
+			$txt .= '<li class="pagenav_prev"><a href="' . sefRelToAbs($link) . '&amp;limitstart=0" title="' . _PN_L_LLAST_0 . '">' . _PN_LLAST . '</a></li>';
 			if ($this_page > 10) {
-			$txt .= '<li class="pagenav_prev">&larr; <a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page_p10) . '" title="' . _PN_L_PREV10 . '">' . _PN_PREV10 . '</a></li>';
+			$txt .= '<li class="pagenav_prev">&larr;<a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page_p10) . '" title="' . _PN_L_PREV_10 . '">' . _PN_PREV10 . '</a></li>';
 			}
-			$txt .= '<li class="pagenav_prev">&larr; <a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" title="' . _PN_L_PREV1 . '">' . _PN_PREV1 . '</a></li>';
+			$txt .= '<li class="pagenav_prev">&larr;<a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" title="' . _PN_L_PREV_1 . '">' . _PN_PREV1 . '</a></li>';
 		}
 		for ($i = $start_loop; $i <= $stop_loop; ++$i) {
 			$page = ($i - 1) * $this->limit;
@@ -135,11 +135,11 @@ class mosPageNav {
 				$mainframe->addCustomHeadTag('<link rel="next" href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" />');
 				$this->next_exist = 1;
 			}
-			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" title="' . _PN_L_NEXT1 . '">' . _PN_NEXT1 . '</a> &rarr;</li>';
+			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page) . '" title="' . _PN_L_NEXT_1 . '">' . _PN_NEXT1 . '</a>&rarr;</li>';
 			if ($this_page > 10) {
-			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page_p10) . '" title="' . _PN_L_NEXT10 . '">' . _PN_NEXT10 . '</a> &rarr;</li>';
+			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $page_p10) . '" title="' . _PN_L_NEXT_10 . '">' . _PN_NEXT10 . '</a>&rarr;</li>';
 			}
-			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $end_page) . '" title="' . _PN_L_RLAST . '">' . _PN_RLAST . '</a></li>';
+			$txt .= '<li class="pagenav_next"><a href="' . sefRelToAbs($link . '&amp;limitstart=' . $end_page) . '" title="' . _PN_L_RLAST_0 . '">' . _PN_RLAST . '</a></li>';
 		}
 		$txt = '<div class="pagenav_line"><ul>' . $txt . '</ul></div>';
 		return $txt;

@@ -10,8 +10,8 @@
 defined('_VALID_MOS') or die();
 global $database, $mosConfig_offset, $mosConfig_live_site, $option, $task, $mainframe;
 $count = intval($params->get('count', 5));
-$catid = trim($params->get('catid'));
 $secid = trim($params->get('secid'));
+$catid = trim($params->get('catid'));
 $id = intval(mosGetParam($_REQUEST, 'id', null));
 $now = _CURRENT_SERVER_TIME;
 $nullDate = $database->getNullDate();
@@ -35,7 +35,7 @@ if ($option == 'com_content' && $task == 'view' && $id) {
 		if (count($likes)) {
 /* select other items based on the metakey field 'like' the keys found */
 /* add STRAIGHT_JOIN */
-			$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.sectionid, a.catid, a.created, cc.access AS cat_access, s.access AS sec_access, cc.published AS cat_state, s.published AS sec_state"
+			$query = "SELECT STRAIGHT_JOIN a.id, a.sectionid, a.catid, a.title, a.created, cc.access AS cat_access, s.access AS sec_access, cc.published AS cat_state, s.published AS sec_state"
 			. "\n FROM #__content AS a"
 			. "\n LEFT JOIN #__content_frontpage AS f ON f.content_id = a.id"
 			. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
@@ -72,10 +72,11 @@ foreach ($related as $item) {
 	if ($option == 'com_content' && $task == 'view' && $id && $Itemid) {
 		$Itemid = $mainframe->getItemid($row->id, 0, 0, $bs, $bc, $gbs);
 	}
-	$href = sefRelToAbs('index.php?option=com_content&amp;task=view&amp;id='.$item->id.'&amp;Itemid='.$Itemid);
+	$link = 'index.php?option=com_content&amp;task=view&amp;id='.$item->id.'&amp;Itemid='.$Itemid;
+	$link = sefRelToAbs($link);
 ?>
 	<li>
-		<h5><a href="<?php echo $href; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title; ?></a></h5>
+		<h5><a href="<?php echo $link; ?>" title="<?php echo $item->title; ?>"><?php echo $item->title; ?></a></h5>
 	</li>
 	<?php } ?>
 </ul>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <mosinstall type="module" version="1.0.0">
 <name>Последние новости</name>
 <author>Joostina! Project</author>
@@ -31,6 +31,10 @@
 </param>
 <param name="@spacer" type="spacer" default="" label="" description="" />
 <param name="show_front" type="radio" default="1" label="Объекты главной страницы" description="Показать/скрыть объекты, предназначенные для главной страницы. Эта опция работает, если выбран режим - Только содержимое объектов">
+<option value="1">Показать</option>
+<option value="0">Скрыть</option>
+</param>
+<param name="show_date" type="radio" default="1" label="Show Created Date Time" description="Select whether to show created date of the content of this module">
 <option value="1">Показать</option>
 <option value="0">Скрыть</option>
 </param>

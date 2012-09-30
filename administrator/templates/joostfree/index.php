@@ -11,20 +11,44 @@
 defined('_VALID_MOS') or die();
 $iso = explode('=', _ISO);
 $cur_file_img_path = $mosConfig_live_site.'/'.ADMINISTRATOR_DIRECTORY.'/templates/joostfree/images';
-echo '<!DOCTYPE html>';
-echo "\n";
-echo '<?xml version="1.0" encoding="'.$iso[1].'"?>';
-echo "\n";
+echo '<!DOCTYPE html>' . "\n";
+echo '<?xml version="1.0" encoding="'.$iso[1].'"?>' . "\n";
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title><?php echo $mosConfig_sitename;?> - <?php echo _JOOSTINA_CONTRL_PANEL;?></title>
 <meta http-equiv="Content-Type" content="text/html; <?php echo _ISO;?>" />
-<link rel="icon" type="image/png" href="<?php echo $mosConfig_live_site;?>/favicon.png" />
-<!--[if IE]>
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo $mosConfig_live_site;?>/favicon.ico" />
-<![endif]-->
-<link rel="apple-touch-icon" href="<?php echo $mosConfig_live_site;?>/apple-touch-icon.png" />
+<?php
+// favourites icon
+	if (!$mosConfig_disable_favicon) {
+			global $mosConfig_favicon_ie, $mosConfig_disable_favicon_ie, $mosConfig_favicon_ipad, $mosConfig_disable_favicon_ipad;
+		if ($mosConfig_favicon) {
+			$icon = 'favicon.png';
+		}
+echo '<link rel="icon" href="' . $icon . '" />' . "\n";
+	}
+	if (!$mosConfig_disable_favicon_ie) {
+		if ($mosConfig_favicon_ie) {
+			$icon_ie = 'favicon.ico';
+		}
+echo '<link rel="shortcut icon" href="' . $icon_ie . '" />' . "\n";
+	}
+	if (!$mosConfig_disable_favicon_ipad) {
+		if ($mosConfig_favicon_ipad) {
+			$mosConfig_favicon_ipad = 'apple-touch-icon.png';
+			$icon_ipad = 'apple-touch-icon.png';
+			$icon_ipad_57 = 'apple-touch-icon-57x57.png';
+			$icon_ipad_72 = 'apple-touch-icon-72x72.png';
+			$icon_ipad_114 = 'apple-touch-icon-114x114.png';
+			$icon_ipad_144 = 'apple-touch-icon-144x144.png';
+		}
+echo '<link rel="apple-touch-icon" href="'.$icon_ipad.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="57x57" href="'.$icon_ipad_57.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="72x72" href="'.$icon_ipad_72.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="114x114" href="'.$icon_ipad_114.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="144x144" href="'.$icon_ipad_144.'" />' . "\n";
+	}
+?>
 <?php
 /* подключаем fullajax */
 mosCommonHTML::loadFullajax();

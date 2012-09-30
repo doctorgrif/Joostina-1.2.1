@@ -36,7 +36,6 @@ switch ($task) {
 		listWeblinks($catid);
 		break;
 }
-
 function listWeblinks($catid) {
 	global $mainframe, $database, $my;
 	global $mosConfig_live_site;
@@ -45,11 +44,17 @@ function listWeblinks($catid) {
 	$currentcat = null;
 	if ($catid) {
 // url links info for category
-		$query = "SELECT id, url, title, description, date, hits, params FROM #__weblinks WHERE catid = " . (int) $catid . "\n AND published = 1 AND archived = 0" . "\n ORDER BY ordering";
+		$query = "SELECT STRAIGHT_JOIN id, url, title, description, date, hits, params"
+		. "\n FROM #__weblinks"
+		. "\n WHERE catid = " . (int) $catid
+		. "\n AND published = 1 AND archived = 0"
+		. "\n ORDER BY ordering";
 		$database->setQuery($query);
 		$rows = $database->loadObjectList();
 // current cate info
-		$query = "SELECT* FROM #__categories WHERE id = " . (int) $catid . "\n AND published = 1 AND access <= " . (int) $my->gid;
+		$query = "SELECT * FROM #__categories"
+		. "\n WHERE id = " . (int) $catid
+		. "\n AND published = 1 AND access <= " . (int) $my->gid;
 		$database->setQuery($query);
 		$database->loadObject($currentcat);
 		/* Check if the category is published or if access level allows access */
@@ -60,9 +65,12 @@ function listWeblinks($catid) {
 	}
 	/* Query to retrieve all categories that belong under the web links section and that are published. */
 	$query = "SELECT STRAIGHT_JOIN cc.*, a.catid, a.title, a.url, COUNT(a.id) AS numlinks"
-			. "\n FROM #__categories AS cc LEFT JOIN #__weblinks AS a ON a.catid = cc.id"
-			. "\n WHERE a.published = 1" . "\n AND section = 'com_weblinks' AND cc.published = 1"
-			. "\n AND cc.access <= " . (int) $my->gid . "\n GROUP BY cc.id"
+			. "\n FROM #__categories AS cc"
+			. "\n LEFT JOIN #__weblinks AS a ON a.catid = cc.id"
+			. "\n WHERE a.published = 1"
+			. "\n AND section = 'com_weblinks' AND cc.published = 1"
+			. "\n AND cc.access <= " . (int) $my->gid
+			. "\n GROUP BY cc.id"
 			. "\n ORDER BY cc.ordering";
 	$database->setQuery($query);
 	$categories = $database->loadObjectList();
@@ -142,10 +150,8 @@ function listWeblinks($catid) {
 	}
 	HTML_weblinks::displaylist($categories, $rows, $catid, $currentcat, $params, $tabclass);
 }
-
 function showItem($id) {
 	global $database, $my, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
-
 	$link = new mosWeblink($database);
 	$link->load((int) $id);
 	/* Check if link is published */
@@ -166,7 +172,9 @@ function showItem($id) {
 		return;
 	}
 // Record the hit
-	$query = "UPDATE #__weblinks SET hits = hits + 1 WHERE id = " . (int) $id;
+	$query = "UPDATE #__weblinks"
+		. "\n SET hits = hits + 1"
+		. "\n WHERE id = " . (int) $id;
 	$database->setQuery($query);
 	$database->query();
 	if ($link->url) {
@@ -196,7 +204,6 @@ function showItem($id) {
 		$mainframe->addMetaTag('keywords', $mosConfig_MetaKeys);
 	}
 }
-
 function editWebLink($id, $option) {
 	global $database, $my;
 	if ($my->gid < 1) {
@@ -204,8 +211,11 @@ function editWebLink($id, $option) {
 		return;
 	}
 // security check to see if link exists in a menu
-	$link = 'index.php?option=com_weblinks&task=new';
-	$query = "SELECT id" . "\n FROM #__menu" . "\n WHERE link LIKE '%$link%'" . "\n AND published = 1";
+	$link = 'index.php?option=com_weblinks&amp;task=new';
+	$query = "SELECT id"
+	. "\n FROM #__menu"
+	. "\n WHERE link LIKE '%$link%'"
+	. "\n AND published = 1";
 	$database->setQuery($query);
 	$exists = $database->loadResult();
 	if (!$exists) {
@@ -231,7 +241,6 @@ function editWebLink($id, $option) {
 	$lists['catid'] = mosAdminMenus::ComponentCategory('catid', $option, intval($row->catid));
 	HTML_weblinks::editWeblink($option, $row, $lists);
 }
-
 function cancelWebLink() {
 	global $database, $my;
 	if ($my->gid < 1) {
@@ -244,7 +253,6 @@ function cancelWebLink() {
 	$referer = strval(mosGetParam($_POST, 'referer', ''));
 	mosRedirect($referer);
 }
-
 /**
 * Saves the record on an edit form submit
 * @param database A database connector object
@@ -257,7 +265,10 @@ function saveWeblink() {
 	}
 // security check to see if link exists in a menu
 	$link = 'index.php?option=com_weblinks&task=new';
-	$query = "SELECT id" . "\n FROM #__menu" . "\n WHERE link LIKE '%$link%'" . "\n AND published = 1";
+	$query = "SELECT id"
+	. "\n FROM #__menu"
+	. "\n WHERE link LIKE '%$link%'"
+	. "\n AND published = 1";
 	$database->setQuery($query);
 	$exists = $database->loadResult();
 	if (!$exists) {
@@ -289,7 +300,10 @@ function saveWeblink() {
 // admin users gid
 	$gid = 25;
 // list of admins
-	$query = "SELECT email, name" . "\n FROM #__users" . "\n WHERE gid = " . (int) $gid . "\n AND sendEmail = 1";
+	$query = "SELECT email, name"
+	. "\n FROM #__users"
+	. "\n WHERE gid = " . (int) $gid
+	. "\n AND sendEmail = 1";
 	$database->setQuery($query);
 	if (!$database->query()) {
 		echo $database->stderr(true);

@@ -19,12 +19,12 @@ class HTML_contact {
 		global $Itemid, $mosConfig_live_site, $hide_js;
 		if ($params->get('page_title')) {
 ?>
-<div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>"><?php echo $currentcat->header; ?></div>
+<div class="componentheading"><?php echo $currentcat->header; ?></div>
 	<?php } ?>
 	<form action="index.php" method="post" name="adminForm">
-		<table cellpadding="4" cellspacing="0" class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
+		<table cellpadding="4" cellspacing="0" class="contentpane">
 			<tr>
-				<td width="60%" class="contentdescription<?php echo $params->get('pageclass_sfx'); ?>" colspan="2">
+				<td width="60%" class="contentdescription" colspan="2">
 				<?php if ($currentcat->img) { ?>
 					<img src="<?php echo $currentcat->img; ?>" align="<?php echo $currentcat->align; ?>" alt="<?php echo _WEBLINKS_TITLE; ?>" />
 				<?php } echo $currentcat->descrip; ?>
@@ -66,18 +66,18 @@ class HTML_contact {
 		<table>
 		<?php if ($params->get('headings')) { ?>
 			<tr>
-				<td class="sectiontableheader<?php echo $params->get('pageclass_sfx'); ?>"><?php echo _CONTACT_HEADER_NAME; ?></td>
+				<td class="sectiontableheader"><?php echo _CONTACT_HEADER_NAME; ?></td>
 				<?php if ($params->get('position')) { ?>
-				<td class="sectiontableheader<?php echo $params->get('pageclass_sfx'); ?>"><?php echo _CONTACT_HEADER_POS; ?></td>
+				<td class="sectiontableheader"><?php echo _CONTACT_HEADER_POS; ?></td>
 				<?php } ?>
 				<?php if ($params->get('email')) { ?>
-				<td class="sectiontableheader<?php echo $params->get('pageclass_sfx'); ?>"><?php echo _CONTACT_HEADER_EMAIL; ?></td>
+				<td class="sectiontableheader"><?php echo _CONTACT_HEADER_EMAIL; ?></td>
 				<?php } ?>
 				<?php if ($params->get('telephone')) { ?>
-				<td class="sectiontableheader<?php echo $params->get('pageclass_sfx'); ?>"><?php echo _CONTACT_HEADER_PHONE; ?></td>
+				<td class="sectiontableheader"><?php echo _CONTACT_HEADER_PHONE; ?></td>
 				<?php } ?>
 				<?php if ($params->get('fax')) { ?>
-				<td class="sectiontableheader<?php echo $params->get('pageclass_sfx'); ?>"><?php echo _CONTACT_HEADER_FAX; ?></td>
+				<td class="sectiontableheader"><?php echo _CONTACT_HEADER_FAX; ?></td>
 				<?php } ?>
 			</tr>
 			<?php
@@ -123,14 +123,14 @@ class HTML_contact {
 		if ($catid == $cat->catid) {
 ?>
 	<li>
-		<strong><?php echo $cat->title; ?></strong> <span class="small<?php echo $params->get('pageclass_sfx'); ?>">(<?php echo $cat->numlinks; ?>)</span>
+		<strong><?php echo $cat->title; ?></strong> <span class="small">(<?php echo $cat->numlinks; ?>)</span>
 	</li>
 	<?php } else {
 		$link = 'index.php?option=com_contact&amp;catid=' . $cat->catid . '&amp;Itemid=' . $Itemid; ?>
 	<li>
-		<a href="<?php echo sefRelToAbs($link); ?>" class="category<?php echo $params->get('pageclass_sfx'); ?>" title="<?php echo $cat->title; ?>"><?php echo $cat->title; ?></a>
+		<a href="<?php echo sefRelToAbs($link); ?>" class="category" title="<?php echo $cat->title; ?>"><?php echo $cat->title; ?></a>
 	<?php if ($params->get('cat_items')) { ?>
-		&nbsp;<span class="small<?php echo $params->get('pageclass_sfx'); ?>">(<?php echo $cat->numlinks; ?>)</span>
+		&nbsp;<span class="small">(<?php echo $cat->numlinks; ?>)</span>
 	<?php } ?>
 	<?php
 // Writes Category Description
@@ -188,23 +188,25 @@ class HTML_contact {
 			}
 			if ($menu_params->get('page_title')) {
 				?>
-<div class="componentheading<?php echo $menu_params->get('pageclass_sfx'); ?>"><?php echo $menu_params->get('header'); ?></div>
+<div class="componentheading"><?php echo $menu_params->get('header'); ?></div>
 				<?php
 			}
 			?>
-<table class="contentpane<?php echo $menu_params->get('pageclass_sfx'); ?>">
+<div class="contentpane">
 		<?php
 		// displays Page Title
 		HTML_contact::_writePageTitle($params, $menu_params);
 		// displays Contact Select box
 		HTML_contact::_writeSelectContact($contact, $params, $count);
+		?>
+		<div id="ddtags" class="contact" itemscope itemtype="http://schema.org/Person">
+		<?php
 		// displays Name & Positione
 		HTML_contact::_writeContactName($contact, $params, $menu_params);
-		?>
-	<tr>
-		<td>
-			<div class="contact">
-		<?php
+		// displays Image
+		echo '<div class="contact-img">';
+		HTML_contact::_writeImage($contact, $params);
+		echo '</div>';
 		// displays Address
 		HTML_contact::_writeContactAddress($contact, $params);
 		// displays Email & Telephone
@@ -215,25 +217,13 @@ class HTML_contact {
 		HTML_contact::_writeContactMisc($contact, $params);
 		?>
 			</div>
-		</td>
-		<td>
-			<div class="contact-img">
-				<?php
-				// displays Image
-				HTML_contact::_writeImage($contact, $params);
-				?>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td>
+	<div>
 		<?php
 		// displays Email Form
 		HTML_contact::_writeEmailForm($contact, $params, $sitename, $menu_params);
 		?>
-		</td>
-	</tr>
-</table>
+	</div>
+</div>
 		<?php
 // display Close button in pop-up window
 		mosHTML::CloseButton($params, $hide_js);
@@ -246,7 +236,7 @@ class HTML_contact {
 		if ($params->get('page_title') && !$params->get('popup')) {
 			?>
 <tr>
-	<td class="componentheading<?php echo $menu_params->get('pageclass_sfx'); ?>">
+	<td class="componentheading">
 		<?php echo $params->get('header'); ?>
 	</td>
 </tr>
@@ -270,30 +260,21 @@ class HTML_contact {
 			<?php
 		}
 	}
-
 	/** Writes Name & Position */
 	function _writeContactName(&$contact, &$params, &$menu_params) {
 		global $Itemid, $hide_js, $mosConfig_live_site;
 		if ($contact->name || $contact->con_position) {
 			if ($contact->name && $params->get('name')) {
 				?>
-<tr>
-	<td>
-		<div class="contentheading<?php echo $params->get('pageclass_sfx'); ?> col_90">
-			<h1><?php echo $contact->name; ?></h1>
-		</div>
-		<div class="col_10">
-			<ul class="buttonheading">
-				<?php
-				// displays Print Icon
-					$print_link = $mosConfig_live_site . '/index2.php?option=com_contact&amp;task=view&amp;contact_id=' . $contact->id . '&amp;Itemid=' . $Itemid . '&amp;pop=1';
-					mosHTML::PrintIcon($contact, $params, $hide_js, $print_link);
-				?>
-			</ul>
-		</div>
-	</td>
-</tr>
-				<?php
+<h2 itemprop="name"><?php echo $contact->name; ?></h2>
+<ul class="buttonheading">
+<?php
+	// displays Print Icon
+	$print_link = $mosConfig_live_site . '/index2.php?option=com_contact&amp;task=view&amp;contact_id=' . $contact->id . '&amp;Itemid=' . $Itemid . '&amp;pop=1';
+	mosHTML::PrintIcon($contact, $params, $hide_js, $print_link);
+?>
+</ul>
+	<?php
 			}
 		}
 	}
@@ -304,10 +285,8 @@ class HTML_contact {
 		if ($contact->image && $params->get('image')) {
 			?>
 			<figure>
-				<img src="<?php echo $mosConfig_live_site; ?>/images/stories/<?php echo $contact->image; ?>" alt="<?php echo _CONTACT_TITLE; ?>" />
-				<figcaption>
-					<p><?php echo $contact->name; ?></p>
-				</figcaption>
+				<img src="<?php echo $mosConfig_live_site; ?>/images/stories/<?php echo $contact->image; ?>" alt="<?php echo _CONTACT_TITLE; ?>" itemprop="image" />
+				<figcaption><?php echo $contact->name; ?></figcaption>
 			</figure>
 				<?php
 			}
@@ -317,34 +296,26 @@ class HTML_contact {
 	function _writeContactAddress(&$contact, &$params) {
 		if (($params->get('address_check') > 0) && ($contact->con_position || $contact->address || $contact->suburb || $contact->state || $contact->country || $contact->postcode)) {
 				?>
-<ul>
+<dl>
 	<?php if ($contact->con_position && $params->get('position')) { ?>
-	<li>
-		<p>
-			<span class="contact-type col_33"><?php echo $params->get('marker_position'); ?></span> 
-			<span class="contact-item col_66"><?php echo $contact->con_position; ?></span>
-		</p>
-	</li>
+			<dt class="contact-type"><?php echo $params->get('marker_position'); ?></dt> 
+			<dd class="contact-item" itemprop="jobTitle"><?php echo $contact->con_position; ?></dd>
 	<?php } ?>
-	<li>
-		<p>
 			<?php if ($params->get('address_check') > 0) { ?>
-			<span class="contact-type col_33"><?php echo $params->get('marker_address'); ?></span>
-			<span class="contact-item col_66">
-				<?php echo $contact->postcode; ?><br />
+			<dt class="contact-type"><?php echo $params->get('marker_address'); ?></dt>
+			<dd class="contact-item" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+				<span itemprop="postalCode"><?php echo $contact->postcode; ?></span>,
 			<?php } if ($contact->country && $params->get('country')) { ?>
-				<?php echo $contact->country; ?><br />
+				<span itemprop="addressCountry"><?php echo $contact->country; ?></span>,
 			<?php } if ($contact->state && $params->get('state')) { ?>
-				<?php echo $contact->state; ?><br />
+				<span itemprop="addressRegion"><?php echo $contact->state; ?></span>,
 			<?php } if ($contact->suburb && $params->get('suburb')) { ?>
-				<?php echo $contact->suburb; ?><br />
+				<span itemprop="addressLocality"><?php echo $contact->suburb; ?></span>,
 			<?php if ($contact->address && $params->get('street_address')) { ?>
-				<?php echo $contact->address; ?><br />
-			</span>
+				<span itemprop="streetAddress"><?php echo $contact->address; ?></span>
+			</dd>
 			<?php } ?>
 			<?php } ?>
-		</p>
-	</li>
 	<?php
 					}
 				}
@@ -354,26 +325,14 @@ class HTML_contact {
 		if ($contact->email_to || $contact->telephone || $contact->fax) {
 						?>
 	<?php if ($contact->email_to && $params->get('email')) { ?>
-	<li>
-		<p>
-			<span class="contact-type col_33"><?php echo $params->get('marker_email'); ?></span>
-			<span class="contact-item col_66"><?php echo $contact->email; ?></span>
-		</p>
-	</li>
+			<dt class="contact-type"><?php echo $params->get('marker_email'); ?></dt>
+			<dd class="contact-item" itemprop="email"><?php echo $contact->email; ?></dd>
 	<?php } if ($contact->telephone && $params->get('telephone')) { ?>
-	<li>
-		<p>
-			<span class="contact-type col_33"><?php echo $params->get('marker_telephone'); ?></span>
-			<span class="contact-item col_66"><?php echo $contact->telephone; ?></span>
-		</p>
-	</li>
+			<dt class="contact-type"><?php echo $params->get('marker_telephone'); ?></dt>
+			<dd class="contact-item" itemprop="telephone"><?php echo $contact->telephone; ?></dd>
 	<?php } if ($contact->fax && $params->get('fax')) { ?>
-	<li>
-		<p>
-			<span class="contact-type col_33"><?php echo $params->get('marker_fax'); ?></span>
-			<span class="contact-item col_66"><?php echo $contact->fax; ?></span>
-		</p>
-	</li>
+			<dt class="contact-type"><?php echo $params->get('marker_fax'); ?></dt>
+			<dd class="contact-item"><?php echo $contact->fax; ?></dd>
 	<?php } ?>
 			<?php
 		}
@@ -383,12 +342,8 @@ class HTML_contact {
 	function _writeVcard(&$contact, &$params) {
 		if ($params->get('vcard')) {
 			?>
-	<li>
-		<p>
-			<span class="contact-type col_33"><?php echo $params->get('marker_vcard'); ?></span>
-			<span class="contact-item col_66"><?php echo (_CONTACT_DOWNLOAD_AS); ?> <a href="index2.php?option=com_contact&amp;task=vcard&amp;contact_id=<?php echo $contact->id; ?>&amp;no_html=1"><?php echo (_VCARD); ?></a></span>
-		</p>
-	</li>
+			<dt class="contact-type"><?php echo $params->get('marker_vcard'); ?></dt>
+			<dd class="contact-item"><?php echo _CONTACT_DOWNLOAD_AS; ?> <a href="<?php echo sefRelToAbs('index2.php?option=com_contact&amp;task=vcard&amp;contact_id=' .$contact->id . '&amp;no_html=1');?>"><?php echo _VCARD; ?></a></dd>
 							<?php
 						}
 					}
@@ -397,12 +352,8 @@ class HTML_contact {
 	function _writeContactMisc(&$contact, &$params) {
 		if ($contact->misc && $params->get('misc')) {
 			?>
-	<li>
-		<p>
-			<span class="contact-type col_33"><?php echo $params->get('marker_misc'); ?></span>
-			<span class="contact-item col_66"><?php echo $contact->misc; ?></span>
-		</p>
-	</li>
+			<dt class="contact-type"><?php echo $params->get('marker_misc'); ?></dt>
+			<dd class="contact-item"><?php echo $contact->misc; ?></dd>
 			<?php
 		}
 	}
@@ -413,7 +364,8 @@ class HTML_contact {
 		// used for spoof hardening
 			$validate = josSpoofValue();
 			?>
-<div id="contact<?php echo $menu_params->get('pageclass_sfx'); ?>">
+</dl>
+<div id="contact">
 	<form method="post" action="<?php echo sefRelToAbs('index.php?option=com_contact&amp;Itemid=' . $Itemid); ?>" name="emailForm" target="_top" class="form" id="emailForm">
 		<fieldset>
 		<legend><h5><?php echo _SEND_EMAIL_CONTACT;?> <?php echo $contact->name; ?></h5></legend>

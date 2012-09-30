@@ -23,16 +23,14 @@ class poll_html {
 			<?php
 			if ($params->get('page_title')) {
 				?>
-		<div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>">
-			<?php echo $params->get('header'); ?>
-		</div>
+		<div class="componentheading"><?php echo $params->get('header'); ?></div>
 				<?php
 			}
 			?>
-		<div class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
+		<div class="contentpane">
 			<div id="id">
 				<label for="id"><?php echo _SEL_POLL; ?></label>
-				<div><?php echo $pollist; ?></div>
+				<?php echo $pollist; ?>
 			</div>
 				<?php
 				if ($votes) {
@@ -54,7 +52,6 @@ class poll_html {
 		<?php
 		mosHTML::BackButton($params);
 	}
-
 	function graphit($data_arr, $graphtitle, $first_vote, $last_vote) {
 		global $mosConfig_live_site, $polls_maxcolors, $tabclass, $polls_barheight, $polls_graphwidth, $polls_barcolor;
 		$tabclass_arr = explode(',', $tabclass);
@@ -92,9 +89,9 @@ class poll_html {
 				}
 				?>
 	<tr class="<?php echo $tabclass_arr[$tabcnt]; ?>">
-		<td class="question"><?php echo stripslashes($text); ?></td>
-		<td class="hits"><?php echo $hits; ?></td>
-		<td class="percent"><?php echo $percent; ?></td>
+		<td class="question"><p><?php echo stripslashes($text); ?></p></td>
+		<td class="hits"><p><?php echo $hits; ?></p></td>
+		<td class="percent"><p><?php echo $percent; ?></p></td>
 					<?php
 					$tdclass = '';
 					if ($polls_barcolor == 0) {
@@ -109,7 +106,9 @@ class poll_html {
 					}
 					?>
 		<td class="graph">
-			<img src="<?php echo $mosConfig_live_site; ?>/templates/newline/i/c/poll/blank.png" class="<?php echo $tdclass; ?>" height="<?php echo $polls_barheight; ?>" width="<?php echo $width; ?>" alt="" />
+			<figure>
+				<img src="<?php echo $mosConfig_live_site; ?>/templates/joostina/i/c/poll/blank.png" class="<?php echo $tdclass; ?>" height="<?php echo $polls_barheight; ?>" width="<?php echo $width; ?>" alt="" />
+			</figure>
 		</td>
 	</tr>
 				<?php

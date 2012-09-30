@@ -20,7 +20,7 @@ $templatefolder = @dir($template_path);
 $darray = array();
 if ($templatefolder) {
 	while ($templatefile = $templatefolder->read()) {
-	if ($templatefile != "." && $templatefile != ".." && $templatefile != ".svn" && $templatefile != "css" && is_dir($template_path.'/'.$templatefile)) {
+	if ($templatefile != '.' && $templatefile != '..' && $templatefile != '.svn' && $templatefile != 'css' && is_dir($template_path.'/'.$templatefile)) {
 		if (strlen($templatefile) > $titlelength) {
 		$templatename = mb_substr($templatefile, 0, $titlelength - 3);
 		$templatename .= '…';

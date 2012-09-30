@@ -11,11 +11,11 @@ defined('_VALID_MOS') or die();
 global $mosConfig_offset, $mosConfig_live_site, $my;
 $type = intval($params->get('type', 1));
 $count = intval($params->get('count', 5));
-$catid = trim($params->get('catid'));
 $secid = trim($params->get('secid'));
-$noncss = intval($params->get('noncss', 1));
+$catid = trim($params->get('catid'));
+//$noncss = intval($params->get('noncss', 1));
 $show_front = $params->get('show_front', 1);
-$show_hits = $params->get('show_hits', 0);
+$show_hits = $params->get('show_hits', 1);
 $def_itemid = $params->get('def_itemid', false);
 $now = _CURRENT_SERVER_TIME;
 $access = !$mainframe->getCfg('shownoauth');
@@ -36,10 +36,10 @@ switch ($type) {
 	break;
 	case 3:
 // Оба типа
-	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.hits, a.sectionid, a.catid, cc.access AS cat_access, s.access AS sec_access, cc.published AS cat_state, s.published AS sec_state"
+	$query = "SELECT STRAIGHT_JOIN a.sectionid, a.id, a.title, a.hits"
 	. "\n FROM #__content AS a"
-	. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
 	. "\n LEFT JOIN #__sections AS s ON s.id = a.sectionid"
+	. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
 	. "\n WHERE a.state = 1"
 	. "\n AND ( a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . " )"
 	. "\n AND ( a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . " )"
@@ -72,7 +72,7 @@ switch ($type) {
 			mosArrayToInts($secids);
 			$whereSecid = "\n AND ( a.sectionid=" . implode(" OR a.sectionid=", $secids) . " )";
 		}
-	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.sectionid, a.catid, a.hits"
+	$query = "SELECT STRAIGHT_JOIN a.sectionid, a.catid, a.id, a.title, a.hits"
 	. "\n FROM #__content AS a"
 	. "\n LEFT JOIN #__content_frontpage AS f ON f.content_id = a.id"
 	. "\n INNER JOIN #__categories AS cc ON cc.id = a.catid"
@@ -91,38 +91,34 @@ switch ($type) {
 	$rows = $database->loadObjectList();
 		break;
 }
-if (!$def_itemid > 0) {
-// требование уменьшить запросы, используемые getItemid для объектов содержимого
-	if (($type == 1) || ($type == 3)) {
-		$bs = $mainframe->getBlogSectionCount();
-		$bc = $mainframe->getBlogCategoryCount();
-		$gbs = $mainframe->getGlobalBlogSectionCount();
-	}
-}
 // Вывод
 ?>
 <ul class="mostread">
 <?php
 foreach ($rows as $row) {
 	if (!$def_itemid > 0) {
+	// требование уменьшить запросы, используемые getItemid для объектов содержимого
+		if (($type == 1) || ($type == 3)) {
+			$bs = $mainframe->getBlogSectionCount();
+			$bc = $mainframe->getBlogCategoryCount();
+			$gbs = $mainframe->getGlobalBlogSectionCount();
+		}
 // получаем Itemid
 	switch ($type) {
 		case 2:
-			$query = "SELECT id"
-			. "\n FROM #__menu"
-			. "\n WHERE type = 'content_typed'"
-			. "\n AND componentid = " . (int) $row->id;
+		if ($row->catid) {
+			$Itemid = $mainframe->getItemid($row->id, 0, 0, $bs, $bc, $gbs);
+		} else {
+			$query = "SELECT id FROM #__menu WHERE type = 'content_typed' AND componentid = " . (int) $row->id;
 			$database->setQuery($query);
 			$Itemid = $database->loadResult();
+		}
 		break;
 		case 3:
 		if ($row->sectionid) {
 			$Itemid = $mainframe->getItemid($row->id, 0, 0, $bs, $bc, $gbs);
 		} else {
-			$query = "SELECT id"
-			. "\n FROM #__menu"
-			. "\n WHERE type = 'content_typed'"
-			. "\n AND componentid = " . (int) $row->id;
+			$query = "SELECT id FROM #__menu WHERE type = 'content_typed' AND componentid = " . (int) $row->id;
 			$database->setQuery($query);
 			$Itemid = $database->loadResult();
 		}
@@ -141,12 +137,16 @@ foreach ($rows as $row) {
 		} else {
 			$Itemid = '&amp;Itemid='.$Itemid;
 		}
-		$link = sefRelToAbs('index.php?option=com_content&amp;task=view&amp;id='.$row->id . $Itemid);
+		$link = 'index.php?option=com_content&amp;task=view&amp;id='.$row->id . $Itemid;
+		$link = sefRelToAbs($link);
 	?>
 	<li>
-		<a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>">
-			<?php echo $row->title; ?>
-		</a>
+		<p><a href="<?php echo $link; ?>" title="<?php echo $row->title; ?>"><?php echo $row->title; ?></a>
+		<?php
+		if ($show_hits) {
+			echo ' <span class="introdate">' . (($row->hits) ? ' (' . $row->hits . ')' : '') . '</span>';
+		}
+		?></p>
 	</li>
 	<?php } ?>
 </ul>

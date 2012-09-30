@@ -30,7 +30,7 @@ switch($mosConfig_db_cache_handler) {
 		break;
 	// использование кэша memcache
 	case 'memcache':
-		require_once('storage/memcache.php');
+		require_once('storage/Memcache.php');
 		require_once('database/database.cache.php');
 		break;
 	// использование xcache

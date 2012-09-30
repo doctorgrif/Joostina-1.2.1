@@ -22,13 +22,12 @@ class Cache_Lite_Function extends Cache_Lite {
 		$this->Cache_Lite($options);
 	}
 	function call() {
-		/* ׁמגלוסעטלמסעü ס php 5.3 */
-		//$arguments = func_get_args(); 
-		//$numargs = func_num_args(); 
-		//for($i=1; $i < $numargs; $i++){ 
-		//$arguments[$i] = &$arguments[$i]; 
-		//}
-		$arguments = func_get_args();
+		//$arguments = func_get_args(); //php 5.2
+		$arguments = func_get_args(); //php 5.3
+		$numargs = func_num_args();
+		for($i=1; $i < $numargs; $i++){
+		$arguments[$i] = &$arguments[$i];
+		}
 		$id = serialize($arguments);
 		if(!$this->_fileNameProtection) {
 			$id = md5($id);

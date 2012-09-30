@@ -1,6 +1,5 @@
-<Files .*>
-order allow,deny 
-deny from all 
-</Files> 
-AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
-Options -ExecCGI
+<FilesMatch \.(bmp|png|gif|jpe?g|ico|swf|flv|pdf|tiff)$>
+    Header append Cache-Control public
+    ExpiresActive On
+    ExpiresDefault "access plus 10 years"
+</FilesMatch>

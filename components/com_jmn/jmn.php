@@ -9,7 +9,7 @@
 // запрет пр€мого доступа
 defined('_VALID_MOS') or die();
 $mainframe->SetPageTitle('<?php echo _MG_KEYEXTR;?>');
-$chars=array('Ч','У','"',',','.','-','?','Х',',','.',':','!','@','#','$','%','^','&','*','(',')','_','-','1','2','3','4','5','6','7','8','9','0','.',';','{','}','[',']','|','/','<','>','+','=');
+$chars = array('Ч', 'У', '"', ',', '.', '-', '?', 'Х', ',', '.', ':', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', ';', '{', '}', '[', ']', '|', '/', '<', '>', '+', '=');
 $result = '';
 if ($_POST['exclude'] == '') {
 	$compare = '';
@@ -112,7 +112,7 @@ if ($_POST[type] == '')
 			<td align="left"><select name="nlist">
 <?
 if ($_POST['nlist'])
-	echo '<option value="' . $_POST[nlist] . '">' . $_POST[nlist] _MG_W . '</option>'; //?
+	echo '<option value="' . $_POST[nlist] . '">' . $_POST[nlist] . ' ' ._MG_W . '</option>'; //?
 ?>
 					<option value="10"><?php echo _MG_10W; ?></option>
 					<option value="25"><?php echo _MG_25W; ?></option>

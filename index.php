@@ -281,33 +281,30 @@ if ($mosConfig_mmb_mainbody_off == 0) {
 }
 initGzip();
 /* при активном кэшировании отправим браузеру более "правильные" заголовки */
-if (!$mosConfig_caching) {
-/* не кэшируется */
-	header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
-	//header('Expires: '.date('r', $_SERVER['REQUEST_TIME']));
-	header('Expires: Thu, 31 Dec 2020 20:00:00 GMT');
+if (!$mosConfig_caching) { // не кэшируется
+	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Cache-Control: post-check=0, pre-check=0',false);
+	if ($option == 'logout' or $option == 'login') {
+		header('Cache-control: private');
+	} else { 
+		header('Cache-control: public');
+	}
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+	header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 	header('Pragma: no-cache');
-} else if ($option != 'logout' or $option != 'login') {
-/* кэшируется */
-// get the last-modified-date of this very file
-	$lastModified = filemtime($_SERVER['REQUEST_URI']);
-// get a unique hash of this file (etag)
-	$etagFile = md5($_SERVER['REQUEST_URI']);
-// get the HTTP_IF_MODIFIED_SINCE header if set
-	$ifModifiedSince = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : false);
-// get the HTTP_IF_NONE_MATCH header if set (etag: unique file hash)
-	$etagHeader = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? trim($_SERVER['HTTP_IF_NONE_MATCH']) : false);
-// set last-modified header
-	header('Last-Modified: '.gmdate('D, d M Y H:i:s', $lastModified).' GMT');
-// set etag-header
-	header('Etag: '.$etagFile);
-// make sure caching is turned on
-	header('Cache-Control: public');
-// check if page has changed. If not, send 304 and exit
-	if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $lastModified || $etagHeader == $etagFile)
-{
-	header('HTTP/1.1 304 Not Modified');
-	exit;
+} elseif ($option != 'logout' or $option != 'login') { // кэшируется
+ if(ereg("Firefox", $_SERVER["HTTP_USER_AGENT"])) { // если броузер - Firefox
+	header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Cache-Control: post-check=0, pre-check=0',false);
+	header('Pragma: no-cache');
+} else { // когда любой другой броузер
+	header('Cache-Control: max-age=3600');
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+	// 60*60=3600 - использования кэширования на 1 час
+	header('Expires: '.gmdate('D, d M Y H:i:s',time() + 3600).' GMT');
+	header('Pragma: ');
 }
 }
 // буферизация итогового содержимого, необходимо для шаблонов группы templates
@@ -320,6 +317,7 @@ if (!file_exists($mosConfig_absolute_path.'/templates/'.$cur_template.'/index.ph
 }
 $_MOS_OPTION['mainbody'] = ob_get_contents(); // главное содержимое - стек вывода компонента - mainbody
 ob_end_clean();
+flush();
 // активация мамботов группы mainbody
 if ($mosConfig_mmb_mainbody_off == 0) {
 	$_MAMBOTS->loadBotGroup('mainbody');
@@ -331,7 +329,7 @@ unset($_MAMBOTS, $mainframe);
 echo $_MOS_OPTION['mainbody'];
 // подсчет времени генерации страницы (время генерации видно только Super Administrator)
 // вывод лога отладки (лог отладки виден только Super Administrator)
-if ($mosConfig_time_gen &&$mosConfig_debug && $my->id == 62) {
+if ($mosConfig_time_gen && $mosConfig_debug /*&& $my->id == 62*/) {
 	list($usec, $sec) = explode(" ", microtime());
 	$sysstop = ((float) $usec + (float) $sec);
 // Расширенный отладчик:start

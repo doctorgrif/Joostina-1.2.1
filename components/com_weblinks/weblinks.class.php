@@ -16,7 +16,6 @@ defined('_VALID_MOS') or die();
 */
 class mosWeblink extends mosDBTable {
 	/** @var int Primary key */
-
 	var $id = null;
 	/** @var int */
 	var $catid = null;
@@ -47,11 +46,9 @@ class mosWeblink extends mosDBTable {
 	/** @var string */
 	var $params = null;
 	/** @param database A database connector object */
-
 	function mosWeblink(&$db) {
 		$this->mosDBTable('#__weblinks', 'id', $db);
 	}
-
 	/** overloaded check function */
 	function check() {
 // filter malicious code
@@ -72,8 +69,10 @@ class mosWeblink extends mosDBTable {
 			$this->url = 'http://' . $this->url;
 		}
 		/* check for existing name */
-		$query = "SELECT id" . "\n FROM #__weblinks " . "\n WHERE title = " . $this->_db->Quote($this->title) .
-				"\n AND catid = " . (int) $this->catid;
+		$query = "SELECT id"
+		. "\n FROM #__weblinks "
+		. "\n WHERE title = " . $this->_db->Quote($this->title)
+		. "\n AND catid = " . (int) $this->catid;
 		$this->_db->setQuery($query);
 		$xid = intval($this->_db->loadResult());
 		if ($xid && $xid != intval($this->id)) {

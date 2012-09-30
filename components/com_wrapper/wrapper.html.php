@@ -8,7 +8,6 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-
 /**
 * @package Joostina
 * @subpackage Wrapper
@@ -28,7 +27,7 @@ class HTML_wrapper {
 		}
 	}
 </script>
-<div class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
+<div class="contentpane">
 	<?php if ($params->get('page_title')) { ?>
 	<div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>"><?php echo $params->get('header'); ?></div>
 	<?php } ?>

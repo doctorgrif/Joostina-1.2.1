@@ -10,6 +10,4 @@
 defined('_VALID_MOS') or die();
 global $mosConfig_sitename, $mosConfig_live_site;
 ?>
-<div>
-	&copy; <?php echo date('Y'); ?> <a href="<?php echo $mosConfig_live_site; ?>" title="<?php echo $mosConfig_sitename; ?>"><?php echo $mosConfig_sitename; ?></a>
-</div>
+<p>&copy; <?php echo date('Y'); ?> <a href="<?php echo $mosConfig_live_site; ?>" title="<?php echo $mosConfig_sitename; ?>"><?php echo $mosConfig_sitename; ?></a></p>

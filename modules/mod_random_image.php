@@ -23,7 +23,7 @@ $s_fadeduration = $params->get('s_fadeduration', '500');
 $panel_height = $params->get('panel_height', '45px');
 $panel_opacity = $params->get('panel_opacity', '0.5');
 $panel_padding = $params->get('panel_padding', '5px');
-$panel_font = $params->get('panel_font', 'bold 11px Verdana');
+$panel_font = $params->get('panel_font', 'normal 16px georgia, times, serif');
 $the_array = array();
 $the_image = array();
 if ($s_autoplay) {

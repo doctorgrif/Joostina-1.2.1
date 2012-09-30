@@ -14,7 +14,6 @@ defined('_VALID_MOS') or die();
 * @subpackage Users
 */
 class loginHTML {
-
 	function loginpage(&$params, $image) {
 		global $mosConfig_lang;
 // used for spoof hardening
@@ -22,11 +21,9 @@ class loginHTML {
 		$return = $params->get('login');
 		?>
 <form action="<?php echo sefRelToAbs('index.php?option=login'); ?>" method="post" name="login" id="login">
-	<div class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
+	<div class="contentpane">
 		<?php if ($params->get('page_title')) { ?>
-		<div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>">
-			<?php echo $params->get('header_login'); ?>
-		</div>
+		<div class="componentheading"><?php echo $params->get('header_login'); ?></div>
 		<?php } ?>
 		<div>
 			<?php echo $image; ?>
@@ -35,13 +32,13 @@ class loginHTML {
 			<?php } ?>
 		</div>
 		<div id="username">
-			<label for="username"><?php echo _USERNAME; ?></label>
+			<label for="username" data-icon="u"><?php echo _USERNAME; ?></label>
 			<div>
 				<input name="username" id="username" type="text" class="inputbox" size="20" />
 			</div>
 		</div>
 		<div id="passwd">
-			<label for="passwd"><?php echo _PASSWORD; ?></label>
+			<label for="passwd" data-icon="p"><?php echo _PASSWORD; ?></label>
 			<div>
 				<input name="passwd" id="passwd" type="password" class="inputbox" size="20" />
 			</div>
@@ -84,11 +81,9 @@ class loginHTML {
 		$return = $params->get('logout');
 		?>
 <form action="<?php echo sefRelToAbs('index.php?option=logout'); ?>" method="post" name="login" id="login">
-	<div class="contentpane<?php echo $params->get('pageclass_sfx'); ?>">
+	<div class="contentpane">
 	<?php if ($params->get('page_title')) { ?>
-		<div class="componentheading<?php echo $params->get('pageclass_sfx'); ?>">
-			<?php echo $params->get('header_logout'); ?>
-		</div>
+		<div class="componentheading"><?php echo $params->get('header_logout'); ?></div>
 	<?php } ?>
 		<div>
 			<?php

@@ -8,7 +8,7 @@
 */
 // запрет прямого доступа
 defined('_VALID_MOS') or die();
-global $mosConfig_offset, $my, $moduleclass_sfx;
+global $mosConfig_offset, $my;
 $count = intval($params->get('count', 20));
 $access = !$mainframe->getCfg('shownoauth');
 $now = _CURRENT_SERVER_TIME;
@@ -45,7 +45,7 @@ if ($rows) {
 	$database->setQuery($query);
 	$itemids = $database->loadObjectList('sectionid');
 	?>
-<ul class="section<?php echo $moduleclass_sfx; ?>">
+<ul class="section">
 <?php
 	foreach ($rows as $row) {
 	if (isset($itemids[$row->id])) {

@@ -29,7 +29,8 @@ unset($params['type']);
 if(isset($params['numbers']) && defined($params['numbers'])) {
 $params['numbers'] = constant($params['numbers']);
 }
-$renderer = &new Text_Highlighter_Renderer_HTML($params);
+//$renderer = &new Text_Highlighter_Renderer_HTML($params); //php 5.2
+$renderer = new Text_Highlighter_Renderer_HTML($params); //php 5.3
 $highlighter = &Text_Highlighter::factory($type);
 $highlighter->setRenderer($renderer);
 return $highlighter->highlight(trim($content));

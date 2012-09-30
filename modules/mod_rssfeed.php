@@ -20,7 +20,6 @@ function output_rssfeed($link, $img_default, $img_file, $img_alt, $img_name) {
 }
 global $mosConfig_live_site, $mosConfig_absolute_path, $cur_template;
 $text = $params->get('text', '');
-$moduleclass_sfx = $params->get('moduleclass_sfx', '');
 $rss091 = $params->get('rss091', 1);
 $rss10 = $params->get('rss10', 1);
 $rss20 = $params->get('rss20', 1);
@@ -71,12 +70,12 @@ if (!$syndicateParams->get('yandex', 1)) {
 	$yandex = 0;
 }
 ?>
-<div class="rssfeed<?php echo $moduleclass_sfx; ?>">
+<div class="rssfeed">
 	<?php
 // текст
 	if ($text) {
 	?>
-	<div class="rssfeed_text<?php echo $moduleclass_sfx; ?>"><?php echo $text; ?></div>
+	<div class="rssfeed_text"><?php echo $text; ?></div>
 	<?php
 	}
 // Yandex

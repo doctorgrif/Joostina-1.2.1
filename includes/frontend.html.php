@@ -145,36 +145,36 @@ class modules_html {
 					}
 				}
 // feed title
-				$content_buffer = '<table class="moduletable' . $moduleclass_sfx . '">' . "\n";
+				$content_buffer = '<div class="moduletable' . $moduleclass_sfx . '">' . "\n";
 				if ($currChannel->getTitle() && $rsstitle) {
 					$feed_title = $currChannel->getTitle();
 					$feed_title = mosCommonHTML::newsfeedEncoding($rssDoc, $feed_title);
-					$content_buffer .= '<tr>' . "\n";
-					$content_buffer .= '<td>' . "\n";
-					$content_buffer .= '<strong>' . "\n";
-					$content_buffer .= '<a href="' . ampReplace($currChannel->getLink()) . '" target="_blank" title="' . $feed_title . '">' . "\n";;
+					//$content_buffer .= '<tr>' . "\n";
+					$content_buffer .= '<div>' . "\n";
+					$content_buffer .= '<p><strong>' . "\n";
+					$content_buffer .= '<a href="' . ampReplace($currChannel->getLink()) . '" title="' . $feed_title . '">' . "\n";;
 					$content_buffer .= $feed_title . '</a>' . "\n";
-					$content_buffer .= '</strong>' . "\n";
-					$content_buffer .= '</td>' . "\n";
-					$content_buffer .= '</tr>' . "\n";
+					$content_buffer .= '</strong></p>' . "\n";
+					$content_buffer .= '</div>' . "\n";
+					//$content_buffer .= '</tr>' . "\n";
 				}
 // feed description
 				if ($rssdesc) {
 					$feed_descrip = $currChannel->getDescription();
 					$feed_descrip = mosCommonHTML::newsfeedEncoding($rssDoc, $feed_descrip);
-					$content_buffer .= '<tr>' . "\n";
-					$content_buffer .= '<td>' . "\n";
+					//$content_buffer .= '<tr>' . "\n";
+					$content_buffer .= '<div>' . "\n";
 					$content_buffer .= $feed_descrip;
-					$content_buffer .= '</td>' . "\n";
-					$content_buffer .= '</tr>' . "\n";
+					$content_buffer .= '</div>' . "\n";
+					//$content_buffer .= '</tr>' . "\n";
 				}
 // feed image
 				if ($rssimage && $iUrl) {
-					$content_buffer .= '<tr>' . "\n";
-					$content_buffer .= '<td align="center">' . "\n";
-					$content_buffer .= '<image src="' . $iUrl . '" alt="' . @$iTitle . '" />' . "\n";
-					$content_buffer .= '</td>' . "\n";
-					$content_buffer .= '</tr>' . "\n";
+					//$content_buffer .= '<tr>' . "\n";
+					$content_buffer .= '<div>' . "\n";
+					$content_buffer .= '<figure><image src="' . $iUrl . '" alt="' . @$iTitle . '" /></figure>' . "\n";
+					$content_buffer .= '</div>' . "\n";
+					//$content_buffer .= '</tr>' . "\n";
 				}
 				$actualItems = $currChannel->getItemCount();
 				$setItems = $rssitems;
@@ -183,35 +183,35 @@ class modules_html {
 				} else {
 					$totalItems = $setItems;
 				}
-				$content_buffer .= '<tr>' . "\n";
-				$content_buffer .= '<td>' . "\n";
-				$content_buffer .= '<ul class="newsfeed' . $moduleclass_sfx . '">' . "\n";
+				//$content_buffer .= '<tr>' . "\n";
+				$content_buffer .= '<div>' . "\n";
+				$content_buffer .= '<ul class="newsfeed">' . "\n";
 				for ($j = 0; $j < $totalItems; $j++) {
 					$currItem = &$currChannel->getItem($j);
 // item title
 					$item_title = $currItem->getTitle();
 					$item_title = mosCommonHTML::newsfeedEncoding($rssDoc, $item_title);
 // START fix for RSS enclosure tag url not showing
-					$content_buffer .= '<li class="newsfeed' . $moduleclass_sfx . '">' . "\n";
-					$content_buffer .= '<strong>' . "\n";
+					$content_buffer .= '<li class="newsfeed">' . "\n";
+					$content_buffer .= '<p><strong>' . "\n";
 					if ($currItem->getLink()) {
-						$content_buffer .= '<a href="' . ampReplace($currItem->getLink()) . '" target="_blank" title="' . $item_title . '">' . "\n";
+						$content_buffer .= '<a href="' . ampReplace($currItem->getLink()) . '" title="' . $item_title . '">' . "\n";
 						$content_buffer .= '' . $item_title . '</a>' . "\n";
 					} else
 					if ($currItem->getEnclosure()) {
 						$enclosure = $currItem->getEnclosure();
 						$eUrl = $enclosure->getUrl();
-						$content_buffer .= '<a href="' . ampReplace($eUrl) . '" target="_blank" title="' . $item_title . '">' . "\n";
+						$content_buffer .= '<a href="' . ampReplace($eUrl) . '" title="' . $item_title . '">' . "\n";
 						$content_buffer .= '' . $item_title . '</a>' . "\n";
 					} else
 					if (($currItem->getEnclosure()) && ($currItem->getLink())) {
 						$enclosure = $currItem->getEnclosure();
 						$eUrl = $enclosure->getUrl();
-						$content_buffer .= '<a href="' . ampReplace($currItem->getLink()) . '" target="_blank" title="' . $item_title . '">' . "\n";
+						$content_buffer .= '<a href="' . ampReplace($currItem->getLink()) . '" title="' . $item_title . '">' . "\n";
 						$content_buffer .= '' . $item_title . '</a><br />' . "\n";
-						$content_buffer .= '<a href="' . ampReplace($eUrl) . '" target="_blank" title="Download"><em>Download</em></a>' . "\n";
+						$content_buffer .= '<a href="' . ampReplace($eUrl) . '" title="Download"><em>Download</em></a>' . "\n";
 					}
-					$content_buffer .= '</strong>' . "\n";
+					$content_buffer .= '</strong></p>' . "\n";
 // END fix for RSS enclosure tag url not showing
 // item description
 					if ($rssitemdesc) {
@@ -237,9 +237,9 @@ class modules_html {
 					$content_buffer .= '</li>' . "\n";
 				}
 				$content_buffer .= '</ul>' . "\n";
-				$content_buffer .= '</td>' . "\n";
-				$content_buffer .= '</tr>' . "\n";
-				$content_buffer .= '</table>' . "\n";
+				$content_buffer .= '</div>' . "\n";
+				//$content_buffer .= '</tr>' . "\n";
+				$content_buffer .= '</div>' . "\n";
 			}
 			$module->content = $content_buffer;
 		}
@@ -250,7 +250,7 @@ class modules_html {
 		global $mosConfig_live_site, $mosConfig_sitename, $mosConfig_lang, $mosConfig_absolute_path;
 		global $mainframe, $database, $my;
 		?>
-		<table cellpadding="0" cellspacing="0" class="moduletable<?php echo $moduleclass_sfx; ?>">
+		<table class="moduletable<?php echo $moduleclass_sfx; ?>">
 					<?php if ($module->showtitle != 0) { ?>
 				<tr>
 					<th valign="top"><?php echo htmlspecialchars($module->title); ?></th>

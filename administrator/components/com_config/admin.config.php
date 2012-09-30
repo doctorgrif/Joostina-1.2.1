@@ -564,10 +564,14 @@ function showconfig($option) {
 	$db_cache_handler = array();
 	$db_cache_handler[]= mosHTML::makeOption( 'none', 'Не использовать' );
 	$db_cache_handler[]= mosHTML::makeOption( 'file', 'Файлы' );
-	if(function_exists('eaccelerator_get'))	$db_cache_handler[] = mosHTML::makeOption( 'eaccelerator', 'eAccelerator' );
-	if(function_exists('apc_fetch'))		$db_cache_handler[] = mosHTML::makeOption( 'apc', 'APC' );
-	if(class_exists('Memcache'))			$db_cache_handler[] = mosHTML::makeOption( 'memcache', 'Memcache' );
-	if(function_exists('xcache_set'))		$db_cache_handler[] = mosHTML::makeOption( 'xcache', 'Xcache' );
+	//if(function_exists('eaccelerator_get'))
+	$db_cache_handler[] = mosHTML::makeOption( 'eaccelerator', 'eAccelerator' );
+	//if(function_exists('apc_fetch'))
+	$db_cache_handler[] = mosHTML::makeOption( 'apc', 'APC' );
+	//if(class_exists('Memcache'))
+	$db_cache_handler[] = mosHTML::makeOption( 'memcache', 'Memcache' );
+	//if(function_exists('xcache_set'))
+	$db_cache_handler[] = mosHTML::makeOption( 'xcache', 'Xcache' );
 
 	$lists['db_cache_handler']= mosHTML::selectList($db_cache_handler,'config_db_cache_handler','class="inputbox" ','value','text',$mosConfig_db_cache_handler_orig);
 

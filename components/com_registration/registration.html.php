@@ -27,13 +27,13 @@ class HTML_registration {
 			<div class="regrequired"><?php echo _NEW_PASS_DESC; ?></div>
 			<div class="regrequired"><?php echo _REGISTER_REQUIRED; ?></div>
 			<div id="checkUName">
-				<label for="checkUName"><?php echo _PROMPT_UNAME; ?> <span class="red">*</span></label>
+				<label for="checkUName"><span class="red">*</span><?php echo _PROMPT_UNAME; ?></label>
 				<div>
 					<input type="text" name="checkusername" class="inputbox" id="checkUName" size="40" maxlength="25" />
 				</div>
 			</div>
 			<div id="confirmEmail">
-				<label for="confirmEmail"><?php echo _PROMPT_EMAIL; ?> <span class="red">*</span></label>
+				<label for="confirmEmail"><span class="red">*</span><?php echo _PROMPT_EMAIL; ?></label>
 				<div>
 					<input type="text" name="confirmEmail" class="inputbox" id="confirmEmail" size="40" />
 				</div>
@@ -99,38 +99,39 @@ class HTML_registration {
 		}
 		//]]>
 	</script>
-	<form action="<?php echo sefRelToAbs('index.php'); ?>" method="post" name="mosForm" target="_top" class="form" id="mosForm">
+	<form action="<?php echo sefRelToAbs('index.php'); ?>" method="post" name="mosForm" target="_top" class="form" id="mosForm" autocomplete="on">
 		<fieldset>
 			<div class="componentheading"><?php echo _REGISTER_TITLE; ?></div>
 			<div class="regrequired"><?php echo _REGISTER_REQUIRED; ?></div>
 			<div id="regname">
-				<label for="regname"><?php echo _REGISTER_NAME; ?><span class="red">*</span></label>
+				<label for="regname" data-icon="u"><span class="red">*</span><?php echo _REGISTER_NAME; ?></label>
 				<div>
-					<input type="text" name="name" size="40" value="" id="regname" class="inputbox" maxlength="50" placeholder="<?php echo _REGISTER_NAME_PH; ?>" />
+					<input class="text-input" name="name" value="" id="regname" required="required" class="inputbox" placeholder="<?php echo _REGISTER_NAME_PH; ?>" />
 				</div>
 			</div>
 			<div id="reguname">
-				<label for="reguname"><?php echo _REGISTER_UNAME; ?> <span class="red">*</span></label>
+				<label for="reguname" data-icon="u"><span class="red">*</span><?php echo _REGISTER_UNAME; ?></label>
 				<div>
-					<input type="text" name="username" size="40" value="" id="reguname" class="inputbox" maxlength="25" placeholder="<?php echo _REGISTER_UNAME_PH; ?>" />
+					<input class="text-input" name="username" value="" id="reguname" required="required" class="inputbox" placeholder="<?php echo _REGISTER_UNAME_PH; ?>" />
 				</div>
 			</div>
 			<div id="regemail">
-				<label for="regemail"><?php echo _REGISTER_EMAIL; ?> <span class="red">*</span></label>
+				<label for="regemail" data-icon="e"><span class="red">*</span><?php echo _REGISTER_EMAIL; ?></label>
 				<div>
-					<input type="text" name="email" size="40" value="" id="regemail" class="inputbox" maxlength="100" placeholder="<?php echo _REGISTER_EMAIL_PH; ?>" />
+					<input class="text-input" name="email" value="" id="regemail" required="required" class="inputbox" placeholder="Введите адрес электронной почты" />
 				</div>
 			</div>
 			<div id="password">
-				<label for="password"><?php echo _REGISTER_PASS; ?> <span class="red">*</span></label>
+				<label for="password" data-icon="p"><span class="red">*</span><?php echo _REGISTER_PASS; ?></label>
 				<div>
-					<input class="inputbox" type="password" id="password" name="password" size="40" value="" />
+					<input class="text-input" type="password" id="password" required="required" name="password" value="" placeholder="Введите пароль" />
+					<br /><span id="passstrength"></span>
 				</div>
 			</div>
 			<div id="password2">
-				<label for="password2"><?php echo _REGISTER_VPASS; ?> <span class="red">*</span></label>
+				<label for="password2" data-icon="p"><span class="red">*</span><?php echo _REGISTER_VPASS; ?></label>
 				<div>
-					<input class="inputbox" type="password" id="password2" name="password2" size="40" value="" />
+					<input class="text-input" type="password" id="password2" required="required" name="password2" value="" placeholder="Повторите пароль" />
 				</div>
 			</div>
 			<?php if ($mosConfig_captcha_reg) { session_start(); ?>

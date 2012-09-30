@@ -35,13 +35,13 @@ class jdebug {
 	function _db() {
 		global $database;
 		count($database->_log);
-		$this->add('<pre id="database_log"><code>');
+		$this->add('<div class="diff"><pre id="database_log"><code>');
 		// подсчет числа SQL запросов и вывод самих запросов
-		$this->add('<p>SQL запросов: ' . count($database->_log));
+		$this->add('SQL запросов: ' . count($database->_log));
 		foreach($database->_log as $k => $sql) {
-			$this->add($k + 1 . '</p><p>' . $sql . '</p><hr />');
+			$this->add($k + 1 . '<br />' . $sql . '<hr />');
 		}
-		$this->add('</code></pre>');
+		$this->add('</code></pre></div>');
 		return;
 	}
 }

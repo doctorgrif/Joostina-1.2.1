@@ -100,7 +100,8 @@ class MIME_Type {
 		if(MIME_Type::hasParameters($type)) {
 			require_once 'MIME/Type/Parameter.php';
 			foreach(MIME_Type::getParameters($type) as $param) {
-				$param = &new MIME_Type_Parameter($param);
+				//$param = &new MIME_Type_Parameter($param); //php 5.2
+				$param = new MIME_Type_Parameter($param); //php 5.3
 				$this->parameters[$param->name] = $param;
 			}
 		}
@@ -284,7 +285,8 @@ class MIME_Type {
 	* @return void
 	*/
 	function addParameter($name,$value,$comment = false) {
-		$tmp = &new MIME_Type_Parameter;
+		//$tmp = &new MIME_Type_Parameter; //php 5.2
+		$tmp = new MIME_Type_Parameter; //php 5.3
 		$tmp->name = $name;
 		$tmp->value = $value;
 		$tmp->comment = $comment;

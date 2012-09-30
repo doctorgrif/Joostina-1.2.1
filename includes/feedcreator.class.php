@@ -15,7 +15,7 @@
 defined('_VALID_MOS') or die();
 global $mosConfig_feed_timeoffset;
 define('TIME_ZONE', $mosConfig_feed_timeoffset);
-define('FEEDCREATOR_VERSION', 'Joostina CMS');
+define('FEEDCREATOR_VERSION', $mosConfig_sitename);
 
 class FeedItem extends HtmlDescribable {
 

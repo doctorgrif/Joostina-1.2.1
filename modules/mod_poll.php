@@ -82,12 +82,12 @@ function submitbutton_Poll<?php echo $z; ?>() {
 	}
 }
 </script>
-<form name="pollxtd<?php echo $z; ?>" method="post" action="<?php echo sefRelToAbs('index.php?option=com_poll'.$_Itemid); ?>">
-	<div class="mpoll<?php echo $moduleclass_sfx; ?>">
+<form name="pollxtd<?php echo $z; ?>" method="post" action="<?php echo sefRelToAbs('index.php?option=com_poll' . $_Itemid); ?>">
+	<div class="mod_poll">
 	<legend><?php echo $poll->title; ?></legend>
-		<div class="stableborder<?php echo $moduleclass_sfx; ?>">
+		<div class="stableborder">
 		<?php for ($i = 0, $n = count($options); $i < $n; ++$i) { ?>
-			<p class="poll-question<?php echo $moduleclass_sfx; ?>">
+			<p class="poll_question">
 				<input type="radio" name="voteid" id="voteid<?php echo $options[$i]->id; ?>" value="<?php echo $options[$i]->id; ?>" alt="<?php echo $options[$i]->id; ?>" />
 				<label for="voteid<?php echo $options[$i]->id; ?>"><?php echo stripslashes($options[$i]->text); ?></label>
 			</p>
@@ -100,7 +100,7 @@ function submitbutton_Poll<?php echo $z; ?>() {
 		}
 		?>
 		</div>
-		<div class="pollbuttons">
+		<div class="poll_buttons">
 			<input type="button" onclick="submitbutton_Poll<?php echo $z; ?>();" name="task_button" class="button" value="<?php echo _BUTTON_VOTE; ?>" />
 			<input type="button" onclick="document.location.href='<?php echo sefRelToAbs('index.php?option=com_poll&amp;task=results&amp;id='.$poll->id . $_Itemid); ?>';" name="option" class="button" value="<?php echo _BUTTON_RESULTS; ?>" />
 		</div>

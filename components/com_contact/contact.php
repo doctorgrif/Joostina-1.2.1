@@ -41,10 +41,16 @@ function listContacts($option, $catid) {
 	;
 	/* Query to retrieve all categories that belong under the contacts section and that are published. */
 	/* add STRAIGHT_JOIN */
-	$query = "SELECT STRAIGHT_JOIN *, COUNT(a.id) AS numlinks" . "\n FROM #__categories AS cc" . "\n LEFT JOIN #__contact_details AS a ON a.catid = cc.id" .
-			"\n WHERE a.published = 1" . "\n AND cc.section = 'com_contact_details'" . "\n AND cc.published = 1" .
-			"\n AND a.access <= " . (int) $my->gid . "\n AND cc.access <= " . (int) $my->gid . "\n GROUP BY cc.id" .
-			"\n ORDER BY cc.ordering";
+		$query = "SELECT STRAIGHT_JOIN *, COUNT(a.id) AS numlinks"
+		. "\n FROM #__categories AS cc"
+		. "\n LEFT JOIN #__contact_details AS a ON a.catid = cc.id"
+		. "\n WHERE a.published = 1"
+		. "\n AND cc.section = 'com_contact_details'"
+		. "\n AND cc.published = 1"
+		. "\n AND a.access <= " . (int) $my->gid
+		. "\n AND cc.access <= " . (int) $my->gid
+		. "\n GROUP BY cc.id" .
+		"\n ORDER BY cc.ordering";
 	$database->setQuery($query);
 	$categories = $database->loadObjectList();
 	$count = count($categories);
@@ -119,13 +125,20 @@ function listContacts($option, $catid) {
 		if ($catid) {
 // url links info for category
 /* add STRAIGHT_JOIN */
-			$query = "SELECT *" . "\n FROM #__contact_details" . "\n WHERE catid = " . (int) $catid .
-					"\n AND published =1" . "\n AND access <= " . (int) $my->gid . "\n ORDER BY ordering";
+			$query = "SELECT *"
+			. "\n FROM #__contact_details"
+			. "\n WHERE catid = " . (int) $catid
+			. "\n AND published =1"
+			. "\n AND access <= " . (int) $my->gid
+			. "\n ORDER BY ordering";
 			$database->setQuery($query);
 			$rows = $database->loadObjectList();
 // current category info
-			$query = "SELECT id, name, description, image, image_position" . "\n FROM #__categories" .
-					"\n WHERE id = " . (int) $catid . "\n AND published = 1" . "\n AND access <= " . (int) $my->gid;
+			$query = "SELECT id, name, description, image, image_position"
+			. "\n FROM #__categories"
+			. "\n WHERE id = " . (int) $catid
+			. "\n AND published = 1"
+			. "\n AND access <= " . (int) $my->gid;
 			$database->setQuery($query);
 			$database->loadObject($currentcat);
 			/** Check if the category is published or if access level allows access */
@@ -174,10 +187,13 @@ function listContacts($option, $catid) {
 function contactpage($contact_id) {
 	global $mainframe, $database, $my, $Itemid;
 	/* add STRAIGHT_JOIN */
-	$query = "SELECT STRAIGHT_JOIN a.id AS value, CONCAT_WS(' - ', a.name, a.con_position) AS text, a.catid, cc.access AS cat_access" .
-			"\n FROM #__contact_details AS a" . "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n WHERE a.published = 1" . "\n AND cc.published = 1" . "\n AND a.access <= " . (int)
-			$my->gid . "\n ORDER BY a.default_con DESC, a.ordering ASC";
+	$query = "SELECT STRAIGHT_JOIN a.id AS value, CONCAT_WS(' - ', a.name, a.con_position) AS text, a.catid, cc.access AS cat_access"
+	. "\n FROM #__contact_details AS a"
+	. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
+	. "\n WHERE a.published = 1"
+	. "\n AND cc.published = 1"
+	. "\n AND a.access <= " . (int) $my->gid
+	. "\n ORDER BY a.default_con DESC, a.ordering ASC";
 	$database->setQuery($query);
 	$checks = $database->loadObjectList();
 	$count = count($checks);
@@ -185,9 +201,12 @@ function contactpage($contact_id) {
 		if ($contact_id < 1) {
 			$contact_id = $checks[0]->value;
 		}
-		$query = "SELECT STRAIGHT_JOIN a.*, cc.access AS cat_access" . "\n FROM #__contact_details AS a" .
-				"\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" . "\n WHERE a.published = 1" .
-				"\n AND a.id = " . (int) $contact_id . "\n AND a.access <= " . (int) $my->gid;
+		$query = "SELECT STRAIGHT_JOIN a.*, cc.access AS cat_access"
+		. "\n FROM #__contact_details AS a"
+		. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
+		. "\n WHERE a.published = 1"
+		. "\n AND a.id = " . (int) $contact_id
+		. "\n AND a.access <= " . (int) $my->gid;
 		$database->SetQuery($query);
 		$contacts = $database->LoadObjectList();
 		if (!$contacts) {
@@ -519,7 +538,7 @@ function vCard($id) {
 				break;
 		}
 		$middlename = trim($middlename);
-		$v = new MambovCard();
+		$v = new JoostinavCard();
 		$v->setPhoneNumber($contact->telephone, 'PREF;WORK;VOICE');
 		$v->setPhoneNumber($contact->fax, 'WORK;FAX');
 		$v->setName($surname, $firstname, $middlename, '');

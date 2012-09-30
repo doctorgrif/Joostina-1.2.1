@@ -605,14 +605,14 @@ class mosMainFrame {
 
 	/** добавление js файлов в шапку страницы */
 	function addJS($patch) {
-		global $ver;
-		$this->_head['custom'][] = '<script type="text/javascript" src="' . $patch . $ver . '"></script>';
+		//global $ver;
+		$this->_head['custom'][] = '<script type="text/javascript" src="' . $patch . '"></script>';
 	}
 
 	/** добавление css файлов в шапку страницы */
 	function addCSS($patch) {
-		global $ver;
-		$this->_head['custom'][] = '<link type="text/css" rel="stylesheet" href="' . $patch . $ver . '" />';
+		//global $ver;
+		$this->_head['custom'][] = '<link type="text/css" rel="stylesheet" href="' . $patch . '" />';
 	}
 
 	/** @return string */
@@ -826,7 +826,8 @@ class mosMainFrame {
 							@$mosConfig_admin_expired === '1') {
 						$now = $_SERVER['REQUEST_TIME'];
 						$file = $this->getPath('com_xml', 'com_users');
-						$params = &new mosParameters($my->params, $file, 'component');
+						//$params = &new mosParameters($my->params, $file, 'component'); //php 5.2
+						$params = new mosParameters($my->params, $file, 'component'); //php 5.3
 // return to expired page functionality
 						$params->set('expired', $link);
 						$params->set('expired_time', $now);
@@ -2084,11 +2085,12 @@ class mosHTML {
 		if ($params->get('back_button') && !$params->get('popup') && !$hide_js) {
 ?>
 			<div class="back_but_div">
-				<p>
-					<a class="back_but" href="javascript:history.go(-1)">
-						<input type="button" name="back_button" value="<?php echo _BACK; ?>" class="button" />
+				<button class="button">
+					<a href="javascript:history.go(-1)" title="<?php echo _BACK; ?>">
+						<?php echo _BACK; ?>
+						<!--<input type="button" name="back_button" value="<?php echo _BACK; ?>" class="button" />-->
 					</a>
-				</p>
+				</button>
 			</div>
 <?php
 		}
@@ -4028,7 +4030,7 @@ class mosTabs {
 			$js_f = 'joostina.tabs.js.php';
 		} else {
 			$css_f = 'tabpane.css';
-			$js_f = 'tabpane_mini.js';
+			$js_f = 'tabpane.js';
 		}
 		$css = '<link rel="stylesheet" type="text/css" media="all" href="' . $mosConfig_live_site . '/includes/js/tabs/' . $css_f . '" id="luna-tab-style-sheet" />';
 		$js = '<script type="text/javascript" src="' . $mosConfig_live_site . '/includes/js/tabs/' . $js_f . '"></script>';

@@ -86,7 +86,7 @@ function botMosPaging($published, &$row, &$params, $page = 0) {
 		require_once ($GLOBALS['mosConfig_absolute_path'] . '/includes/pageNavigation.php');
 		$pageNav = new mosPageNav($n, $page, 1);
 // счетчик страниц
-		$row->text .= '<div class="pagenavcounter" style="display:none;">';
+		$row->text .= '<div class="pagenavcounter">';
 		$row->text .= $pageNav->writeLeafsCounter();
 		$row->text .= '</div>';
 // текст страницы
@@ -133,8 +133,7 @@ function createTOC(&$row, &$matches) {
 		if (@$bot[2]) {
 			parse_str(html_entity_decode($bot[2]), $args2);
 			if (@$args2['title']) {
-				$row->toc .= '<li><a href="' . $link . '" title="' . stripslashes($args2['title']) . '">' . stripslashes($args2['title']) . '</a></li>
-';
+				$row->toc .= '<li><a href="' . $link . '" title="' . stripslashes($args2['title']) . '">' . stripslashes($args2['title']) . '</a></li>';
 			} else {
 				$row->toc .= '<li><a href="' . $link . '" title="' . _PN_PAGE . '">' . _PN_PAGE . ' ' . $i . '</a></li>';
 			}
@@ -152,14 +151,14 @@ function createNavigation(&$row, $page, $n) {
 	if ($page < $n - 1) {
 		$link_next = $link . '&amp;limit=1&amp;limitstart=' . ($page + 1);
 		$link_next = sefRelToAbs($link_next);
-		$next = '<li class="pagenav_next"><a href="' . $link_next . '" title="' . _CMN_NEXT . '">' . _CMN_NEXT . '</a></li>';
+		$next = '<li class="pagenav_next"><a href="' . $link_next . '" title="' . _CMN_NEXT_1 . '">' . _CMN_NEXT . '</a></li>';
 	} else {
 		$next = '<li class="pagenav_next">' . _CMN_NEXT . '</li>';
 	}
 	if ($page > 0) {
 		$link_prev = $link . '&amp;limit=1&amp;limitstart=' . ($page - 1);
 		$link_prev = sefRelToAbs($link_prev);
-		$prev = '<li class="pagenav_prev"><a href="' . $link_prev . '" title="' . _CMN_PREV . '">' . _CMN_PREV . '</a></li>';
+		$prev = '<li class="pagenav_prev"><a href="' . $link_prev . '" title="' . _CMN_PREV_1 . '">' . _CMN_PREV . '</a></li>';
 	} else {
 		$prev = '<li class="pagenav_prev">' . _CMN_PREV . '</li>';
 	}

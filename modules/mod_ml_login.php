@@ -141,10 +141,10 @@ function BuildLoginForm($params_aray, $orientation) {
 	} else {
 		$pass_tooltip = '';
 	}
-	$login_label_def = '<label for="username">'.$params_aray['ml_login_text'].'</label><br />';
-	$login_input_def = '<input class="text-input" type="text" name="username" id="username" placeholder="'.$params_aray['ml_login_text_ph'].'" value="" '.$login_tooltip.' />';
-	$pass_label_def = '<label for="password">'.$params_aray['ml_pass_text'].'</label><br />';
-	$pass_input_def = '<input class="text-input" type="password" id="password" name="passwd" placeholder="'.$params_aray['ml_pass_text_ph'].'" value="" /><br /><span id="passstrength"></span>';
+	$login_label_def = '<label for="username" data-icon="u">'.$params_aray['ml_login_text'].'</label><br />';
+	$login_input_def = '<input class="text-input" type="text" name="username" required="required" id="username" placeholder="'.$params_aray['ml_login_text_ph'].'" value="" '.$login_tooltip.' />';
+	$pass_label_def = '<label for="password" data-icon="p">'.$params_aray['ml_pass_text'].'</label><br />';
+	$pass_input_def = '<input class="text-input" type="password" id="password" name="passwd" required="required" placeholder="'.$params_aray['ml_pass_text_ph'].', например X8df!90EO" value="" />';
 	switch ($params_aray['show_login_text']) {
 		case '0':
 			$input_login = '<p>'.$login_input_def.'</p>';
@@ -153,7 +153,7 @@ function BuildLoginForm($params_aray, $orientation) {
 			$input_login = '<p>'.$login_label_def . $login_input_def.'</p>';
 			break;
 		case '2':
-			$input_login = '<input class="text-input" type="text" name="username" id="username" placeholder="'.$params_aray['ml_login_text_ph'].'" value="'.$params_aray['ml_login_text'].'" onblur="if(this.value==\'\') this.value=\''.$params_aray['ml_login_text'].'\';" onfocus="if(this.value==\''.$params_aray['ml_login_text'].'\') this.value=\'\';" />';
+			$input_login = '<input class="text-input" type="text" name="username" id="username" required="required" placeholder="'.$params_aray['ml_login_text_ph'].'" value="'.$params_aray['ml_login_text'].'" onblur="if(this.value==\'\') this.value=\''.$params_aray['ml_login_text'].'\';" onfocus="if(this.value==\''.$params_aray['ml_login_text'].'\') this.value=\'\';" />';
 			break;
 		case '3':
 		default:
@@ -168,7 +168,7 @@ function BuildLoginForm($params_aray, $orientation) {
 			$input_pass = '<p>'.$pass_label_def . $pass_input_def.'</p>';
 			break;
 		case '2':
-			$input_pass = '<input class="text-input" type="password" id="password" name="passwd" placeholder="'.$params_aray['ml_pass_text_ph'].'" value="'.$params_aray['ml_pass_text'].'" onblur="if(this.value==\'\') this.value=\''.$params_aray['ml_pass_text'].'\';" onfocus="if(this.value==\''.$params_aray['ml_pass_text'].'\') this.value=\'\';" /><br /><span id="passstrength"></span>';
+			$input_pass = '<input class="text-input" type="password" id="password" name="passwd" required="required" placeholder="'.$params_aray['ml_pass_text_ph'].', например X8df!90EO" value="'.$params_aray['ml_pass_text'].'" onblur="if(this.value==\'\') this.value=\''.$params_aray['ml_pass_text'].'\';" onfocus="if(this.value==\''.$params_aray['ml_pass_text'].'\') this.value=\'\';" />';
 			break;
 		case '3':
 		default:
@@ -181,21 +181,20 @@ function BuildLoginForm($params_aray, $orientation) {
 		$remember_me = '';
 	}
 	if ($params_aray['show_lost_pass'] == 1) {
-		$lost_pass = '<p><label for="lost-pass">'.$params_aray['ml_rem_pass_text'].'</label></p><p><a href="'.sefRelToAbs('index.php?option=com_registration&amp;task=lostPassword').'" id="lost-pass" title="'.$params_aray['ml_rem_pass_text'].' '. _REM_PASS.'. ">'._REM_PASS.'</a></p>';
+		$lost_pass = '<p><a href="'.sefRelToAbs('index.php?option=com_registration&amp;task=lostPassword').'" id="lost-pass" title="'.$params_aray['ml_rem_pass_text'].' '. _REM_PASS.'. ">'.$params_aray['ml_rem_pass_text'].'</a></p>';
 	} else {
 		$lost_pass = '';
 	}
 	if ($params_aray['show_register'] == 1) {
-		$register_me = '<p><label for="register-me">'._NO_REGISTRED.'</label></p><p><a href="'.sefRelToAbs('index.php?option=com_registration&amp;task=register').'" id="register-me" title="'.$params_aray['ml_reg_text'].'">'.$params_aray['ml_reg_text'].'</a></p>';
+		$register_me = '<p><a href="'.sefRelToAbs('index.php?option=com_registration&amp;task=register').'" id="register-me" title="'._NO_REGISTRED.' '.$params_aray['ml_reg_text'].'">'._NO_REGISTRED.'</a></p>';
 	} else {
 		$register_me = '';
 	}
 	$submit_button = '<input type="submit" name="submit" class="button" id="button" value="'.$params_aray['submit_button_text'].'" />';
 // Выводим форму
-echo '<div class="formpretext">'.$params_aray['pretext'].'</div>
-';
+echo '<div class="formpretext">'.$params_aray['pretext'].'</div>';
 	?>
-<form action="<?php echo sefRelToAbs('index.php?option=login'); ?>" method="post" name="login" class="form">
+<form action="<?php echo sefRelToAbs('index.php?option=login'); ?>" method="post" name="login" class="form" autocomplete="on">
 	<?php if ($orientation == '1') { ?>
 	<div class="loginform-gorisontal">
 		<div class="login-line">
@@ -214,13 +213,13 @@ echo '<div class="formpretext">'.$params_aray['pretext'].'</div>
 	<?php } else { /* Форма во всплывающем окне */ ?>
 	<div class="loginform">
 		<div class="loginleft col_50">
-			<?php echo $lost_pass; ?>
+			<?php echo $input_login; ?>
+			<?php echo $remember_me; ?>
 			<?php echo $register_me; ?>
+			<?php echo $lost_pass; ?>
 		</div>
 		<div class="loginright col_50">
-			<?php echo $input_login; ?>
 			<?php echo $input_pass; ?>
-			<?php echo $remember_me; ?>
 			<?php echo $submit_button; ?>
 		</div>
 		<div class="clearfix"></div>
@@ -238,9 +237,6 @@ echo '<div class="formposttext">'.$params_aray['posttext'].'</div>
 	<input type="hidden" name="force_session" value="1" />
 	<input type="hidden" name="<?php echo $validate; ?>" value="1" />
 </form>
-	<?php
-		mosCommonHTML::loadJqueryPlugins('jquery.passstrength', 1);
-	?>
 	<?php
 }
 ?>

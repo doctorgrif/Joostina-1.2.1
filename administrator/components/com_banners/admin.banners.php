@@ -1456,7 +1456,8 @@ function doRestore($option) {
 	require_once ($mosConfig_absolute_path . '/includes/domit/xml_domit_include.php');
 
 	//instantiate a new DOMIT! document
-	$xmldoc = &new DOMIT_Document();
+	//$xmldoc = &new DOMIT_Document(); //php 5.2
+	$xmldoc = new DOMIT_Document(); //php 5.3
 
 	$success = $xmldoc->loadXML($media_path . $userfile_name);
 
@@ -1671,7 +1672,8 @@ function doBackup() {
 	require_once ($mosConfig_absolute_path . '/includes/domit/xml_domit_include.php');
 
 	//instantiate a new DOMIT! document
-	$xmldoc = &new DOMIT_Document();
+	//$xmldoc = &new DOMIT_Document(); //php 5.2
+	$xmldoc = new DOMIT_Document(); //php 5.3
 
 	//create XML declaration
 	$xmlDecl = &$xmldoc->createProcessingInstruction('xml', 'version="1.2"');

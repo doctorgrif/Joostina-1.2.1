@@ -164,14 +164,14 @@ function showMyItems(&$access, $limit, $selected, $limitstart) {
 		$pagetitle = $menu->name;
 	} // if
 	$query = "SELECT COUNT(a.id)"
-			. "\n FROM #__content AS a"
-			. "\n LEFT JOIN #__users AS u ON u.id = a.created_by"
-			. "\n LEFT JOIN #__groups AS g ON a.access = g.id"
-			. "\n LEFT JOIN #__categories AS c on a.catid = c.id"
-			. "\n LEFT JOIN #__sections AS s on s.id = c.section"
-			. "\n WHERE a.created_by = $my->id"
-			. "\n AND a.state > -1"
-			. $and;
+	. "\n FROM #__content AS a"
+	. "\n LEFT JOIN #__users AS u ON u.id = a.created_by"
+	. "\n LEFT JOIN #__groups AS g ON a.access = g.id"
+	. "\n LEFT JOIN #__categories AS c on a.catid = c.id"
+	. "\n LEFT JOIN #__sections AS s on s.id = c.section"
+	. "\n WHERE a.created_by = $my->id"
+	. "\n AND a.state > -1"
+	. $and;
 	$database->setQuery($query);
 	$total = $database->loadResult();
 	$limit = $limit ? $limit : $params->get('display_num');
@@ -182,17 +182,17 @@ function showMyItems(&$access, $limit, $selected, $limitstart) {
 // get the list of items for this category
 /* add STRAIGHT_JOIN */
 	$query = "SELECT STRAIGHT_JOIN a.sectionid, a.checked_out, a.id, a.state AS published, a.title, a.hits, a.created_by, a.created_by_alias, a.created AS created, a.access, u.name AS author, a.state, g.name AS groups,"
-			. "\n c.name AS category, s.name AS section"
-			. "\n FROM #__content AS a"
-			. "\n LEFT JOIN #__users AS u ON u.id = a.created_by"
-			. "\n LEFT JOIN #__groups AS g ON a.access = g.id"
-			. "\n LEFT JOIN #__categories AS c on a.catid = c.id"
-			. "\n LEFT JOIN #__sections AS s on s.id = c.section"
-			. "\n WHERE a.created_by = $my->id"
-			. "\n AND a.state > -1"
-			. $and
-			. "\n ORDER BY $orderby"
-			. "\n LIMIT $limitstart, $limit"
+	. "\n c.name AS category, s.name AS section"
+	. "\n FROM #__content AS a"
+	. "\n LEFT JOIN #__users AS u ON u.id = a.created_by"
+	. "\n LEFT JOIN #__groups AS g ON a.access = g.id"
+	. "\n LEFT JOIN #__categories AS c on a.catid = c.id"
+	. "\n LEFT JOIN #__sections AS s on s.id = c.section"
+	. "\n WHERE a.created_by = $my->id"
+	. "\n AND a.state > -1"
+	. $and
+	. "\n ORDER BY $orderby"
+	. "\n LIMIT $limitstart, $limit"
 	;
 	$database->setQuery($query);
 	$items = $database->loadObjectList();
@@ -246,8 +246,8 @@ function findKeyItem($gid, $access, $pop, $option) {
 	global $database;
 	$keyref = stripslashes(strval(mosGetParam($_REQUEST, 'keyref', '')));
 	$query = "SELECT id"
-			. "\n FROM #__content"
-			. "\n WHERE attribs LIKE '%keyref=" . $database->getEscaped($keyref, true) . "\n%'";
+	. "\n FROM #__content"
+	. "\n WHERE attribs LIKE '%keyref=" . $database->getEscaped($keyref, true) . "\n%'";
 	$database->setQuery($query);
 	$id = $database->loadResult();
 	if ($id > 0) {
@@ -257,7 +257,8 @@ function findKeyItem($gid, $access, $pop, $option) {
 	}
 }
 
-function frontpage($gid, &$access, $pop, $now, $limit, $limitstart) {
+//function frontpage($gid, &$access, $pop, $now, $limit, $limitstart) { //php 5.2
+function frontpage($gid, $access, $pop, $now, $limit, $limitstart) { //php 5.3
 	global $database, $mainframe, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
 	$now = _CURRENT_SERVER_TIME;
 	$noauth = !$mainframe->getCfg('shownoauth');
@@ -281,9 +282,9 @@ function frontpage($gid, &$access, $pop, $now, $limit, $limitstart) {
 	$limit = $intro + $leading + $links;
 // query to determine total number of records
 	$query = "SELECT COUNT(a.id) FROM #__content AS a INNER JOIN #__content_frontpage AS f ON f.content_id = a.id"
-			. "\n INNER JOIN #__categories AS cc ON cc.id = a.catid INNER JOIN #__sections AS s ON s.id = a.sectionid"
-			. "\n LEFT JOIN #__users AS u ON u.id = a.created_by LEFT JOIN #__groups AS g ON a.access = g.id" .
-			$where;
+	. "\n INNER JOIN #__categories AS cc ON cc.id = a.catid INNER JOIN #__sections AS s ON s.id = a.sectionid"
+	. "\n LEFT JOIN #__users AS u ON u.id = a.created_by LEFT JOIN #__groups AS g ON a.access = g.id" .
+	$where;
 	$database->setQuery($query);
 	$total = $database->loadResult();
 	if ($total <= $limit) {
@@ -291,13 +292,13 @@ function frontpage($gid, &$access, $pop, $now, $limit, $limitstart) {
 	}
 // query records
 /* add STRAIGHT_JOIN */
-	$query = "SELECT STRAIGHT_JOIN a.attribs, a.notetext, a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
-			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access, a.hits," .
-			"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
-			"\n, s.id AS sec_id, cc.id as cat_id" . $voting['select'] . "\n FROM #__content AS a" .
-			"\n INNER JOIN #__content_frontpage AS f ON f.content_id = a.id" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n INNER JOIN #__sections AS s ON s.id = a.sectionid" . "\n LEFT JOIN #__users AS u ON u.id = a.created_by" .
-			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_pri $order_sec";
+	$query = "SELECT STRAIGHT_JOIN a.attribs, a.id, a.title, a.title_alias, a.introtext, a.notetext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
+	"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access, a.hits," .
+	"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
+	"\n, s.id AS sec_id, cc.id as cat_id" . $voting['select'] . "\n FROM #__content AS a" .
+	"\n INNER JOIN #__content_frontpage AS f ON f.content_id = a.id" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
+	"\n INNER JOIN #__sections AS s ON s.id = a.sectionid" . "\n LEFT JOIN #__users AS u ON u.id = a.created_by" .
+	"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_pri $order_sec";
 	$database->setQuery($query, $limitstart, $limit);
 	$rows = $database->loadObjectList();
 // Dynamic Page Title
@@ -328,7 +329,8 @@ function frontpage($gid, &$access, $pop, $now, $limit, $limitstart) {
 	BlogOutput($rows, $params, $gid, $access, $pop, $menu, $limitstart, $limit, $total);
 }
 
-function showSection($id, $gid, &$access, $now) {
+//function showSection($id, $gid, &$access, $now) { //php 5.2
+function showSection($id, $gid, $access, $now) { //php 5.3
 	global $database, $mainframe, $Itemid, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
 	$section = new mosSection($database);
 	$section->load((int) $id);
@@ -445,8 +447,7 @@ function showSection($id, $gid, &$access, $now) {
 		$mainframe->addMetaTag('author', $params->get('meta_author'));
 	}
 	$null = null;
-	HTML_content::showContentList($section, $null, $access, $id, $null, $gid, $params, $null,
-					$categories, $null, $null, $categories_exist);
+	HTML_content::showContentList($section, $null, $access, $id, $null, $gid, $params, $null, $categories, $null, $null, $categories_exist);
 }
 
 /**
@@ -457,7 +458,8 @@ function showSection($id, $gid, &$access, $now) {
  * @param int The number of items to dislpay
  * @param int The offset for pagination
  */
-function showCategory($id, $gid, &$access, $sectionid, $limit, $selected, $limitstart, $now, $selected, $filter) {
+//function showCategory($id, $gid, &$access, $sectionid, $limit, $selected, $limitstart, $now, $selected, $filter) { //php 5.2
+function showCategory($id, $gid, $access, $sectionid, $limit, $selected, $limitstart, $now, $selected, $filter) { //php 5.3
 	global $database, $mainframe, $Itemid, $mosConfig_list_limit, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
 	$category = new mosCategory($database);
 	$category->load((int) $id);
@@ -615,9 +617,9 @@ function showCategory($id, $gid, &$access, $sectionid, $limit, $selected, $limit
 // get the list of items for this category
 /* add STRAIGHT_JOIN */
 	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.hits, a.created_by, a.created_by_alias, a.created AS created, a.access, u.name AS author, a.state, g.name AS groups" .
-			"\n FROM #__content AS a" . "\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__groups AS g ON a.access = g.id" .
-			"\n WHERE a.catid = " . (int) $category->id . $xwhere . ($noauth ? "\n AND a.access <= " .
-					(int) $gid : '') . "\n AND " . (int) $category->access . " <= " . (int) $gid . $and . "\n ORDER BY $orderby";
+	"\n FROM #__content AS a" . "\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__groups AS g ON a.access = g.id" .
+	"\n WHERE a.catid = " . (int) $category->id . $xwhere . ($noauth ? "\n AND a.access <= " .
+	(int) $gid : '') . "\n AND " . (int) $category->access . " <= " . (int) $gid . $and . "\n ORDER BY $orderby";
 	$database->setQuery($query, $limitstart, $limit);
 	$items = $database->loadObjectList();
 	$check = 0;
@@ -642,7 +644,7 @@ function showCategory($id, $gid, &$access, $sectionid, $limit, $selected, $limit
 		$check .= 1;
 	}
 	$order[] = mosHTML::makeOption('order', _ORDER_DROPDOWN_O);
-	$lists['order'] = mosHTML::selectList($order, 'order', 'class="inputbox" size="1"onchange="document.adminForm.submit();"', 'value', 'text', $selected);
+	$lists['order'] = mosHTML::selectList($order, 'order', 'class="inputbox" size="1" onchange="document.adminForm.submit();"', 'value', 'text', $selected);
 	if ($check < 1) {
 		$lists['order'] = '';
 		$params->set('order_select', 0);
@@ -667,13 +669,13 @@ function showCategory($id, $gid, &$access, $sectionid, $limit, $selected, $limit
 	if ($params->get('meta_author') != "") {
 		$mainframe->addMetaTag('author', $params->get('meta_author'));
 	}
-	HTML_content::showContentList($category, $items, $access, $id, $sectionid, $gid, $params,
-					$pageNav, $other_categories, $lists, $selected, true);
+	HTML_content::showContentList($category, $items, $access, $id, $sectionid, $gid, $params, $pageNav, $other_categories, $lists, $selected, true);
 }
 
 // showCategory
 
-function showBlogSection($id = 0, $gid, &$access, $pop, $now = null, $limit, $limitstart) {
+//function showBlogSection($id = 0, $gid, &$access, $pop, $now = null, $limit, $limitstart) { //php 5.2
+function showBlogSection($id = 0, $gid, $access, $pop, $now = null, $limit, $limitstart) { //php 5.3
 	global $database, $mainframe, $Itemid, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
 // needed for check whether section is published
 	$check = ($id ? $id : 0);
@@ -709,8 +711,8 @@ function showBlogSection($id = 0, $gid, &$access, $pop, $now = null, $limit, $li
 	$limit = $limit ? $limit : ($intro + $leading + $links);
 // query to determine total number of records
 	$query = "SELECT COUNT(a.id)" . "\n FROM #__content AS a INNER JOIN #__categories AS cc ON cc.id = a.catid"
-			. "\n LEFT JOIN #__users AS u ON u.id = a.created_by LEFT JOIN #__sections AS s ON a.sectionid = s.id"
-			. "\n LEFT JOIN #__groups AS g ON a.access = g.id" . $where;
+	. "\n LEFT JOIN #__users AS u ON u.id = a.created_by LEFT JOIN #__sections AS s ON a.sectionid = s.id"
+	. "\n LEFT JOIN #__groups AS g ON a.access = g.id" . $where;
 	$database->setQuery($query);
 	$total = $database->loadResult();
 	if ($total <= $limit) {
@@ -719,11 +721,11 @@ function showBlogSection($id = 0, $gid, &$access, $pop, $now = null, $limit, $li
 // Main data query
 /* add STRAIGHT_JOIN */
 	$query = "SELECT STRAIGHT_JOIN a.id, a.attribs , a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
-			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access,"
-			. "\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups"
-			. $voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid"
-			. "\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id"
-			. "\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_pri $order_sec";
+	"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access,"
+	. "\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups"
+	. $voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid"
+	. "\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id"
+	. "\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_pri $order_sec";
 	$database->setQuery($query, $limitstart, $limit);
 	$rows = $database->loadObjectList();
 // Dynamic Page Title
@@ -769,7 +771,8 @@ function showBlogSection($id = 0, $gid, &$access, $pop, $now = null, $limit, $li
 	BlogOutput($rows, $params, $gid, $access, $pop, $menu, $limitstart, $limit, $total);
 }
 
-function showBlogCategory($id = 0, $gid, &$access, $pop, $now, $limit, $limitstart) {
+//function showBlogCategory($id = 0, $gid, &$access, $pop, $now, $limit, $limitstart) { //php 5.2
+function showBlogCategory($id = 0, $gid, $access, $pop, $now, $limit, $limitstart) { //php 5.3
 	global $database, $mainframe, $Itemid, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
 	$now = _CURRENT_SERVER_TIME;
 	$noauth = !$mainframe->getCfg('shownoauth');
@@ -805,8 +808,8 @@ function showBlogCategory($id = 0, $gid, &$access, $pop, $now, $limit, $limitsta
 	$limit = $limit ? $limit : ($intro + $leading + $links);
 // query to determine total number of records
 	$query = "SELECT COUNT(a.id)" . "\n FROM #__content AS a" . "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
-			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $where;
+	"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
+	"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $where;
 	$database->setQuery($query);
 	$total = $database->loadResult();
 	if ($total <= $limit) {
@@ -815,11 +818,11 @@ function showBlogCategory($id = 0, $gid, &$access, $pop, $now, $limit, $limitsta
 // Main data query
 /* add STRAIGHT_JOIN */
 	$query = "SELECT STRAIGHT_JOIN a.id, a.notetext,a.attribs, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
-			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
-			"\n CHAR_LENGTH(a.fulltext) AS readmore, s.published AS sec_pub,cc.published AS sec_pub, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
-			$voting['select'] . "\n FROM #__content AS a" . "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
-			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_pri $order_sec";
+	"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
+	"\n CHAR_LENGTH(a.fulltext) AS readmore, s.published AS sec_pub,cc.published AS sec_pub, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
+	$voting['select'] . "\n FROM #__content AS a" . "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
+	"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
+	"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_pri $order_sec";
 	$database->setQuery($query, $limitstart, $limit);
 	$rows = $database->loadObjectList();
 // check whether section & category is published
@@ -871,7 +874,8 @@ function showBlogCategory($id = 0, $gid, &$access, $pop, $now, $limit, $limitsta
 	BlogOutput($rows, $params, $gid, $access, $pop, $menu, $limitstart, $limit, $total);
 }
 
-function showArchiveSection($id = null, $gid, &$access, $pop, $option, $year, $month, $limit, $limitstart) {
+//function showArchiveSection($id = null, $gid, &$access, $pop, $option, $year, $month, $limit, $limitstart) { //php 5.2
+function showArchiveSection($id = null, $gid, $access, $pop, $option, $year, $month, $limit, $limitstart) { //php 5.3
 	global $database, $mainframe, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
 	global $Itemid;
 	$secID = ($id ? $id : 0);
@@ -916,8 +920,8 @@ function showArchiveSection($id = null, $gid, &$access, $pop, $option, $year, $m
 	$limit = $limit ? $limit : ($intro + $leading + $links);
 // query to determine total number of records
 	$query = "SELECT COUNT(a.id)" . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
-			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $where;
+	"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
+	"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $where;
 	$database->setQuery($query);
 	$total = $database->loadResult();
 	if ($total <= $limit) {
@@ -926,11 +930,11 @@ function showArchiveSection($id = null, $gid, &$access, $pop, $option, $year, $m
 // Main Query
 /* add STRAIGHT_JOIN */
 	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
-			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
-			"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
-			$voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
-			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_pri $order_sec";
+	"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
+	"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
+	$voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
+	"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
+	"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_pri $order_sec";
 	$database->setQuery($query, $limitstart, $limit);
 	$rows = $database->loadObjectList();
 // check whether section is published
@@ -975,7 +979,7 @@ function showArchiveSection($id = null, $gid, &$access, $pop, $option, $year, $m
 	}
 	if (!$archives) {
 // if no archives for category, hides search and outputs empty message
-		echo '<br /><div align="center">' . _CATEGORY_ARCHIVE_EMPTY . '</div>';
+		echo '<div>' . _CATEGORY_ARCHIVE_EMPTY . '</div>';
 	} else {
 		BlogOutput($rows, $params, $gid, $access, $pop, $menu, $limitstart, $limit, $total, 1, 1);
 	}
@@ -986,7 +990,8 @@ function showArchiveSection($id = null, $gid, &$access, $pop, $option, $year, $m
 	echo '</form>';
 }
 
-function showArchiveCategory($id = 0, $gid, &$access, $pop, $option, $year, $month, $module, $limit, $limitstart) {
+//function showArchiveCategory($id = 0, $gid, &$access, $pop, $option, $year, $month, $module, $limit, $limitstart) { //php 5.2
+function showArchiveCategory($id = 0, $gid, $access, $pop, $option, $year, $month, $module, $limit, $limitstart) { //php 5.3
 	global $database, $mainframe, $mosConfig_MetaDesc, $mosConfig_MetaKeys;
 	global $Itemid;
 	$noauth = !$mainframe->getCfg('shownoauth');
@@ -1028,8 +1033,8 @@ function showArchiveCategory($id = 0, $gid, &$access, $pop, $option, $year, $mon
 	$limit = $limit ? $limit : ($intro + $leading + $links);
 // query to determine total number of records
 	$query = "SELECT COUNT(a.id)" . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
-			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $where;
+	"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
+	"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $where;
 	$database->setQuery($query);
 	$total = $database->loadResult();
 	if ($total <= $limit) {
@@ -1038,11 +1043,11 @@ function showArchiveCategory($id = 0, $gid, &$access, $pop, $option, $year, $mon
 // main query
 /* add STRAIGHT_JOIN */
 	$query = "SELECT STRAIGHT_JOIN a.id, a.title, a.title_alias, a.introtext, a.sectionid, a.state, a.catid, a.created, a.created_by, a.created_by_alias, a.modified, a.modified_by," .
-			"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
-			"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
-			$voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
-			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_sec";
+	"\n a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, a.images, a.urls, a.ordering, a.metakey, a.metadesc, a.access," .
+	"\n CHAR_LENGTH(a.fulltext) AS readmore, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups" .
+	$voting['select'] . "\n FROM #__content AS a" . "\n INNER JOIN #__categories AS cc ON cc.id = a.catid" .
+	"\n LEFT JOIN #__users AS u ON u.id = a.created_by" . "\n LEFT JOIN #__sections AS s ON a.sectionid = s.id" .
+	"\n LEFT JOIN #__groups AS g ON a.access = g.id" . $voting['join'] . $where . "\n ORDER BY $order_sec";
 	$database->setQuery($query, $limitstart, $limit);
 	$rows = $database->loadObjectList();
 // check whether section & category is published
@@ -1099,8 +1104,7 @@ function showArchiveCategory($id = 0, $gid, &$access, $pop, $option, $year, $mon
 	}
 	if (!$archives) {
 // if no archives for category, hides search and outputs empty message
-		echo '<br />';
-		echo '<div align="center">' . _CATEGORY_ARCHIVE_EMPTY . '</div>';
+		echo '<div>' . _CATEGORY_ARCHIVE_EMPTY . '</div>';
 	} else {
 // if coming from the Archive Module, the Archive Dropdown selector is not shown
 		if ($id) {
@@ -1165,40 +1169,41 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 		echo '<div class="componentheading' . $params->get('pageclass_sfx') . '">' . $header . '</div>';
 	}
 	if ($archive) {
-		echo '<br />';
+		echo '<div>';
 		echo mosHTML::monthSelectList('month', 'size="1" class="inputbox"', $params->get('month'));
 		echo mosHTML::integerSelectList(2000, 2010, 1, 'year', 'size="1" class="inputbox"', $params->get('year'), "%04d");
 		echo '<input type="submit" class="button" value="' . _SUBMIT_BUTTON . '" />';
+		echo '</div>';
 	}
 // checks to see if there are there any items to display
 	if ($total) {
 		$col_with = 100 / $columns; // width of each column
-		$width = 'width="' . intval($col_with) . '%"';
+		//$width = 'width="' . intval($col_with) . '%"';
+		$width = 'class="col_'.intval($col_with).'"';
 		if ($archive) {
 // Search Success message
 			$msg = sprintf(_ARCHIVE_SEARCH_SUCCESS, $params->get('month'), $params->get('year'));
-			echo '<br /><br /><div align="center">' . $msg . '</div><br /><br />';
+			echo '<div>' . $msg . '</div>';
 		}
-		echo '<table class="blog' . $params->get('pageclass_sfx') . '">';
+		echo '<table class="blog">'; // test div start
 // Secrion/Category Description & Image
 		if ($menu && $menu->componentid && ($descrip || $descrip_image)) {
 			$link = $mosConfig_live_site . '/images/stories/' . $description->image;
 			echo '<tr>';
-			echo '<td valign="top" class="contentdescription">';
+			echo '<td class="contentdescription">';
 			if ($descrip_image && $description->image) {
-				echo '<img src="' . $link . '" align="' . $description->image_position . '" hspace="6" alt="" />';
+				echo '<img src="' . $link . '" style="float:' . $description->image_position . ';" alt="' . $header . '" />';
 			}
 			if ($descrip && $description->description) {
 				echo $description->description;
 			}
-			//echo '<br/><br/>';
 			echo '</td>';
 			echo '</tr>';
 		}
 // Leading story output
 		if ($leading) {
 			echo '<tr>';
-			echo '<td valign="top">';
+			echo '<td>';
 			for ($z = 0; $z < $leading; $z++) {
 				if ($i >= ($total - $limitstart)) {
 // stops loop if total number of items is less than the number set to display as leading
@@ -1214,43 +1219,44 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 		}
 		if ($intro && ($i < $total)) {
 			echo '<tr>';
-			echo '<td valign="top">';
-			echo '<table width="100%">';
+			echo '<td>';
+			echo '<div class="col_100">';
 // intro story output
 			for ($z = 0; $z < $intro; $z++) {
 				if ($i >= ($total - $limitstart)) {
 // stops loop if total number of items is less than the number set to display as intro + leading
 					break;
 				}
-				if (!($z % $columns) || $columns == 1) {
-					echo '<tr>';
-				}
-				echo '<td valign="top" ' . $width . '>';
+				//if (!($z % $columns) || $columns == 1) {
+				//	echo '<div>';
+				//}
+				echo '<div ' . $width . '>';
 // outputs either intro or only a link
 				if ($z < $intro) {
 					show($rows[$i], $params, $gid, $access, $pop);
 				} else {
-					echo '</td>';
-					echo '</tr>';
+					echo '</div>';
+					echo '<div class="clearfix"></div>';
+					//echo '</div>';
 					break;
 				}
-				echo '</td>';
+				echo '</div>';
 				++$i;
 // this is required to output a closing </tr> tag if one of the 3 conditions are met
 // 1. No of intro story output = number of columns
 // 2. Total number of items is reached before the number set to display
 // 3. Reached the last item but it does not fully fill the last row of output - a blank column is left
-				if (!(($z + 1) % $columns) || $columns == 1) {
-					echo '</tr>';
-				} else
-				if ($i >= $total) {
-					echo '</tr>';
-				} else
-				if ((($z + 1) == $intro) && ($intro % $columns)) {
-					echo '</tr>';
-				}
+				//if (!(($z + 1) % $columns) || $columns == 1) {
+				//	echo '</div>';
+				//} else
+				//if ($i >= $total) {
+					echo '</div>';
+				//} else
+				//if ((($z + 1) == $intro) && ($intro % $columns)) {
+				//	echo '</div>';
+				//}
 			}
-			echo '</table>';
+			echo '</div>';
 			echo '</td>';
 			echo '</tr>';
 		}
@@ -1258,8 +1264,8 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 		if ($links && ($i < $total - $limitstart)) {
 			$showmore = $leading + $intro;
 			echo '<tr>';
-			echo '<td valign="top">';
-			echo '<div class="blog_more' . $params->get('pageclass_sfx') . '">';
+			echo '<td>';
+			echo '<div class="blog_more">';
 			HTML_content::showLinks($rows, $links, $total, $i, $showmore);
 			echo '</div>';
 			echo '</td>';
@@ -1297,32 +1303,31 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 						$pid = '&amp;id=' . $id;
 						$module = '';
 					}
-					$link = 'index.php?option=com_content&amp;task=' . $task . $pid . $Itemid_link .
-							'&amp;year=' . $year . '&amp;month=' . $month . $module;
+					$link = 'index.php?option=com_content&amp;task=' . $task . $pid . $Itemid_link . '&amp;year=' . $year . '&amp;month=' . $month . $module;
 				} else {
 					$link = 'index.php?option=com_content&amp;task=' . $task . '&amp;id=' . $id . $Itemid_link;
 				}
 				echo '<tr>';
-				echo '<td valign="top" align="center">';
+				echo '<td>';
 				echo $pageNav->writePagesLinks($link);
 				echo '</td>';
 				echo '</tr>';
 				if ($pagination_results) {
 					echo '<tr>';
-					echo '<td valign="top" align="center">';
+					echo '<td>';
 					echo $pageNav->writePagesCounter();
 					echo '</td>';
 					echo '</tr>';
 				}
 			}
 		}
-		echo '</table>';
+		echo '</table>'; // test div stop
 		echo '<div class="clearfix"></div>';
 	} else
 	if ($archive && !$total) {
 // Search Failure message for Archives
 		$msg = sprintf(_ARCHIVE_SEARCH_FAILURE, $params->get('month'), $params->get('year'));
-		echo '<div align="center">' . $msg . '</div><br />';
+		echo '<div>' . $msg . '</div>';
 	} else {
 // Generic blog empty display
 		echo _EMPTY_BLOG;
@@ -1332,7 +1337,8 @@ function BlogOutput(&$rows, &$params, $gid, &$access, $pop, &$menu, $limitstart,
 	mosHTML::BackButton($params);
 }
 
-function showItem($uid, $gid, &$access, $pop) {
+//function showItem($uid, $gid, &$access, $pop) { //php 5.2
+function showItem($uid, $gid, $access, $pop) { //php 5.3
 	global $database, $mainframe, $mosConfig_disable_date_state, $mosConfig_disable_access_control;
 	global $mosConfig_MetaTitle, $mosConfig_MetaAuthor;
 	$now = _CURRENT_SERVER_TIME;
@@ -1352,12 +1358,14 @@ function showItem($uid, $gid, &$access, $pop) {
 	else
 		$where_ac = '';
 // main query
-	$query = "SELECT a.*, u.name AS author, u.usertype, cc.name AS category, s.name AS section, g.name AS groups," .
-			"\n s.published AS sec_pub, cc.published AS cat_pub, s.access AS sec_access, cc.access AS cat_access," .
-			"\n s.id AS sec_id, cc.id as cat_id" . "\n FROM #__content AS a LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__sections AS s ON s.id = cc.section AND s.scope = 'content' LEFT JOIN #__users AS u ON u.id = a.created_by" .
-			"\n LEFT JOIN #__groups AS g ON a.access = g.id" . "\n WHERE a.id = " . (int) $uid . $xwhere .
-			$where_ac;
+	$query = "SELECT a.*, u.name AS author, u.usertype, s.name AS section, cc.name AS category, g.name AS groups, s.published AS sec_pub, cc.published AS cat_pub, s.access AS sec_access, cc.access AS cat_access, s.id AS sec_id, cc.id as cat_id"
+	. "\n FROM #__content AS a"
+	. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
+	. "\n LEFT JOIN #__sections AS s ON s.id = cc.section AND s.scope = 'content'"
+	. "\n LEFT JOIN #__users AS u ON u.id = a.created_by"
+	. "\n LEFT JOIN #__groups AS g ON a.access = g.id"
+	. "\n WHERE a.id = " . (int) $uid . $xwhere .
+	$where_ac;
 	$database->setQuery($query);
 	$row = null;
 	if ($database->loadObject($row)) {
@@ -1422,10 +1430,10 @@ function showItem($uid, $gid, &$access, $pop) {
 			}
 // array of content items in same category correctly ordered
 /* add STRAIGHT_JOIN */
-			$query = "SELECT STRAIGHT_JOIN a.id, a.title $uname FROM #__content AS a $ufrom WHERE a.catid = "
-					. (int) $row->catid
-					. "\n AND a.state = " . (int) $row->state . ($access->canEdit ? '' : $where_ac)
-					. $xwhere . "\n ORDER BY $orderby";
+			$query = "SELECT STRAIGHT_JOIN a.id, a.title $uname FROM #__content AS a $ufrom"
+			. "\n WHERE a.catid = " . (int) $row->catid
+			. "\n AND a.state = " . (int) $row->state . ($access->canEdit ? '' : $where_ac) . $xwhere
+			. "\n ORDER BY $orderby";
 			$database->setQuery($query);
 			$list = $database->loadObjectList();
 // this check needed if incorrect Itemid is given resulting in an incorrect result
@@ -1485,7 +1493,8 @@ function showItem($uid, $gid, &$access, $pop) {
 	}
 }
 
-function show($row, $params, $gid, &$access, $pop) {
+//function show($row, $params, $gid, &$access, $pop) { //php 5.2
+function show($row, $params, $gid, $access, $pop) { //php 5.3
 	global $database, $mainframe, $mosConfig_content_hits;
 	global $cache;
 	$noauth = !$mainframe->getCfg('shownoauth');
@@ -1543,7 +1552,7 @@ function show($row, $params, $gid, &$access, $pop) {
 		$row->rating_count = null;
 		global $voteLoad, $task;
 		if (!isset($voteLoad)) {
-			$query = "SELECT ROUND(rating_sum / rating_count) AS rating, rating_count, content_id FROM #__content_rating";
+			$query = "SELECT ROUND(rating_sum/rating_count) AS rating, rating_count, content_id FROM #__content_rating";
 			$task == 'view' ? $query .= "\n WHERE content_id=$row->id" : '';
 			$database->setQuery($query);
 			$Allvote = $database->loadObjectList();
@@ -1569,7 +1578,12 @@ function show($row, $params, $gid, &$access, $pop) {
 // check if values have already been placed into mainframe memory
 			if ($secLinkID == -1) {
 			/* add STRAIGHT_JOIN */
-				$query = "SELECT STRAIGHT_JOIN id, link FROM #__menu WHERE published = 1 AND type IN ('content_section', 'content_blog_section') AND componentid = " . (int) $row->sectionid . "\n ORDER BY type DESC, ordering";
+				$query = "SELECT STRAIGHT_JOIN id, link"
+				. "\n FROM #__menu"
+				. "\n WHERE published = 1"
+				. "\n AND type IN ('content_section', 'content_blog_section')"
+				. "\n AND componentid = " . (int) $row->sectionid
+				. "\n ORDER BY type ordering, DESC";
 				$database->setQuery($query);
 //$secLinkID = $database->loadResult();
 				$result = $database->loadRow();
@@ -1606,7 +1620,12 @@ function show($row, $params, $gid, &$access, $pop) {
 // check if values have already been placed into mainframe memory
 			if ($catLinkID == -1) {
 			/* add STRAIGHT_JOIN */
-				$query = "SELECT STRAIGHT_JOIN id, link FROM #__menu WHERE published = 1 AND type IN ('content_category', 'content_blog_category') AND componentid = " . (int) $row->catid . "\n ORDER BY type DESC, ordering";
+				$query = "SELECT STRAIGHT_JOIN id, link"
+				. "\n FROM #__menu"
+				. "\n WHERE published = 1"
+				. "\n AND type IN ('content_category', 'content_blog_category')"
+				. "\n AND componentid = " . (int) $row->catid
+				. "\n ORDER BY type ordering, DESC";
 				$database->setQuery($query);
 //$catLinkID = $database->loadResult();
 				$result = $database->loadRow();
@@ -1640,6 +1659,7 @@ function show($row, $params, $gid, &$access, $pop) {
 		}
 	}
 // show/hides the intro text
+/*ToDo: добавить микроформаты статьей*/
 	if ($params->get('introtext')) {
 		if ($params->get('jeditable'))
 			$row->text = '<div class="introtext">' . $row->introtext . '</div>' . ($params->get('intro_only') ? '' : chr(13) . '<div id="jneditf-' . $row->id . '">' . chr(13) . '</div>' . '<div class="fulltext">' . $row->fulltext . '</div>' . chr(13) . chr(13) . '<div class="notetext">' . $row->notetext . '</div>');
@@ -1771,8 +1791,7 @@ function editItem($uid, $gid, &$access, $sectionid = 0, $task, $Itemid) {
 			$database->setQuery($query);
 			$row->modifier = $database->loadResult();
 		}
-		$query = "SELECT content_id FROM #__content_frontpage WHERE content_id = " . (int)
-				$row->id;
+		$query = "SELECT content_id FROM #__content_frontpage WHERE content_id = " . (int) $row->id;
 		$database->setQuery($query);
 		$row->frontpage = $database->loadResult();
 	} else {
@@ -1848,10 +1867,17 @@ function editItem($uid, $gid, &$access, $sectionid = 0, $task, $Itemid) {
 	$lists['state'] = mosHTML::selectList($states, 'state', 'class="inputbox" size="1"', 'value', 'text', intval($row->state));
 // build the html select list for ordering
 /* add STRAIGHT_JOIN */
-	$query = "SELECT STRAIGHT_JOIN ordering AS value, title AS text FROM #__content WHERE catid = " . (int) $row->catid . "\n ORDER BY ordering";
+	$query = "SELECT STRAIGHT_JOIN title AS text, ordering AS value"
+	. "\n FROM #__content"
+	. "\n WHERE catid = " . (int) $row->catid . ""
+	. "\n ORDER BY ordering";
 	$lists['ordering'] = mosAdminMenus::SpecificOrdering($row, $uid, $query, 1);
 	/* add STRAIGHT_JOIN */
-	$database->setQuery(" SELECT STRAIGHT_JOIN c.id AS cid , c.name AS c_name, c.section FROM #__categories AS c WHERE c.published=1 $where_c AND section NOT LIKE '%com_%' ORDER BY title ASC ");
+	$database->setQuery("SELECT STRAIGHT_JOIN c.id AS cid , c.name AS c_name, c.section"
+	. "\n FROM #__categories AS c"
+	. "\n WHERE c.published=1 $where_c"
+	. "\n AND section NOT LIKE '%com_%'"
+	. "\n ORDER BY title ASC ");
 	$cids = $database->loadObjectList();
 	/* add STRAIGHT_JOIN */
 	$database->setQuery(" SELECT STRAIGHT_JOIN s.id, s.name FROM #__sections AS s WHERE s.published=1 $where_s ORDER BY title ASC");
@@ -1880,7 +1906,7 @@ function editItem($uid, $gid, &$access, $sectionid = 0, $task, $Itemid) {
 				} else {
 					$extra = '';
 				}
-				$return .= '<option value="' . $row3->id . '*' . $v['cid'] . '" ' . $extra . '>&nbsp;&nbsp;&nbsp;- ' . $v['cat_name'] . '</option>';
+				$return .= '<option value="' . $row3->id . '*' . $v['cid'] . '" ' . $extra . '> &ndash; ' . $v['cat_name'] . '</option>';
 			}
 		}
 	}
@@ -2005,16 +2031,11 @@ function saveContent(&$access, $task) {
 	$row->checkin();
 	$row->updateOrder("catid = " . (int) $row->catid);
 // gets section name of item
-	$query = "SELECT s.title"
-			. "\n FROM #__sections AS s"
-			. "\n WHERE s.scope = 'content'"
-			. "\n AND s.id = " . (int) $row->sectionid;
+	$query = "SELECT s.title FROM #__sections AS s WHERE s.scope = 'content' AND s.id = " . (int) $row->sectionid;
 	$database->setQuery($query);
 // gets category name of item
 	$section = $database->loadResult();
-	$query = "SELECT c.title"
-			. "\n FROM #__categories AS c"
-			. "\n WHERE c.id = " . (int) $row->catid;
+	$query = "SELECT c.title FROM #__categories AS c WHERE c.id = " . (int) $row->catid;
 	$database->setQuery($query);
 	$category = $database->loadResult();
 	$category = stripslashes($category);
@@ -2022,8 +2043,8 @@ function saveContent(&$access, $task) {
 // messaging for new items
 		require_once ($mosConfig_absolute_path . '/components/com_messages/messages.class.php');
 		$query = "SELECT id"
-				. "\n FROM #__users"
-				. "\n WHERE sendEmail = 1";
+		. "\n FROM #__users"
+		. "\n WHERE sendEmail = 1";
 		$database->setQuery($query);
 		$users = $database->loadResultArray();
 		foreach ($users as $user_id) {
@@ -2111,13 +2132,16 @@ function emailContentForm($uid, $gid) {
 	$nullDate = $database->getNullDate();
 // query to check for state and access levels
 	$query = "SELECT a.*, cc.name AS category, s.name AS section, s.published AS sec_pub, cc.published AS cat_pub," .
-			"\ns.access AS sec_access, cc.access AS cat_access, s.id AS sec_id, cc.id as cat_id" .
-			"\n FROM #__content AS a" . "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__sections AS s ON s.id = cc.section AND s.scope = 'content'" . "\n WHERE a.id = " . (int)
-			$uid . "\n AND a.state = 1" . "\n AND a.access <= " . (int) $gid . "\n AND (a.publish_up = " .
-			$database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . ")" .
-			"\n AND (a.publish_down = " . $database->Quote($nullDate) .
-			" OR a.publish_down >= " . $database->Quote($now) . ")";
+	"\ns.access AS sec_access, cc.access AS cat_access, s.id AS sec_id, cc.id as cat_id"
+	. "\n FROM #__content AS a"
+	. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
+	. "\n LEFT JOIN #__sections AS s ON s.id = cc.section"
+	. "\n AND s.scope = 'content'"
+	. "\n WHERE a.id = " . (int) $uid
+	. "\n AND a.state = 1"
+	. "\n AND a.access <= " . (int) $gid
+	. "\n AND (a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . ")"
+	. "\n AND (a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . ")";
 	$database->setQuery($query);
 	$row = null;
 	if ($database->loadObject($row)) {
@@ -2141,8 +2165,7 @@ function emailContentForm($uid, $gid) {
 			mosNotAuth();
 			return;
 		}
-		$query = "SELECT template" . "\n FROM #__templates_menu" . "\n WHERE client_id = 0" .
-				"\n AND menuid = 0";
+		$query = "SELECT template" . "\n FROM #__templates_menu" . "\n WHERE client_id = 0 AND menuid = 0";
 		$database->setQuery($query);
 		$template = $database->loadResult();
 		HTML_content::emailForm($row->id, $row->title, $template, $itemid);
@@ -2187,14 +2210,16 @@ function emailContentSend($uid, $gid) {
 	$now = _CURRENT_SERVER_TIME;
 	$nullDate = $database->getNullDate();
 // query to check for state and access levels
-	$query = "SELECT a.*, cc.name AS category, s.name AS section, s.published AS sec_pub, cc.published AS cat_pub," .
-			"\ns.access AS sec_access, cc.access AS cat_access, s.id AS sec_id, cc.id as cat_id" .
-			"\n FROM #__content AS a" . "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid" .
-			"\n LEFT JOIN #__sections AS s ON s.id = cc.section AND s.scope = 'content'" . "\n WHERE a.id = " . (int)
-			$uid . "\n AND a.state = 1" . "\n AND a.access <= " . (int) $gid . "\n AND (a.publish_up = " .
-			$database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . ")" .
-			"\n AND (a.publish_down = " . $database->Quote($nullDate) .
-			" OR a.publish_down >= " . $database->Quote($now) . ")";
+	$query = "SELECT a.*, cc.name AS category, s.name AS section, s.published AS sec_pub, cc.published AS cat_pub, s.access AS sec_access, cc.access AS cat_access, s.id AS sec_id, cc.id as cat_id"
+	. "\n FROM #__content AS a"
+	. "\n LEFT JOIN #__categories AS cc ON cc.id = a.catid"
+	. "\n LEFT JOIN #__sections AS s ON s.id = cc.section"
+	. "\n AND s.scope = 'content'"
+	. "\n WHERE a.id = " . (int) $uid
+	. "\n AND a.state = 1"
+	. "\n AND a.access <= " . (int) $gid
+	. "\n AND (a.publish_up = " . $database->Quote($nullDate) . " OR a.publish_up <= " . $database->Quote($now) . ")"
+	. "\n AND (a.publish_down = " . $database->Quote($nullDate) . " OR a.publish_down >= " . $database->Quote($now) . ")";
 	$database->setQuery($query);
 	$row = null;
 	if ($database->loadObject($row)) {
@@ -2225,12 +2250,10 @@ function emailContentSend($uid, $gid) {
 		if (empty($subject)) {
 			$subject = _EMAIL_INFO . ' ' . $yourname;
 		}
-		if ($uid < 1 || !$email || !$youremail || (JosIsValidEmail($email) == false) || (JosIsValidEmail
-						($youremail) == false)) {
+		if ($uid < 1 || !$email || !$youremail || (JosIsValidEmail($email) == false) || (JosIsValidEmail ($youremail) == false)) {
 			mosErrorAlert(_EMAIL_ERR_NOINFO);
 		}
-		$query = "SELECT template" . "\n FROM #__templates_menu" . "\n WHERE client_id = 0" .
-				"\n AND menuid = 0";
+		$query = "SELECT template FROM #__templates_menu WHERE client_id = 0 AND menuid = 0";
 		$database->setQuery($query);
 		$template = $database->loadResult();
 // determine Itemid for Item
@@ -2263,21 +2286,17 @@ function recordVote() {
 	$cid = intval(mosGetParam($_REQUEST, 'cid', 0));
 	if (($user_rating >= 1) and ($user_rating <= 5)) {
 		$currip = (phpversion() <= '4.2.1' ? @getenv('REMOTE_ADDR') : $_SERVER['REMOTE_ADDR']);
-		$query = "SELECT*" . "\n FROM #__content_rating" . "\n WHERE content_id = " . (int) $cid;
+		$query = "SELECT * FROM #__content_rating WHERE content_id = " . (int) $cid;
 		$database->setQuery($query);
 		$votesdb = null;
 		if (!($database->loadObject($votesdb))) {
-			$query = "INSERT INTO #__content_rating (content_id, lastip, rating_sum, rating_count)" .
-					"\n VALUES (" . (int) $cid . ", " . $database->Quote($currip) . ", " . (int) $user_rating .
-					", 1)";
+			$query = "INSERT INTO #__content_rating (content_id, lastip, rating_sum, rating_count) VALUES (" . (int) $cid . ", " . $database->Quote($currip) . ", " . (int) $user_rating . ", 1)";
 			$database->setQuery($query);
 			$database->query() or die($database->stderr());
 			;
 		} else {
 			if ($currip != ($votesdb->lastip)) {
-				$query = "UPDATE #__content_rating" . "\n SET rating_count = rating_count + 1, rating_sum = rating_sum + " . (int)
-						$user_rating . ", lastip = " . $database->Quote($currip) . "\n WHERE content_id = " . (int)
-						$cid;
+				$query = "UPDATE #__content_rating SET rating_count = rating_count + 1, rating_sum = rating_sum + " . (int) $user_rating . ", lastip = " . $database->Quote($currip) . " WHERE content_id = " . (int) $cid;
 				$database->setQuery($query);
 				$database->query() or die($database->stderr());
 			} else {
@@ -2439,5 +2458,4 @@ function votingQuery($active = null) {
 	$results = array('select' => $select, 'join' => $join);
 	return $results;
 }
-
 ?>

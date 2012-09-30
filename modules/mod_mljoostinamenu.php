@@ -15,19 +15,18 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 	$ml_rollover_use = $params->get('ml_rollover_use');
 	if ($ml_rollover_use == 1) {
 		?>
-		<script type="text/javascript">
-		function MlImageOn (imgname) {
-			document.images[imgname].src = onImgArray[imgname].src;
-		}
-		function MlImageOff (imgname) {
-			document.images[imgname].src = offImgArray[imgname].src;
-		}
-		var offImgArray = new Array();
-		var onImgArray = new Array();
-		</script>
+<script type="text/javascript">
+function MlImageOn (imgname) {
+	document.images[imgname].src = onImgArray[imgname].src;
+}
+function MlImageOff (imgname) {
+	document.images[imgname].src = offImgArray[imgname].src;
+}
+var offImgArray = new Array();
+var onImgArray = new Array();
+</script>
 		<?php
 	}
-
 	function mosGetJoostinaLink($mitem, $level=0, &$params, $open=null) {
 		global $Itemid, $mosConfig_live_site, $mainframe;
 		$txt = '';
@@ -177,7 +176,6 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 		}
 		return $txt;
 	}
-
 	function mosJoostinaLinkReplacer($count_link, $link, $style, $params, $full_count) {
 		global $my;
 		$moduleclass_sfx = $params->get('moduleclass_sfx');
@@ -308,14 +306,12 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 			}
 		}
 	}
-
 	function mosJoostinaGetmenu(&$params) {
 		global $my;
 // активирование кэширования
 		$cache = &mosCache::getCache('mod_mljoostinamenu');
 		return $cache->call('_mosJoostinaGetmenu', $params, $my->gid);
 	}
-
 	function _mosJoostinaGetmenu(&$params, $gid) {
 		global $database, $mosConfig_shownoauth, $mosConfig_disable_access_control;
 		$and = '';
@@ -332,7 +328,6 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 		$database->setQuery($sql);
 		return $database->loadObjectList('id');
 	}
-
 // подготовка ссылок ,замена стилей в ссылках
 	function mosJoostinaPrepareLink(&$params, $style=0) {
 		global $database, $my;
@@ -415,10 +410,8 @@ if (!defined('_MOS_MLJOOSTINAMENU_MODULE')) {
 // конец генерации вывода
 		}
 	}
-
 }
 if (!function_exists('mosShowVIMenuMLZ')) {
-
 	function mosShowVIMenuMLZ(&$params) {
 		global $database, $my, $cur_template, $Itemid, $mosConfig_disable_access_control;
 		global $mosConfig_live_site, $mosConfig_shownoauth;
@@ -498,11 +491,9 @@ if (!function_exists('mosShowVIMenuMLZ')) {
 		}
 		mosRecurseVIMenuMLZ(0, 0, $children, $open, $indents, $params);
 	}
-
 }
 /* Utility function to recursively work through a vertically indented hierarchial menu */
 if (!function_exists('mosRecurseVIMenuMLZ')) {
-
 	function mosRecurseVIMenuMLZ($id, $level, &$children, &$open, &$indents, &$params) {
 		if (@$children[$id]) {
 			$n = min($level, count($indents) - 1);
@@ -523,10 +514,8 @@ if (!function_exists('mosRecurseVIMenuMLZ')) {
 			echo "\n".$indents[$n][3];
 		}
 	}
-
 }
 if (!function_exists('mosJoostinaShowLink')) {
-
 	function mosJoostinaShowLink(&$params, $style=0) {
 		global $mosConfig_live_site;
 		$ml_module_number = $params->get('ml_module_number');
@@ -555,52 +544,52 @@ if (!function_exists('mosJoostinaShowLink')) {
 			$ml_image_roll_10 = $params->get('ml_image_roll_10');
 			$ml_image_roll_11 = $params->get('ml_image_roll_11');
 			?>
-			<script type="text/javascript">
-				offImgArray["ml_img_1_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_2_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_3_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_4_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_5_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_6_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_7_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_8_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_9_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_10_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_11_<?php echo $ml_module_number; ?>"] = new Image ();
-				offImgArray["ml_img_1_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image1; ?>";
-				offImgArray["ml_img_2_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image2; ?>";
-				offImgArray["ml_img_3_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image3; ?>";
-				offImgArray["ml_img_4_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image4; ?>";
-				offImgArray["ml_img_5_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image5; ?>";
-				offImgArray["ml_img_6_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image6; ?>";
-				offImgArray["ml_img_7_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image7; ?>";
-				offImgArray["ml_img_8_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image8; ?>";
-				offImgArray["ml_img_9_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image9; ?>";
-				offImgArray["ml_img_10_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image10; ?>";
-				offImgArray["ml_img_11_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image11; ?>";
-				onImgArray["ml_img_1_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_2_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_3_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_4_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_5_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_6_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_7_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_8_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_9_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_10_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_11_<?php echo $ml_module_number; ?>"] = new Image ();
-				onImgArray["ml_img_1_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_1; ?>";
-				onImgArray["ml_img_2_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_2; ?>";
-				onImgArray["ml_img_3_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_3; ?>";
-				onImgArray["ml_img_4_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_4; ?>";
-				onImgArray["ml_img_5_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_5; ?>";
-				onImgArray["ml_img_6_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_6; ?>";
-				onImgArray["ml_img_7_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_7; ?>";
-				onImgArray["ml_img_8_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_8; ?>";
-				onImgArray["ml_img_9_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_9; ?>";
-				onImgArray["ml_img_10_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_10; ?>";
-				onImgArray["ml_img_11_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_11; ?>";
-			</script>
+<script type="text/javascript">
+	offImgArray["ml_img_1_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_2_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_3_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_4_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_5_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_6_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_7_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_8_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_9_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_10_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_11_<?php echo $ml_module_number; ?>"] = new Image ();
+	offImgArray["ml_img_1_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image1; ?>";
+	offImgArray["ml_img_2_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image2; ?>";
+	offImgArray["ml_img_3_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image3; ?>";
+	offImgArray["ml_img_4_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image4; ?>";
+	offImgArray["ml_img_5_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image5; ?>";
+	offImgArray["ml_img_6_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image6; ?>";
+	offImgArray["ml_img_7_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image7; ?>";
+	offImgArray["ml_img_8_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image8; ?>";
+	offImgArray["ml_img_9_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image9; ?>";
+	offImgArray["ml_img_10_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image10; ?>";
+	offImgArray["ml_img_11_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image11; ?>";
+	onImgArray["ml_img_1_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_2_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_3_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_4_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_5_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_6_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_7_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_8_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_9_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_10_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_11_<?php echo $ml_module_number; ?>"] = new Image ();
+	onImgArray["ml_img_1_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_1; ?>";
+	onImgArray["ml_img_2_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_2; ?>";
+	onImgArray["ml_img_3_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_3; ?>";
+	onImgArray["ml_img_4_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_4; ?>";
+	onImgArray["ml_img_5_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_5; ?>";
+	onImgArray["ml_img_6_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_6; ?>";
+	onImgArray["ml_img_7_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_7; ?>";
+	onImgArray["ml_img_8_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_8; ?>";
+	onImgArray["ml_img_9_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_9; ?>";
+	onImgArray["ml_img_10_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_10; ?>";
+	onImgArray["ml_img_11_<?php echo $ml_module_number; ?>"].src = "<?php echo $mosConfig_live_site.'/templates/'.$cur_template.'/i/m/mljoostinamenu/'.$ml_image_roll_11; ?>";
+</script>
 			<?php
 		}
 		switch ($style) {
@@ -641,7 +630,6 @@ if (!function_exists('mosJoostinaShowLink')) {
 				break;
 		}
 	}
-
 }
 $params->def('menutype', 'mainmenu');
 $ml_separated_element = $params->get('ml_separated_element');

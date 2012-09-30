@@ -6,10 +6,8 @@
 * Joostina! - свободное программное обеспечение распространяемое по условиям лицензии GNU/GPL
 * Для получения информации о используемых расширениях и замечаний об авторском праве, смотрите файл help/copyright.php.
 */
-
 // запрет прямого доступа
 defined('_VALID_MOS') or die('');
-
 /** Wraps HTML output */
 class XmapHtml extends Xmap {
 	var $level = -1;
@@ -18,34 +16,26 @@ class XmapHtml extends Xmap {
 	var $_closeItem = '';
 	var $_childs;
 	var $_width;
-
 		function XmapHtml (&$config, &$sitemap) {
 				$this->view = 'html';
 				Xmap::Xmap($config, $sitemap);
 		}
-
 	/** Convert sitemap tree to an 'unordered' html list.
 	* This function uses recursion, keep unnecessary code out of this!
 	*/
 	function printNode( &$node ) {
 		global $Itemid,$mosConfig_live_site;
-
 		$out = '';
-	
 		$out .= $this->_closeItem;
 		$out .= $this->_openList;
 		$this->_openList = '';
-
 		if ( $Itemid == $node->id )
 			$out .= '<li class="active">';
 		else
 			$out .= '<li>';
-
 		$link = Xmap::getItemLink($node);;
-
 		if( !isset($node->browserNav) )
 			$node->browserNav = 0;
-
 		$node->name = htmlspecialchars($node->name);
 		switch( $node->browserNav ) {
 			case 1:	// open url in new window
@@ -55,7 +45,6 @@ class XmapHtml extends Xmap {
 				}
 				$out .= '<a href="'. $link .'" title="'. $node->name .'" target="_blank">'. $node->name . $ext_image .'</a>';
 				break;
-
 			case 2:	// open url in javascript popup window
 				$ext_image = '';
 				if( $this->sitemap->exlinks ) {
@@ -63,22 +52,18 @@ class XmapHtml extends Xmap {
 				}
 				$out .= '<a href="'. $link .'" title="'. $node->name .'" target="_blank" '. "onClick=\"javascript: window.open('" . $link ."', '', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=550'); return false;\">" . $node->name . $ext_image . "</a>";
 				break;
-
 			case 3:	// no link
 				$out .= '<span>'. $node->name .'</span>';
 				break;
-
 			default:	// open url in parent window
 				$out .= '<a href="'. $link .'" title="'. $node->name .'">'. $node->name .'</a>';
 				break;
 		}
-
 		$this->_closeItem = '</li>' . "\n";
 		$this->_childs[$this->level]++;
 		echo $out;
 		$this->count++;
 	}
-
 	/**
 	* Moves sitemap level up or down
 	*/
@@ -98,19 +83,15 @@ class XmapHtml extends Xmap {
 			$this->level += $level;
 		}
 	}
-
 	/** Print component heading, etc. Then call getHtmlList() to print list */
 	function startOutput(&$menus,&$config) {
 		global $database, $Itemid;
 		$sitemap = &$this->sitemap;
-
 		$menu = new mosMenu( $database );
 		$menu->load( $Itemid );	// Load params for the Xmap menu-item
 		$title = $menu->name;
-		
 		$exlink[0] = $sitemap->exlinks;	// image to mark popup links
 		$exlink[1] = $sitemap->ext_image;
-
 		if( $sitemap->columns > 1 ) {	// calculate column widths
 			$total = count($menus);
 			$columns = $total < $sitemap->columns ? $total : $sitemap->columns;
@@ -120,17 +101,14 @@ class XmapHtml extends Xmap {
 	echo '<div class="componentheading">' . $title . '</div>';
 	echo '<div class="contentpaneopen"' . ($sitemap->columns > 1 ? '' : '') . '>';
 	}
-
 	/** Print component heading, etc. Then call getHtmlList() to print list */
 	function endOutput(&$menus) {
 		global $database, $Itemid;
 		$sitemap = &$this->sitemap;
-
 		echo '<div class="clearfix"></div>';
 		echo '</div>';
 		echo '</div>' . "\n";
 	}
-
 	function startMenu(&$menu) {
 		$sitemap = &$this->sitemap;
 		if( $sitemap->columns > 1 )	// use columns
@@ -138,7 +116,6 @@ class XmapHtml extends Xmap {
 		if( $sitemap->show_menutitle )	// show menu titles
 			echo '<h3>' . $menu->name . '</h3>';
 	}
-
 	function endMenu(&$menu) {
 		$sitemap = &$this->sitemap;
 		$this->_closeItem='';
@@ -146,7 +123,6 @@ class XmapHtml extends Xmap {
 			if( $sitemap->columns > 1 ) {
 				echo '</div>' . "\n";
 			}
-
 		}
 	}
 }

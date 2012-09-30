@@ -31,13 +31,11 @@ switch ($task) {
 		activate($option);
 		break;
 }
-
 function lostPassForm($option) {
 	global $mainframe;
 	$mainframe->SetPageTitle(_PROMPT_PASSWORD);
 	HTML_registration::lostPassForm($option);
 }
-
 function sendNewPass($option) {
 	global $database, $mosConfig_mailfrom, $mosConfig_fromname, $mosConfig_captcha_reg;
 // simple spoof check security
@@ -55,7 +53,7 @@ function sendNewPass($option) {
 		session_unset();
 		session_write_close();
 	}
-	$query = "SELECT id FROM #__users WHERE username = " . $database->Quote($checkusername) . "\n AND email = " . $database->Quote($confirmEmail);
+	$query = "SELECT id FROM #__users WHERE username = " . $database->Quote($checkusername) . " AND email = " . $database->Quote($confirmEmail);
 	$database->setQuery($query);
 	if (!($user_id = $database->loadResult()) || !$checkusername || !$confirmEmail) {
 		mosRedirect('index.php?option=' . $option . '&amp;task=lostPassword&amp;mosmsg=' . _ERROR_PASS);
@@ -69,7 +67,7 @@ function sendNewPass($option) {
 	$salt = mosMakePassword(16);
 	$crypt = md5($newpass . $salt);
 	$newpass = $crypt . ':' . $salt;
-	$sql = "UPDATE #__users SET password = " . $database->Quote($newpass) . "\n WHERE id = " . (int)
+	$sql = "UPDATE #__users SET password = " . $database->Quote($newpass) . " WHERE id = " . (int)
 			$user_id;
 	$database->setQuery($sql);
 	if (!$database->query()) {
@@ -77,7 +75,6 @@ function sendNewPass($option) {
 	}
 	mosRedirect('index.php?option=com_registration&amp;mosmsg=' . _NEWPASS_SENT);
 }
-
 function registerForm($option, $useractivation) {
 	global $mainframe;
 	if (!$mainframe->getCfg('allowUserRegistration')) {
@@ -88,7 +85,6 @@ function registerForm($option, $useractivation) {
 	$mainframe->SetPageTitle(_REGISTER_TITLE);
 	HTML_registration::registerForm($option, $useractivation);
 }
-
 function saveRegistration() {
 	global $database, $acl, $mosConfig_captcha_reg;
 	global $mosConfig_sitename, $mosConfig_live_site, $mosConfig_useractivation, $mosConfig_allowUserRegistration;
@@ -181,8 +177,7 @@ function saveRegistration() {
 	$subject2 = html_entity_decode($subject2, ENT_QUOTES);
 	$message2 = html_entity_decode($message2, ENT_QUOTES);
 // get email addresses of all admins and superadmins set to recieve system emails
-	$query = "SELECT email, sendEmail" . "\n FROM #__users" . "\n WHERE ( gid = 24 OR gid = 25 )" .
-			"\n AND sendEmail = 1" . "\n AND block = 0";
+	$query = "SELECT email, sendEmail FROM #__users WHERE ( gid = 24 OR gid = 25 ) AND sendEmail = 1 AND block = 0";
 	$database->setQuery($query);
 	$admins = $database->loadObjectList();
 	foreach ($admins as $admin) {
@@ -195,7 +190,6 @@ function saveRegistration() {
 		echo _REG_COMPLETE;
 	}
 }
-
 function activate() {
 	global $database, $my, $mosConfig_auto_activ_login, $mainframe, $mosConfig_auto_activ_login;
 	global $mosConfig_useractivation, $mosConfig_allowUserRegistration;
@@ -211,11 +205,11 @@ function activate() {
 		echo _REG_ACTIVATE_NOT_FOUND;
 		return;
 	}
-	$query = "SELECT id FROM #__users WHERE activation = " . $database->Quote($activation) . "\n AND block = 1";
+	$query = "SELECT id FROM #__users WHERE activation = " . $database->Quote($activation) . " AND block = 1";
 	$database->setQuery($query);
 	$result = $database->loadResult();
 	if ($result) {
-		$query = "UPDATE #__users SET block = 0, activation = '' WHERE activation = " . $database->Quote($activation) . "\n AND block = 1";
+		$query = "UPDATE #__users SET block = 0, activation = '' WHERE activation = " . $database->Quote($activation) . " AND block = 1";
 		$database->setQuery($query);
 		if (!$database->query()) {
 			if (!defined(_REG_ACTIVATE_FAILURE)) {
@@ -238,5 +232,4 @@ function activate() {
 		echo _REG_ACTIVATE_NOT_FOUND;
 	}
 }
-
 ?>

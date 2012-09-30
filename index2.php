@@ -126,35 +126,48 @@ if ($my->id || $mainframe->get('joomlaJavascript')) {
 }
 initGzip();
 /* при активном кэшировании отправим браузеру более "правильные" заголовки */
-if (!$mosConfig_caching) {
-/* не кэшируется */
-	header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
-	//header('Expires: '.date('r', $_SERVER['REQUEST_TIME']));
-	header('Expires: Thu, 31 Dec 2020 20:00:00 GMT');
-	header('Pragma: no-cache');
-} else if ($option != 'logout' or $option != 'login') {
-/* кэшируется */
-// get the last-modified-date of this very file
-	$lastModified = filemtime($_SERVER['REQUEST_URI']);
-// get a unique hash of this file (etag)
+if (!$mosConfig_caching) { // не кэшируется
 	$etagFile = md5($_SERVER['REQUEST_URI']);
-// get the HTTP_IF_MODIFIED_SINCE header if set
+	header('Etag: ' . $etagFile);
+	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Cache-Control: post-check=0, pre-check=0',false);
+	if ($option == 'logout' or $option == 'login') {
+		header('Cache-control: private');
+	} else { 
+		header('Cache-control: public');
+	}
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+	header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+	header('Pragma: no-cache');
+} elseif ($option != 'logout' or $option != 'login') { // кэшируется
+	$etagFile = md5($_SERVER['REQUEST_URI']);
+	$lastModified = filemtime($_SERVER['REQUEST_URI']);
 	$ifModifiedSince = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : false);
-// get the HTTP_IF_NONE_MATCH header if set (etag: unique file hash)
 	$etagHeader = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? trim($_SERVER['HTTP_IF_NONE_MATCH']) : false);
-// set last-modified header
-	header('Last-Modified: '.gmdate('D, d M Y H:i:s', $lastModified).' GMT');
-// set etag-header
-	header('Etag: '.$etagFile);
-// make sure caching is turned on
+if(ereg('Firefox', $_SERVER['HTTP_USER_AGENT'])) { // если Firefox
+	header('Etag: ' . $etagFile);
+	header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Cache-Control: post-check=0, pre-check=0',false);
+	header('Pragma: no-cache');
+} else { // когда другой броузер
+	header('Etag: ' . $etagFile);
+	header('Cache-Control: max-age=3600');
 	header('Cache-Control: public');
-// check if page has changed. If not, send 304 and exit
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+	// 60*60=3600 - использования кэширования на 1 час
+	header('Expires: '.gmdate('D, d M Y H:i:s',time() + 3600).' GMT');
+	header('Pragma: ');
 	if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $lastModified || $etagHeader == $etagFile)
-{
+	{
 	header('HTTP/1.1 304 Not Modified');
-	exit;
+	exit(304);
 }
 }
+}
+// буферизация итогового содержимого, необходимо для шаблонов группы templates
+ob_start();
 /* старт основного HTML */
 if ($no_html == 0) {
 	$customIndex2 = 'templates/'.$mainframe->getTemplate().'/index2.php';
@@ -171,44 +184,32 @@ echo "\n";
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head profile="http://gmpg.org/xfn/11">
 <?php
-/* favicon для нормальных браузеров */
-	if (!$mosConfig_favicon) {
-		$mosConfig_favicon = 'favicon.png';
+// favourites icon
+	if (!$mosConfig_disable_favicon) {
+			global $mosConfig_favicon_ie, $mosConfig_disable_favicon_ie, $mosConfig_favicon_ipad, $mosConfig_disable_favicon_ipad;
+		if ($mosConfig_favicon) {
+			$icon = 'favicon.png';
+		}
+echo '<link rel="icon" href="' . $icon . '" />' . "\n";
 	}
-		$icon = $mosConfig_absolute_path.'/'.$mosConfig_favicon;
-	if (!file_exists($icon)) {
-		$icon = $mosConfig_live_site.'/favicon.png';
-	} else {
-		$icon = $mosConfig_live_site.'/'.$mosConfig_favicon;
+	if (!$mosConfig_disable_favicon_ie) {
+		if ($mosConfig_favicon_ie) {
+			$icon_ie = 'favicon.ico';
+		}
+echo '<link rel="shortcut icon" href="' . $icon_ie . '" />' . "\n";
 	}
-/* favicon для IE */
-	if (!$mosConfig_favicon_ie) {
-		$mosConfig_favicon_ie = 'favicon.ico';
-	}
-		$icon_ie = $mosConfig_absolute_path.'/'.$mosConfig_favicon_ie;
-	if (!file_exists($icon_ie)) {
-		$icon_ie = $mosConfig_live_site.'/favicon.ico';
-	} else {
-		$icon_ie = $mosConfig_live_site.'/'.$mosConfig_favicon_ie;
-	}
-/* favicon для iДевайсов */
-	if (!$mosConfig_favicon_ipad) {
-		$mosConfig_favicon_ipad = 'apple-touch-icon.png';
-	}
-		$icon_ipad = $mosConfig_absolute_path.'/'.$mosConfig_favicon_ipad;
-	if (!file_exists($icon_ipad)) {
-		$icon_ipad = $mosConfig_live_site.'/apple-touch-icon.png';
-	} else {
-		$icon_ipad = $mosConfig_live_site.'/'.$mosConfig_favicon_ipad;
+	if (!$mosConfig_disable_favicon_ipad) {
+		if ($mosConfig_favicon_ipad) {
+			$mosConfig_favicon_ipad = 'apple-touch-icon.png';
+			$icon_ipad = 'apple-touch-icon.png';
+			$icon_ipad_72 = 'apple-touch-icon-72x72.png';
+			$icon_ipad_114 = 'apple-touch-icon-114x114.png';
+		}
+echo '<link rel="apple-touch-icon" href="'.$icon_ipad.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="72x72" href="'.$icon_ipad_72.'" />' . "\n";
+echo '<link rel="apple-touch-icon" sizes="114x114" href="'.$icon_ipad_114.'" />' . "\n";
 	}
 ?>
-<link rel="icon" type="image/png" href="<?php echo $icon;?>" />
-<?php
-if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE')) {
-echo '<link rel="shortcut icon" type="image/x-icon" href="'.$icon_ie.'" />';
-}
-?>
-<link rel="apple-touch-icon" href="<?php echo $icon_ipad;?>" />
 <meta http-equiv="Content-Type" content="text/html; <?php echo _ISO;?>" />
 <?php echo $mainframe->getHead();?>
 </head>
@@ -221,5 +222,7 @@ echo '<link rel="shortcut icon" type="image/x-icon" href="'.$icon_ie.'" />';
 } else {
 	mosMainBody();
 }
+ob_end_clean();
+flush();
 doGzip();
 ?>
